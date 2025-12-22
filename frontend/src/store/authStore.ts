@@ -1,0 +1,75 @@
+import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
+
+interface User {
+  id: string
+  name: string
+  email: string
+  role: string
+}
+
+interface AuthState {
+  user: User | null
+  accessToken: string | null
+  refreshToken: string | null
+  isAuthenticated: boolean
+  login: (email: string, password: string) => Promise<void>
+  logout: () => void
+  setAuth: (user: User, accessToken: string, refreshToken: string) => void
+}
+
+export const useAuthStore = create<AuthState>()(
+  persist(
+    (set) => ({
+      user: null,
+      accessToken: null,
+      refreshToken: null,
+      isAuthenticated: false,
+
+      setAuth: (user, accessToken, refreshToken) => {
+        set({
+          user,
+          accessToken,
+          refreshToken,
+          isAuthenticated: true,
+        })
+      },
+
+      login: async (email: string, password: string) => {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api'
+        const response = await fetch(`${apiUrl}/auth/login`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, password }),
+        })
+
+        if (!response.ok) {
+          const error = await response.json().catch(() => ({ error: 'Erro ao fazer login' }))
+          throw new Error(error.error || 'Erro ao fazer login')
+        }
+
+        const data = await response.json()
+        set({
+          user: data.user,
+          accessToken: data.accessToken,
+          refreshToken: data.refreshToken,
+          isAuthenticated: true,
+        })
+      },
+
+      logout: () => {
+        set({
+          user: null,
+          accessToken: null,
+          refreshToken: null,
+          isAuthenticated: false,
+        })
+      },
+    }),
+    {
+      name: 'auth-storage',
+    }
+  )
+)
