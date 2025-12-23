@@ -1,1 +1,141 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  role      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  sales     Sale[]
+}
+
+model Customer {
+  id        Int       @id @default(autoincrement())
+  name      String
+  phone     String
+  email     String?
+  address   String?
+  cpf       String?
+  rg        String?
+  cep       String?
+  city      String?
+  district  String?
+  documents String?
+  status    String    @default("novo")
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  vehicles  Vehicle[] // Veículos associados ao cliente
+  sales     Sale[]
+  tradeIns  TradeIn[]
+  leads     Lead[]
+}
+
+model Lead {
+  id         Int      @id @default(autoincrement())
+  customerId Int
+  notes      String?
+  status     String   @default("novo")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  customer   Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+}
+
+model Vehicle {
+  id            Int       @id @default(autoincrement())
+  brand         String
+  model         String
+  year          Int
+  plate         String?   // Placa do veículo
+  km            Int?
+  color         String?
+  price         Float?    // Preço de venda (opcional)
+  cost          Float?    // Preço de compra/custo (opcional)
+  tableValue    Float?    // Valor da tabela (FIPE)
+  expenseType   String?   // Tipo de gasto/despesa (ex: pneu, revisão, etc.) - opcional
+  expenseValue  Float?    // Valor do gasto/despesa - opcional
+  customerId    Int?      // Cliente associado (opcional)
+  notes         String?   // Observações/Notas
+  photos        String?   // Fotos (JSON string com URLs)
+  status        String    @default("disponivel")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  customer      Customer? @relation(fields: [customerId], references: [id], onDelete: SetNull)
+  sale          Sale?
+}
+
+model TradeIn {
+  id         Int      @id @default(autoincrement())
+  customerId Int
+  brand      String
+  model      String
+  year       Int
+  km         Int?
+  valueFipe  Float
+  valueOffer Float
+  photos     String?
+  status     String   @default("pendente")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  customer   Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  sale       Sale?
+}
+
+model Sale {
+  id                    Int      @id @default(autoincrement())
+  customerId            Int
+  vehicleId             Int      @unique
+  tradeInId             Int?     @unique
+  sellerId              Int
+  salePrice             Float?   // Preço de venda (opcional)
+  purchasePrice         Float?   // Preço de compra do veículo
+  profit                Float?   // Lucro (salePrice - purchasePrice)
+  entryValue            Float?   // Valor de entrada
+  entryType             String?  // Tipo de entrada: dinheiro, veiculo, cartao_credito
+  entryVehicleValue     Float?   // Valor do veículo de entrada (se entryType = veiculo)
+  entryAdditionalValue  Float?   // Valor adicional quando entrada for veículo + dinheiro
+  entryCardInstallments Int?     // Número de parcelas do cartão (se entryType = cartao_credito)
+  remainingValue        Float?   // Valor restante
+  paymentMethod         String?  // Método de pagamento do restante (pix, dinheiro, financiamento, carta_credito)
+  paymentInstallments   Int?     // Número de parcelas (se aplicável)
+  paymentInstallmentValue Float? // Valor da parcela quando for cartão de crédito
+  financedValue         Float?   // Valor financiado
+  commission            Float?   // Comissão do vendedor
+  contractUrl           String?  // URL do contrato gerado
+  contractClauses       String?  // Cláusulas do contrato (texto)
+  notes                 String?  // Observações/notas adicionais
+  status                String   @default("em_andamento")
+  date                  DateTime @default(now())
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  customer              Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  vehicle               Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  tradeIn               TradeIn? @relation(fields: [tradeInId], references: [id], onDelete: SetNull)
+  seller                User     @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  transactions          FinancialTransaction[]
+}
+
+model FinancialTransaction {
+  id          Int      @id @default(autoincrement())
+  type        String
+  description String
+  amount      Float
+  dueDate     DateTime
+  paidDate    DateTime?
+  status      String   @default("pendente")
+  saleId      Int?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  sale        Sale?    @relation(fields: [saleId], references: [id], onDelete: SetNull)
+}

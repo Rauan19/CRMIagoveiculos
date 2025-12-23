@@ -16,11 +16,12 @@ interface AuthState {
   login: (email: string, password: string) => Promise<void>
   logout: () => void
   setAuth: (user: User, accessToken: string, refreshToken: string) => void
+  checkAuth: () => Promise<void>
 }
 
 export const useAuthStore = create<AuthState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       user: null,
       accessToken: null,
       refreshToken: null,
@@ -59,6 +60,18 @@ export const useAuthStore = create<AuthState>()(
         })
       },
 
+      checkAuth: async () => {
+        const state = get()
+        
+        // Se tiver accessToken e user, está autenticado
+        // O interceptor da API vai tratar a renovação automática se o token expirar
+        if (state.accessToken && state.user) {
+          set({ isAuthenticated: true })
+        } else {
+          set({ isAuthenticated: false })
+        }
+      },
+
       logout: () => {
         set({
           user: null,
@@ -66,6 +79,10 @@ export const useAuthStore = create<AuthState>()(
           refreshToken: null,
           isAuthenticated: false,
         })
+        // Limpar localStorage
+        if (typeof window !== 'undefined') {
+          localStorage.removeItem('auth-storage')
+        }
       },
     }),
     {

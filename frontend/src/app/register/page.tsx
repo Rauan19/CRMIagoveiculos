@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import Image from 'next/image'
 
 export default function RegisterPage() {
   const router = useRouter()
@@ -54,42 +53,40 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex relative">
       {/* Lado esquerdo - Logo com fundo preto */}
       <div className="hidden lg:flex lg:w-1/2 bg-black items-center justify-center p-12">
         <div className="max-w-md text-center">
-          <Image
-            src="/logo/logo2.png"
-            alt="CRM IAGO Veículos"
-            width={300}
-            height={150}
-            className="h-auto mx-auto mb-8"
-            priority
+          <div
+            className="w-full h-48 bg-contain bg-center bg-no-repeat mx-auto mb-8"
+            style={{
+              backgroundImage: 'url(/logo/logo2-Photoroom.png)',
+            }}
           />
-          <h1 className="text-4xl font-bold text-white mb-4">
-            CRM IAGO Veículos
-          </h1>
           <p className="text-xl text-gray-300">
-            Sistema de gestão para loja de veículos
+            Sistema de gerenciamento da Iago Veiculos
           </p>
         </div>
       </div>
 
       {/* Lado direito - Formulário */}
-      <div className="flex-1 flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full space-y-8">
-          {/* Logo visível em telas pequenas */}
-          <div className="lg:hidden text-center mb-8">
-            <Image
-              src="/logo/logo2.png"
-              alt="CRM IAGO Veículos"
-              width={200}
-              height={100}
-              className="h-auto mx-auto mb-4"
-              priority
+      <div className="flex-1 flex items-center justify-center bg-white py-8 sm:py-12 px-4 sm:px-6 lg:px-8 relative">
+        {/* Logo visível em telas pequenas */}
+        <div className="absolute top-0 left-0 right-0 bg-black py-6 lg:hidden">
+          <div className="text-center">
+            <div
+              className="w-32 h-20 bg-contain bg-center bg-no-repeat mx-auto mb-4"
+              style={{
+                backgroundImage: 'url(/logo/logo2-Photoroom.png)',
+              }}
             />
-            <h2 className="text-2xl font-bold text-gray-900">CRM IAGO Veículos</h2>
+            <p className="text-sm text-gray-300">
+              Sistema de gerenciamento da Iago Veiculos
+            </p>
           </div>
+        </div>
+        
+        <div className="max-w-md w-full space-y-6 sm:space-y-8 relative z-10 mt-40 sm:mt-0">
 
           <div>
             <h2 className="text-3xl font-extrabold text-gray-900">

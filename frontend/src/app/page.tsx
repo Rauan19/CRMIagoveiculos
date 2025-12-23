@@ -1,20 +1,33 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuthStore } from '@/store/authStore'
 
 export default function Home() {
   const router = useRouter()
-  const { isAuthenticated } = useAuthStore()
+  const { isAuthenticated, checkAuth } = useAuthStore()
+  const [isChecking, setIsChecking] = useState(true)
 
   useEffect(() => {
-    if (isAuthenticated) {
-      router.push('/dashboard')
-    } else {
-      router.push('/login')
+    // Aguardar restauração do localStorage e verificar autenticação
+    const timer = setTimeout(async () => {
+      await checkAuth()
+      setIsChecking(false)
+    }, 200)
+    
+    return () => clearTimeout(timer)
+  }, [checkAuth])
+
+  useEffect(() => {
+    if (!isChecking) {
+      if (isAuthenticated) {
+        router.push('/dashboard')
+      } else {
+        router.push('/login')
+      }
     }
-  }, [isAuthenticated, router])
+  }, [isAuthenticated, router, isChecking])
 
   return (
     <div className="flex items-center justify-center min-h-screen">

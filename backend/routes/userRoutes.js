@@ -1,113 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const { PrismaClient } = require('@prisma/client');
-const { authorizeRoles } = require('../middleware/auth');
-const { hashPassword } = require('../utils/password');
-
-const prisma = new PrismaClient();
+const userController = require('../controllers/userController');
+const { authenticateToken, authorizeRoles } = require('../middleware/auth');
 
 // Listar todos os usuários (apenas admin/gerente)
-router.get('/', authorizeRoles('admin', 'gerente'), async (req, res) => {
-  try {
-    const users = await prisma.user.findMany({
-      select: {
-        id: true,
-        name: true,
-        email: true,
-        role: true,
-        createdAt: true,
-        _count: {
-          select: { sales: true }
-        }
-      }
-    });
+router.get('/', authenticateToken, authorizeRoles('admin', 'gerente'), (req, res) => userController.list(req, res));
 
-    res.json(users);
-  } catch (error) {
-    console.error('Erro ao listar usuários:', error);
-    res.status(500).json({ error: 'Erro ao buscar usuários' });
-  }
-});
+// Buscar usuário por ID (apenas admin/gerente)
+router.get('/:id', authenticateToken, authorizeRoles('admin', 'gerente'), (req, res) => userController.getById(req, res));
 
-// Buscar usuário por ID
-router.get('/:id', authorizeRoles('admin', 'gerente'), async (req, res) => {
-  try {
-    const { id } = req.params;
-    const user = await prisma.user.findUnique({
-      where: { id: parseInt(id) },
-      select: {
-        id: true,
-        name: true,
-        email: true,
-        role: true,
-        createdAt: true,
-        sales: {
-          select: {
-            id: true,
-            salePrice: true,
-            date: true,
-            status: true
-          }
-        }
-      }
-    });
+// Atualizar usuário (apenas admin/gerente)
+router.put('/:id', authenticateToken, authorizeRoles('admin', 'gerente'), (req, res) => userController.update(req, res));
 
-    if (!user) {
-      return res.status(404).json({ error: 'Usuário não encontrado' });
-    }
-
-    res.json(user);
-  } catch (error) {
-    console.error('Erro ao buscar usuário:', error);
-    res.status(500).json({ error: 'Erro ao buscar usuário' });
-  }
-});
-
-// Atualizar usuário
-router.put('/:id', authorizeRoles('admin', 'gerente'), async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { name, email, role, password } = req.body;
-
-    const updateData = {};
-    if (name) updateData.name = name;
-    if (email) updateData.email = email;
-    if (role) updateData.role = role;
-    if (password) updateData.password = await hashPassword(password);
-
-    const user = await prisma.user.update({
-      where: { id: parseInt(id) },
-      data: updateData,
-      select: {
-        id: true,
-        name: true,
-        email: true,
-        role: true
-      }
-    });
-
-    res.json({ message: 'Usuário atualizado com sucesso', user });
-  } catch (error) {
-    console.error('Erro ao atualizar usuário:', error);
-    res.status(500).json({ error: 'Erro ao atualizar usuário' });
-  }
-});
-
-// Deletar usuário
-router.delete('/:id', authorizeRoles('admin'), async (req, res) => {
-  try {
-    const { id } = req.params;
-    await prisma.user.delete({
-      where: { id: parseInt(id) }
-    });
-
-    res.json({ message: 'Usuário deletado com sucesso' });
-  } catch (error) {
-    console.error('Erro ao deletar usuário:', error);
-    res.status(500).json({ error: 'Erro ao deletar usuário' });
-  }
-});
+// Deletar usuário (apenas admin)
+router.delete('/:id', authenticateToken, authorizeRoles('admin'), (req, res) => userController.delete(req, res));
 
 module.exports = router;
-
-

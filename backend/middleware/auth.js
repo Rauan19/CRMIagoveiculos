@@ -10,7 +10,9 @@ const authenticateToken = (req, res, next) => {
 
   jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
     if (err) {
-      return res.status(403).json({ error: 'Token inválido ou expirado' });
+      // Token expirado ou inválido retorna 401 (Unauthorized)
+      // 403 (Forbidden) deve ser usado apenas para problemas de permissão
+      return res.status(401).json({ error: 'Token inválido ou expirado' });
     }
     req.user = user;
     next();
