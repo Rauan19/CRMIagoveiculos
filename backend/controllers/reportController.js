@@ -420,6 +420,286 @@ class ReportController {
       res.status(500).json({ error: 'Erro ao gerar relatório' });
     }
   }
+
+  /**
+   * Relatório de performance por vendedor
+   */
+  async getSellerPerformanceReport(req, res) {
+    try {
+      const { startDate, endDate } = req.query;
+      
+      const where = {};
+      if (startDate || endDate) {
+        where.date = {};
+        if (startDate) where.date.gte = new Date(startDate);
+        if (endDate) where.date.lte = new Date(endDate);
+      }
+
+      const sales = await prisma.sale.findMany({
+        where,
+        include: {
+          seller: {
+            select: { id: true, name: true, email: true }
+          },
+          vehicle: {
+            select: { brand: true, model: true, year: true, cost: true }
+          }
+        }
+      });
+
+      // Agrupar por vendedor
+      const performanceBySeller = {};
+      
+      sales.forEach(sale => {
+        const sellerId = sale.sellerId;
+        const sellerName = sale.seller.name;
+        
+        if (!performanceBySeller[sellerId]) {
+          performanceBySeller[sellerId] = {
+            sellerId,
+            sellerName: sellerName,
+            sellerEmail: sale.seller.email,
+            totalSales: 0,
+            totalRevenue: 0,
+            totalProfit: 0,
+            averageTicket: 0,
+            averageProfit: 0,
+            commissionTotal: 0,
+            sales: []
+          };
+        }
+
+        const salePrice = sale.salePrice || 0;
+        const profit = sale.profit || 0;
+        const commission = sale.commission || 0;
+
+        performanceBySeller[sellerId].totalSales++;
+        performanceBySeller[sellerId].totalRevenue += salePrice;
+        performanceBySeller[sellerId].totalProfit += profit;
+        performanceBySeller[sellerId].commissionTotal += commission;
+        
+        performanceBySeller[sellerId].sales.push({
+          id: sale.id,
+          vehicle: `${sale.vehicle.brand} ${sale.vehicle.model} ${sale.vehicle.year}`,
+          salePrice,
+          profit,
+          commission,
+          date: sale.date
+        });
+      });
+
+      // Calcular médias
+      const performance = Object.values(performanceBySeller).map(seller => ({
+        ...seller,
+        averageTicket: seller.totalSales > 0 ? seller.totalRevenue / seller.totalSales : 0,
+        averageProfit: seller.totalSales > 0 ? seller.totalProfit / seller.totalSales : 0
+      }));
+
+      // Ordenar por total de vendas
+      performance.sort((a, b) => b.totalSales - a.totalSales);
+
+      res.json({
+        periodo: {
+          startDate,
+          endDate
+        },
+        resumo: {
+          totalVendedores: performance.length,
+          totalVendas: sales.length
+        },
+        performance
+      });
+    } catch (error) {
+      console.error('Erro ao gerar relatório de performance por vendedor:', error);
+      res.status(500).json({ error: 'Erro ao gerar relatório' });
+    }
+  }
+
+  /**
+   * Relatório de veículos mais vendidos
+   */
+  async getTopSellingVehiclesReport(req, res) {
+    try {
+      const { startDate, endDate, limit = 10 } = req.query;
+      
+      const where = {};
+      if (startDate || endDate) {
+        where.date = {};
+        if (startDate) where.date.gte = new Date(startDate);
+        if (endDate) where.date.lte = new Date(endDate);
+      }
+
+      const sales = await prisma.sale.findMany({
+        where,
+        include: {
+          vehicle: {
+            select: { brand: true, model: true, year: true, cost: true }
+          }
+        }
+      });
+
+      // Agrupar por veículo (marca + modelo + ano)
+      const vehiclesMap = {};
+      
+      sales.forEach(sale => {
+        const key = `${sale.vehicle.brand}|${sale.vehicle.model}|${sale.vehicle.year}`;
+        
+        if (!vehiclesMap[key]) {
+          vehiclesMap[key] = {
+            brand: sale.vehicle.brand,
+            model: sale.vehicle.model,
+            year: sale.vehicle.year,
+            description: `${sale.vehicle.brand} ${sale.vehicle.model} ${sale.vehicle.year}`,
+            totalSold: 0,
+            totalRevenue: 0,
+            totalProfit: 0,
+            averagePrice: 0,
+            averageProfit: 0
+          };
+        }
+
+        const salePrice = sale.salePrice || 0;
+        const profit = sale.profit || 0;
+
+        vehiclesMap[key].totalSold++;
+        vehiclesMap[key].totalRevenue += salePrice;
+        vehiclesMap[key].totalProfit += profit;
+      });
+
+      // Calcular médias e converter para array
+      const topVehicles = Object.values(vehiclesMap).map(vehicle => ({
+        ...vehicle,
+        averagePrice: vehicle.totalSold > 0 ? vehicle.totalRevenue / vehicle.totalSold : 0,
+        averageProfit: vehicle.totalSold > 0 ? vehicle.totalProfit / vehicle.totalSold : 0
+      }));
+
+      // Ordenar por quantidade vendida
+      topVehicles.sort((a, b) => b.totalSold - a.totalSold);
+
+      // Limitar quantidade
+      const limited = topVehicles.slice(0, parseInt(limit));
+
+      res.json({
+        periodo: {
+          startDate,
+          endDate
+        },
+        limit: parseInt(limit),
+        total: topVehicles.length,
+        veiculos: limited
+      });
+    } catch (error) {
+      console.error('Erro ao gerar relatório de veículos mais vendidos:', error);
+      res.status(500).json({ error: 'Erro ao gerar relatório' });
+    }
+  }
+
+  /**
+   * Análise de lucratividade por período
+   */
+  async getProfitabilityAnalysisReport(req, res) {
+    try {
+      const { startDate, endDate, groupBy = 'month' } = req.query; // 'day', 'week', 'month', 'year'
+      
+      const where = {};
+      if (startDate || endDate) {
+        where.date = {};
+        if (startDate) where.date.gte = new Date(startDate);
+        if (endDate) where.date.lte = new Date(endDate);
+      }
+
+      const sales = await prisma.sale.findMany({
+        where,
+        include: {
+          vehicle: {
+            select: { cost: true }
+          }
+        },
+        orderBy: { date: 'asc' }
+      });
+
+      // Agrupar por período
+      const periods = {};
+      
+      sales.forEach(sale => {
+        const date = new Date(sale.date);
+        let periodKey;
+
+        switch (groupBy) {
+          case 'day':
+            periodKey = date.toISOString().split('T')[0];
+            break;
+          case 'week':
+            const weekStart = new Date(date);
+            weekStart.setDate(date.getDate() - date.getDay());
+            periodKey = weekStart.toISOString().split('T')[0];
+            break;
+          case 'month':
+            periodKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+            break;
+          case 'year':
+            periodKey = date.getFullYear().toString();
+            break;
+          default:
+            periodKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+        }
+
+        if (!periods[periodKey]) {
+          periods[periodKey] = {
+            period: periodKey,
+            totalSales: 0,
+            totalRevenue: 0,
+            totalCost: 0,
+            totalProfit: 0,
+            averageMargin: 0
+          };
+        }
+
+        const salePrice = sale.salePrice || 0;
+        const cost = sale.vehicle?.cost || 0;
+        const profit = sale.profit || (salePrice - cost);
+
+        periods[periodKey].totalSales++;
+        periods[periodKey].totalRevenue += salePrice;
+        periods[periodKey].totalCost += cost;
+        periods[periodKey].totalProfit += profit;
+      });
+
+      // Calcular margem média
+      const analysis = Object.values(periods).map(period => ({
+        ...period,
+        averageMargin: period.totalRevenue > 0 
+          ? ((period.totalProfit / period.totalRevenue) * 100).toFixed(2) + '%'
+          : '0%'
+      }));
+
+      // Ordenar por período
+      analysis.sort((a, b) => a.period.localeCompare(b.period));
+
+      // Calcular totais
+      const totals = {
+        totalSales: sales.length,
+        totalRevenue: sales.reduce((sum, s) => sum + (s.salePrice || 0), 0),
+        totalProfit: sales.reduce((sum, s) => sum + (s.profit || 0), 0),
+        averageMargin: sales.length > 0 
+          ? ((sales.reduce((sum, s) => sum + (s.profit || 0), 0) / sales.reduce((sum, s) => sum + (s.salePrice || 0), 0)) * 100).toFixed(2) + '%'
+          : '0%'
+      };
+
+      res.json({
+        periodo: {
+          startDate,
+          endDate,
+          groupBy
+        },
+        totals,
+        analysis
+      });
+    } catch (error) {
+      console.error('Erro ao gerar análise de lucratividade:', error);
+      res.status(500).json({ error: 'Erro ao gerar relatório' });
+    }
+  }
 }
 
 module.exports = new ReportController();

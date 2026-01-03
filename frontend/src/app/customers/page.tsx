@@ -16,6 +16,7 @@ interface Customer {
   city?: string
   district?: string
   cep?: string
+  birthDate?: string
   status: string
   createdAt: string
 }
@@ -37,6 +38,7 @@ export default function CustomersPage() {
     city: '',
     district: '',
     cep: '',
+    birthDate: '',
     status: 'novo',
   })
 
@@ -66,6 +68,7 @@ export default function CustomersPage() {
         phone: formData.phone ? removeMask(formData.phone) : '',
         cep: formData.cep ? removeMask(formData.cep) : '',
         rg: formData.rg ? removeMask(formData.rg) : '',
+        birthDate: formData.birthDate || null,
       }
       
       if (editingCustomer) {
@@ -98,6 +101,7 @@ export default function CustomersPage() {
       city: customer.city || '',
       district: customer.district || '',
       cep: customer.cep ? formatCEP(customer.cep) : '',
+      birthDate: customer.birthDate ? customer.birthDate.split('T')[0] : '',
       status: customer.status,
     })
     setShowModal(true)
@@ -128,6 +132,7 @@ export default function CustomersPage() {
       city: '',
       district: '',
       cep: '',
+      birthDate: '',
       status: 'novo',
     })
   }
@@ -152,8 +157,8 @@ export default function CustomersPage() {
         {loading ? (
           <div className="text-center py-12">Carregando...</div>
         ) : (
-          <div className="bg-white shadow rounded-lg overflow-hidden">
-            <div className="overflow-x-auto">
+          <div className="bg-white shadow rounded-lg overflow-hidden max-h-[calc(100vh-220px)] flex flex-col">
+            <div className="overflow-x-auto overflow-y-auto flex-1 min-h-0">
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
@@ -278,6 +283,15 @@ export default function CustomersPage() {
                         type="email"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Data de Nascimento</label>
+                      <input
+                        type="date"
+                        value={formData.birthDate}
+                        onChange={(e) => setFormData({ ...formData, birthDate: e.target.value })}
                         className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900"
                       />
                     </div>

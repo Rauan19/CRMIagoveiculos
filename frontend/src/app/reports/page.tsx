@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Layout from '@/components/Layout'
 import api from '@/services/api'
 import Toast from '@/components/Toast'
@@ -40,9 +40,9 @@ export default function ReportsPage() {
     days: '30'
   })
 
-  const handleGenerateReport = async () => {
+  const loadReportData = async () => {
     if (!reportType) {
-      setToast({ message: 'Selecione um tipo de relatório', type: 'error' })
+      setReportData(null)
       return
     }
 
@@ -63,14 +63,34 @@ export default function ReportsPage() {
 
       const response = await api.get(`/reports/${reportType}?${params.toString()}`)
       setReportData(response.data)
-      setToast({ message: 'Relatório gerado com sucesso!', type: 'success' })
     } catch (error: any) {
-      console.error('Erro ao gerar relatório:', error)
-      setToast({ message: error.response?.data?.error || 'Erro ao gerar relatório', type: 'error' })
+      console.error('Erro ao carregar relatório:', error)
+      setToast({ message: error.response?.data?.error || 'Erro ao carregar relatório', type: 'error' })
     } finally {
       setLoading(false)
     }
   }
+
+  const handleGenerateReport = async () => {
+    if (!reportType) {
+      setToast({ message: 'Selecione um tipo de relatório', type: 'error' })
+      return
+    }
+
+    await loadReportData()
+    setToast({ message: 'Relatório atualizado com sucesso!', type: 'success' })
+  }
+
+  // Carregar dados automaticamente quando o tipo ou filtros mudarem
+  useEffect(() => {
+    if (reportType) {
+      const timeoutId = setTimeout(() => {
+        loadReportData()
+      }, 500) // Debounce de 500ms para evitar muitas requisições
+
+      return () => clearTimeout(timeoutId)
+    }
+  }, [reportType, filters])
 
   const handleExportPDF = () => {
     if (!reportData || !reportType) {
@@ -86,13 +106,13 @@ export default function ReportsPage() {
 
       // Título
       doc.setFontSize(18)
-      doc.setFont(undefined, 'bold')
-      const title = getReportTitle(reportType)
+      doc.setFont('helvetica', 'bold')
+      const title = getReportTitle(reportType || 'sales')
       doc.text(title, pageWidth / 2, y, { align: 'center' })
       y += 15
 
       doc.setFontSize(10)
-      doc.setFont(undefined, 'normal')
+      doc.setFont('helvetica', 'normal')
       doc.text(`Data de geração: ${new Date().toLocaleDateString('pt-BR')}`, margin, y)
       y += 10
 
@@ -108,12 +128,12 @@ export default function ReportsPage() {
       // Resumo
       if (reportData.resumo) {
         doc.setFontSize(14)
-        doc.setFont(undefined, 'bold')
+        doc.setFont('helvetica', 'bold')
         doc.text('RESUMO', margin, y)
         y += 10
         
         doc.setFontSize(11)
-        doc.setFont(undefined, 'normal')
+        doc.setFont('helvetica', 'normal')
         Object.entries(reportData.resumo).forEach(([key, value]: [string, any]) => {
           if (y > 270) {
             doc.addPage()
@@ -138,12 +158,12 @@ export default function ReportsPage() {
           }
           
           doc.setFontSize(14)
-          doc.setFont(undefined, 'bold')
+          doc.setFont('helvetica', 'bold')
           doc.text('DETALHES', margin, y)
           y += 10
           
           doc.setFontSize(9)
-          doc.setFont(undefined, 'normal')
+          doc.setFont('helvetica', 'normal')
           
           data.slice(0, 20).forEach((item: any, index: number) => {
             if (y > 270) {
@@ -151,7 +171,7 @@ export default function ReportsPage() {
               y = 20
             }
             
-            const itemText = formatReportItem(item, reportType)
+            const itemText = formatReportItem(item, reportType || 'sales')
             const lines = doc.splitTextToSize(`${index + 1}. ${itemText}`, pageWidth - (margin * 2))
             doc.text(lines, margin + 5, y)
             y += lines.length * 4 + 3
@@ -229,16 +249,16 @@ export default function ReportsPage() {
       return `${item.nome} - ${item.telefone} - ${item.totalCompras} compras`
     }
     if (type === 'vehicles') {
-      return `${item.descricao} - ${item.status} - R$ ${item.valorVenda.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`
+      return `${item.descricao} - ${item.status} - R$ ${(item.valorVenda || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`
     }
     if (type === 'profitability') {
-      return `${item.vehicle} - Lucro: R$ ${item.lucro.toLocaleString('pt-BR', { minimumFractionDigits: 2 })} - Margem: ${item.margem}`
+      return `${item.vehicle} - Lucro: R$ ${(item.lucro || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })} - Margem: ${item.margem}`
     }
     if (type === 'vehicles-stuck') {
       return `${item.descricao} - ${item.diasParado} dias parado`
     }
     if (type === 'trade-ins') {
-      return `${item.veiculo} - Cliente: ${item.cliente} - Valor Oferecido: R$ ${item.valorOferecido.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`
+      return `${item.veiculo} - Cliente: ${item.cliente} - Valor Oferecido: R$ ${(item.valorOferecido || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`
     }
     return JSON.stringify(item)
   }
@@ -286,14 +306,14 @@ export default function ReportsPage() {
 
         {/* Dados Detalhados */}
         {(reportData.vendas || reportData.clientes || reportData.veiculos || reportData.detalhes || reportData.tradeIns) && (
-          <div className="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200">
-            <div className="bg-gray-100 px-6 py-3 border-b border-gray-200">
+          <div className="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200 flex-1 flex flex-col min-h-0">
+            <div className="bg-gray-100 px-6 py-3 border-b border-gray-200 flex-shrink-0">
               <h3 className="font-bold text-lg text-gray-900 flex items-center gap-2">
                 <FiFileText className="text-gray-600" />
                 Detalhes do Relatório
               </h3>
             </div>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto overflow-y-auto flex-1 min-h-0">
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-100">
                   <tr>
@@ -309,7 +329,7 @@ export default function ReportsPage() {
                     .slice(0, 100)
                     .map((item: any, index: number) => (
                       <tr key={index} className="hover:bg-gray-50 transition-colors duration-150 border-b border-gray-100">
-                        {getTableCells(item, reportType).map((cell, cellIndex) => (
+                        {getTableCells(item, reportType || 'sales').map((cell, cellIndex) => (
                           <td key={cellIndex} className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                             {cell}
                           </td>
@@ -360,8 +380,8 @@ export default function ReportsPage() {
         item.telefone,
         item.email || '-',
         item.status,
-        item.totalCompras,
-        `R$ ${item.valorTotalCompras.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`
+        item.totalCompras || 0,
+        `R$ ${(item.valorTotalCompras || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`
       ]
     }
     if (type === 'vehicles') {
@@ -370,17 +390,17 @@ export default function ReportsPage() {
         item.ano,
         item.placa || '-',
         item.status,
-        `R$ ${item.valorVenda.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`,
-        `R$ ${item.valorCompra.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`,
+        `R$ ${(item.valorVenda || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`,
+        `R$ ${(item.valorCompra || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`,
         item.cliente || '-'
       ]
     }
     if (type === 'profitability') {
       return [
         item.vehicle,
-        `R$ ${item.custo.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`,
-        `R$ ${item.venda.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`,
-        `R$ ${item.lucro.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`,
+        `R$ ${(item.custo || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`,
+        `R$ ${(item.venda || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`,
+        `R$ ${(item.lucro || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`,
         item.margem,
         item.vendedor
       ]
@@ -388,18 +408,18 @@ export default function ReportsPage() {
     if (type === 'vehicles-stuck') {
       return [
         item.descricao,
-        `R$ ${item.custo.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`,
-        `R$ ${item.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`,
-        `${item.diasParado} dias`
+        `R$ ${(item.custo || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`,
+        `R$ ${(item.preco || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`,
+        `${item.diasParado || 0} dias`
       ]
     }
     if (type === 'trade-ins') {
       return [
         item.cliente,
         item.veiculo,
-        `R$ ${item.valorFipe.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`,
-        `R$ ${item.valorOferecido.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`,
-        `R$ ${item.diferenca.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`,
+        `R$ ${(item.valorFipe || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`,
+        `R$ ${(item.valorOferecido || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`,
+        `R$ ${(item.diferenca || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`,
         item.status
       ]
     }
@@ -408,7 +428,7 @@ export default function ReportsPage() {
 
   return (
     <Layout>
-      <div className="space-y-6 p-6">
+      <div className="space-y-6 h-full flex flex-col">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>

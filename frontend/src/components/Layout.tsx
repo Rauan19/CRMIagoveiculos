@@ -12,7 +12,11 @@ import {
   FiRefreshCw, 
   FiFileText, 
   FiCreditCard,
-  FiBarChart2
+  FiBarChart2,
+  FiSearch,
+  FiTag,
+  FiTarget,
+  FiUserCheck
 } from 'react-icons/fi'
 
 interface LayoutProps {
@@ -58,12 +62,17 @@ export default function Layout({ children }: LayoutProps) {
   const navigation = [
     { name: 'Dashboard', href: '/dashboard', icon: FiLayout },
     { name: 'Clientes', href: '/customers', icon: FiUsers },
+    { name: 'Funcionários', href: '/users', icon: FiUserCheck },
     { name: 'Veículos', href: '/vehicles', icon: FiTruck },
     { name: 'Vendas', href: '/sales', icon: FiDollarSign },
     { name: 'Entradas', href: '/trade-ins', icon: FiRefreshCw },
+    { name: 'Estoque', href: '/estoque', icon: FiTruck },
+    { name: 'Promoções', href: '/promotions', icon: FiTag },
+    { name: 'Metas', href: '/goals', icon: FiTarget },
     { name: 'Anúncios', href: '/announcements', icon: FiFileText },
     { name: 'Financeiro', href: '/financial', icon: FiCreditCard },
     { name: 'Relatórios', href: '/reports', icon: FiBarChart2 },
+    { name: 'Consulta FIPE', href: '/fipe', icon: FiSearch },
   ]
 
   const handleLogout = () => {
@@ -72,7 +81,7 @@ export default function Layout({ children }: LayoutProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex">
+    <div className="h-screen bg-gray-50 flex overflow-hidden">
       {/* Sidebar */}
       <div className={`
         fixed inset-y-0 left-0 z-50 w-64 bg-gray-900 transform transition-transform duration-300 ease-in-out
@@ -81,7 +90,7 @@ export default function Layout({ children }: LayoutProps) {
       `}>
         <div className="flex flex-col h-full">
           {/* Menu items */}
-          <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
+          <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto min-h-0">
             {navigation.map((item) => {
               const isActive = pathname === item.href
               const Icon = item.icon
@@ -132,9 +141,9 @@ export default function Layout({ children }: LayoutProps) {
       )}
 
       {/* Main content */}
-      <div className="flex-1 flex flex-col lg:ml-0">
+      <div className="flex-1 flex flex-col lg:ml-0 min-w-0 h-screen overflow-hidden">
         {/* Header com logo */}
-        <header className="bg-black h-16 flex items-center justify-between px-4 lg:px-6 shadow-sm">
+        <header className="bg-black h-16 flex items-center justify-between px-4 lg:px-6 shadow-sm flex-shrink-0">
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
             className="lg:hidden text-white p-2 hover:bg-gray-800 rounded-lg"
@@ -157,8 +166,10 @@ export default function Layout({ children }: LayoutProps) {
         </header>
 
         {/* Page content */}
-        <main className="flex-1 overflow-y-auto p-4 lg:p-6">
-          {children}
+        <main className="flex-1 overflow-y-auto p-4 lg:p-6 min-h-0">
+          <div className="h-full">
+            {children}
+          </div>
         </main>
       </div>
     </div>

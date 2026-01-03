@@ -27,6 +27,7 @@ interface Vehicle {
   customerId?: number
   customer?: Customer
   notes?: string
+  photos?: string
   status: string
   createdAt: string
 }
@@ -91,6 +92,7 @@ export default function VehiclesPage() {
         customerId: formData.customerId || null,
         expenseType: formData.expenseType || null,
         expenseValue: formData.expenseValue || null,
+        photos: null, // Upload de fotos removido - usar página /estoque
       }
       
       if (editingVehicle) {
@@ -179,15 +181,15 @@ export default function VehiclesPage() {
             onClick={openModal}
             className="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors"
           >
-            Novo Veículo
-          </button>
+              Novo Veículo
+            </button>
         </div>
 
         {loading ? (
           <div className="text-center py-12">Carregando...</div>
         ) : (
-          <div className="bg-white shadow rounded-lg overflow-hidden">
-            <div className="overflow-x-auto">
+          <div className="bg-white shadow rounded-lg overflow-hidden max-h-[calc(100vh-220px)] flex flex-col">
+            <div className="overflow-x-auto overflow-y-auto flex-1 min-h-0">
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
@@ -484,6 +486,7 @@ export default function VehiclesPage() {
             </div>
           </div>
         )}
+
       </div>
     </Layout>
   )

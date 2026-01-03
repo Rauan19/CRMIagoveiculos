@@ -18,7 +18,12 @@ class FinancialController {
         where,
         include: {
           sale: {
-            select: { id: true, customer: { select: { name: true } } }
+            select: { 
+              id: true,
+              customer: {
+                select: { name: true }
+              }
+            }
           }
         },
         orderBy: { dueDate: 'desc' }
@@ -35,9 +40,9 @@ class FinancialController {
     try {
       const { type, amount, description, dueDate, saleId, status } = req.body;
 
-      if (!type || !amount || !description || !dueDate) {
+      if (!type || !amount || !description) {
         return res.status(400).json({ 
-          error: 'Campos obrigatórios: type, amount, description, dueDate' 
+          error: 'Campos obrigatórios: type, amount, description' 
         });
       }
 
@@ -46,7 +51,7 @@ class FinancialController {
           type,
           amount: parseFloat(amount),
           description,
-          dueDate: new Date(dueDate),
+          dueDate: dueDate ? new Date(dueDate) : new Date(), // Se não informado, usa data atual
           saleId: saleId ? parseInt(saleId) : null,
           status: status || 'pendente'
         }
@@ -68,7 +73,7 @@ class FinancialController {
       if (type) updateData.type = type;
       if (amount) updateData.amount = parseFloat(amount);
       if (description) updateData.description = description;
-      if (dueDate) updateData.dueDate = new Date(dueDate);
+      if (dueDate !== undefined) updateData.dueDate = dueDate ? new Date(dueDate) : null;
       if (paidDate !== undefined) updateData.paidDate = paidDate ? new Date(paidDate) : null;
       if (status) updateData.status = status;
 
@@ -130,6 +135,20 @@ class FinancialController {
     } catch (error) {
       console.error('Erro ao buscar dashboard:', error);
       res.status(500).json({ error: 'Erro ao buscar dashboard' });
+    }
+  }
+
+  async deleteTransaction(req, res) {
+    try {
+      const { id } = req.params;
+      await prisma.financialTransaction.delete({
+        where: { id: parseInt(id) }
+      });
+
+      res.json({ message: 'Transação deletada com sucesso' });
+    } catch (error) {
+      console.error('Erro ao deletar transação:', error);
+      res.status(500).json({ error: 'Erro ao deletar transação' });
     }
   }
 }

@@ -6,6 +6,9 @@ const { authenticateToken } = require('../middleware/auth');
 // Listar todos os clientes
 router.get('/', authenticateToken, (req, res) => customerController.list(req, res));
 
+// Listar próximos aniversários
+router.get('/birthdays/upcoming', authenticateToken, (req, res) => customerController.getUpcomingBirthdays(req, res));
+
 // Buscar cliente por ID
 router.get('/:id', authenticateToken, (req, res) => customerController.getById(req, res));
 

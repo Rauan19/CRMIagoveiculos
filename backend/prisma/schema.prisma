@@ -19,6 +19,7 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   sales     Sale[]
+  goals     Goal[]
 }
 
 model Customer {
@@ -33,6 +34,7 @@ model Customer {
   city      String?
   district  String?
   documents String?
+  birthDate DateTime? // Data de nascimento para lembretes de aniversário
   status    String    @default("novo")
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
@@ -98,8 +100,10 @@ model Sale {
   vehicleId             Int      @unique
   tradeInId             Int?     @unique
   sellerId              Int
+  promotionId           Int?     // Promoção aplicada (opcional)
   salePrice             Float?   // Preço de venda (opcional)
   purchasePrice         Float?   // Preço de compra do veículo
+  discountAmount        Float?   // Valor do desconto aplicado
   profit                Float?   // Lucro (salePrice - purchasePrice)
   entryValue            Float?   // Valor de entrada
   entryType             String?  // Tipo de entrada: dinheiro, veiculo, cartao_credito
@@ -123,19 +127,68 @@ model Sale {
   vehicle               Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
   tradeIn               TradeIn? @relation(fields: [tradeInId], references: [id], onDelete: SetNull)
   seller                User     @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  promotion             Promotion? @relation(fields: [promotionId], references: [id], onDelete: SetNull)
   transactions          FinancialTransaction[]
 }
 
 model FinancialTransaction {
-  id          Int      @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   type        String
   description String
   amount      Float
-  dueDate     DateTime
+  dueDate     DateTime? // Opcional - se não informado, usa data atual
   paidDate    DateTime?
-  status      String   @default("pendente")
+  status      String    @default("pendente")
   saleId      Int?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  sale        Sale?    @relation(fields: [saleId], references: [id], onDelete: SetNull)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  sale        Sale?     @relation(fields: [saleId], references: [id], onDelete: SetNull)
+}
+
+model Promotion {
+  id            Int       @id @default(autoincrement())
+  name          String
+  description   String?
+  discountType  String    // "percentage" ou "fixed"
+  discountValue Float
+  startDate     DateTime
+  endDate       DateTime
+  status        String    @default("ativa") // "ativa", "inativa", "expirada"
+  applicableTo  String?   // "all", "vehicles", "services"
+  minPurchaseValue Float?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  sales         Sale[]
+}
+
+model Goal {
+  id          Int       @id @default(autoincrement())
+  userId      Int
+  type        String    // "sales", "revenue", "profit"
+  targetValue Float
+  currentValue Float    @default(0)
+  period      String    // "monthly", "quarterly", "yearly"
+  startDate   DateTime
+  endDate     DateTime
+  status      String    @default("active") // "active", "completed", "cancelled"
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Estoque {
+  id          Int       @id @default(autoincrement())
+  brand       String    // Marca do veículo
+  model       String    // Modelo do veículo
+  year        Int       // Ano
+  plate       String?   // Placa (opcional)
+  km          Int?      // Quilometragem (opcional)
+  color       String?   // Cor (opcional)
+  value       Float?    // Valor
+  discount    Float?    @default(0) // Desconto percentual (opcional)
+  notes       String?   // Observações/Notas
+  photos      String?   // Fotos em base64 (JSON string)
+  totalSize   Float     @default(0) // Tamanho total das imagens em bytes
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }

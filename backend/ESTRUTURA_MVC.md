@@ -192,3 +192,4 @@ app.use('/api/meu-recurso', meuRoutes);
 5. Validar dados de entrada antes de processar
 6. Usar middlewares para autenticação/autorização nas rotas protegidas
 
+

@@ -165,11 +165,16 @@ export default function TradeInsPage() {
   return (
     <Layout>
       <div className="space-y-6">
-        <div className="flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-gray-900">Entradas (Trade-In)</h1>
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">Avaliações de Entrada (Trade-In)</h1>
+            <p className="text-sm text-gray-600 mt-1">
+              Quando um cliente quer trocar o veículo dele pelo da loja. Avalie o veículo, defina o valor FIPE e o valor oferecido como entrada.
+            </p>
+          </div>
           <button
             onClick={openModal}
-            className="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors"
+            className="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors whitespace-nowrap"
           >
             Nova Avaliação
           </button>
@@ -178,8 +183,8 @@ export default function TradeInsPage() {
         {loading ? (
           <div className="text-center py-12">Carregando...</div>
         ) : (
-          <div className="bg-white shadow rounded-lg overflow-hidden">
-            <div className="overflow-x-auto">
+          <div className="bg-white shadow rounded-lg overflow-hidden max-h-[calc(100vh-220px)] flex flex-col">
+            <div className="overflow-x-auto overflow-y-auto flex-1 min-h-0">
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
@@ -213,7 +218,7 @@ export default function TradeInsPage() {
                   {tradeIns.length === 0 ? (
                     <tr>
                       <td colSpan={8} className="px-6 py-4 text-center text-gray-500">
-                        Nenhum trade-in cadastrado
+                        Nenhuma avaliação cadastrada. Clique em "Nova Avaliação" para começar.
                       </td>
                     </tr>
                   ) : (
@@ -278,9 +283,14 @@ export default function TradeInsPage() {
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
               <div className="p-6">
-                <h2 className="text-xl font-bold mb-4">
-                  {editingTradeIn ? 'Editar Trade-In' : 'Nova Avaliação'}
-                </h2>
+                <div className="mb-4">
+                  <h2 className="text-xl font-bold mb-1">
+                    {editingTradeIn ? 'Editar Avaliação' : 'Nova Avaliação de Entrada'}
+                  </h2>
+                  <p className="text-sm text-gray-600">
+                    Avalie o veículo que o cliente quer usar como entrada na compra. Informe o valor FIPE e o valor que você oferecerá.
+                  </p>
+                </div>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div className="col-span-2">

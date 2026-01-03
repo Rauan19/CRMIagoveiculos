@@ -24,6 +24,32 @@ class UserController {
     }
   }
 
+  async listSellers(req, res) {
+    try {
+      const users = await prisma.user.findMany({
+        where: {
+          role: {
+            in: ['vendedor', 'gerente', 'admin']
+          }
+        },
+        select: {
+          id: true,
+          name: true,
+          email: true,
+          role: true
+        },
+        orderBy: {
+          name: 'asc'
+        }
+      });
+
+      res.json(users);
+    } catch (error) {
+      console.error('Erro ao listar vendedores:', error);
+      res.status(500).json({ error: 'Erro ao buscar vendedores' });
+    }
+  }
+
   async getById(req, res) {
     try {
       const { id } = req.params;
@@ -102,4 +128,5 @@ class UserController {
 }
 
 module.exports = new UserController();
+
 

@@ -18,6 +18,11 @@ class VehicleController {
 
       const vehicles = await prisma.vehicle.findMany({
         where,
+        include: {
+          customer: {
+            select: { id: true, name: true, phone: true }
+          }
+        },
         orderBy: { createdAt: 'desc' }
       });
 
@@ -71,6 +76,10 @@ class VehicleController {
         });
       }
 
+      const vehicleCost = cost ? parseFloat(cost) : null;
+      const vehicleExpense = expenseValue ? parseFloat(expenseValue) : null;
+      const totalCost = vehicleCost ? (vehicleCost + (vehicleExpense || 0)) : null;
+
       const vehicle = await prisma.vehicle.create({
         data: {
           brand,
@@ -80,10 +89,10 @@ class VehicleController {
           km: km ? parseInt(km) : null,
           color: color || null,
           price: price ? parseFloat(price) : null,
-          cost: cost ? parseFloat(cost) : null,
+          cost: vehicleCost,
           tableValue: tableValue ? parseFloat(tableValue) : null,
           expenseType: expenseType || null,
-          expenseValue: expenseValue ? parseFloat(expenseValue) : null,
+          expenseValue: vehicleExpense,
           customerId: customerId ? parseInt(customerId) : null,
           notes: notes || null,
           photos: photos ? (typeof photos === 'string' ? photos : JSON.stringify(photos)) : null,
@@ -95,6 +104,19 @@ class VehicleController {
           }
         }
       });
+
+      // Criar transação financeira de saída se houver custo
+      if (totalCost && totalCost > 0) {
+        await prisma.financialTransaction.create({
+          data: {
+            type: 'pagar',
+            description: `Compra de veículo: ${brand} ${model} ${year}${plate ? ` - ${plate}` : ''}`,
+            amount: totalCost,
+            dueDate: new Date(), // Data atual se não especificado
+            status: 'pendente'
+          }
+        });
+      }
 
       res.status(201).json({ message: 'Veículo criado com sucesso', vehicle });
     } catch (error) {

@@ -70,6 +70,7 @@ class CustomerController {
         city, 
         district, 
         cep, 
+        birthDate,
         status 
       } = req.body;
 
@@ -90,6 +91,7 @@ class CustomerController {
           city: city || null,
           district: district || null,
           cep: cep || null,
+          birthDate: birthDate ? new Date(birthDate) : null,
           status: status || 'novo'
         }
       });
@@ -114,6 +116,7 @@ class CustomerController {
         city, 
         district, 
         cep, 
+        birthDate,
         status 
       } = req.body;
 
@@ -127,6 +130,7 @@ class CustomerController {
       if (city !== undefined) updateData.city = city;
       if (district !== undefined) updateData.district = district;
       if (cep !== undefined) updateData.cep = cep;
+      if (birthDate !== undefined) updateData.birthDate = birthDate ? new Date(birthDate) : null;
       if (status) updateData.status = status;
 
       const customer = await prisma.customer.update({
@@ -154,7 +158,20 @@ class CustomerController {
       res.status(500).json({ error: 'Erro ao deletar cliente' });
     }
   }
+
+  async getUpcomingBirthdays(req, res) {
+    try {
+      const birthdayScheduler = require('../services/birthdayScheduler');
+      const days = parseInt(req.query.days) || 30;
+      const upcoming = await birthdayScheduler.getUpcomingBirthdays(days);
+      res.json(upcoming);
+    } catch (error) {
+      console.error('Erro ao buscar próximos aniversários:', error);
+      res.status(500).json({ error: 'Erro ao buscar próximos aniversários' });
+    }
+  }
 }
 
 module.exports = new CustomerController();
+
 

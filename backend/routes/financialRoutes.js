@@ -15,4 +15,7 @@ router.post('/transactions', authenticateToken, (req, res) => financialControlle
 // Atualizar transação
 router.put('/transactions/:id', authenticateToken, (req, res) => financialController.updateTransaction(req, res));
 
+// Deletar transação
+router.delete('/transactions/:id', authenticateToken, (req, res) => financialController.deleteTransaction(req, res));
+
 module.exports = router;

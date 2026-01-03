@@ -83,6 +83,8 @@ export default function SalesPage() {
   const [selectedSale, setSelectedSale] = useState<Sale | null>(null)
   const [newSellerData, setNewSellerData] = useState({ name: '', email: '', password: '' })
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' | 'info' } | null>(null)
+  const [periodFilter, setPeriodFilter] = useState<string>('all') // 'all', 'today', 'week', 'month', 'year', 'date'
+  const [specificDate, setSpecificDate] = useState<string>('') // Para filtro de data específica
   const [formData, setFormData] = useState({
     customerId: '',
     vehicleId: '',
@@ -105,13 +107,63 @@ export default function SalesPage() {
 
   useEffect(() => {
     loadData()
-  }, [])
+  }, [periodFilter, specificDate])
+
+  const getDateRange = (period: string, date?: string) => {
+    const now = new Date()
+    let startDate: Date | null = null
+    let endDate: Date | null = null
+
+    switch (period) {
+      case 'today':
+        startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0)
+        endDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59)
+        break
+      case 'week':
+        // Calcular início da semana (domingo)
+        const dayOfWeek = now.getDay()
+        const diff = dayOfWeek // Dias desde domingo
+        const startOfWeek = new Date(now)
+        startOfWeek.setDate(now.getDate() - diff)
+        startDate = new Date(startOfWeek.getFullYear(), startOfWeek.getMonth(), startOfWeek.getDate(), 0, 0, 0)
+        endDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59)
+        break
+      case 'month':
+        startDate = new Date(now.getFullYear(), now.getMonth(), 1, 0, 0, 0)
+        endDate = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59)
+        break
+      case 'year':
+        startDate = new Date(now.getFullYear(), 0, 1, 0, 0, 0)
+        endDate = new Date(now.getFullYear(), 11, 31, 23, 59, 59)
+        break
+      case 'date':
+        // Data específica
+        if (date) {
+          const selectedDate = new Date(date)
+          startDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate(), 0, 0, 0)
+          endDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate(), 23, 59, 59)
+        }
+        break
+      default:
+        return { startDate: null, endDate: null }
+    }
+
+    return {
+      startDate: startDate ? startDate.toISOString().split('T')[0] : null,
+      endDate: endDate ? endDate.toISOString().split('T')[0] : null
+    }
+  }
 
   const loadData = async () => {
     try {
       setLoading(true)
+      const dateRange = getDateRange(periodFilter, specificDate)
+      const params = new URLSearchParams()
+      if (dateRange.startDate) params.append('startDate', dateRange.startDate)
+      if (dateRange.endDate) params.append('endDate', dateRange.endDate)
+
       const [salesRes, customersRes, vehiclesRes] = await Promise.all([
-        api.get('/sales'),
+        api.get(`/sales?${params.toString()}`),
         api.get('/customers'),
         api.get('/vehicles?status=disponivel'),
       ])
@@ -129,6 +181,18 @@ export default function SalesPage() {
       console.error('Erro ao carregar dados:', error)
     } finally {
       setLoading(false)
+    }
+  }
+
+  const clearFilters = () => {
+    setPeriodFilter('all')
+    setSpecificDate('')
+  }
+
+  const handleDateChange = (date: string) => {
+    setSpecificDate(date)
+    if (date) {
+      setPeriodFilter('date')
     }
   }
 
@@ -584,9 +648,15 @@ export default function SalesPage() {
           onClose={() => setToast(null)}
         />
       )}
-      <div className="space-y-6">
+      <div className="space-y-6 h-full flex flex-col">
         <div className="flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-gray-900">Vendas</h1>
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">Vendas</h1>
+            <p className="text-gray-600 mt-1">
+              {sales.length} {sales.length === 1 ? 'venda encontrada' : 'vendas encontradas'}
+              {periodFilter !== 'all' && ` no período selecionado`}
+            </p>
+          </div>
           <button
             onClick={() => {
               resetForm()
@@ -598,11 +668,92 @@ export default function SalesPage() {
           </button>
         </div>
 
+        {/* Filtros de Período */}
+        <div className="bg-white p-4 rounded-lg shadow border border-gray-200">
+          <div className="flex items-center justify-between mb-3">
+            <h3 className="text-sm font-medium text-gray-700">Filtrar por período:</h3>
+            {periodFilter !== 'all' && (
+              <button
+                onClick={clearFilters}
+                className="text-xs text-primary-600 hover:text-primary-700"
+              >
+                Limpar filtro
+              </button>
+            )}
+          </div>
+          <div className="flex gap-2 flex-wrap">
+            <button
+              onClick={() => setPeriodFilter('all')}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                periodFilter === 'all'
+                  ? 'bg-primary-600 text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              Todas
+            </button>
+            <button
+              onClick={() => setPeriodFilter('today')}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                periodFilter === 'today'
+                  ? 'bg-primary-600 text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              Hoje
+            </button>
+            <button
+              onClick={() => setPeriodFilter('week')}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                periodFilter === 'week'
+                  ? 'bg-primary-600 text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              Esta Semana
+            </button>
+            <button
+              onClick={() => setPeriodFilter('month')}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                periodFilter === 'month'
+                  ? 'bg-primary-600 text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              Este Mês
+            </button>
+            <button
+              onClick={() => setPeriodFilter('year')}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                periodFilter === 'year'
+                  ? 'bg-primary-600 text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              Este Ano
+            </button>
+          </div>
+          <div className="flex items-center gap-3 border-t pt-3 mt-3">
+            <label className="text-sm font-medium text-gray-700 whitespace-nowrap">Data específica:</label>
+            <input
+              type="date"
+              value={specificDate}
+              onChange={(e) => handleDateChange(e.target.value)}
+              className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+            />
+            {specificDate && (
+              <span className="text-sm text-gray-600">
+                {new Date(specificDate).toLocaleDateString('pt-BR')}
+              </span>
+            )}
+          </div>
+        </div>
+
         {loading ? (
           <div className="text-center py-12 text-gray-700">Carregando...</div>
         ) : (
-          <div className="bg-white shadow rounded-lg overflow-hidden border border-gray-200">
-            <div className="overflow-x-auto">
+          <div className="bg-white shadow rounded-lg overflow-hidden border border-gray-200 max-h-[calc(100vh-220px)] flex flex-col">
+            <div className="overflow-x-auto overflow-y-auto flex-1 min-h-0">
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-100">
                   <tr>

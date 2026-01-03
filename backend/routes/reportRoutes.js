@@ -24,4 +24,9 @@ router.get('/vehicles', authenticateToken, (req, res) => reportController.getVeh
 // Relatório de trade-ins
 router.get('/trade-ins', authenticateToken, (req, res) => reportController.getTradeInsReport(req, res));
 
+// Relatórios avançados
+router.get('/seller-performance', authenticateToken, (req, res) => reportController.getSellerPerformanceReport(req, res));
+router.get('/top-selling-vehicles', authenticateToken, (req, res) => reportController.getTopSellingVehiclesReport(req, res));
+router.get('/profitability-analysis', authenticateToken, (req, res) => reportController.getProfitabilityAnalysisReport(req, res));
+
 module.exports = router;
