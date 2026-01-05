@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Layout from '@/components/Layout'
 import api from '@/services/api'
 import Toast from '@/components/Toast'
+import ConfirmModal from '@/components/ConfirmModal'
 
 interface Customer {
   id: number
@@ -47,6 +48,8 @@ export default function TradeInsPage() {
   const [showModal, setShowModal] = useState(false)
   const [editingTradeIn, setEditingTradeIn] = useState<TradeIn | null>(null)
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' | 'info' } | null>(null)
+  const [showConfirmModal, setShowConfirmModal] = useState(false)
+  const [confirmDeleteId, setConfirmDeleteId] = useState<number | null>(null)
   const [formData, setFormData] = useState({
     customerId: '',
     brand: '',
@@ -128,11 +131,17 @@ export default function TradeInsPage() {
     setShowModal(true)
   }
 
-  const handleDelete = async (id: number) => {
-    if (!confirm('Tem certeza que deseja excluir este trade-in?')) return
-    setDeleting(id)
+  const handleDeleteClick = (id: number) => {
+    setConfirmDeleteId(id)
+    setShowConfirmModal(true)
+  }
+
+  const handleDeleteConfirm = async () => {
+    if (!confirmDeleteId) return
+    setShowConfirmModal(false)
+    setDeleting(confirmDeleteId)
     try {
-      await api.delete(`/trade-ins/${id}`)
+      await api.delete(`/trade-ins/${confirmDeleteId}`)
       setToast({ message: 'Trade-in excluído com sucesso!', type: 'success' })
       await loadData()
     } catch (error: any) {
@@ -140,7 +149,13 @@ export default function TradeInsPage() {
       setToast({ message: error.response?.data?.error || 'Erro ao excluir trade-in', type: 'error' })
     } finally {
       setDeleting(null)
+      setConfirmDeleteId(null)
     }
+  }
+
+  const handleDeleteCancel = () => {
+    setShowConfirmModal(false)
+    setConfirmDeleteId(null)
   }
 
   const resetForm = () => {
@@ -262,7 +277,7 @@ export default function TradeInsPage() {
                             Editar
                           </button>
                           <button
-                            onClick={() => handleDelete(tradeIn.id)}
+                            onClick={() => handleDeleteClick(tradeIn.id)}
                             disabled={deleting === tradeIn.id}
                             className="text-red-600 hover:text-red-900 disabled:opacity-50 disabled:cursor-not-allowed"
                           >
@@ -430,6 +445,17 @@ export default function TradeInsPage() {
           onClose={() => setToast(null)}
         />
       )}
+
+      <ConfirmModal
+        isOpen={showConfirmModal}
+        title="Confirmar Exclusão"
+        message="Tem certeza que deseja excluir este trade-in?"
+        onConfirm={handleDeleteConfirm}
+        onCancel={handleDeleteCancel}
+        confirmText="Sim, Excluir"
+        cancelText="Cancelar"
+        confirmColor="red"
+      />
     </Layout>
   )
 }

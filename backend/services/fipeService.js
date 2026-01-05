@@ -8,16 +8,27 @@ class FipeService {
   }
 
   /**
+   * Valida o tipo de veículo
+   */
+  validateVehicleType(type) {
+    const validTypes = ['carros', 'motos', 'caminhoes'];
+    return validTypes.includes(type) ? type : 'carros';
+  }
+
+  /**
    * Busca o código FIPE de um veículo pela marca, modelo e ano
    * @param {string} brand - Marca do veículo
    * @param {string} model - Modelo do veículo
    * @param {number} year - Ano do veículo
+   * @param {string} vehicleType - Tipo do veículo: 'carros', 'motos' ou 'caminhoes' (padrão: 'carros')
    * @returns {Promise<Object>} Dados do veículo na tabela FIPE
    */
-  async searchVehicle(brand, model, year) {
+  async searchVehicle(brand, model, year, vehicleType = 'carros') {
     try {
+      const type = this.validateVehicleType(vehicleType);
+      
       // Primeiro, buscar todas as marcas
-      const brandsResponse = await axios.get(`${this.baseURL}/carros/marcas`);
+      const brandsResponse = await axios.get(`${this.baseURL}/${type}/marcas`);
       const brands = brandsResponse.data;
       
       // Encontrar a marca que corresponde (busca parcial)
@@ -31,7 +42,7 @@ class FipeService {
       }
 
       // Buscar modelos da marca
-      const modelsResponse = await axios.get(`${this.baseURL}/carros/marcas/${brandMatch.codigo}/modelos`);
+      const modelsResponse = await axios.get(`${this.baseURL}/${type}/marcas/${brandMatch.codigo}/modelos`);
       const models = modelsResponse.data.modelos || [];
       
       // Encontrar o modelo que corresponde (busca parcial)
@@ -45,7 +56,7 @@ class FipeService {
       }
 
       // Buscar anos do modelo
-      const yearsResponse = await axios.get(`${this.baseURL}/carros/marcas/${brandMatch.codigo}/modelos/${modelMatch.codigo}/anos`);
+      const yearsResponse = await axios.get(`${this.baseURL}/${type}/marcas/${brandMatch.codigo}/modelos/${modelMatch.codigo}/anos`);
       const years = yearsResponse.data;
 
       // Encontrar o ano mais próximo (pode ser gasolina, álcool, flex, etc)
@@ -58,7 +69,7 @@ class FipeService {
       }
 
       // Buscar valor FIPE
-      const valueResponse = await axios.get(`${this.baseURL}/carros/marcas/${brandMatch.codigo}/modelos/${modelMatch.codigo}/anos/${yearMatch.codigo}`);
+      const valueResponse = await axios.get(`${this.baseURL}/${type}/marcas/${brandMatch.codigo}/modelos/${modelMatch.codigo}/anos/${yearMatch.codigo}`);
       
       const fipeData = {
         valor: this.parseFipeValue(valueResponse.data.Valor),
@@ -99,9 +110,9 @@ class FipeService {
   /**
    * Busca apenas o valor FIPE (método simplificado)
    */
-  async getFipeValue(brand, model, year) {
+  async getFipeValue(brand, model, year, vehicleType = 'carros') {
     try {
-      const data = await this.searchVehicle(brand, model, year);
+      const data = await this.searchVehicle(brand, model, year, vehicleType);
       return data.valor;
     } catch (error) {
       console.error('Erro ao buscar valor FIPE:', error.message);
@@ -111,10 +122,12 @@ class FipeService {
 
   /**
    * Lista todas as marcas disponíveis
+   * @param {string} vehicleType - Tipo do veículo: 'carros', 'motos' ou 'caminhoes' (padrão: 'carros')
    */
-  async getBrands() {
+  async getBrands(vehicleType = 'carros') {
     try {
-      const response = await axios.get(`${this.baseURL}/carros/marcas`);
+      const type = this.validateVehicleType(vehicleType);
+      const response = await axios.get(`${this.baseURL}/${type}/marcas`);
       return response.data;
     } catch (error) {
       console.error('Erro ao buscar marcas FIPE:', error);
@@ -124,10 +137,13 @@ class FipeService {
 
   /**
    * Lista modelos de uma marca
+   * @param {string} brandCode - Código da marca
+   * @param {string} vehicleType - Tipo do veículo: 'carros', 'motos' ou 'caminhoes' (padrão: 'carros')
    */
-  async getModels(brandCode) {
+  async getModels(brandCode, vehicleType = 'carros') {
     try {
-      const response = await axios.get(`${this.baseURL}/carros/marcas/${brandCode}/modelos`);
+      const type = this.validateVehicleType(vehicleType);
+      const response = await axios.get(`${this.baseURL}/${type}/marcas/${brandCode}/modelos`);
       return response.data.modelos || [];
     } catch (error) {
       console.error('Erro ao buscar modelos FIPE:', error);
@@ -137,10 +153,14 @@ class FipeService {
 
   /**
    * Lista anos disponíveis para um modelo específico
+   * @param {string} brandCode - Código da marca
+   * @param {string} modelCode - Código do modelo
+   * @param {string} vehicleType - Tipo do veículo: 'carros', 'motos' ou 'caminhoes' (padrão: 'carros')
    */
-  async getYears(brandCode, modelCode) {
+  async getYears(brandCode, modelCode, vehicleType = 'carros') {
     try {
-      const response = await axios.get(`${this.baseURL}/carros/marcas/${brandCode}/modelos/${modelCode}/anos`);
+      const type = this.validateVehicleType(vehicleType);
+      const response = await axios.get(`${this.baseURL}/${type}/marcas/${brandCode}/modelos/${modelCode}/anos`);
       return response.data || [];
     } catch (error) {
       console.error('Erro ao buscar anos FIPE:', error);

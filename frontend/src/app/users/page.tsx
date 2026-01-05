@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Layout from '@/components/Layout'
 import api from '@/services/api'
 import Toast from '@/components/Toast'
+import ConfirmModal from '@/components/ConfirmModal'
 import { useAuthStore } from '@/store/authStore'
 import { FiUsers, FiEdit, FiTrash2, FiPlus, FiShield, FiUser, FiAlertCircle } from 'react-icons/fi'
 
@@ -28,6 +29,8 @@ export default function UsersPage() {
   const [editingUser, setEditingUser] = useState<User | null>(null)
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' | 'info' } | null>(null)
   const [hasPermission, setHasPermission] = useState(true)
+  const [showConfirmModal, setShowConfirmModal] = useState(false)
+  const [confirmDeleteId, setConfirmDeleteId] = useState<number | null>(null)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -121,11 +124,17 @@ export default function UsersPage() {
     setShowModal(true)
   }
 
-  const handleDelete = async (id: number) => {
-    if (!confirm('Tem certeza que deseja excluir este funcionário?')) return
-    setDeleting(id)
+  const handleDeleteClick = (id: number) => {
+    setConfirmDeleteId(id)
+    setShowConfirmModal(true)
+  }
+
+  const handleDeleteConfirm = async () => {
+    if (!confirmDeleteId) return
+    setShowConfirmModal(false)
+    setDeleting(confirmDeleteId)
     try {
-      await api.delete(`/users/${id}`)
+      await api.delete(`/users/${confirmDeleteId}`)
       setToast({ message: 'Funcionário excluído com sucesso!', type: 'success' })
       loadUsers()
     } catch (error: any) {
@@ -133,7 +142,13 @@ export default function UsersPage() {
       setToast({ message: error.response?.data?.error || 'Erro ao excluir funcionário', type: 'error' })
     } finally {
       setDeleting(null)
+      setConfirmDeleteId(null)
     }
+  }
+
+  const handleDeleteCancel = () => {
+    setShowConfirmModal(false)
+    setConfirmDeleteId(null)
   }
 
   const resetForm = () => {
@@ -266,22 +281,22 @@ export default function UsersPage() {
                               <button
                                 onClick={() => handleEdit(userItem)}
                                 className="text-primary-600 hover:text-primary-900"
+                                title="Editar"
                               >
                                 <FiEdit />
                               </button>
-                              {user.role === 'admin' && (
-                                <button
-                                  onClick={() => handleDelete(userItem.id)}
-                                  disabled={deleting === userItem.id}
-                                  className="text-red-600 hover:text-red-900 disabled:opacity-50"
-                                >
-                                  {deleting === userItem.id ? (
-                                    <div className="animate-spin h-4 w-4 border-2 border-red-600 border-t-transparent rounded-full"></div>
-                                  ) : (
-                                    <FiTrash2 />
-                                  )}
-                                </button>
-                              )}
+                              <button
+                                onClick={() => handleDeleteClick(userItem.id)}
+                                disabled={deleting === userItem.id}
+                                className="text-red-600 hover:text-red-900 disabled:opacity-50 disabled:cursor-not-allowed"
+                                title="Excluir"
+                              >
+                                {deleting === userItem.id ? (
+                                  <div className="animate-spin h-4 w-4 border-2 border-red-600 border-t-transparent rounded-full"></div>
+                                ) : (
+                                  <FiTrash2 />
+                                )}
+                              </button>
                             </>
                           )}
                         </td>
@@ -407,6 +422,17 @@ export default function UsersPage() {
         )}
       </div>
       {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
+
+      <ConfirmModal
+        isOpen={showConfirmModal}
+        title="Confirmar Exclusão"
+        message="Tem certeza que deseja excluir este funcionário?"
+        onConfirm={handleDeleteConfirm}
+        onCancel={handleDeleteCancel}
+        confirmText="Sim, Excluir"
+        cancelText="Cancelar"
+        confirmColor="red"
+      />
     </Layout>
   )
 }

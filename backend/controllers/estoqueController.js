@@ -89,7 +89,7 @@ class EstoqueController {
 
   async create(req, res) {
     try {
-      const { brand, model, year, plate, km, color, value, discount, notes, photos } = req.body;
+      const { brand, model, year, plate, km, color, value, promotionValue, discount, notes, photos } = req.body;
 
       if (!brand || !model || !year) {
         return res.status(400).json({ 
@@ -128,6 +128,7 @@ class EstoqueController {
           km: km ? parseInt(km) : null,
           color: color || null,
           value: value ? parseFloat(value) : null,
+          promotionValue: promotionValue ? parseFloat(promotionValue) : null,
           discount: discount ? parseFloat(discount) : 0,
           notes: notes || null,
           photos: photosArray.length > 0 ? JSON.stringify(photosArray) : null,
@@ -146,7 +147,7 @@ class EstoqueController {
   async update(req, res) {
     try {
       const { id } = req.params;
-      const { brand, model, year, plate, km, color, value, discount, notes, photos } = req.body;
+      const { brand, model, year, plate, km, color, value, promotionValue, discount, notes, photos } = req.body;
 
       const item = await prisma.estoque.findUnique({
         where: { id: parseInt(id) }
@@ -198,6 +199,7 @@ class EstoqueController {
       if (km !== undefined) updateData.km = km ? parseInt(km) : null;
       if (color !== undefined) updateData.color = color || null;
       if (value !== undefined) updateData.value = value ? parseFloat(value) : null;
+      if (promotionValue !== undefined) updateData.promotionValue = promotionValue ? parseFloat(promotionValue) : null;
       if (discount !== undefined) updateData.discount = discount ? parseFloat(discount) : 0;
       if (notes !== undefined) updateData.notes = notes || null;
       if (photos !== undefined) {

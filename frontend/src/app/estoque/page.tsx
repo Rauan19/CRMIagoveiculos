@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Layout from '@/components/Layout'
 import api from '@/services/api'
 import Toast from '@/components/Toast'
+import ConfirmModal from '@/components/ConfirmModal'
 import { formatPlate, removeMask } from '@/utils/formatters'
 
 interface Estoque {
@@ -15,6 +16,7 @@ interface Estoque {
   km?: number
   color?: string
   value?: number
+  promotionValue?: number
   discount?: number
   notes?: string
   photos?: string
@@ -54,6 +56,11 @@ export default function EstoquePage() {
   const [showModal, setShowModal] = useState(false)
   const [editingItem, setEditingItem] = useState<Estoque | null>(null)
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' | 'info' } | null>(null)
+  const [viewingPhotos, setViewingPhotos] = useState<string[]>([])
+  const [showPhotoModal, setShowPhotoModal] = useState(false)
+  const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0)
+  const [showConfirmModal, setShowConfirmModal] = useState(false)
+  const [confirmDeleteId, setConfirmDeleteId] = useState<number | null>(null)
   const [formData, setFormData] = useState({
     brand: '',
     model: '',
@@ -62,27 +69,65 @@ export default function EstoquePage() {
     km: '',
     color: '',
     value: '',
+    promotionValue: '',
     discount: '',
     notes: '',
     photos: [] as string[],
   })
   const [currentPhotosSize, setCurrentPhotosSize] = useState(0)
-  const [vehicleOptions, setVehicleOptions] = useState<{ brands: string[]; models: string[]; years: number[] }>({
-    brands: [],
-    models: [],
-    years: []
-  })
+  const [vehicleType, setVehicleType] = useState<string>('carros') // 'carros', 'motos', 'caminhoes'
+  const [fipeBrands, setFipeBrands] = useState<{ codigo: string; nome: string }[]>([])
+  const [fipeModels, setFipeModels] = useState<{ codigo: string; nome: string }[]>([])
+  const [fipeYears, setFipeYears] = useState<{ codigo: string; nome: string }[]>([])
+  const [selectedBrandCode, setSelectedBrandCode] = useState<string>('')
+  const [selectedModelCode, setSelectedModelCode] = useState<string>('')
   const [brandSearch, setBrandSearch] = useState('')
   const [modelSearch, setModelSearch] = useState('')
   const [yearSearch, setYearSearch] = useState('')
   const [showBrandDropdown, setShowBrandDropdown] = useState(false)
   const [showModelDropdown, setShowModelDropdown] = useState(false)
   const [showYearDropdown, setShowYearDropdown] = useState(false)
+  const [loadingBrands, setLoadingBrands] = useState(false)
+  const [loadingModels, setLoadingModels] = useState(false)
+  const [loadingYears, setLoadingYears] = useState(false)
 
   useEffect(() => {
     loadData()
-    loadVehicleOptions()
+    loadFipeBrands()
   }, [])
+
+  // Quando trocar o tipo de veículo, recarregar marcas
+  useEffect(() => {
+    setSelectedBrandCode('')
+    setSelectedModelCode('')
+    setFipeModels([])
+    setFipeYears([])
+    setBrandSearch('')
+    setModelSearch('')
+    setYearSearch('')
+    setFormData(prev => ({ ...prev, brand: '', model: '', year: '' }))
+    loadFipeBrands()
+  }, [vehicleType])
+
+  // Quando selecionar uma marca, carregar modelos
+  useEffect(() => {
+    if (selectedBrandCode) {
+      loadFipeModels(selectedBrandCode)
+    } else {
+      setFipeModels([])
+      setSelectedModelCode('')
+      setFipeYears([])
+    }
+  }, [selectedBrandCode, vehicleType])
+
+  // Quando selecionar um modelo, carregar anos
+  useEffect(() => {
+    if (selectedBrandCode && selectedModelCode) {
+      loadFipeYears(selectedBrandCode, selectedModelCode)
+    } else {
+      setFipeYears([])
+    }
+  }, [selectedBrandCode, selectedModelCode, vehicleType])
 
   useEffect(() => {
     // Recalcular tamanho das fotos quando mudar
@@ -107,14 +152,45 @@ export default function EstoquePage() {
     }
   }
 
-  const loadVehicleOptions = async () => {
+  const loadFipeBrands = async () => {
+    setLoadingBrands(true)
     try {
-      const response = await api.get('/estoque/options')
-      console.log('Opções carregadas:', response.data)
-      setVehicleOptions(response.data || { brands: [], models: [], years: [] })
+      const response = await api.get(`/fipe/brands?type=${vehicleType}`)
+      setFipeBrands(response.data || [])
     } catch (error) {
-      console.error('Erro ao carregar opções de veículos:', error)
-      setVehicleOptions({ brands: [], models: [], years: [] })
+      console.error('Erro ao carregar marcas FIPE:', error)
+      setToast({ message: 'Erro ao carregar marcas da FIPE. Você ainda pode digitar a marca manualmente.', type: 'error' })
+      setFipeBrands([])
+    } finally {
+      setLoadingBrands(false)
+    }
+  }
+
+  const loadFipeModels = async (brandCode: string) => {
+    if (!brandCode) return
+    setLoadingModels(true)
+    try {
+      const response = await api.get(`/fipe/brands/${brandCode}/models?type=${vehicleType}`)
+      setFipeModels(response.data || [])
+    } catch (error) {
+      console.error('Erro ao carregar modelos FIPE:', error)
+      setFipeModels([])
+    } finally {
+      setLoadingModels(false)
+    }
+  }
+
+  const loadFipeYears = async (brandCode: string, modelCode: string) => {
+    if (!brandCode || !modelCode) return
+    setLoadingYears(true)
+    try {
+      const response = await api.get(`/fipe/brands/${brandCode}/models/${modelCode}/years?type=${vehicleType}`)
+      setFipeYears(response.data || [])
+    } catch (error) {
+      console.error('Erro ao carregar anos FIPE:', error)
+      setFipeYears([])
+    } finally {
+      setLoadingYears(false)
     }
   }
 
@@ -132,33 +208,42 @@ export default function EstoquePage() {
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
-  const filteredBrands = vehicleOptions.brands.filter(brand =>
-    brand.toLowerCase().includes(brandSearch.toLowerCase())
+  // Filtrar marcas da FIPE pelo nome
+  const filteredBrands = fipeBrands.filter(brand =>
+    brand.nome.toLowerCase().includes(brandSearch.toLowerCase())
   )
 
-  const filteredModels = vehicleOptions.models.filter(model =>
-    model.toLowerCase().includes(modelSearch.toLowerCase())
+  const filteredModels = fipeModels.filter(model =>
+    model.nome.toLowerCase().includes(modelSearch.toLowerCase())
   )
 
-  const filteredYears = vehicleOptions.years.filter(year =>
-    year.toString().includes(yearSearch)
+  const filteredYears = fipeYears.filter(year =>
+    year.nome.toLowerCase().includes(yearSearch.toLowerCase())
   )
 
-  const handleBrandSelect = (brand: string) => {
-    setFormData({ ...formData, brand })
-    setBrandSearch(brand)
+  const handleBrandSelect = (brand: { codigo: string; nome: string }) => {
+    setSelectedBrandCode(brand.codigo)
+    setBrandSearch(brand.nome)
+    setFormData({ ...formData, brand: brand.nome, model: '', year: '' })
+    setModelSearch('')
+    setSelectedModelCode('')
+    setYearSearch('')
     setShowBrandDropdown(false)
   }
 
-  const handleModelSelect = (model: string) => {
-    setFormData({ ...formData, model })
-    setModelSearch(model)
+  const handleModelSelect = (model: { codigo: string; nome: string }) => {
+    setSelectedModelCode(model.codigo)
+    setFormData({ ...formData, model: model.nome, year: '' })
+    setModelSearch(model.nome)
+    setYearSearch('')
     setShowModelDropdown(false)
   }
 
-  const handleYearSelect = (year: number) => {
-    setFormData({ ...formData, year: year.toString() })
-    setYearSearch(year.toString())
+  const handleYearSelect = (year: { codigo: string; nome: string }) => {
+    // Extrair apenas o ano (primeira parte antes de / ou -)
+    const yearNumber = year.nome.split('/')[0]?.split('-')[0] || year.nome.split('-')[0] || year.nome
+    setFormData({ ...formData, year: yearNumber })
+    setYearSearch(year.nome)
     setShowYearDropdown(false)
   }
 
@@ -166,12 +251,32 @@ export default function EstoquePage() {
     const files = e.target.files
     if (!files) return
 
-    Array.from(files).forEach((file) => {
+    const MAX_PHOTOS = 5
+    const currentPhotoCount = formData.photos.length
+    const filesToProcess = Array.from(files).slice(0, MAX_PHOTOS - currentPhotoCount)
+
+    if (files.length > filesToProcess.length) {
+      setToast({
+        message: `Limite de ${MAX_PHOTOS} fotos por veículo. Apenas ${filesToProcess.length} foto(s) será(ão) adicionada(s).`,
+        type: 'info'
+      })
+    }
+
+    filesToProcess.forEach((file) => {
       if (file.type.startsWith('image/')) {
         const reader = new FileReader()
         reader.onloadend = () => {
           const base64String = reader.result as string
           const newPhotos = [...formData.photos, base64String]
+          
+          if (newPhotos.length > MAX_PHOTOS) {
+            setToast({
+              message: `Limite de ${MAX_PHOTOS} fotos por veículo atingido.`,
+              type: 'error'
+            })
+            return
+          }
+
           const newSize = calculateTotalSize(newPhotos)
           const availableSize = storageInfo ? storageInfo.available : 10 * 1024 * 1024 * 1024
           
@@ -199,6 +304,9 @@ export default function EstoquePage() {
         reader.readAsDataURL(file)
       }
     })
+    
+    // Limpar o input para permitir selecionar o mesmo arquivo novamente
+    e.target.value = ''
   }
 
   const handleRemoveImage = (index: number) => {
@@ -220,6 +328,7 @@ export default function EstoquePage() {
         km: formData.km ? parseInt(formData.km) : null,
         color: formData.color || null,
         value: formData.value ? parseFloat(formData.value) : null,
+        promotionValue: formData.promotionValue ? parseFloat(formData.promotionValue) : null,
         discount: formData.discount ? parseFloat(formData.discount) : 0,
         notes: formData.notes || null,
         photos: formData.photos.length > 0 ? formData.photos : null,
@@ -262,6 +371,7 @@ export default function EstoquePage() {
       km: item.km?.toString() || '',
       color: item.color || '',
       value: item.value?.toString() || '',
+      promotionValue: item.promotionValue?.toString() || '',
       discount: item.discount?.toString() || '',
       notes: item.notes || '',
       photos,
@@ -272,11 +382,17 @@ export default function EstoquePage() {
     setShowModal(true)
   }
 
-  const handleDelete = async (id: number) => {
-    if (!confirm('Tem certeza que deseja excluir este veículo do estoque?')) return
-    setDeleting(id)
+  const handleDeleteClick = (id: number) => {
+    setConfirmDeleteId(id)
+    setShowConfirmModal(true)
+  }
+
+  const handleDeleteConfirm = async () => {
+    if (!confirmDeleteId) return
+    setShowConfirmModal(false)
+    setDeleting(confirmDeleteId)
     try {
-      await api.delete(`/estoque/${id}`)
+      await api.delete(`/estoque/${confirmDeleteId}`)
       setToast({ message: 'Veículo removido do estoque com sucesso!', type: 'success' })
       await loadData()
     } catch (error: any) {
@@ -284,7 +400,13 @@ export default function EstoquePage() {
       setToast({ message: error.response?.data?.error || 'Erro ao excluir veículo', type: 'error' })
     } finally {
       setDeleting(null)
+      setConfirmDeleteId(null)
     }
+  }
+
+  const handleDeleteCancel = () => {
+    setShowConfirmModal(false)
+    setConfirmDeleteId(null)
   }
 
   const resetForm = () => {
@@ -296,10 +418,15 @@ export default function EstoquePage() {
       km: '',
       color: '',
       value: '',
+      promotionValue: '',
       discount: '',
       notes: '',
       photos: [],
     })
+    setSelectedBrandCode('')
+    setSelectedModelCode('')
+    setFipeModels([])
+    setFipeYears([])
     setBrandSearch('')
     setModelSearch('')
     setYearSearch('')
@@ -408,7 +535,11 @@ export default function EstoquePage() {
                       const photos = item.photos 
                         ? (typeof item.photos === 'string' ? JSON.parse(item.photos) : item.photos)
                         : []
-                      const finalValue = item.value && item.discount 
+                      // Se houver promotionValue, usar ele como valor final
+                      // Caso contrário, calcular com desconto se houver
+                      const finalValue = item.promotionValue 
+                        ? item.promotionValue
+                        : item.value && item.discount 
                         ? item.value - (item.value * item.discount / 100)
                         : item.value
 
@@ -433,11 +564,35 @@ export default function EstoquePage() {
                             {item.discount ? `${item.discount}%` : '-'}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-green-600">
-                            {finalValue ? `R$ ${finalValue.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` : '-'}
+                            {item.promotionValue && item.value ? (
+                              <div>
+                                <div className="text-gray-500 line-through text-xs">
+                                  De R$ {item.value.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                                </div>
+                                <div className="text-green-600">
+                                  Por R$ {item.promotionValue.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                                </div>
+                              </div>
+                            ) : finalValue ? (
+                              `R$ ${finalValue.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`
+                            ) : (
+                              '-'
+                            )}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             {photos.length > 0 ? (
-                              <span className="text-green-600">{photos.length} foto(s)</span>
+                              <button
+                                onClick={() => {
+                                  setViewingPhotos(photos)
+                                  setCurrentPhotoIndex(0)
+                                  setShowPhotoModal(true)
+                                }}
+                                className="hover:underline cursor-pointer"
+                              >
+                                <span className="text-gray-900">{photos.length} foto(s)</span>
+                                {' '}
+                                <span className="text-primary-600 hover:text-primary-800">- Ver</span>
+                              </button>
                             ) : (
                               <span className="text-gray-400">-</span>
                             )}
@@ -450,7 +605,7 @@ export default function EstoquePage() {
                               Editar
                             </button>
                             <button
-                              onClick={() => handleDelete(item.id)}
+                              onClick={() => handleDeleteClick(item.id)}
                               disabled={deleting === item.id}
                               className="text-red-600 hover:text-red-900 disabled:opacity-50 disabled:cursor-not-allowed"
                             >
@@ -476,6 +631,18 @@ export default function EstoquePage() {
                   {editingItem ? 'Editar Veículo' : 'Adicionar Veículo ao Estoque'}
                 </h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Tipo de Veículo *</label>
+                    <select
+                      value={vehicleType}
+                      onChange={(e) => setVehicleType(e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900 bg-white"
+                    >
+                      <option value="carros">Carros</option>
+                      <option value="motos">Motos</option>
+                      <option value="caminhoes">Caminhões</option>
+                    </select>
+                  </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div className="searchable-select relative">
                       <label className="block text-sm font-medium text-gray-700 mb-1">Marca *</label>
@@ -490,25 +657,29 @@ export default function EstoquePage() {
                             setShowBrandDropdown(true)
                           }}
                           onFocus={() => setShowBrandDropdown(true)}
-                          placeholder="Digite para buscar ou digite uma nova marca..."
+                          placeholder="Digite para buscar marcas da FIPE ou digite uma marca personalizada..."
                           className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900 bg-white"
                         />
-                        {showBrandDropdown && vehicleOptions.brands.length > 0 && (
+                        {showBrandDropdown && (loadingBrands || filteredBrands.length > 0 || brandSearch.length > 0) && (
                           <div className="absolute z-20 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto">
-                            {filteredBrands.length > 0 ? (
+                            {loadingBrands ? (
+                              <div className="px-4 py-2 text-gray-500 text-sm">Carregando marcas...</div>
+                            ) : filteredBrands.length > 0 ? (
                               filteredBrands.map((brand) => (
                                 <button
-                                  key={brand}
+                                  key={brand.codigo}
                                   type="button"
                                   onClick={() => handleBrandSelect(brand)}
                                   className="w-full text-left px-4 py-2 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none text-gray-900"
                                 >
-                                  {brand}
+                                  {brand.nome}
                                 </button>
                               ))
-                            ) : (
-                              <div className="px-4 py-2 text-gray-500 text-sm">Nenhuma marca encontrada</div>
-                            )}
+                            ) : brandSearch.length > 0 ? (
+                              <div className="px-4 py-2 text-gray-500 text-sm">
+                                Nenhuma marca encontrada. Você pode digitar livremente.
+                              </div>
+                            ) : null}
                           </div>
                         )}
                       </div>
@@ -525,66 +696,102 @@ export default function EstoquePage() {
                             setFormData({ ...formData, model: e.target.value })
                             setShowModelDropdown(true)
                           }}
-                          onFocus={() => setShowModelDropdown(true)}
-                          placeholder="Digite para buscar ou digite um novo modelo..."
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900 bg-white"
+                          onFocus={() => {
+                            if (selectedBrandCode) {
+                              setShowModelDropdown(true)
+                            }
+                          }}
+                          disabled={!selectedBrandCode}
+                          placeholder={selectedBrandCode ? "Digite para buscar modelos..." : "Selecione uma marca primeiro"}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900 bg-white disabled:bg-gray-100 disabled:cursor-not-allowed disabled:text-gray-500"
                         />
-                        {showModelDropdown && vehicleOptions.models.length > 0 && (
+                        {loadingModels && (
+                          <div className="absolute right-3 top-2.5">
+                            <svg className="animate-spin h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                          </div>
+                        )}
+                        {showModelDropdown && selectedBrandCode && (loadingModels || filteredModels.length > 0 || modelSearch.length > 0) && (
                           <div className="absolute z-20 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto">
-                            {filteredModels.length > 0 ? (
+                            {loadingModels ? (
+                              <div className="px-4 py-2 text-gray-500 text-sm">Carregando modelos...</div>
+                            ) : filteredModels.length > 0 ? (
                               filteredModels.map((model) => (
                                 <button
-                                  key={model}
+                                  key={model.codigo}
                                   type="button"
                                   onClick={() => handleModelSelect(model)}
                                   className="w-full text-left px-4 py-2 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none text-gray-900"
                                 >
-                                  {model}
+                                  {model.nome}
                                 </button>
                               ))
-                            ) : (
-                              <div className="px-4 py-2 text-gray-500 text-sm">Nenhum modelo encontrado</div>
-                            )}
+                            ) : modelSearch.length > 0 ? (
+                              <div className="px-4 py-2 text-gray-500 text-sm">
+                                Nenhum modelo encontrado. Você pode digitar livremente.
+                              </div>
+                            ) : null}
                           </div>
                         )}
                       </div>
                     </div>
                     <div className="searchable-select relative">
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Ano *</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Ano/Ano Modelo *</label>
                       <div className="relative">
                         <input
                           type="text"
                           required
                           value={yearSearch}
                           onChange={(e) => {
-                            const value = e.target.value.replace(/\D/g, '') // Apenas números
-                            setYearSearch(value)
-                            setFormData({ ...formData, year: value })
+                            setYearSearch(e.target.value)
+                            // Se o usuário digitar apenas números, permitir entrada livre
+                            const numericValue = e.target.value.replace(/[^0-9]/g, '')
+                            if (numericValue) {
+                              setFormData({ ...formData, year: numericValue })
+                            }
                             setShowYearDropdown(true)
                           }}
-                          onFocus={() => setShowYearDropdown(true)}
-                          placeholder="Digite o ano (ex: 2024)..."
-                          maxLength={4}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900 bg-white"
+                          onFocus={() => {
+                            if (selectedBrandCode && selectedModelCode) {
+                              setShowYearDropdown(true)
+                            }
+                          }}
+                          disabled={!selectedBrandCode || !selectedModelCode}
+                          placeholder={selectedBrandCode && selectedModelCode ? "Digite para buscar anos..." : "Selecione marca e modelo primeiro"}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900 bg-white disabled:bg-gray-100 disabled:cursor-not-allowed disabled:text-gray-500"
                         />
-                            {showYearDropdown && vehicleOptions.years.length > 0 && (
-                              <div className="absolute z-20 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto">
-                                {filteredYears.length > 0 ? (
-                                  filteredYears.map((year) => (
-                                    <button
-                                      key={year}
-                                      type="button"
-                                      onClick={() => handleYearSelect(year)}
-                                      className="w-full text-left px-4 py-2 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none text-gray-900"
-                                    >
-                                      {year}
-                                    </button>
-                                  ))
-                                ) : (
-                                  <div className="px-4 py-2 text-gray-500 text-sm">Nenhum ano encontrado</div>
-                                )}
+                        {loadingYears && (
+                          <div className="absolute right-3 top-2.5">
+                            <svg className="animate-spin h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                          </div>
+                        )}
+                        {showYearDropdown && selectedBrandCode && selectedModelCode && (loadingYears || filteredYears.length > 0 || yearSearch.length > 0) && (
+                          <div className="absolute z-20 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                            {loadingYears ? (
+                              <div className="px-4 py-2 text-gray-500 text-sm">Carregando anos...</div>
+                            ) : filteredYears.length > 0 ? (
+                              filteredYears.map((year) => (
+                                <button
+                                  key={year.codigo}
+                                  type="button"
+                                  onClick={() => handleYearSelect(year)}
+                                  className="w-full text-left px-4 py-2 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none text-gray-900"
+                                >
+                                  {year.nome}
+                                </button>
+                              ))
+                            ) : yearSearch.length > 0 ? (
+                              <div className="px-4 py-2 text-gray-500 text-sm">
+                                Nenhum ano encontrado. Você pode digitar livremente.
                               </div>
-                            )}
+                            ) : null}
+                          </div>
+                        )}
                       </div>
                     </div>
                     <div>
@@ -628,6 +835,17 @@ export default function EstoquePage() {
                       />
                     </div>
                     <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Promoção</label>
+                      <input
+                        type="number"
+                        step="0.01"
+                        value={formData.promotionValue}
+                        onChange={(e) => setFormData({ ...formData, promotionValue: e.target.value })}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                        placeholder="Valor promocional (opcional)"
+                      />
+                    </div>
+                    <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">Desconto (%)</label>
                       <input
                         type="number"
@@ -654,6 +872,9 @@ export default function EstoquePage() {
                   <div className="col-span-2 border-t pt-4 mt-4">
                     <label className="block text-sm font-medium text-gray-700 mb-1">
                       Fotos do Veículo
+                      <span className="text-xs text-gray-500 ml-2">
+                        ({formData.photos.length}/5)
+                      </span>
                       {currentPhotosSize > 0 && (
                         <span className="text-xs text-gray-500 ml-2">
                           (Tamanho: {formatBytes(currentPhotosSize)})
@@ -669,18 +890,23 @@ export default function EstoquePage() {
                           onChange={handleImageUpload}
                           className="hidden"
                           id="image-upload"
+                          disabled={formData.photos.length >= 5}
                         />
                         <label
                           htmlFor="image-upload"
-                          className="cursor-pointer inline-flex items-center px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-700 hover:bg-gray-50 transition-colors"
+                          className={`inline-flex items-center px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-700 transition-colors ${
+                            formData.photos.length >= 5
+                              ? 'opacity-50 cursor-not-allowed'
+                              : 'cursor-pointer hover:bg-gray-50'
+                          }`}
                         >
                           <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                           </svg>
-                          Adicionar Fotos
+                          {formData.photos.length >= 5 ? 'Limite de 5 fotos atingido' : 'Adicionar Fotos'}
                         </label>
                         <p className="text-xs text-gray-500 mt-1">
-                          Selecione uma ou múltiplas imagens. Limite máximo: 10GB total
+                          Máximo de 5 fotos por veículo. Limite de armazenamento: 10GB total
                         </p>
                       </div>
                       
@@ -746,6 +972,75 @@ export default function EstoquePage() {
           </div>
         )}
       </div>
+      {/* Modal de Visualização de Fotos */}
+      {showPhotoModal && viewingPhotos.length > 0 && (
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] flex flex-col">
+            <div className="flex items-center justify-between p-4 border-b">
+              <h2 className="text-xl font-bold text-gray-900">
+                Fotos do Veículo ({currentPhotoIndex + 1}/{viewingPhotos.length})
+              </h2>
+              <button
+                onClick={() => setShowPhotoModal(false)}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <div className="flex-1 flex items-center justify-center p-4 relative">
+              <img
+                src={viewingPhotos[currentPhotoIndex]}
+                alt={`Foto ${currentPhotoIndex + 1}`}
+                className="max-w-full max-h-[70vh] object-contain rounded-lg"
+              />
+              {viewingPhotos.length > 1 && (
+                <>
+                  <button
+                    onClick={() => setCurrentPhotoIndex((prev) => (prev > 0 ? prev - 1 : viewingPhotos.length - 1))}
+                    className="absolute left-4 bg-black bg-opacity-50 hover:bg-opacity-75 text-white p-2 rounded-full"
+                  >
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+                  <button
+                    onClick={() => setCurrentPhotoIndex((prev) => (prev < viewingPhotos.length - 1 ? prev + 1 : 0))}
+                    className="absolute right-4 bg-black bg-opacity-50 hover:bg-opacity-75 text-white p-2 rounded-full"
+                  >
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                </>
+              )}
+            </div>
+            {viewingPhotos.length > 1 && (
+              <div className="p-4 border-t bg-gray-50">
+                <div className="flex gap-2 justify-center overflow-x-auto">
+                  {viewingPhotos.map((photo, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentPhotoIndex(index)}
+                      className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 ${
+                        index === currentPhotoIndex ? 'border-primary-600' : 'border-gray-300'
+                      }`}
+                    >
+                      <img
+                        src={photo}
+                        alt={`Miniatura ${index + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
       {toast && (
         <Toast
           message={toast.message}
@@ -753,7 +1048,19 @@ export default function EstoquePage() {
           onClose={() => setToast(null)}
         />
       )}
+
+      <ConfirmModal
+        isOpen={showConfirmModal}
+        title="Confirmar Exclusão"
+        message="Tem certeza que deseja excluir este veículo do estoque?"
+        onConfirm={handleDeleteConfirm}
+        onCancel={handleDeleteCancel}
+        confirmText="Sim, Excluir"
+        cancelText="Cancelar"
+        confirmColor="red"
+      />
     </Layout>
   )
 }
+
 

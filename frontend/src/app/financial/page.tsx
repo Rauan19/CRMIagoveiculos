@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Layout from '@/components/Layout'
 import api from '@/services/api'
 import Toast from '@/components/Toast'
+import ConfirmModal from '@/components/ConfirmModal'
 import { FiDollarSign, FiTrendingUp, FiTrendingDown, FiPlus, FiEdit, FiTrash2, FiCheck, FiX, FiFilter } from 'react-icons/fi'
 
 interface FinancialTransaction {
@@ -47,6 +48,8 @@ export default function FinancialPage() {
   const [showModal, setShowModal] = useState(false)
   const [editingTransaction, setEditingTransaction] = useState<FinancialTransaction | null>(null)
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' | 'info' } | null>(null)
+  const [showConfirmModal, setShowConfirmModal] = useState(false)
+  const [confirmDeleteId, setConfirmDeleteId] = useState<number | null>(null)
   const [filters, setFilters] = useState({
     type: '' as '' | 'receber' | 'pagar',
     status: '' as '' | 'pendente' | 'pago' | 'vencido',
@@ -142,11 +145,17 @@ export default function FinancialPage() {
     setShowModal(true)
   }
 
-  const handleDelete = async (id: number) => {
-    if (!confirm('Tem certeza que deseja excluir esta transação?')) return
-    setDeleting(id)
+  const handleDeleteClick = (id: number) => {
+    setConfirmDeleteId(id)
+    setShowConfirmModal(true)
+  }
+
+  const handleDeleteConfirm = async () => {
+    if (!confirmDeleteId) return
+    setShowConfirmModal(false)
+    setDeleting(confirmDeleteId)
     try {
-      await api.delete(`/financial/transactions/${id}`)
+      await api.delete(`/financial/transactions/${confirmDeleteId}`)
       setToast({ message: 'Transação excluída com sucesso!', type: 'success' })
       loadData()
     } catch (error: any) {
@@ -154,7 +163,13 @@ export default function FinancialPage() {
       setToast({ message: error.response?.data?.error || 'Erro ao excluir transação', type: 'error' })
     } finally {
       setDeleting(null)
+      setConfirmDeleteId(null)
     }
+  }
+
+  const handleDeleteCancel = () => {
+    setShowConfirmModal(false)
+    setConfirmDeleteId(null)
   }
 
   const handleMarkAsPaid = async (id: number) => {
@@ -533,7 +548,7 @@ export default function FinancialPage() {
                               <FiEdit />
                             </button>
                             <button
-                              onClick={() => handleDelete(transaction.id)}
+                              onClick={() => handleDeleteClick(transaction.id)}
                               disabled={deleting === transaction.id}
                               className="text-red-600 hover:text-red-900 disabled:opacity-50"
                             >
@@ -690,6 +705,17 @@ export default function FinancialPage() {
         )}
       </div>
       {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
+
+      <ConfirmModal
+        isOpen={showConfirmModal}
+        title="Confirmar Exclusão"
+        message="Tem certeza que deseja excluir esta transação?"
+        onConfirm={handleDeleteConfirm}
+        onCancel={handleDeleteCancel}
+        confirmText="Sim, Excluir"
+        cancelText="Cancelar"
+        confirmColor="red"
+      />
     </Layout>
   )
 }

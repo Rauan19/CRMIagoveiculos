@@ -33,6 +33,7 @@ interface FipeData {
 }
 
 export default function FipePage() {
+  const [vehicleType, setVehicleType] = useState<string>('carros') // 'carros', 'motos', 'caminhoes'
   const [brands, setBrands] = useState<Brand[]>([])
   const [models, setModels] = useState<Model[]>([])
   const [years, setYears] = useState<Year[]>([])
@@ -57,15 +58,25 @@ export default function FipePage() {
   const [fipeData, setFipeData] = useState<FipeData | null>(null)
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' | 'info' } | null>(null)
 
-  // Carregar marcas ao montar o componente
+  // Quando trocar o tipo de veículo, limpar tudo e recarregar
   useEffect(() => {
+    setSelectedBrand('')
+    setSelectedModel('')
+    setSelectedYear('')
+    setBrands([])
+    setModels([])
+    setYears([])
+    setBrandSearch('')
+    setModelSearch('')
+    setYearSearch('')
+    setFipeData(null)
     loadBrands()
-  }, [])
+  }, [vehicleType])
 
   const loadBrands = async () => {
     setLoadingBrands(true)
     try {
-      const response = await api.get('/fipe/brands')
+      const response = await api.get(`/fipe/brands?type=${vehicleType}`)
       setBrands(response.data)
     } catch (error) {
       console.error('Erro ao carregar marcas:', error)
@@ -85,7 +96,7 @@ export default function FipePage() {
     setYears([])
     
     try {
-      const response = await api.get(`/fipe/brands/${brandCode}/models`)
+      const response = await api.get(`/fipe/brands/${brandCode}/models?type=${vehicleType}`)
       setModels(response.data)
     } catch (error) {
       console.error('Erro ao carregar modelos:', error)
@@ -103,7 +114,7 @@ export default function FipePage() {
     setSelectedYear('')
     
     try {
-      const response = await api.get(`/fipe/brands/${brandCode}/models/${modelCode}/years`)
+      const response = await api.get(`/fipe/brands/${brandCode}/models/${modelCode}/years?type=${vehicleType}`)
       setYears(response.data)
     } catch (error) {
       console.error('Erro ao carregar anos:', error)
@@ -165,7 +176,8 @@ export default function FipePage() {
         params: {
           brand: brand.nome,
           model: model.nome,
-          year: yearNumber
+          year: yearNumber,
+          type: vehicleType
         }
       })
       
@@ -220,6 +232,18 @@ export default function FipePage() {
         {/* Formulário de busca */}
         <div className="bg-white shadow rounded-lg p-6">
           <form onSubmit={handleSearch} className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Tipo de Veículo *</label>
+              <select
+                value={vehicleType}
+                onChange={(e) => setVehicleType(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900 bg-white"
+              >
+                <option value="carros">Carros</option>
+                <option value="motos">Motos</option>
+                <option value="caminhoes">Caminhões</option>
+              </select>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {/* Select de Marca */}
               <div className="relative">

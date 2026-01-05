@@ -72,9 +72,9 @@ class GoalController {
         endDate
       } = req.body;
 
-      if (!userId || !type || !targetValue || !period || !startDate || !endDate) {
+      if (!userId || !type || !targetValue || !period) {
         return res.status(400).json({
-          error: 'Campos obrigatórios: userId, type, targetValue, period, startDate, endDate'
+          error: 'Campos obrigatórios: userId, type, targetValue, period'
         });
       }
 
@@ -85,17 +85,20 @@ class GoalController {
         });
       }
 
+      const goalData = {
+        userId: parseInt(userId),
+        type,
+        targetValue: parseFloat(targetValue),
+        currentValue: 0,
+        period,
+        status: 'active'
+      };
+
+      if (startDate) goalData.startDate = new Date(startDate);
+      if (endDate) goalData.endDate = new Date(endDate);
+
       const goal = await prisma.goal.create({
-        data: {
-          userId: parseInt(userId),
-          type,
-          targetValue: parseFloat(targetValue),
-          currentValue: 0,
-          period,
-          startDate: new Date(startDate),
-          endDate: new Date(endDate),
-          status: 'active'
-        },
+        data: goalData,
         include: {
           user: {
             select: { id: true, name: true, email: true }
@@ -167,12 +170,16 @@ class GoalController {
   async calculateCurrentValue(goal) {
     try {
       const where = {
-        sellerId: goal.userId,
-        date: {
+        sellerId: goal.userId
+      };
+
+      // Só filtra por data se ambas estiverem definidas
+      if (goal.startDate && goal.endDate) {
+        where.date = {
           gte: new Date(goal.startDate),
           lte: new Date(goal.endDate)
-        }
-      };
+        };
+      }
 
       const sales = await prisma.sale.findMany({
         where,

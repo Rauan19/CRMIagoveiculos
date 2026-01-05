@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -168,8 +168,8 @@ model Goal {
   targetValue Float
   currentValue Float    @default(0)
   period      String    // "monthly", "quarterly", "yearly"
-  startDate   DateTime
-  endDate     DateTime
+  startDate   DateTime?
+  endDate     DateTime?
   status      String    @default("active") // "active", "completed", "cancelled"
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
@@ -177,18 +177,19 @@ model Goal {
 }
 
 model Estoque {
-  id          Int       @id @default(autoincrement())
-  brand       String    // Marca do veículo
-  model       String    // Modelo do veículo
-  year        Int       // Ano
-  plate       String?   // Placa (opcional)
-  km          Int?      // Quilometragem (opcional)
-  color       String?   // Cor (opcional)
-  value       Float?    // Valor
-  discount    Float?    @default(0) // Desconto percentual (opcional)
-  notes       String?   // Observações/Notas
-  photos      String?   // Fotos em base64 (JSON string)
-  totalSize   Float     @default(0) // Tamanho total das imagens em bytes
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  id             Int       @id @default(autoincrement())
+  brand          String    // Marca do veículo
+  model          String    // Modelo do veículo
+  year           Int       // Ano
+  plate          String?   // Placa (opcional)
+  km             Int?      // Quilometragem (opcional)
+  color          String?   // Cor (opcional)
+  value          Float?    // Valor original
+  promotionValue Float?    // Valor promocional (opcional)
+  discount       Float?    @default(0) // Desconto percentual (opcional)
+  notes          String?   // Observações/Notas
+  photos         String?   // Fotos em base64 (JSON string)
+  totalSize      Float     @default(0) // Tamanho total das imagens em bytes
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
 }

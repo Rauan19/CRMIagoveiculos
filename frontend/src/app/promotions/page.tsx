@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Layout from '@/components/Layout'
 import api from '@/services/api'
 import Toast from '@/components/Toast'
+import ConfirmModal from '@/components/ConfirmModal'
 import { FiTag, FiEdit, FiTrash2, FiPlus, FiCheck, FiX } from 'react-icons/fi'
 
 interface Promotion {
@@ -30,6 +31,8 @@ export default function PromotionsPage() {
   const [showModal, setShowModal] = useState(false)
   const [editingPromotion, setEditingPromotion] = useState<Promotion | null>(null)
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' | 'info' } | null>(null)
+  const [showConfirmModal, setShowConfirmModal] = useState(false)
+  const [confirmDeleteId, setConfirmDeleteId] = useState<number | null>(null)
   const [statusFilter, setStatusFilter] = useState<string>('ativa')
   const [formData, setFormData] = useState({
     name: '',
@@ -102,11 +105,17 @@ export default function PromotionsPage() {
     setShowModal(true)
   }
 
-  const handleDelete = async (id: number) => {
-    if (!confirm('Tem certeza que deseja excluir esta promoção?')) return
-    setDeleting(id)
+  const handleDeleteClick = (id: number) => {
+    setConfirmDeleteId(id)
+    setShowConfirmModal(true)
+  }
+
+  const handleDeleteConfirm = async () => {
+    if (!confirmDeleteId) return
+    setShowConfirmModal(false)
+    setDeleting(confirmDeleteId)
     try {
-      await api.delete(`/promotions/${id}`)
+      await api.delete(`/promotions/${confirmDeleteId}`)
       setToast({ message: 'Promoção excluída com sucesso!', type: 'success' })
       loadPromotions()
     } catch (error) {
@@ -114,7 +123,13 @@ export default function PromotionsPage() {
       setToast({ message: 'Erro ao excluir promoção', type: 'error' })
     } finally {
       setDeleting(null)
+      setConfirmDeleteId(null)
     }
+  }
+
+  const handleDeleteCancel = () => {
+    setShowConfirmModal(false)
+    setConfirmDeleteId(null)
   }
 
   const resetForm = () => {
@@ -294,7 +309,7 @@ export default function PromotionsPage() {
                             <FiEdit />
                           </button>
                           <button
-                            onClick={() => handleDelete(promotion.id)}
+                            onClick={() => handleDeleteClick(promotion.id)}
                             disabled={deleting === promotion.id}
                             className="text-red-600 hover:text-red-900 disabled:opacity-50"
                           >
@@ -481,6 +496,17 @@ export default function PromotionsPage() {
       {toast && (
         <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />
       )}
+
+      <ConfirmModal
+        isOpen={showConfirmModal}
+        title="Confirmar Exclusão"
+        message="Tem certeza que deseja excluir esta promoção?"
+        onConfirm={handleDeleteConfirm}
+        onCancel={handleDeleteCancel}
+        confirmText="Sim, Excluir"
+        cancelText="Cancelar"
+        confirmColor="red"
+      />
     </Layout>
   )
 }

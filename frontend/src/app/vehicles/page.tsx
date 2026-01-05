@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Layout from '@/components/Layout'
 import api from '@/services/api'
+import ConfirmModal from '@/components/ConfirmModal'
 import { formatPlate, removeMask } from '@/utils/formatters'
 
 interface Customer {
@@ -38,6 +39,21 @@ const statusColors: Record<string, string> = {
   vendido: 'bg-red-100 text-red-800',
 }
 
+interface FipeBrand {
+  codigo: string
+  nome: string
+}
+
+interface FipeModel {
+  codigo: string
+  nome: string
+}
+
+interface FipeYear {
+  codigo: string
+  nome: string
+}
+
 export default function VehiclesPage() {
   const [vehicles, setVehicles] = useState<Vehicle[]>([])
   const [customers, setCustomers] = useState<Customer[]>([])
@@ -46,6 +62,26 @@ export default function VehiclesPage() {
   const [deleting, setDeleting] = useState<number | null>(null)
   const [showModal, setShowModal] = useState(false)
   const [editingVehicle, setEditingVehicle] = useState<Vehicle | null>(null)
+  const [showConfirmModal, setShowConfirmModal] = useState(false)
+  const [confirmDeleteId, setConfirmDeleteId] = useState<number | null>(null)
+  
+  // Estados para FIPE
+  const [vehicleType, setVehicleType] = useState<string>('carros') // 'carros', 'motos', 'caminhoes'
+  const [fipeBrands, setFipeBrands] = useState<FipeBrand[]>([])
+  const [fipeModels, setFipeModels] = useState<FipeModel[]>([])
+  const [fipeYears, setFipeYears] = useState<FipeYear[]>([])
+  const [selectedBrandCode, setSelectedBrandCode] = useState<string>('')
+  const [selectedModelCode, setSelectedModelCode] = useState<string>('')
+  const [loadingBrands, setLoadingBrands] = useState(false)
+  const [loadingModels, setLoadingModels] = useState(false)
+  const [loadingYears, setLoadingYears] = useState(false)
+  const [brandSearch, setBrandSearch] = useState('')
+  const [modelSearch, setModelSearch] = useState('')
+  const [yearSearch, setYearSearch] = useState('')
+  const [showBrandDropdown, setShowBrandDropdown] = useState(false)
+  const [showModelDropdown, setShowModelDropdown] = useState(false)
+  const [showYearDropdown, setShowYearDropdown] = useState(false)
+  
   const [formData, setFormData] = useState({
     brand: '',
     model: '',
@@ -67,6 +103,58 @@ export default function VehiclesPage() {
     loadData()
   }, [])
 
+  useEffect(() => {
+    if (showModal) {
+      loadFipeBrands()
+    }
+  }, [showModal])
+
+  useEffect(() => {
+    // Quando trocar o tipo de veículo, limpar tudo e recarregar marcas
+    setSelectedBrandCode('')
+    setSelectedModelCode('')
+    setFipeModels([])
+    setFipeYears([])
+    setBrandSearch('')
+    setModelSearch('')
+    setYearSearch('')
+    if (showModal) {
+      loadFipeBrands()
+    }
+  }, [vehicleType])
+
+  useEffect(() => {
+    if (selectedBrandCode) {
+      loadFipeModels(selectedBrandCode)
+    } else {
+      setFipeModels([])
+      setSelectedModelCode('')
+      setFipeYears([])
+    }
+  }, [selectedBrandCode, vehicleType])
+
+  useEffect(() => {
+    if (selectedBrandCode && selectedModelCode) {
+      loadFipeYears(selectedBrandCode, selectedModelCode)
+    } else {
+      setFipeYears([])
+    }
+  }, [selectedBrandCode, selectedModelCode, vehicleType])
+
+  useEffect(() => {
+    // Fechar dropdowns ao clicar fora
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement
+      if (!target.closest('.searchable-select')) {
+        setShowBrandDropdown(false)
+        setShowModelDropdown(false)
+        setShowYearDropdown(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
   const loadData = async () => {
     try {
       const [vehiclesRes, customersRes] = await Promise.all([
@@ -79,6 +167,47 @@ export default function VehiclesPage() {
       console.error('Erro ao carregar dados:', error)
     } finally {
       setLoading(false)
+    }
+  }
+
+  const loadFipeBrands = async () => {
+    setLoadingBrands(true)
+    try {
+      const response = await api.get(`/fipe/brands?type=${vehicleType}`)
+      setFipeBrands(response.data || [])
+    } catch (error) {
+      console.error('Erro ao carregar marcas FIPE:', error)
+      setFipeBrands([])
+    } finally {
+      setLoadingBrands(false)
+    }
+  }
+
+  const loadFipeModels = async (brandCode: string) => {
+    if (!brandCode) return
+    setLoadingModels(true)
+    try {
+      const response = await api.get(`/fipe/brands/${brandCode}/models?type=${vehicleType}`)
+      setFipeModels(response.data || [])
+    } catch (error) {
+      console.error('Erro ao carregar modelos FIPE:', error)
+      setFipeModels([])
+    } finally {
+      setLoadingModels(false)
+    }
+  }
+
+  const loadFipeYears = async (brandCode: string, modelCode: string) => {
+    if (!brandCode || !modelCode) return
+    setLoadingYears(true)
+    try {
+      const response = await api.get(`/fipe/brands/${brandCode}/models/${modelCode}/years?type=${vehicleType}`)
+      setFipeYears(response.data || [])
+    } catch (error) {
+      console.error('Erro ao carregar anos FIPE:', error)
+      setFipeYears([])
+    } finally {
+      setLoadingYears(false)
     }
   }
 
@@ -130,21 +259,38 @@ export default function VehiclesPage() {
       notes: vehicle.notes || '',
       status: vehicle.status,
     })
+    setBrandSearch(vehicle.brand)
+    setModelSearch(vehicle.model)
+    setYearSearch(vehicle.year.toString())
+    setSelectedBrandCode('') // Limpar código da marca ao editar (será buscado se necessário)
+    setSelectedModelCode('') // Limpar código do modelo ao editar
     setShowModal(true)
   }
 
-  const handleDelete = async (id: number) => {
-    if (!confirm('Tem certeza que deseja excluir este veículo?')) return
-    setDeleting(id)
+  const handleDeleteClick = (id: number) => {
+    setConfirmDeleteId(id)
+    setShowConfirmModal(true)
+  }
+
+  const handleDeleteConfirm = async () => {
+    if (!confirmDeleteId) return
+    setShowConfirmModal(false)
+    setDeleting(confirmDeleteId)
     try {
-      await api.delete(`/vehicles/${id}`)
+      await api.delete(`/vehicles/${confirmDeleteId}`)
       loadData()
     } catch (error) {
       console.error('Erro ao excluir veículo:', error)
       alert('Erro ao excluir veículo')
     } finally {
       setDeleting(null)
+      setConfirmDeleteId(null)
     }
+  }
+
+  const handleDeleteCancel = () => {
+    setShowConfirmModal(false)
+    setConfirmDeleteId(null)
   }
 
   const resetForm = () => {
@@ -164,7 +310,55 @@ export default function VehiclesPage() {
       notes: '',
       status: 'disponivel',
     })
+    setSelectedBrandCode('')
+    setSelectedModelCode('')
+    setFipeModels([])
+    setFipeYears([])
+    setBrandSearch('')
+    setModelSearch('')
+    setYearSearch('')
+    setShowBrandDropdown(false)
+    setShowModelDropdown(false)
+    setShowYearDropdown(false)
   }
+
+  const handleBrandSelect = (brand: FipeBrand) => {
+    setSelectedBrandCode(brand.codigo)
+    setBrandSearch(brand.nome)
+    setFormData({ ...formData, brand: brand.nome, model: '', year: '' }) // Limpar modelo e ano quando trocar marca
+    setModelSearch('')
+    setSelectedModelCode('')
+    setYearSearch('')
+    setShowBrandDropdown(false)
+  }
+
+  const handleModelSelect = (model: FipeModel) => {
+    setSelectedModelCode(model.codigo)
+    setFormData({ ...formData, model: model.nome, year: '' }) // Limpar ano quando trocar modelo
+    setModelSearch(model.nome)
+    setYearSearch('')
+    setShowModelDropdown(false)
+  }
+
+  const handleYearSelect = (year: FipeYear) => {
+    // Extrair apenas o ano (primeira parte antes de / ou -)
+    const yearNumber = year.nome.split('/')[0]?.split('-')[0] || year.nome.split('-')[0] || year.nome
+    setFormData({ ...formData, year: yearNumber })
+    setYearSearch(year.nome) // Mostrar ano/ano modelo no input
+    setShowYearDropdown(false)
+  }
+
+  const filteredBrands = fipeBrands.filter(brand =>
+    brand.nome.toLowerCase().includes(brandSearch.toLowerCase())
+  )
+
+  const filteredModels = fipeModels.filter(model =>
+    model.nome.toLowerCase().includes(modelSearch.toLowerCase())
+  )
+
+  const filteredYears = fipeYears.filter(year =>
+    year.nome.toLowerCase().includes(yearSearch.toLowerCase())
+  )
 
   const openModal = () => {
     resetForm()
@@ -272,7 +466,7 @@ export default function VehiclesPage() {
                             Editar
                           </button>
                           <button
-                            onClick={() => handleDelete(vehicle.id)}
+                            onClick={() => handleDeleteClick(vehicle.id)}
                             disabled={deleting === vehicle.id}
                             className="text-red-600 hover:text-red-900 disabled:opacity-50 disabled:cursor-not-allowed"
                           >
@@ -297,38 +491,152 @@ export default function VehiclesPage() {
                   {editingVehicle ? 'Editar Veículo' : 'Novo Veículo'}
                 </h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Tipo de Veículo *</label>
+                    <select
+                      value={vehicleType}
+                      onChange={(e) => setVehicleType(e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900 bg-white"
+                    >
+                      <option value="carros">Carros</option>
+                      <option value="motos">Motos</option>
+                      <option value="caminhoes">Caminhões</option>
+                    </select>
+                  </div>
                   <div className="grid grid-cols-2 gap-4">
-                    <div>
+                    <div className="searchable-select relative">
                       <label className="block text-sm font-medium text-gray-700 mb-1">Marca *</label>
-                      <input
-                        type="text"
-                        required
-                        value={formData.brand}
-                        onChange={(e) => setFormData({ ...formData, brand: e.target.value })}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900"
-                      />
+                      <div className="relative">
+                        <input
+                          type="text"
+                          required
+                          value={brandSearch}
+                          onChange={(e) => {
+                            setBrandSearch(e.target.value)
+                            setFormData({ ...formData, brand: e.target.value })
+                            setShowBrandDropdown(true)
+                          }}
+                          onFocus={() => setShowBrandDropdown(true)}
+                          placeholder="Digite para buscar marcas..."
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900 bg-white"
+                        />
+                        {showBrandDropdown && (loadingBrands || filteredBrands.length > 0 || brandSearch.length > 0) && (
+                          <div className="absolute z-20 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                            {loadingBrands ? (
+                              <div className="px-4 py-2 text-gray-500 text-sm">Carregando marcas...</div>
+                            ) : filteredBrands.length > 0 ? (
+                              filteredBrands.map((brand) => (
+                                <button
+                                  key={brand.codigo}
+                                  type="button"
+                                  onClick={() => handleBrandSelect(brand)}
+                                  className="w-full text-left px-4 py-2 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none text-gray-900"
+                                >
+                                  {brand.nome}
+                                </button>
+                              ))
+                            ) : brandSearch.length > 0 ? (
+                              <div className="px-4 py-2 text-gray-500 text-sm">
+                                Nenhuma marca encontrada. Você pode digitar livremente.
+                              </div>
+                            ) : null}
+                          </div>
+                        )}
+                      </div>
                     </div>
-                    <div>
+                    <div className="searchable-select relative">
                       <label className="block text-sm font-medium text-gray-700 mb-1">Modelo *</label>
-                      <input
-                        type="text"
-                        required
-                        value={formData.model}
-                        onChange={(e) => setFormData({ ...formData, model: e.target.value })}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900"
-                      />
+                      <div className="relative">
+                        <input
+                          type="text"
+                          required
+                          value={modelSearch}
+                          onChange={(e) => {
+                            setModelSearch(e.target.value)
+                            setFormData({ ...formData, model: e.target.value })
+                            setShowModelDropdown(true)
+                          }}
+                          onFocus={() => {
+                            if (selectedBrandCode) {
+                              setShowModelDropdown(true)
+                            }
+                          }}
+                          disabled={!selectedBrandCode}
+                          placeholder={selectedBrandCode ? "Digite para buscar modelos..." : "Selecione uma marca primeiro"}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900 bg-white disabled:bg-gray-100 disabled:cursor-not-allowed"
+                        />
+                        {showModelDropdown && selectedBrandCode && (loadingModels || filteredModels.length > 0 || modelSearch.length > 0) && (
+                          <div className="absolute z-20 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                            {loadingModels ? (
+                              <div className="px-4 py-2 text-gray-500 text-sm">Carregando modelos...</div>
+                            ) : filteredModels.length > 0 ? (
+                              filteredModels.map((model) => (
+                                <button
+                                  key={model.codigo}
+                                  type="button"
+                                  onClick={() => handleModelSelect(model)}
+                                  className="w-full text-left px-4 py-2 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none text-gray-900"
+                                >
+                                  {model.nome}
+                                </button>
+                              ))
+                            ) : modelSearch.length > 0 ? (
+                              <div className="px-4 py-2 text-gray-500 text-sm">
+                                Nenhum modelo encontrado. Você pode digitar livremente.
+                              </div>
+                            ) : null}
+                          </div>
+                        )}
+                      </div>
                     </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Ano *</label>
-                      <input
-                        type="number"
-                        required
-                        min="1900"
-                        max="2100"
-                        value={formData.year}
-                        onChange={(e) => setFormData({ ...formData, year: e.target.value })}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900"
-                      />
+                    <div className="searchable-select relative">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Ano/Ano Modelo *</label>
+                      <div className="relative">
+                        <input
+                          type="text"
+                          required
+                          value={yearSearch}
+                          onChange={(e) => {
+                            setYearSearch(e.target.value)
+                            // Se o usuário digitar apenas números, permitir entrada livre
+                            const numericValue = e.target.value.replace(/[^0-9]/g, '')
+                            if (numericValue) {
+                              setFormData({ ...formData, year: numericValue })
+                            }
+                            setShowYearDropdown(true)
+                          }}
+                          onFocus={() => {
+                            if (selectedBrandCode && selectedModelCode) {
+                              setShowYearDropdown(true)
+                            }
+                          }}
+                          disabled={!selectedBrandCode || !selectedModelCode}
+                          placeholder={selectedBrandCode && selectedModelCode ? "Digite para buscar anos..." : "Selecione marca e modelo primeiro"}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900 bg-white disabled:bg-gray-100 disabled:cursor-not-allowed"
+                        />
+                        {showYearDropdown && selectedBrandCode && selectedModelCode && (loadingYears || filteredYears.length > 0 || yearSearch.length > 0) && (
+                          <div className="absolute z-20 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                            {loadingYears ? (
+                              <div className="px-4 py-2 text-gray-500 text-sm">Carregando anos...</div>
+                            ) : filteredYears.length > 0 ? (
+                              filteredYears.map((year) => (
+                                <button
+                                  key={year.codigo}
+                                  type="button"
+                                  onClick={() => handleYearSelect(year)}
+                                  className="w-full text-left px-4 py-2 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none text-gray-900"
+                                >
+                                  {year.nome}
+                                </button>
+                              ))
+                            ) : yearSearch.length > 0 ? (
+                              <div className="px-4 py-2 text-gray-500 text-sm">
+                                Nenhum ano encontrado. Você pode digitar livremente.
+                              </div>
+                            ) : null}
+                          </div>
+                        )}
+                      </div>
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">Placa</label>
@@ -488,6 +796,17 @@ export default function VehiclesPage() {
         )}
 
       </div>
+
+      <ConfirmModal
+        isOpen={showConfirmModal}
+        title="Confirmar Exclusão"
+        message="Tem certeza que deseja excluir este veículo?"
+        onConfirm={handleDeleteConfirm}
+        onCancel={handleDeleteCancel}
+        confirmText="Sim, Excluir"
+        cancelText="Cancelar"
+        confirmColor="red"
+      />
     </Layout>
   )
 }

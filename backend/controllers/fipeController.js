@@ -6,7 +6,7 @@ class FipeController {
    */
   async searchFipeValue(req, res) {
     try {
-      const { brand, model, year } = req.query;
+      const { brand, model, year, type } = req.query;
 
       if (!brand || !model || !year) {
         return res.status(400).json({
@@ -14,7 +14,8 @@ class FipeController {
         });
       }
 
-      const fipeData = await fipeService.searchVehicle(brand, model, parseInt(year));
+      const vehicleType = type || 'carros';
+      const fipeData = await fipeService.searchVehicle(brand, model, parseInt(year), vehicleType);
       
       res.json(fipeData);
     } catch (error) {
@@ -30,7 +31,9 @@ class FipeController {
    */
   async getBrands(req, res) {
     try {
-      const brands = await fipeService.getBrands();
+      const { type } = req.query;
+      const vehicleType = type || 'carros';
+      const brands = await fipeService.getBrands(vehicleType);
       res.json(brands);
     } catch (error) {
       console.error('Erro ao buscar marcas FIPE:', error);
@@ -44,7 +47,9 @@ class FipeController {
   async getModels(req, res) {
     try {
       const { brandCode } = req.params;
-      const models = await fipeService.getModels(brandCode);
+      const { type } = req.query;
+      const vehicleType = type || 'carros';
+      const models = await fipeService.getModels(brandCode, vehicleType);
       res.json(models);
     } catch (error) {
       console.error('Erro ao buscar modelos FIPE:', error);
@@ -58,7 +63,9 @@ class FipeController {
   async getYears(req, res) {
     try {
       const { brandCode, modelCode } = req.params;
-      const years = await fipeService.getYears(brandCode, modelCode);
+      const { type } = req.query;
+      const vehicleType = type || 'carros';
+      const years = await fipeService.getYears(brandCode, modelCode, vehicleType);
       res.json(years);
     } catch (error) {
       console.error('Erro ao buscar anos FIPE:', error);

@@ -15,7 +15,8 @@ import {
   FiRefreshCw,
   FiFileText,
   FiFilter,
-  FiDownload
+  FiDownload,
+  FiX
 } from 'react-icons/fi'
 
 type ReportType = 'sales' | 'customers' | 'vehicles' | 'profitability' | 'vehicles-stuck' | 'trade-ins' | null
@@ -25,6 +26,7 @@ export default function ReportsPage() {
   const [reportData, setReportData] = useState<any>(null)
   const [loading, setLoading] = useState(false)
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' | 'info' } | null>(null)
+  const [selectedSummaryKey, setSelectedSummaryKey] = useState<string | null>(null)
   
   // Filtros
   const [filters, setFilters] = useState({
@@ -241,6 +243,118 @@ export default function ReportsPage() {
     return String(value)
   }
 
+  const canClickSummaryKey = (key: string, type: ReportType | null): boolean => {
+    if (!type) return false
+    if (type === 'customers') {
+      return ['totalClientes', 'totalCompras'].includes(key)
+    }
+    if (type === 'sales') {
+      return ['totalVendas', 'valorTotal'].includes(key)
+    }
+    if (type === 'vehicles') {
+      return ['total', 'disponivel', 'reservado', 'vendido'].includes(key)
+    }
+    if (type === 'trade-ins') {
+      return ['total'].includes(key)
+    }
+    return false
+  }
+
+  const getFilteredDataByKey = (key: string, reportData: any, type: ReportType | null): any[] => {
+    if (!type || !reportData) return []
+    
+    const data = reportData.vendas || reportData.clientes || reportData.veiculos || reportData.detalhes || reportData.tradeIns || []
+    
+    if (key.startsWith('status_')) {
+      const status = key.replace('status_', '')
+      return data.filter((item: any) => item.status === status)
+    }
+    
+    if (type === 'customers') {
+      if (key === 'totalClientes') return data
+      if (key === 'totalCompras') return data.filter((item: any) => (item.totalCompras || 0) > 0)
+    }
+    
+    if (type === 'sales') {
+      if (key === 'totalVendas') return data
+      if (key === 'valorTotal') return data
+    }
+    
+    if (type === 'vehicles') {
+      if (key === 'total') return data
+      if (key === 'disponivel') return data.filter((item: any) => item.status === 'disponivel')
+      if (key === 'reservado') return data.filter((item: any) => item.status === 'reservado')
+      if (key === 'vendido') return data.filter((item: any) => item.status === 'vendido')
+    }
+    
+    if (type === 'trade-ins') {
+      if (key === 'total') return data
+    }
+    
+    return []
+  }
+
+  const renderSummaryList = (key: string, reportData: any, type: ReportType | null) => {
+    const filteredData = getFilteredDataByKey(key, reportData, type)
+    const title = key.startsWith('status_') 
+      ? `Lista: ${key.replace('status_', '').charAt(0).toUpperCase() + key.replace('status_', '').slice(1)}`
+      : `Lista: ${formatLabel(key)}`
+
+    return (
+      <div className="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200 flex-1 flex flex-col min-h-0">
+        <div className="bg-gray-50 px-6 py-4 border-b border-gray-200 flex-shrink-0 flex items-center justify-between">
+          <h3 className="font-bold text-lg text-gray-900 flex items-center gap-2">
+            <FiFileText className="text-gray-600" />
+            {title}
+          </h3>
+          <button
+            onClick={() => setSelectedSummaryKey(null)}
+            className="text-gray-500 hover:text-gray-700 flex items-center gap-2 text-sm font-medium"
+          >
+            <FiX /> Fechar
+          </button>
+        </div>
+        <div className="overflow-x-auto overflow-y-auto flex-1 min-h-0">
+          {filteredData.length === 0 ? (
+            <div className="p-8 text-center text-gray-500">
+              Nenhum item encontrado
+            </div>
+          ) : (
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50 sticky top-0">
+                <tr>
+                  {getTableHeaders(type).map((header) => (
+                    <th key={header} className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                      {header}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {filteredData.slice(0, 100).map((item: any, index: number) => (
+                  <tr key={index} className="hover:bg-gray-50 transition-colors duration-150">
+                    {getTableCells(item, type || 'sales').map((cell, cellIndex) => (
+                      <td key={cellIndex} className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        {cell}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
+        {filteredData.length > 100 && (
+          <div className="bg-gray-50 px-6 py-3 border-t border-gray-200 flex-shrink-0">
+            <p className="text-sm text-gray-600 text-center">
+              Mostrando 100 de {filteredData.length} registros
+            </p>
+          </div>
+        )}
+      </div>
+    )
+  }
+
   const formatReportItem = (item: any, type: ReportType): string => {
     if (type === 'sales') {
       return `${item.customer?.name || '-'} - ${item.vehicle?.brand} ${item.vehicle?.model} - R$ ${(item.salePrice || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`
@@ -263,89 +377,74 @@ export default function ReportsPage() {
     return JSON.stringify(item)
   }
 
+  // Função auxiliar para obter o array de dados baseado no tipo de relatório
+  const getDataArray = (): any[] => {
+    if (!reportData || !reportType) return []
+    
+    // Mapeia o tipo de relatório para a chave correta no objeto reportData
+    const dataMap: Record<string, string> = {
+      'sales': 'vendas',
+      'customers': 'clientes',
+      'vehicles': 'veiculos',
+      'profitability': 'detalhes',
+      'vehicles-stuck': 'veiculos', // vehicles-stuck também retorna 'veiculos'
+      'trade-ins': 'tradeIns'
+    }
+    
+    const dataKey = dataMap[reportType]
+    if (dataKey && reportData[dataKey] && Array.isArray(reportData[dataKey])) {
+      return reportData[dataKey]
+    }
+    
+    return []
+  }
+
   const renderReportContent = () => {
-    if (!reportData) return null
+    if (!reportData || !reportType) return null
+
+    const dataArray = getDataArray()
 
     return (
-      <div className="mt-8 space-y-6">
-        {/* Resumo */}
-        {reportData.resumo && (
-          <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-md">
-            <h3 className="font-bold text-lg mb-4 text-gray-900 flex items-center gap-2">
-              <FiTrendingUp className="text-gray-600" />
-              Resumo
-            </h3>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              {Object.entries(reportData.resumo).map(([key, value]) => (
-                <div key={key} className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                  <p className="text-xs font-medium text-gray-600 mb-1 uppercase tracking-wide">{formatLabel(key)}</p>
-                  <p className="text-xl font-bold text-gray-900">{formatValue(value)}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Por Status */}
-        {reportData.porStatus && (
-          <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-md">
-            <h3 className="font-bold text-lg mb-4 text-gray-900 flex items-center gap-2">
-              <FiBarChart2 className="text-gray-600" />
-              Distribuição por Status
-            </h3>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              {Object.entries(reportData.porStatus).map(([status, count]) => (
-                <div key={status} className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                  <p className="text-xs font-medium text-gray-600 mb-1 capitalize">{status}</p>
-                  <p className="text-xl font-bold text-gray-900">{count as number}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Dados Detalhados */}
-        {(reportData.vendas || reportData.clientes || reportData.veiculos || reportData.detalhes || reportData.tradeIns) && (
-          <div className="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200 flex-1 flex flex-col min-h-0">
-            <div className="bg-gray-100 px-6 py-3 border-b border-gray-200 flex-shrink-0">
-              <h3 className="font-bold text-lg text-gray-900 flex items-center gap-2">
-                <FiFileText className="text-gray-600" />
-                Detalhes do Relatório
-              </h3>
-            </div>
+      <div className="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200 flex-1 flex flex-col min-h-0">
+        {dataArray.length > 0 ? (
+          <>
             <div className="overflow-x-auto overflow-y-auto flex-1 min-h-0">
               <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-100">
+                <thead className="bg-gray-50 sticky top-0 z-10">
                   <tr>
                     {getTableHeaders(reportType).map((header) => (
-                      <th key={header} className="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider border-b-2 border-gray-300">
+                      <th key={header} className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                         {header}
                       </th>
                     ))}
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {(reportData.vendas || reportData.clientes || reportData.veiculos || reportData.detalhes || reportData.tradeIns || [])
-                    .slice(0, 100)
-                    .map((item: any, index: number) => (
-                      <tr key={index} className="hover:bg-gray-50 transition-colors duration-150 border-b border-gray-100">
-                        {getTableCells(item, reportType || 'sales').map((cell, cellIndex) => (
-                          <td key={cellIndex} className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                            {cell}
-                          </td>
-                        ))}
-                      </tr>
-                    ))}
+                  {dataArray.slice(0, 100).map((item: any, index: number) => (
+                    <tr key={index} className="hover:bg-gray-50 transition-colors duration-150">
+                      {getTableCells(item, reportType).map((cell, cellIndex) => (
+                        <td key={cellIndex} className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                          {cell}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
-            {(reportData.vendas || reportData.clientes || reportData.veiculos || reportData.detalhes || reportData.tradeIns || []).length > 100 && (
-              <div className="bg-gray-50 px-6 py-4 border-t border-gray-200">
+            {dataArray.length > 100 && (
+              <div className="bg-gray-50 px-6 py-3 border-t border-gray-200 flex-shrink-0">
                 <p className="text-sm text-gray-600 text-center">
-                  Mostrando 100 de {(reportData.vendas || reportData.clientes || reportData.veiculos || reportData.detalhes || reportData.tradeIns || []).length} registros
+                  Mostrando 100 de {dataArray.length} registros
                 </p>
               </div>
             )}
+          </>
+        ) : (
+          <div className="flex items-center justify-center py-12">
+            <p className="text-gray-500 text-center">
+              Nenhum dado encontrado para os filtros selecionados.
+            </p>
           </div>
         )}
       </div>
@@ -480,11 +579,13 @@ export default function ReportsPage() {
         {/* Filtros */}
         {reportType && (
           <div className="bg-white shadow-md rounded-lg p-6 border border-gray-200">
-            <h2 className="text-lg font-bold mb-4 text-gray-900 flex items-center gap-2">
-              <FiFilter className="text-gray-600" />
-              Filtros
-            </h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                <FiFilter className="text-gray-600" />
+                Filtros
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {(reportType === 'sales' || reportType === 'profitability' || reportType === 'customers' || reportType === 'trade-ins') && (
                 <>
                   <div>
@@ -613,7 +714,7 @@ export default function ReportsPage() {
               <button
                 onClick={handleGenerateReport}
                 disabled={loading}
-                className="px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 font-medium transition-colors"
+                className="px-6 py-2.5 bg-primary-600 text-white rounded-lg hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 font-medium transition-colors shadow-sm"
               >
                 {loading ? (
                   <>
@@ -633,7 +734,7 @@ export default function ReportsPage() {
               {reportData && (
                 <button
                   onClick={handleExportPDF}
-                  className="px-6 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800 flex items-center justify-center gap-2 font-medium transition-colors"
+                  className="px-6 py-2.5 bg-gray-700 text-white rounded-lg hover:bg-gray-800 flex items-center justify-center gap-2 font-medium transition-colors shadow-sm"
                 >
                   <FiDownload />
                   Exportar PDF

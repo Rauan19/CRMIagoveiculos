@@ -649,10 +649,10 @@ export default function SalesPage() {
         />
       )}
       <div className="space-y-6 h-full flex flex-col">
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Vendas</h1>
-            <p className="text-gray-600 mt-1">
+            <h1 className="text-xl font-bold text-gray-900">Vendas</h1>
+            <p className="text-sm text-gray-600 mt-0.5">
               {sales.length} {sales.length === 1 ? 'venda encontrada' : 'vendas encontradas'}
               {periodFilter !== 'all' && ` no período selecionado`}
             </p>
@@ -662,29 +662,29 @@ export default function SalesPage() {
               resetForm()
               setShowModal(true)
             }}
-            className="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors"
+            className="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors text-sm font-medium whitespace-nowrap"
           >
             Nova Venda
           </button>
         </div>
 
         {/* Filtros de Período */}
-        <div className="bg-white p-4 rounded-lg shadow border border-gray-200">
-          <div className="flex items-center justify-between mb-3">
-            <h3 className="text-sm font-medium text-gray-700">Filtrar por período:</h3>
+        <div className="bg-white p-3 rounded-lg shadow border border-gray-200">
+          <div className="flex items-center justify-between mb-2">
+            <h3 className="text-xs font-semibold text-gray-700 uppercase tracking-wide">Filtrar por período</h3>
             {periodFilter !== 'all' && (
               <button
                 onClick={clearFilters}
-                className="text-xs text-primary-600 hover:text-primary-700"
+                className="text-xs text-primary-600 hover:text-primary-700 font-medium"
               >
-                Limpar filtro
+                Limpar
               </button>
             )}
           </div>
-          <div className="flex gap-2 flex-wrap">
+          <div className="flex flex-wrap gap-2 mb-3">
             <button
               onClick={() => setPeriodFilter('all')}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+              className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
                 periodFilter === 'all'
                   ? 'bg-primary-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -694,7 +694,7 @@ export default function SalesPage() {
             </button>
             <button
               onClick={() => setPeriodFilter('today')}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+              className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
                 periodFilter === 'today'
                   ? 'bg-primary-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -704,7 +704,7 @@ export default function SalesPage() {
             </button>
             <button
               onClick={() => setPeriodFilter('week')}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+              className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
                 periodFilter === 'week'
                   ? 'bg-primary-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -714,7 +714,7 @@ export default function SalesPage() {
             </button>
             <button
               onClick={() => setPeriodFilter('month')}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+              className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
                 periodFilter === 'month'
                   ? 'bg-primary-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -724,7 +724,7 @@ export default function SalesPage() {
             </button>
             <button
               onClick={() => setPeriodFilter('year')}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+              className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
                 periodFilter === 'year'
                   ? 'bg-primary-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -733,16 +733,16 @@ export default function SalesPage() {
               Este Ano
             </button>
           </div>
-          <div className="flex items-center gap-3 border-t pt-3 mt-3">
-            <label className="text-sm font-medium text-gray-700 whitespace-nowrap">Data específica:</label>
+          <div className="flex items-center gap-2 border-t border-gray-200 pt-2">
+            <label className="text-xs font-medium text-gray-700 whitespace-nowrap">Data específica:</label>
             <input
               type="date"
               value={specificDate}
               onChange={(e) => handleDateChange(e.target.value)}
-              className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+              className="px-2 py-1.5 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500 text-gray-900 text-sm"
             />
             {specificDate && (
-              <span className="text-sm text-gray-600">
+              <span className="text-xs text-gray-600">
                 {new Date(specificDate).toLocaleDateString('pt-BR')}
               </span>
             )}
@@ -752,64 +752,78 @@ export default function SalesPage() {
         {loading ? (
           <div className="text-center py-12 text-gray-700">Carregando...</div>
         ) : (
-          <div className="bg-white shadow rounded-lg overflow-hidden border border-gray-200 max-h-[calc(100vh-220px)] flex flex-col">
+          <div className="bg-white shadow rounded-lg overflow-hidden border border-gray-200 max-h-[calc(100vh-280px)] flex flex-col">
             <div className="overflow-x-auto overflow-y-auto flex-1 min-h-0">
               <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-100">
+                <thead className="bg-gray-50 sticky top-0 z-10">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-300">Cliente</th>
-                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-300">Veículo</th>
-                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-300">Valor Venda</th>
-                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-300">Valor Compra</th>
-                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-300">Lucro</th>
-                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-300">Vendedor</th>
-                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-300">Status</th>
-                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-300">Ações</th>
+                    <th className="px-4 py-2.5 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Cliente</th>
+                    <th className="px-4 py-2.5 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Veículo</th>
+                    <th className="px-4 py-2.5 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Valor Venda</th>
+                    <th className="px-4 py-2.5 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Valor Compra</th>
+                    <th className="px-4 py-2.5 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Lucro</th>
+                    <th className="px-4 py-2.5 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Vendedor</th>
+                    <th className="px-4 py-2.5 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Status</th>
+                    <th className="px-4 py-2.5 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Ações</th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {sales.length === 0 ? (
                     <tr>
-                      <td colSpan={8} className="px-6 py-8 text-center text-gray-600 text-base">
+                      <td colSpan={8} className="px-4 py-6 text-center text-gray-500 text-sm">
                         Nenhuma venda cadastrada
                       </td>
                     </tr>
                   ) : (
                     sales.map((sale) => (
-                      <tr key={sale.id} className="hover:bg-gray-50 border-b border-gray-200">
-                        <td className="px-6 py-4 whitespace-nowrap border-r border-gray-200">
-                          <div className="text-sm font-semibold text-gray-900">{sale.customer?.name || '-'}</div>
-                          <div className="text-sm text-gray-600">{sale.customer?.cpf || sale.customer?.phone || '-'}</div>
+                      <tr key={sale.id} className="hover:bg-gray-50 transition-colors">
+                        <td className="px-4 py-3">
+                          <div className="text-sm font-medium text-gray-900">{sale.customer?.name || '-'}</div>
+                          <div className="text-xs text-gray-500 mt-0.5">{sale.customer?.cpf || sale.customer?.phone || '-'}</div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap border-r border-gray-200">
+                        <td className="px-4 py-3">
                           <div className="text-sm font-medium text-gray-900">
-                            {sale.vehicle?.brand} {sale.vehicle?.model} {sale.vehicle?.year}
+                            {sale.vehicle?.brand} {sale.vehicle?.model}
                           </div>
-                          {sale.vehicle?.plate && (
-                            <div className="text-sm text-gray-600">{sale.vehicle.plate}</div>
-                          )}
+                          <div className="text-xs text-gray-500 mt-0.5">
+                            {sale.vehicle?.year} {sale.vehicle?.plate && `• ${sale.vehicle.plate}`}
+                          </div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900 border-r border-gray-200">
-                          {sale.salePrice ? `R$ ${sale.salePrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` : '-'}
+                        <td className="px-4 py-3 whitespace-nowrap">
+                          <div className="text-sm font-semibold text-gray-900">
+                            {sale.salePrice ? `R$ ${sale.salePrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` : '-'}
+                          </div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700 border-r border-gray-200">
-                          {sale.purchasePrice ? `R$ ${sale.purchasePrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` : '-'}
+                        <td className="px-4 py-3 whitespace-nowrap">
+                          <div className="text-sm text-gray-700">
+                            {sale.purchasePrice ? `R$ ${sale.purchasePrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` : '-'}
+                          </div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-green-700 border-r border-gray-200">
-                          {sale.profit ? `R$ ${sale.profit.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` : '-'}
+                        <td className="px-4 py-3 whitespace-nowrap">
+                          <div className="text-sm font-semibold text-green-600">
+                            {sale.profit ? `R$ ${sale.profit.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` : '-'}
+                          </div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700 border-r border-gray-200">
-                          {sale.seller?.name || '-'}
+                        <td className="px-4 py-3 whitespace-nowrap">
+                          <div className="text-sm text-gray-700">
+                            {sale.seller?.name || '-'}
+                          </div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap border-r border-gray-200">
-                          <span className="px-3 py-1 text-xs font-semibold rounded-full bg-blue-200 text-blue-900 border border-blue-300">
-                            {sale.status || 'em_andamento'}
+                        <td className="px-4 py-3 whitespace-nowrap">
+                          <span className={`inline-flex px-2.5 py-1 text-xs font-medium rounded-full ${
+                            sale.status === 'concluida' 
+                              ? 'bg-green-100 text-green-800' 
+                              : sale.status === 'cancelada'
+                              ? 'bg-red-100 text-red-800'
+                              : 'bg-blue-100 text-blue-800'
+                          }`}>
+                            {sale.status === 'concluida' ? 'Concluída' : sale.status === 'cancelada' ? 'Cancelada' : 'Em Andamento'}
                           </span>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <td className="px-4 py-3 whitespace-nowrap">
                           <button
                             onClick={() => handleGenerateContract(sale)}
-                            className="text-blue-600 hover:text-blue-800 font-semibold underline"
+                            className="text-primary-600 hover:text-primary-800 font-medium text-sm transition-colors"
                           >
                             Contrato
                           </button>

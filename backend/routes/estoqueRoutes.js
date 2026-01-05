@@ -6,8 +6,8 @@ const { authenticateToken } = require('../middleware/auth');
 // Buscar opções de veículos (marcas, modelos, anos)
 router.get('/options', authenticateToken, (req, res) => estoqueController.getVehicleOptions(req, res));
 
-// Listar todos os itens do estoque
-router.get('/', authenticateToken, (req, res) => estoqueController.list(req, res));
+// Listar todos os itens do estoque (pública - sem autenticação)
+router.get('/', (req, res) => estoqueController.list(req, res));
 
 // Buscar item por ID
 router.get('/storage', authenticateToken, (req, res) => estoqueController.getStorageInfo(req, res));

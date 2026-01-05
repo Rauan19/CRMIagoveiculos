@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Layout from '@/components/Layout'
 import api from '@/services/api'
+import ConfirmModal from '@/components/ConfirmModal'
 import { formatCPF, formatPhone, formatCEP, formatRG, removeMask } from '@/utils/formatters'
 
 interface Customer {
@@ -28,6 +29,8 @@ export default function CustomersPage() {
   const [deleting, setDeleting] = useState<number | null>(null)
   const [showModal, setShowModal] = useState(false)
   const [editingCustomer, setEditingCustomer] = useState<Customer | null>(null)
+  const [showConfirmModal, setShowConfirmModal] = useState(false)
+  const [confirmDeleteId, setConfirmDeleteId] = useState<number | null>(null)
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -107,18 +110,30 @@ export default function CustomersPage() {
     setShowModal(true)
   }
 
-  const handleDelete = async (id: number) => {
-    if (!confirm('Tem certeza que deseja excluir este cliente?')) return
-    setDeleting(id)
+  const handleDeleteClick = (id: number) => {
+    setConfirmDeleteId(id)
+    setShowConfirmModal(true)
+  }
+
+  const handleDeleteConfirm = async () => {
+    if (!confirmDeleteId) return
+    setShowConfirmModal(false)
+    setDeleting(confirmDeleteId)
     try {
-      await api.delete(`/customers/${id}`)
+      await api.delete(`/customers/${confirmDeleteId}`)
       loadCustomers()
     } catch (error) {
       console.error('Erro ao excluir cliente:', error)
       alert('Erro ao excluir cliente')
     } finally {
       setDeleting(null)
+      setConfirmDeleteId(null)
     }
+  }
+
+  const handleDeleteCancel = () => {
+    setShowConfirmModal(false)
+    setConfirmDeleteId(null)
   }
 
   const resetForm = () => {
@@ -209,7 +224,7 @@ export default function CustomersPage() {
                             Editar
                           </button>
                           <button
-                            onClick={() => handleDelete(customer.id)}
+                            onClick={() => handleDeleteClick(customer.id)}
                             className="text-red-600 hover:text-red-900"
                           >
                             Excluir
@@ -384,6 +399,17 @@ export default function CustomersPage() {
           </div>
         )}
       </div>
+
+      <ConfirmModal
+        isOpen={showConfirmModal}
+        title="Confirmar Exclusão"
+        message="Tem certeza que deseja excluir este cliente?"
+        onConfirm={handleDeleteConfirm}
+        onCancel={handleDeleteCancel}
+        confirmText="Sim, Excluir"
+        cancelText="Cancelar"
+        confirmColor="red"
+      />
     </Layout>
   )
 }
