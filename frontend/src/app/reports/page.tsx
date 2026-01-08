@@ -301,8 +301,8 @@ export default function ReportsPage() {
       : `Lista: ${formatLabel(key)}`
 
     return (
-      <div className="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200 flex-1 flex flex-col min-h-0">
-        <div className="bg-gray-50 px-6 py-4 border-b border-gray-200 flex-shrink-0 flex items-center justify-between">
+      <div className="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200">
+        <div className="bg-gray-50 px-6 py-4 border-b border-gray-200 flex items-center justify-between">
           <h3 className="font-bold text-lg text-gray-900 flex items-center gap-2">
             <FiFileText className="text-gray-600" />
             {title}
@@ -314,7 +314,7 @@ export default function ReportsPage() {
             <FiX /> Fechar
           </button>
         </div>
-        <div className="overflow-x-auto overflow-y-auto flex-1 min-h-0">
+        <div className="overflow-x-auto overflow-y-auto" style={{ maxHeight: '40vh' }}>
           {filteredData.length === 0 ? (
             <div className="p-8 text-center text-gray-500">
               Nenhum item encontrado
@@ -345,7 +345,7 @@ export default function ReportsPage() {
           )}
         </div>
         {filteredData.length > 100 && (
-          <div className="bg-gray-50 px-6 py-3 border-t border-gray-200 flex-shrink-0">
+          <div className="bg-gray-50 px-6 py-3 border-t border-gray-200">
             <p className="text-sm text-gray-600 text-center">
               Mostrando 100 de {filteredData.length} registros
             </p>
@@ -405,10 +405,10 @@ export default function ReportsPage() {
     const dataArray = getDataArray()
 
     return (
-      <div className="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200 flex-1 flex flex-col min-h-0">
+      <div className="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200">
         {dataArray.length > 0 ? (
           <>
-            <div className="overflow-x-auto overflow-y-auto flex-1 min-h-0">
+            <div className="overflow-x-auto overflow-y-auto" style={{ maxHeight: '40vh' }}>
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50 sticky top-0 z-10">
                   <tr>
@@ -433,7 +433,7 @@ export default function ReportsPage() {
               </table>
             </div>
             {dataArray.length > 100 && (
-              <div className="bg-gray-50 px-6 py-3 border-t border-gray-200 flex-shrink-0">
+              <div className="bg-gray-50 px-6 py-3 border-t border-gray-200">
                 <p className="text-sm text-gray-600 text-center">
                   Mostrando 100 de {dataArray.length} registros
                 </p>
@@ -527,7 +527,7 @@ export default function ReportsPage() {
 
   return (
     <Layout>
-      <div className="space-y-6 h-full flex flex-col">
+      <div className="space-y-6 pb-6">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
@@ -578,32 +578,32 @@ export default function ReportsPage() {
 
         {/* Filtros */}
         {reportType && (
-          <div className="bg-white shadow-md rounded-lg p-6 border border-gray-200">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                <FiFilter className="text-gray-600" />
+          <div className="bg-white shadow-md rounded-lg p-4 border border-gray-200">
+            <div className="flex items-center justify-between mb-3">
+              <h2 className="text-base font-bold text-gray-900 flex items-center gap-2">
+                <FiFilter className="text-gray-600 text-sm" />
                 Filtros
               </h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
               {(reportType === 'sales' || reportType === 'profitability' || reportType === 'customers' || reportType === 'trade-ins') && (
                 <>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Data Inicial</label>
+                    <label className="block text-xs font-medium text-gray-700 mb-0.5">Data Inicial</label>
                     <input
                       type="date"
                       value={filters.startDate}
                       onChange={(e) => setFilters({ ...filters, startDate: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                      className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-primary-500 focus:border-primary-500 text-gray-900"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Data Final</label>
+                    <label className="block text-xs font-medium text-gray-700 mb-0.5">Data Final</label>
                     <input
                       type="date"
                       value={filters.endDate}
                       onChange={(e) => setFilters({ ...filters, endDate: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                      className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-primary-500 focus:border-primary-500 text-gray-900"
                     />
                   </div>
                 </>
@@ -611,11 +611,11 @@ export default function ReportsPage() {
 
               {(reportType === 'customers' || reportType === 'vehicles' || reportType === 'trade-ins') && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                  <label className="block text-xs font-medium text-gray-700 mb-0.5">Status</label>
                   <select
                     value={filters.status}
                     onChange={(e) => setFilters({ ...filters, status: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                    className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-primary-500 focus:border-primary-500 text-gray-900"
                   >
                     <option value="">Todos</option>
                     {reportType === 'vehicles' && (
@@ -647,51 +647,51 @@ export default function ReportsPage() {
               {reportType === 'vehicles' && (
                 <>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Marca</label>
+                    <label className="block text-xs font-medium text-gray-700 mb-0.5">Marca</label>
                     <input
                       type="text"
                       value={filters.brand}
                       onChange={(e) => setFilters({ ...filters, brand: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                      className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-primary-500 focus:border-primary-500 text-gray-900"
                       placeholder="Filtrar por marca"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Ano Mínimo</label>
+                    <label className="block text-xs font-medium text-gray-700 mb-0.5">Ano Mínimo</label>
                     <input
                       type="number"
                       value={filters.minYear}
                       onChange={(e) => setFilters({ ...filters, minYear: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                      className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-primary-500 focus:border-primary-500 text-gray-900"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Ano Máximo</label>
+                    <label className="block text-xs font-medium text-gray-700 mb-0.5">Ano Máximo</label>
                     <input
                       type="number"
                       value={filters.maxYear}
                       onChange={(e) => setFilters({ ...filters, maxYear: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                      className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-primary-500 focus:border-primary-500 text-gray-900"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Preço Mínimo</label>
+                    <label className="block text-xs font-medium text-gray-700 mb-0.5">Preço Mínimo</label>
                     <input
                       type="number"
                       step="0.01"
                       value={filters.minPrice}
                       onChange={(e) => setFilters({ ...filters, minPrice: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                      className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-primary-500 focus:border-primary-500 text-gray-900"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Preço Máximo</label>
+                    <label className="block text-xs font-medium text-gray-700 mb-0.5">Preço Máximo</label>
                     <input
                       type="number"
                       step="0.01"
                       value={filters.maxPrice}
                       onChange={(e) => setFilters({ ...filters, maxPrice: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                      className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-primary-500 focus:border-primary-500 text-gray-900"
                     />
                   </div>
                 </>
@@ -699,26 +699,26 @@ export default function ReportsPage() {
 
               {reportType === 'vehicles-stuck' && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Dias Parado (mínimo)</label>
+                  <label className="block text-xs font-medium text-gray-700 mb-0.5">Dias Parado (mínimo)</label>
                   <input
                     type="number"
                     value={filters.days}
                     onChange={(e) => setFilters({ ...filters, days: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                    className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-primary-500 focus:border-primary-500 text-gray-900"
                   />
                 </div>
               )}
             </div>
 
-            <div className="flex flex-col sm:flex-row justify-end gap-3 mt-6 pt-4 border-t border-gray-200">
+            <div className="flex flex-col sm:flex-row justify-end gap-2 mt-4 pt-3 border-t border-gray-200">
               <button
                 onClick={handleGenerateReport}
                 disabled={loading}
-                className="px-6 py-2.5 bg-primary-600 text-white rounded-lg hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 font-medium transition-colors shadow-sm"
+                className="px-4 py-1.5 text-sm bg-primary-600 text-white rounded-lg hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 font-medium transition-colors shadow-sm"
               >
                 {loading ? (
                   <>
-                    <svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <svg className="animate-spin h-3 w-3 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
@@ -726,7 +726,7 @@ export default function ReportsPage() {
                   </>
                 ) : (
                   <>
-                    <FiBarChart2 />
+                    <FiBarChart2 className="text-sm" />
                     Gerar Relatório
                   </>
                 )}
@@ -734,9 +734,9 @@ export default function ReportsPage() {
               {reportData && (
                 <button
                   onClick={handleExportPDF}
-                  className="px-6 py-2.5 bg-gray-700 text-white rounded-lg hover:bg-gray-800 flex items-center justify-center gap-2 font-medium transition-colors shadow-sm"
+                  className="px-4 py-1.5 text-sm bg-gray-700 text-white rounded-lg hover:bg-gray-800 flex items-center justify-center gap-2 font-medium transition-colors shadow-sm"
                 >
-                  <FiDownload />
+                  <FiDownload className="text-sm" />
                   Exportar PDF
                 </button>
               )}

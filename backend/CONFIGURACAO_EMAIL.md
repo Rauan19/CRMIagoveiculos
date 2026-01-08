@@ -82,3 +82,4 @@ GET /api/customers/birthdays/upcoming?days=30
 - ⚠️ O scheduler só funciona quando o servidor backend está rodando
 - ⚠️ Em ambiente de desenvolvimento, você pode testar usando serviços como Mailtrap ou MailHog
 
+

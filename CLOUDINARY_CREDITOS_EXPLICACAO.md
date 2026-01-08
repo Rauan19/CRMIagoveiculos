@@ -98,3 +98,4 @@
 
 **Recomendação:** Use o plano gratuito! Quando crescer muito, aí pensa em migrar para S3 ou upgrade. 🎉
 
+

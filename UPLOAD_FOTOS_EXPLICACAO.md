@@ -130,3 +130,4 @@ Se quiser implementar Cloudinary:
 **Tempo estimado:** 2-3 horas
 **Impacto:** Muito positivo para performance e escalabilidade
 
+

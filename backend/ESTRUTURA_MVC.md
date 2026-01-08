@@ -193,3 +193,4 @@ app.use('/api/meu-recurso', meuRoutes);
 6. Usar middlewares para autenticação/autorização nas rotas protegidas
 
 
+

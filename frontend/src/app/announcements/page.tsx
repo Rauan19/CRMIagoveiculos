@@ -5,6 +5,7 @@ import Layout from '@/components/Layout'
 import api from '@/services/api'
 import Toast from '@/components/Toast'
 import { FiUpload, FiDownload, FiRefreshCw, FiImage, FiX } from 'react-icons/fi'
+import { formatPhone } from '@/utils/formatters'
 
 interface EstoqueItem {
   id: number
@@ -30,6 +31,7 @@ export default function AnnouncementsPage() {
     year: '',
     modelYear: '',
     value: '',
+    promotionValue: '',
     km: '',
     color: '',
     plate: '',
@@ -70,7 +72,8 @@ export default function AnnouncementsPage() {
         model: selectedItem.model || '',
         year: selectedItem.year?.toString() || '',
         modelYear: '',
-        value: selectedItem.promotionValue?.toString() || selectedItem.value?.toString() || '',
+        value: selectedItem.value?.toString() || '',
+        promotionValue: selectedItem.promotionValue?.toString() || '',
         km: selectedItem.km?.toString() || '',
         color: selectedItem.color || '',
         plate: selectedItem.plate || '',
@@ -103,7 +106,7 @@ export default function AnnouncementsPage() {
     }, 100)
 
     return () => clearTimeout(timer)
-  }, [uploadedImage, formData.brand, formData.model, formData.year, formData.modelYear, formData.value, formData.km, formData.color, formData.plate, formData.phone, formData.whatsapp, formData.transmission, formData.fuel])
+  }, [uploadedImage, formData.brand, formData.model, formData.year, formData.modelYear, formData.value, formData.promotionValue, formData.km, formData.color, formData.plate, formData.phone, formData.whatsapp, formData.transmission, formData.fuel])
 
   const loadEstoque = async () => {
     try {
@@ -234,41 +237,24 @@ export default function AnnouncementsPage() {
     // Desenhar imagem ocupando toda a área
     ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
 
-    // Overlay escuro no topo para melhorar legibilidade (mais escuro)
-    const topOverlay = ctx.createLinearGradient(0, 0, 0, 450)
-    topOverlay.addColorStop(0, 'rgba(0, 0, 0, 0.75)')
+    // Overlay escuro no topo para melhorar legibilidade (altura reduzida)
+    const topOverlay = ctx.createLinearGradient(0, 0, 0, 200)
+    topOverlay.addColorStop(0, 'rgba(0, 0, 0, 0.85)')
     topOverlay.addColorStop(0.5, 'rgba(0, 0, 0, 0.5)')
     topOverlay.addColorStop(1, 'rgba(0, 0, 0, 0)')
     ctx.fillStyle = topOverlay
-    ctx.fillRect(0, 0, canvas.width, 450)
+    ctx.fillRect(0, 0, canvas.width, 200)
 
-    // Overlay escuro na parte inferior (mais escuro)
-    const bottomOverlay = ctx.createLinearGradient(0, canvas.height - 250, 0, canvas.height)
-    bottomOverlay.addColorStop(0, 'rgba(0, 0, 0, 0)')
-    bottomOverlay.addColorStop(0.5, 'rgba(0, 0, 0, 0.5)')
-    bottomOverlay.addColorStop(1, 'rgba(0, 0, 0, 0.85)')
-    ctx.fillStyle = bottomOverlay
-    ctx.fillRect(0, canvas.height - 250, canvas.width, 250)
-
-    // Configurar sombra para textos (mais destacada)
-    ctx.shadowColor = 'rgba(0, 0, 0, 0.9)'
-    ctx.shadowBlur = 12
-    ctx.shadowOffsetX = 2
-    ctx.shadowOffsetY = 2
-
-    const padding = 60
-    let yPos = padding
-
-    // Logo da loja (bem maior, canto superior direito)
+    // Logo da loja (DESENHADA DEPOIS do overlay para ficar por cima)
     const logoImg = new Image()
     logoImg.crossOrigin = 'anonymous'
     logoImg.onload = () => {
       const logoWidth = 280
       const logoHeight = 120
-      const logoX = canvas.width - padding - logoWidth
-      const logoY = padding - 20 // Mais acima
+      const logoX = canvas.width - 60 - logoWidth
+      const logoY = 10 // Logo mais para cima
       
-      // Desenhar logo sem fundo
+      // Desenhar logo sem fundo (por cima do overlay)
       ctx.drawImage(logoImg, logoX, logoY, logoWidth, logoHeight)
     }
     logoImg.onerror = () => {
@@ -280,9 +266,27 @@ export default function AnnouncementsPage() {
       ctx.fillStyle = '#ffffff'
       ctx.font = 'bold 20px Arial'
       ctx.textAlign = 'right'
-      ctx.fillText('CRM IAGO VEÍCULOS', canvas.width - padding, padding + 25)
+      ctx.fillText('CRM IAGO VEÍCULOS', canvas.width - 60, 55)
     }
     logoImg.src = '/logo/logo2-Photoroom.png'
+
+    // Overlay escuro na parte inferior (mais escuro, altura aumentada para valores)
+    const bottomOverlay = ctx.createLinearGradient(0, canvas.height - 320, 0, canvas.height)
+    bottomOverlay.addColorStop(0, 'rgba(0, 0, 0, 0)')
+    bottomOverlay.addColorStop(0.3, 'rgba(0, 0, 0, 0.4)')
+    bottomOverlay.addColorStop(0.6, 'rgba(0, 0, 0, 0.7)')
+    bottomOverlay.addColorStop(1, 'rgba(0, 0, 0, 0.9)')
+    ctx.fillStyle = bottomOverlay
+    ctx.fillRect(0, canvas.height - 320, canvas.width, 320)
+
+    // Configurar sombra para textos (mais destacada)
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.9)'
+    ctx.shadowBlur = 12
+    ctx.shadowOffsetX = 2
+    ctx.shadowOffsetY = 2
+
+    const padding = 60
+    let yPos = padding
 
     // Linha divisória mais visível no topo
     ctx.shadowColor = 'transparent'
@@ -299,27 +303,27 @@ export default function AnnouncementsPage() {
     // Espaço suficiente para logo e linha divisória
     yPos = padding + 100
 
-    // Marca e Modelo (mais destacado, maior) - com espaço adequado
+    // Marca e Modelo (tamanho reduzido) - com espaço adequado
     if (formData.brand || formData.model) {
       ctx.shadowColor = 'rgba(0, 0, 0, 0.9)'
-      ctx.shadowBlur = 15
+      ctx.shadowBlur = 12
       ctx.shadowOffsetX = 2
       ctx.shadowOffsetY = 2
       
       ctx.fillStyle = '#ffffff'
-      ctx.font = '300 80px Arial'
+      ctx.font = '300 56px Arial'
       ctx.textAlign = 'left'
       const brand = formData.brand || ''
       if (brand) {
         ctx.fillText(brand, padding, yPos)
-        yPos += 90
+        yPos += 70
       }
       
-      ctx.font = 'bold 72px Arial'
+      ctx.font = 'bold 50px Arial'
       const model = formData.model || ''
       if (model) {
         ctx.fillText(model, padding, yPos)
-        yPos += 110
+        yPos += 85
       }
     }
 
@@ -351,19 +355,30 @@ export default function AnnouncementsPage() {
       ctx.shadowOffsetX = 0
       ctx.shadowOffsetY = 0
       
-      // Formato: ano/anoModelo ou só ano se não tiver anoModelo
-      const yearText = formData.modelYear ? `${formData.year}/${formData.modelYear}` : formData.year
+      // Formato: Ano ano/anoModelo ou Ano ano se não tiver anoModelo
+      const yearText = formData.modelYear ? `Ano ${formData.year}/${formData.modelYear}` : `Ano ${formData.year}`
       ctx.font = 'bold 30px Arial'
       const yearMetrics = ctx.measureText(yearText)
       const yearWidth = yearMetrics.width
       
-      roundRect(ctx, infoX - 10, infoY - 25, yearWidth + 30, 40, 20)
-      ctx.fillStyle = 'rgba(5, 150, 105, 0.3)'
-      ctx.fill()
+      // Retângulo com corte inclinado no lado esquerdo (como os valores)
+      const yearBoxWidth = yearWidth + 50
+      const yearBoxHeight = 40
+      const yearBoxX = infoX - 10
+      const yearBoxY = infoY - 25
       
-      ctx.strokeStyle = 'rgba(5, 150, 105, 0.6)'
-      ctx.lineWidth = 2
-      roundRect(ctx, infoX - 10, infoY - 25, yearWidth + 30, 40, 20)
+      ctx.beginPath()
+      ctx.moveTo(yearBoxX + 20, yearBoxY) // Início do corte inclinado (canto superior esquerdo)
+      ctx.lineTo(yearBoxX + yearBoxWidth, yearBoxY) // Canto superior direito
+      ctx.lineTo(yearBoxX + yearBoxWidth, yearBoxY + yearBoxHeight) // Canto inferior direito
+      ctx.lineTo(yearBoxX, yearBoxY + yearBoxHeight - 20) // Corte diagonal (ponto inclinado no canto inferior esquerdo)
+      ctx.closePath()
+      
+      // Fundo transparente (sem fill)
+      
+      // Borda branca
+      ctx.strokeStyle = '#ffffff'
+      ctx.lineWidth = 2.5
       ctx.stroke()
       
       ctx.shadowColor = 'rgba(0, 0, 0, 0.9)'
@@ -386,28 +401,28 @@ export default function AnnouncementsPage() {
       ctx.shadowOffsetX = 0
       ctx.shadowOffsetY = 0
       
-      const kmText = `${parseInt(formData.km).toLocaleString('pt-BR')} km`
+      const kmText = `KM ${parseInt(formData.km).toLocaleString('pt-BR')}`
       ctx.font = 'bold 30px Arial'
       const kmMetrics = ctx.measureText(kmText)
       const kmWidth = kmMetrics.width
       
-      roundRect(ctx, infoX - 10, infoY - 25, kmWidth + iconSize + iconSpacing + 20, 40, 20)
-      ctx.fillStyle = 'rgba(5, 150, 105, 0.3)'
-      ctx.fill()
+      roundRect(ctx, infoX - 10, infoY - 25, kmWidth + 30, 40, 20)
+      // Fundo transparente (sem fill)
       
-      ctx.strokeStyle = 'rgba(5, 150, 105, 0.6)'
-      ctx.lineWidth = 2
-      roundRect(ctx, infoX - 10, infoY - 25, kmWidth + iconSize + iconSpacing + 20, 40, 20)
+      // Borda branca
+      ctx.strokeStyle = '#ffffff'
+      ctx.lineWidth = 2.5
+      roundRect(ctx, infoX - 10, infoY - 25, kmWidth + 30, 40, 20)
       ctx.stroke()
       
-      drawSpeedometerIcon(ctx, infoX + iconSize / 2, infoY - 10, iconSize)
+      // Removido ícone de velocímetro
       ctx.shadowColor = 'rgba(0, 0, 0, 0.9)'
       ctx.shadowBlur = 15
       ctx.shadowOffsetX = 2
       ctx.shadowOffsetY = 2
       ctx.fillStyle = '#ffffff'
       ctx.font = 'bold 30px Arial'
-      ctx.fillText(kmText, infoX + iconSize + iconSpacing, infoY)
+      ctx.fillText(kmText, infoX, infoY)
     }
 
     // Terceira linha: Câmbio e Combustível
@@ -470,11 +485,11 @@ export default function AnnouncementsPage() {
       const colorWidth = colorMetrics.width
       
       roundRect(ctx, infoX - 10, infoY - 25, colorWidth + 30, 40, 20)
-      ctx.fillStyle = 'rgba(5, 150, 105, 0.3)'
-      ctx.fill()
+      // Fundo transparente (sem fill)
       
-      ctx.strokeStyle = 'rgba(5, 150, 105, 0.6)'
-      ctx.lineWidth = 2
+      // Borda branca
+      ctx.strokeStyle = '#ffffff'
+      ctx.lineWidth = 2.5
       roundRect(ctx, infoX - 10, infoY - 25, colorWidth + 30, 40, 20)
       ctx.stroke()
       
@@ -569,11 +584,11 @@ export default function AnnouncementsPage() {
       const colorWidth = colorMetrics.width
       
       roundRect(ctx, infoX - 10, infoY - 25, colorWidth + 30, 40, 20)
-      ctx.fillStyle = 'rgba(5, 150, 105, 0.3)'
-      ctx.fill()
+      // Fundo transparente (sem fill)
       
-      ctx.strokeStyle = 'rgba(5, 150, 105, 0.6)'
-      ctx.lineWidth = 2
+      // Borda branca
+      ctx.strokeStyle = '#ffffff'
+      ctx.lineWidth = 2.5
       roundRect(ctx, infoX - 10, infoY - 25, colorWidth + 30, 40, 20)
       ctx.stroke()
       
@@ -598,48 +613,179 @@ export default function AnnouncementsPage() {
       ctx.fillText(`Placa: ${formData.plate}`, padding, yPos)
     }
 
-    // Preço (canto superior direito, muito destacado)
-    if (formData.value) {
-      const price = parseFloat(formData.value).toLocaleString('pt-BR', {
-        style: 'currency',
-        currency: 'BRL'
-      })
-      
-      ctx.shadowColor = 'rgba(0, 0, 0, 0.7)'
-      ctx.shadowBlur = 20
-      ctx.shadowOffsetX = 0
-      ctx.shadowOffsetY = 5
-      
-      ctx.font = 'bold 42px Arial'
-      ctx.textAlign = 'right'
-      const metrics = ctx.measureText(price)
-      const textWidth = metrics.width
-      const priceX = canvas.width - padding
-      const priceY = 220
-      
-      // Fundo destacado para preço
-      roundRect(
-        ctx,
-        priceX - textWidth - 30,
-        priceY - 40,
-        textWidth + 60,
-        60,
-        30
-      )
-      ctx.fillStyle = '#059669'
-      ctx.fill()
-      
-      ctx.shadowColor = 'rgba(0, 0, 0, 0.9)'
-      ctx.shadowBlur = 15
-      ctx.shadowOffsetX = 2
-      ctx.shadowOffsetY = 2
-      ctx.fillStyle = '#ffffff'
-      ctx.font = 'bold 48px Arial'
-      ctx.fillText(price, priceX, priceY)
-    }
-
     // CTA destacado (parte inferior)
     const ctaY = canvas.height - padding - 50
+    
+    // Preço (valores bem embaixo, na mesma linha do telefone)
+    if (formData.promotionValue || formData.value) {
+      const priceX = canvas.width - padding
+      let priceStartY = ctaY + 10 // Valores bem embaixo, na mesma altura do telefone/CTA
+      
+      // Se tiver valor promocional, mostra "De R$ X por R$ Y" com "Oferta Imperdível"
+      if (formData.promotionValue && formData.value) {
+        const originalPrice = parseFloat(formData.value).toLocaleString('pt-BR', {
+          style: 'currency',
+          currency: 'BRL'
+        })
+        const promoPrice = parseFloat(formData.promotionValue).toLocaleString('pt-BR', {
+          style: 'currency',
+          currency: 'BRL'
+        })
+        
+        const deText = 'De'
+        const porText = 'Por'
+        
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.9)'
+        ctx.shadowBlur = 15
+        ctx.shadowOffsetX = 2
+        ctx.shadowOffsetY = 2
+        ctx.textAlign = 'right'
+        
+        // Calcular larguras dos textos
+        ctx.font = 'bold 28px Arial'
+        const deMetrics = ctx.measureText(deText)
+        const originalMetrics = ctx.measureText(originalPrice)
+        const porMetrics = ctx.measureText(porText)
+        ctx.font = 'bold 42px Arial'
+        const promoMetrics = ctx.measureText(promoPrice)
+        
+        const totalWidth = Math.max(
+          deMetrics.width + 10 + originalMetrics.width,
+          porMetrics.width + 10 + promoMetrics.width
+        ) + 60
+        
+        let currentY = priceStartY
+        
+        // Badge "Oferta Imperdível"
+        ctx.shadowColor = 'transparent'
+        ctx.shadowBlur = 0
+        ctx.shadowOffsetX = 0
+        ctx.shadowOffsetY = 0
+        
+        ctx.font = 'bold 18px Arial'
+        const ofertaText = 'OFERTA IMPERDÍVEL'
+        const ofertaMetrics = ctx.measureText(ofertaText)
+        const ofertaWidth = ofertaMetrics.width
+        
+        roundRect(ctx, priceX - ofertaWidth - 20, currentY - 45, ofertaWidth + 40, 28, 14)
+        ctx.fillStyle = '#dc2626'
+        ctx.fill()
+        
+        ctx.strokeStyle = '#ffffff'
+        ctx.lineWidth = 2
+        roundRect(ctx, priceX - ofertaWidth - 20, currentY - 45, ofertaWidth + 40, 28, 14)
+        ctx.stroke()
+        
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.9)'
+        ctx.shadowBlur = 12
+        ctx.shadowOffsetX = 2
+        ctx.shadowOffsetY = 2
+        ctx.fillStyle = '#ffffff'
+        ctx.font = 'bold 18px Arial'
+        ctx.textAlign = 'right'
+        ctx.fillText(ofertaText, priceX, currentY - 27)
+        
+        currentY += 5
+        
+        // Container para os preços (com corte inclinado no lado esquerdo, sem borda)
+        const promoBoxWidth = totalWidth + 40 // Aumentar width
+        const promoBoxHeight = 90
+        const promoBoxX = priceX - promoBoxWidth
+        const promoBoxY = currentY - 50
+        
+        // Desenhar retângulo com corte diagonal no lado esquerdo
+        ctx.beginPath()
+        ctx.moveTo(promoBoxX + 20, promoBoxY) // Início do corte inclinado (canto superior esquerdo)
+        ctx.lineTo(promoBoxX + promoBoxWidth, promoBoxY) // Canto superior direito
+        ctx.lineTo(promoBoxX + promoBoxWidth, promoBoxY + promoBoxHeight) // Canto inferior direito
+        ctx.lineTo(promoBoxX, promoBoxY + promoBoxHeight - 20) // Corte diagonal (ponto inclinado no canto inferior esquerdo)
+        ctx.closePath()
+        
+        ctx.fillStyle = 'rgba(220, 38, 38, 0.95)'
+        ctx.fill()
+        
+        // Sem borda branca
+        
+        // "De" + Preço original riscado
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.9)'
+        ctx.shadowBlur = 15
+        ctx.shadowOffsetX = 2
+        ctx.shadowOffsetY = 2
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.8)'
+        ctx.font = 'bold 28px Arial'
+        ctx.textAlign = 'right'
+        ctx.fillText(deText, priceX - 15, currentY - 10)
+        
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.7)'
+        ctx.font = 'bold 32px Arial'
+        ctx.fillText(originalPrice, priceX - 15 - deMetrics.width - 10, currentY - 10)
+        
+        // Linha riscando o preço original
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)'
+        ctx.lineWidth = 4
+        ctx.beginPath()
+        const originalX = priceX - 15 - deMetrics.width - 10
+        ctx.moveTo(originalX - originalMetrics.width - 5, currentY - 10)
+        ctx.lineTo(originalX + 5, currentY - 10)
+        ctx.stroke()
+        
+        // "Por" + Preço promocional em destaque
+        ctx.fillStyle = '#ffffff'
+        ctx.font = 'bold 28px Arial'
+        ctx.fillText(porText, priceX - 15, currentY + 35)
+        
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.9)'
+        ctx.shadowBlur = 18
+        ctx.shadowOffsetX = 3
+        ctx.shadowOffsetY = 3
+        ctx.fillStyle = '#ffffff'
+        ctx.font = 'bold 48px Arial'
+        ctx.fillText(promoPrice, priceX - 15 - porMetrics.width - 10, currentY + 35)
+      } else {
+        // Preço normal (sem promoção)
+        const price = parseFloat(formData.value || formData.promotionValue).toLocaleString('pt-BR', {
+          style: 'currency',
+          currency: 'BRL'
+        })
+        
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.7)'
+        ctx.shadowBlur = 20
+        ctx.shadowOffsetX = 0
+        ctx.shadowOffsetY = 5
+        
+        ctx.font = 'bold 42px Arial'
+        ctx.textAlign = 'right'
+        const metrics = ctx.measureText(price)
+        const textWidth = metrics.width
+        
+        // Aumentar mais a largura do fundo
+        const boxWidth = textWidth + 140
+        const boxHeight = 60
+        const boxX = priceX - boxWidth
+        const boxY = priceStartY - 40
+        
+        // Desenhar retângulo com corte diagonal no lado ESQUERDO (sem borda arredondada, sem borda branca)
+        ctx.beginPath()
+        ctx.moveTo(boxX + 20, boxY) // Início do corte inclinado (canto superior esquerdo)
+        ctx.lineTo(boxX + boxWidth, boxY) // Canto superior direito
+        ctx.lineTo(boxX + boxWidth, boxY + boxHeight) // Canto inferior direito
+        ctx.lineTo(boxX, boxY + boxHeight - 20) // Corte diagonal (ponto inclinado no canto inferior esquerdo)
+        ctx.closePath()
+        
+        ctx.fillStyle = formData.promotionValue ? '#dc2626' : '#D4AF37' // Dourado em vez de verde
+        ctx.fill()
+        
+        // Sem borda branca
+        
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.9)'
+        ctx.shadowBlur = 15
+        ctx.shadowOffsetX = 2
+        ctx.shadowOffsetY = 2
+        ctx.fillStyle = '#ffffff'
+        ctx.font = 'bold 48px Arial'
+        ctx.fillText(price, priceX, priceStartY)
+      }
+    }
     
     ctx.shadowColor = 'transparent'
     ctx.shadowBlur = 0
@@ -654,63 +800,58 @@ export default function AnnouncementsPage() {
     ctx.lineTo(canvas.width - padding, ctaY - 35)
     ctx.stroke()
     
-    // Botão CTA destacado
-    ctx.shadowColor = 'rgba(0, 0, 0, 0.6)'
-    ctx.shadowBlur = 20
-    ctx.shadowOffsetX = 0
-    ctx.shadowOffsetY = 5
-    
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.25)'
-    roundRect(ctx, padding, ctaY, 220, 50, 25)
-    ctx.fill()
-    
-    ctx.strokeStyle = '#ffffff'
-    ctx.lineWidth = 2.5
-    roundRect(ctx, padding, ctaY, 220, 50, 25)
-    ctx.stroke()
-    
-    ctx.shadowColor = 'rgba(0, 0, 0, 0.9)'
-    ctx.shadowBlur = 12
-    ctx.shadowOffsetX = 2
-    ctx.shadowOffsetY = 2
-    ctx.fillStyle = '#ffffff'
-    ctx.font = 'bold 20px Arial'
-    ctx.textAlign = 'left'
-    ctx.fillText('FALE CONOSCO', padding + 25, ctaY + 32)
-
-    // Contato (canto inferior direito) - muito destacado
+    // Campo único com "FALE CONOSCO" e telefone juntos
     if (formData.whatsapp || formData.phone) {
-      const contact = formData.whatsapp || formData.phone
-      const contactY = ctaY + 5
+      const contactRaw = formData.whatsapp || formData.phone
+      const contact = formatPhone(contactRaw)
       
-      // Fundo destacado para telefone
+      // Medir textos
+      ctx.font = 'bold 20px Arial'
+      const faleConoscoText = 'FALE CONOSCO'
+      const faleConoscoMetrics = ctx.measureText(faleConoscoText)
+      
+      ctx.font = 'bold 32px Arial'
+      const contactMetrics = ctx.measureText(contact)
+      
+      // Calcular largura total do box (FALE CONOSCO + espaçamento + telefone)
+      const spacing = 40
+      const totalWidth = faleConoscoMetrics.width + spacing + contactMetrics.width + 80
+      const contactBoxHeight = 50
+      const contactBoxX = padding
+      const contactBoxY = ctaY + 5 // Posição do box
+      
+      // Fundo destacado unificado
       ctx.shadowColor = 'transparent'
       ctx.shadowBlur = 0
       ctx.shadowOffsetX = 0
       ctx.shadowOffsetY = 0
       
-      ctx.font = 'bold 28px Arial'
-      ctx.textAlign = 'right'
-      const contactMetrics = ctx.measureText(contact)
-      const contactWidth = contactMetrics.width
-      const contactX = canvas.width - padding
+      roundRect(ctx, contactBoxX, contactBoxY, totalWidth, contactBoxHeight, 18)
+      // Fundo transparente (sem fill)
       
-      roundRect(ctx, contactX - contactWidth - 30, contactY - 25, contactWidth + 60, 45, 22)
-      ctx.fillStyle = 'rgba(5, 150, 105, 0.4)'
-      ctx.fill()
-      
-      ctx.strokeStyle = 'rgba(5, 150, 105, 0.8)'
+      // Borda branca
+      ctx.strokeStyle = '#ffffff'
       ctx.lineWidth = 2.5
-      roundRect(ctx, contactX - contactWidth - 30, contactY - 25, contactWidth + 60, 45, 22)
+      roundRect(ctx, contactBoxX, contactBoxY, totalWidth, contactBoxHeight, 18)
       ctx.stroke()
       
+      // Calcular posição vertical centralizada dentro do box
+      const textCenterY = contactBoxY + (contactBoxHeight / 2) + 8 // +8 para ajuste visual de centralização
+      
+      // Desenhar "FALE CONOSCO" à esquerda dentro do box
       ctx.shadowColor = 'rgba(0, 0, 0, 0.9)'
-      ctx.shadowBlur = 15
+      ctx.shadowBlur = 12
       ctx.shadowOffsetX = 2
       ctx.shadowOffsetY = 2
       ctx.fillStyle = '#ffffff'
-      ctx.font = 'bold 28px Arial'
-      ctx.fillText(contact, contactX, contactY)
+      ctx.font = 'bold 20px Arial'
+      ctx.textAlign = 'left'
+      ctx.fillText(faleConoscoText, contactBoxX + 30, textCenterY)
+      
+      // Desenhar telefone à direita dentro do box
+      ctx.font = 'bold 32px Arial'
+      ctx.textAlign = 'right'
+      ctx.fillText(contact, contactBoxX + totalWidth - 30, textCenterY)
     }
   }
 
@@ -795,7 +936,7 @@ export default function AnnouncementsPage() {
     // Preço
     if (formData.value) {
       yPos = cardY + 250
-      ctx.fillStyle = '#059669'
+      ctx.fillStyle = '#D4AF37' // Dourado
       ctx.font = 'bold 48px Arial'
       ctx.textAlign = 'left'
       const price = parseFloat(formData.value).toLocaleString('pt-BR', {
@@ -850,6 +991,7 @@ export default function AnnouncementsPage() {
         year: '',
         modelYear: '',
         value: '',
+        promotionValue: '',
         km: '',
         color: '',
         plate: '',
@@ -929,29 +1071,33 @@ export default function AnnouncementsPage() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Ano / Ano do Modelo
+                    Ano
                   </label>
                   <input
                     type="text"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
-                    value={formData.modelYear ? `${formData.year}/${formData.modelYear}` : formData.year}
-                    onChange={(e) => {
-                      const value = e.target.value
-                      // Separar ano/anoModelo se tiver barra
-                      if (value.includes('/')) {
-                        const parts = value.split('/')
-                        setFormData({ 
-                          ...formData, 
-                          year: parts[0].trim(), 
-                          modelYear: parts[1]?.trim() || '' 
-                        })
-                      } else {
-                        setFormData({ ...formData, year: value, modelYear: '' })
-                      }
-                    }}
-                    placeholder="Ex: 2024/2025 ou 2024"
+                    inputMode="text"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 text-gray-900"
+                    value={formData.year}
+                    onChange={(e) => setFormData({ ...formData, year: e.target.value })}
+                    placeholder="Ex: 2024"
                   />
                 </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Ano do Modelo
+                  </label>
+                  <input
+                    type="text"
+                    inputMode="text"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 text-gray-900"
+                    value={formData.modelYear}
+                    onChange={(e) => setFormData({ ...formData, modelYear: e.target.value })}
+                    placeholder="Ex: 2025"
+                  />
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Valor (R$)
@@ -965,6 +1111,25 @@ export default function AnnouncementsPage() {
                     placeholder="Ex: 50000"
                   />
                 </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Valor Promocional (R$)
+                  </label>
+                  <input
+                    type="number"
+                    step="0.01"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    value={formData.promotionValue}
+                    onChange={(e) => setFormData({ ...formData, promotionValue: e.target.value })}
+                    placeholder="Ex: 45000 (deixe vazio se não houver promoção)"
+                  />
+                </div>
+              </div>
+              
+              <div className="col-span-2">
+                <p className="text-xs text-gray-500 mt-1">
+                  Se preenchido, o valor original será mostrado riscado e este será o valor em destaque
+                </p>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
@@ -1007,31 +1172,17 @@ export default function AnnouncementsPage() {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Telefone
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    placeholder="Ex: (11) 99999-9999"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    WhatsApp
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
-                    value={formData.whatsapp}
-                    onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
-                    placeholder="Ex: (11) 99999-9999"
-                  />
-                </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Telefone
+                </label>
+                <input
+                  type="text"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: formatPhone(e.target.value) })}
+                  placeholder="Ex: (11) 99999-9999"
+                />
               </div>
 
               {/* Upload de Imagem */}
@@ -1100,12 +1251,6 @@ export default function AnnouncementsPage() {
                 >
                   <FiDownload size={18} />
                   Download
-                </button>
-                <button
-                  onClick={handleReset}
-                  className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50"
-                >
-                  Limpar
                 </button>
               </div>
             </div>

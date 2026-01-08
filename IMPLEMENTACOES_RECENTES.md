@@ -175,3 +175,4 @@ backend/
 - `GET /api/reports/top-selling-vehicles?startDate=...&endDate=...&limit=10` - Top veículos
 - `GET /api/reports/profitability-analysis?startDate=...&endDate=...&groupBy=month` - Análise de lucratividade
 
+

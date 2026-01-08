@@ -9,12 +9,10 @@ import {
   FiUsers, 
   FiTruck, 
   FiDollarSign, 
-  FiRefreshCw, 
   FiFileText, 
   FiCreditCard,
   FiBarChart2,
   FiSearch,
-  FiTag,
   FiTarget,
   FiUserCheck
 } from 'react-icons/fi'
@@ -65,9 +63,7 @@ export default function Layout({ children }: LayoutProps) {
     { name: 'Funcionários', href: '/users', icon: FiUserCheck },
     { name: 'Veículos', href: '/vehicles', icon: FiTruck },
     { name: 'Vendas', href: '/sales', icon: FiDollarSign },
-    { name: 'Entradas', href: '/trade-ins', icon: FiRefreshCw },
     { name: 'Estoque', href: '/estoque', icon: FiTruck },
-    { name: 'Promoções', href: '/promotions', icon: FiTag },
     { name: 'Metas', href: '/goals', icon: FiTarget },
     { name: 'Anúncios', href: '/announcements', icon: FiFileText },
     { name: 'Financeiro', href: '/financial', icon: FiCreditCard },

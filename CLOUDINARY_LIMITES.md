@@ -103,3 +103,4 @@ O limite de 25GB é de **armazenamento TOTAL**, não mensal. Isso significa:
 
 Para a maioria dos CRMs de veículos, 25GB dá para **anos** de uso! 🚀
 
+

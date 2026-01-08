@@ -134,3 +134,4 @@ export const validateCEP = (cep: string): boolean => {
   return cleanCEP.length === 8
 }
 
+

@@ -35,8 +35,8 @@ class EstoqueController {
       const where = {};
       if (search) {
         where.OR = [
-          { brand: { contains: search } },
-          { model: { contains: search } }
+          { brand: { contains: search, mode: 'insensitive' } },
+          { model: { contains: search, mode: 'insensitive' } }
         ];
       }
 

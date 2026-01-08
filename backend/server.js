@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 
 console.log('🔄 Iniciando servidor...');
+console.log('📊 DATABASE_URL:', process.env.DATABASE_URL || 'NÃO DEFINIDO');
 
 // Importar rotas
 const authRoutes = require('./routes/authRoutes');

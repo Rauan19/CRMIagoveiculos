@@ -170,3 +170,4 @@ Total: ~R$ 20/mês para TODOS os clientes!
 **Quer que eu implemente Upload Local primeiro?** 
 É grátis e você pode migrar para S3 depois quando precisar! 🎉
 
+

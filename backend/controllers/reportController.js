@@ -3,28 +3,131 @@ const prisma = require('../models/prisma');
 class ReportController {
   async getDashboardStats(req, res) {
     try {
-      // Contar clientes
+      const { period = 'all', startDate: customStartDate, endDate: customEndDate } = req.query; // 'day', 'week', 'month', 'year', 'all'
+      
+      // Calcular datas baseado no período ou usar datas customizadas
+      let startDate = null;
+      let endDate = null;
+      const now = new Date();
+      
+      // Se houver datas customizadas, usar elas
+      if (customStartDate && customEndDate) {
+        startDate = new Date(customStartDate);
+        endDate = new Date(customEndDate);
+        // Adicionar 23:59:59 ao final do dia
+        endDate.setHours(23, 59, 59, 999);
+      } else {
+        // Caso contrário, usar o período pré-definido
+        switch (period) {
+          case 'day':
+            startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            endDate = new Date(now);
+            endDate.setHours(23, 59, 59, 999);
+            break;
+          case 'week':
+            startDate = new Date(now);
+            startDate.setDate(now.getDate() - 7);
+            endDate = new Date(now);
+            endDate.setHours(23, 59, 59, 999);
+            break;
+          case 'month':
+            startDate = new Date(now.getFullYear(), now.getMonth(), 1);
+            endDate = new Date(now);
+            endDate.setHours(23, 59, 59, 999);
+            break;
+          case 'year':
+            startDate = new Date(now.getFullYear(), 0, 1);
+            endDate = new Date(now);
+            endDate.setHours(23, 59, 59, 999);
+            break;
+          default:
+            startDate = null;
+            endDate = null;
+        }
+      }
+
+      // Construir where para vendas
+      const salesWhere = {};
+      if (startDate && endDate) {
+        salesWhere.date = { gte: startDate, lte: endDate };
+      } else if (startDate) {
+        salesWhere.date = { gte: startDate };
+      }
+
+      // Contar clientes (sempre total, independente do período)
       const totalCustomers = await prisma.customer.count();
 
-      // Contar veículos por status
+      // Contar veículos por status (sempre total)
       const totalVehicles = await prisma.vehicle.count();
       const vehiclesDisponivel = await prisma.vehicle.count({ where: { status: 'disponivel' } });
       const vehiclesReservado = await prisma.vehicle.count({ where: { status: 'reservado' } });
       const vehiclesVendido = await prisma.vehicle.count({ where: { status: 'vendido' } });
 
-      // Estatísticas de vendas
-      const totalSales = await prisma.sale.count();
+      // Estatísticas de vendas com filtro de período
+      const totalSales = await prisma.sale.count({ where: salesWhere });
       
-      // Buscar todas as vendas para calcular receita e lucro
+      // Buscar vendas do período para calcular receita e lucro
       const sales = await prisma.sale.findMany({
+        where: salesWhere,
         select: {
           salePrice: true,
           profit: true,
-        }
+          date: true,
+        },
+        orderBy: { date: 'asc' }
       });
 
       const totalRevenue = sales.reduce((sum, sale) => sum + (sale.salePrice || 0), 0);
       const totalProfit = sales.reduce((sum, sale) => sum + (sale.profit || 0), 0);
+
+      // Preparar dados para gráficos (agrupar por período)
+      const chartData = [];
+      if (sales.length > 0) {
+        const grouped = {};
+        
+        sales.forEach(sale => {
+          const saleDate = new Date(sale.date);
+          let key;
+          
+          switch (period) {
+            case 'day':
+              key = saleDate.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+              break;
+            case 'week':
+            case 'month':
+              key = saleDate.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
+              break;
+            case 'year':
+              key = saleDate.toLocaleDateString('pt-BR', { month: '2-digit', year: 'numeric' });
+              break;
+            default:
+              key = saleDate.toLocaleDateString('pt-BR');
+          }
+          
+          if (!grouped[key]) {
+            grouped[key] = { date: key, revenue: 0, profit: 0, count: 0 };
+          }
+          grouped[key].revenue += sale.salePrice || 0;
+          grouped[key].profit += sale.profit || 0;
+          grouped[key].count += 1;
+        });
+        
+        chartData.push(...Object.values(grouped));
+        // Ordenar por data
+        chartData.sort((a, b) => {
+          try {
+            // Tentar converter para Date para ordenação correta
+            const dateA = new Date(a.date.split('/').reverse().join('-'));
+            const dateB = new Date(b.date.split('/').reverse().join('-'));
+            if (!isNaN(dateA.getTime()) && !isNaN(dateB.getTime())) {
+              return dateA.getTime() - dateB.getTime();
+            }
+          } catch (e) {
+            // Se falhar, usar ordenação alfabética
+          }
+          return a.date.localeCompare(b.date);
+        });
+      }
 
       res.json({
         customers: {
@@ -40,7 +143,8 @@ class ReportController {
           total: totalSales,
           revenue: totalRevenue,
           profit: totalProfit
-        }
+        },
+        chartData: chartData
       });
     } catch (error) {
       console.error('Erro ao buscar estatísticas do dashboard:', error);
@@ -275,7 +379,7 @@ class ReportController {
       
       const where = {};
       if (status) where.status = status;
-      if (brand) where.brand = { contains: brand };
+      if (brand) where.brand = { contains: brand, mode: 'insensitive' };
       if (minYear || maxYear) {
         where.year = {};
         if (minYear) where.year.gte = parseInt(minYear);

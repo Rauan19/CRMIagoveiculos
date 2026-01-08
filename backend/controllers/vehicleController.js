@@ -7,12 +7,12 @@ class VehicleController {
       
       const where = {};
       if (status) where.status = status;
-      if (brand) where.brand = { contains: brand };
+      if (brand) where.brand = { contains: brand, mode: 'insensitive' };
       if (year) where.year = parseInt(year);
       if (search) {
         where.OR = [
-          { brand: { contains: search } },
-          { model: { contains: search } }
+          { brand: { contains: search, mode: 'insensitive' } },
+          { model: { contains: search, mode: 'insensitive' } }
         ];
       }
 

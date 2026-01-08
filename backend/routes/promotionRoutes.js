@@ -20,3 +20,4 @@ router.delete('/:id', authenticateToken, (req, res) => promotionController.delet
 
 module.exports = router;
 
+
