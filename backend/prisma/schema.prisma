@@ -5,6 +5,9 @@ generator client {
   provider = "prisma-client-js"
 }
 
+// Configuração do seed
+// Execute: npm run seed ou npx prisma db seed
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -16,32 +19,55 @@ model User {
   email     String   @unique
   password  String
   role      String
+  phone     String?
+  avatar    String?  // URL da imagem do avatar
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   sales     Sale[]
   goals     Goal[]
+  sinaisNegocio SinalNegocio[]
+  pendencias    Pendencia[] // Pendências em que é responsável
 }
 
 model Customer {
-  id        Int       @id @default(autoincrement())
-  name      String
-  phone     String
-  email     String?
-  address   String?
-  cpf       String?
-  rg        String?
-  cep       String?
-  city      String?
-  district  String?
-  documents String?
-  birthDate DateTime? // Data de nascimento para lembretes de aniversário
-  status    String    @default("novo")
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  vehicles  Vehicle[] // Veículos associados ao cliente
-  sales     Sale[]
-  tradeIns  TradeIn[]
-  leads     Lead[]
+  id                    Int       @id @default(autoincrement())
+  name                  String
+  phone                 String
+  email                 String?
+  address               String?
+  cpf                   String?
+  rg                    String?
+  cep                   String?
+  city                  String?
+  district              String?
+  documents             String?
+  birthDate             DateTime? // Data de nascimento para lembretes de aniversário
+  pessoaType            String?   @default("Física") // "Física" ou "Jurídica"
+  apelido               String? // Apelido do cliente
+  marcador              String? // Marcador/tag do cliente
+  nomeMae               String? // Nome da mãe
+  facebook              String? // Facebook
+  instagram             String? // Instagram
+  nacionalidade         String?   @default("BRASILEIRA") // Nacionalidade
+  naturalidade          String? // Naturalidade
+  sexo                  String? // Sexo
+  estadoCivil           String? // Estado Civil
+  profissao             String? // Profissão
+  cnh                   String? // CNH
+  cnhVencimento         DateTime? // Data vencimento CNH
+  website               String? // Website
+  adicional             String? // Adicional
+  pendenciasFinanceiras String? // Pendências Financeiras
+  status                String    @default("novo")
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  vehicles              Vehicle[] // Veículos associados ao cliente
+  sales                 Sale[]
+  tradeIns              TradeIn[]
+  leads                 Lead[]
+  financialTransactions FinancialTransaction[]
+  despachantes          Despachante[]
+  sinaisNegocio         SinalNegocio[]
 }
 
 model Lead {
@@ -55,26 +81,112 @@ model Lead {
 }
 
 model Vehicle {
-  id            Int       @id @default(autoincrement())
-  brand         String
-  model         String
-  year          Int
-  plate         String?   // Placa do veículo
-  km            Int?
-  color         String?
-  price         Float?    // Preço de venda (opcional)
-  cost          Float?    // Preço de compra/custo (opcional)
-  tableValue    Float?    // Valor da tabela (FIPE)
-  expenseType   String?   // Tipo de gasto/despesa (ex: pneu, revisão, etc.) - opcional
-  expenseValue  Float?    // Valor do gasto/despesa - opcional
-  customerId    Int?      // Cliente associado (opcional)
-  notes         String?   // Observações/Notas
-  photos        String?   // Fotos (JSON string com URLs)
-  status        String    @default("disponivel")
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  customer      Customer? @relation(fields: [customerId], references: [id], onDelete: SetNull)
-  sale          Sale?
+  id                  Int       @id @default(autoincrement())
+  brand               String
+  model               String
+  year                Int
+  plate               String?
+  km                  Int?
+  color               String?
+  price               Float?
+  cost                Float?
+  tableValue          Float?
+  expenseType         String?
+  expenseValue        Float?
+  customerId          Int?
+  notes               String?
+  photos              String? // JSON array base64 ou URLs
+  documentPdf         Bytes?
+  documentName        String?
+  documentMime        String?
+  documentUpdatedAt   DateTime?
+  status              String    @default("disponivel") // disponivel, reservado, vendido
+  // Novos campos
+  empresa             String?   @default("Iago Veiculos Ltda")
+  posicao             Int?
+  conditionStatus     String? // usado | novo
+  renavam             String?
+  cadastroOutrasLojas Boolean?  @default(false)
+  especie             String? // AUTOMÓVEL, etc.
+  combustivel         String?
+  modeloDenatran      String?
+  modeloBase          String?
+  portas              String?
+  carroceria          String?
+  anoFabricacao       Int?
+  anoModelo           Int?
+  motorizacao         String?
+  cambio              String?
+  chassi              String?
+  chassiRemarcado     Boolean?  @default(false)
+  modeloFipe          String?
+  cidadeEmplacamento  String?
+  numeroCambio        String?
+  hpCv                String?
+  periciaCautelar     String?
+  passageiros         String?
+  blindado            String? // Sim | Não
+  origem              String? // Nacional, etc.
+  numeroMotor         String?
+  corInterna          String?
+  opcionais           String? // JSON array de strings
+  // Campos de entrada de estoque
+  dataEntrada         DateTime? // Data de entrada no estoque
+  canalEntrada        String? // Canal da entrada (REPASSE, etc)
+  fornecedor          String? // Fornecedor
+  docEmNomeDe         String? // Documento em nome de
+  intermediario       String? // Intermediário
+  valorEntrada        Float? // Valor de entrada
+  valorQuitacao       Float? // Valor da quitação
+  valorDebitos        Float? // Valor de débitos
+  valorLiquido        Float? // Valor líquido
+  precoPromocional    Float? // Preço promocional
+  valorMinimoVenda    Float? // Valor mínimo de venda
+  anoCRLV             Int? // Ano CRLV
+  valorIPVA            Float? // Valor IPVA
+  situacaoRecibo      String? // Situação do recibo
+  vencimentoIPVA      DateTime? // Vencimento IPVA
+  valorLicencSeg      Float? // Valor Licenciamento + Seguro
+  vencimentoGarantiaFabrica DateTime? // Vencimento Garantia Fábrica
+  documentoCRV        String? // Documento CRV
+  informacao1         String? // Informação 1
+  marcador1           String? // Marcador 1
+  informacao2         String? // Informação 2
+  marcador2           String? // Marcador 2
+  vendedorAngariador  String? // Vendedor/Angariador
+  observacaoEntrada   String? // Observação de entrada
+  observacoesInternas String? // Observações internas
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  customer            Customer? @relation(fields: [customerId], references: [id], onDelete: SetNull)
+  sale                Sale?
+  trocaPaymentMethods SalePaymentMethod[] @relation("VehicleTrocaPayment") // Veículos usados como forma de pagamento na troca
+  fichasCadastrais    FichaCadastral[]
+  parcelasQuitacao    ParcelaQuitacao[] // Parcelas de quitação
+  debitos             Debito[] // Débitos do veículo
+  pendencias          Pendencia[] // Pendências do veículo
+  despachantes        Despachante[] // Controles de despachante
+  sinaisNegocio       SinalNegocio[] // Sinais de negócio (reserva) vinculados ao veículo
+}
+
+model SinalNegocio {
+  id              Int       @id @default(autoincrement())
+  customerId      Int
+  vehicleId       Int?      // Veículo de interesse
+  sellerId        Int       // Vendedor
+  valor           Float     // Valor do sinal
+  data            DateTime  @default(now()) // Data do sinal
+  dataValidade    DateTime? // Data de validade do sinal
+  valorVeiculo    Float?    // Valor do veículo
+  valorEmAberto   Float?    // Valor em aberto
+  formaPagamento  String?   // Boleto, PIX, Dinheiro, etc.
+  status          String    @default("pendente") // pendente, convertido, desistido, devolvido
+  observacoes     String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  customer        Customer  @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  vehicle         Vehicle?  @relation(fields: [vehicleId], references: [id], onDelete: SetNull)
+  seller          User      @relation(fields: [sellerId], references: [id], onDelete: Cascade)
 }
 
 model TradeIn {
@@ -95,101 +207,359 @@ model TradeIn {
 }
 
 model Sale {
-  id                    Int      @id @default(autoincrement())
-  customerId            Int
-  vehicleId             Int      @unique
-  tradeInId             Int?     @unique
-  sellerId              Int
-  promotionId           Int?     // Promoção aplicada (opcional)
-  salePrice             Float?   // Preço de venda (opcional)
-  purchasePrice         Float?   // Preço de compra do veículo
-  discountAmount        Float?   // Valor do desconto aplicado
-  profit                Float?   // Lucro (salePrice - purchasePrice)
-  entryValue            Float?   // Valor de entrada
-  entryType             String?  // Tipo de entrada: dinheiro, veiculo, cartao_credito
-  entryVehicleValue     Float?   // Valor do veículo de entrada (se entryType = veiculo)
-  entryAdditionalValue  Float?   // Valor adicional quando entrada for veículo + dinheiro
-  entryCardInstallments Int?     // Número de parcelas do cartão (se entryType = cartao_credito)
-  remainingValue        Float?   // Valor restante
-  paymentMethod         String?  // Método de pagamento do restante (pix, dinheiro, financiamento, carta_credito)
-  paymentInstallments   Int?     // Número de parcelas (se aplicável)
-  paymentInstallmentValue Float? // Valor da parcela quando for cartão de crédito
-  financedValue         Float?   // Valor financiado
-  commission            Float?   // Comissão do vendedor
-  contractUrl           String?  // URL do contrato gerado
-  contractClauses       String?  // Cláusulas do contrato (texto)
-  notes                 String?  // Observações/notas adicionais
-  status                String   @default("em_andamento")
-  date                  DateTime @default(now())
-  createdAt             DateTime @default(now())
-  updatedAt             DateTime @updatedAt
-  customer              Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
-  vehicle               Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
-  tradeIn               TradeIn? @relation(fields: [tradeInId], references: [id], onDelete: SetNull)
-  seller                User     @relation(fields: [sellerId], references: [id], onDelete: Cascade)
-  promotion             Promotion? @relation(fields: [promotionId], references: [id], onDelete: SetNull)
-  transactions          FinancialTransaction[]
+  id                      Int                    @id @default(autoincrement())
+  customerId              Int
+  vehicleId               Int                    @unique
+  tradeInId               Int?                   @unique
+  sellerId                Int
+  promotionId             Int? // Promoção aplicada (opcional)
+  salePrice               Float? // Preço de venda (opcional)
+  purchasePrice           Float? // Preço de compra do veículo
+  discountAmount          Float? // Valor do desconto aplicado
+  profit                  Float? // Lucro (salePrice - purchasePrice)
+  entryValue              Float? // Valor de entrada
+  entryType               String? // Tipo de entrada: dinheiro, veiculo, cartao_credito
+  entryVehicleValue       Float? // Valor do veículo de entrada (se entryType = veiculo)
+  entryAdditionalValue    Float? // Valor adicional quando entrada for veículo + dinheiro
+  entryCardInstallments   Int? // Número de parcelas do cartão (se entryType = cartao_credito)
+  remainingValue          Float? // Valor restante
+  paymentMethod           String? // Método de pagamento do restante (pix, dinheiro, financiamento, carta_credito) - DEPRECATED: usar SalePaymentMethod
+  paymentInstallments     Int? // Número de parcelas (se aplicável) - DEPRECATED: usar SalePaymentMethod
+  paymentInstallmentValue Float? // Valor da parcela quando for cartão de crédito - DEPRECATED: usar SalePaymentMethod
+  financedValue           Float? // Valor financiado - DEPRECATED: usar SalePaymentMethod
+  financingBank           String? // Banco do financiamento (quando paymentMethod = financiamento) - DEPRECATED: usar SalePaymentMethod
+  commission              Float? // Comissão do vendedor
+  contractUrl             String? // URL do contrato gerado
+  contractClauses         String? // Cláusulas do contrato (texto)
+  notes                   String? // Observações/notas adicionais
+  exitType                String? // Tipo de saída: transferencia, venda, pre_venda
+  saleType                String? // Tipo de venda: consumidor_final, repasse
+  transferStatus          String? // Status da transferência: pago, aberto, cortesia, cliente_vai_transferir, embutido_pagamentos
+  transferNotes           String? // Observações da transferência
+  transferenciaValorEmbutido Float? // Valor embutido da transferência (quando Status = Embutido nos pagamentos)
+  transferenciaPagoFormasPagamento Json? // [{ type, date, descricao?, value }] quando Status = Pago
+  saleChannel             String? // Canal de venda: loja, online, telefone, indicacao, outro
+  saleChannelNotes        String? // Observações do canal de venda
+  internalNotes           String? // Observações internas
+  status                  String                 @default("em_andamento")
+  date                    DateTime               @default(now())
+  createdAt               DateTime               @default(now())
+  updatedAt               DateTime               @updatedAt
+  customer                Customer               @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  vehicle                 Vehicle                @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  tradeIn                 TradeIn?               @relation(fields: [tradeInId], references: [id], onDelete: SetNull)
+  seller                  User                   @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  promotion               Promotion?             @relation(fields: [promotionId], references: [id], onDelete: SetNull)
+  transactions            FinancialTransaction[]
+  paymentMethods          SalePaymentMethod[]    // Múltiplas formas de pagamento
+}
+
+model SalePaymentMethod {
+  id                      Int       @id @default(autoincrement())
+  saleId                  Int
+  date                    DateTime  // Data do pagamento
+  type                    String    // Tipo: dinheiro, pix, carta_credito, financiamento_proprio, etc.
+  value                   Float     // Valor do pagamento
+  // Campos específicos para Financiamento Próprio
+  valorFinanciado         Float?
+  quantidadeParcelas      Int?
+  frequencia15Dias        Boolean?  @default(false)
+  manterDataFixa          Boolean?  @default(false)
+  valorParcela            Float?
+  numeroPrimeiroDoc       String?
+  numeroDocumento         String?
+  descricao               String?
+  avalista                String?
+  avalistaAdicional       String?
+  // Campo para forma de pagamento dentro do Financiamento Próprio
+  formaPagamentoFinanciamentoProprio String?
+  // Campos para Troco na troca
+  trocoData               DateTime?
+  trocoDescricao          String?
+  trocoValorTotal         Float?
+  // Campos para Veículo na troca
+  veiculoTrocaId          Int?
+  // Campos para Cartão de crédito
+  codigoAutorizacao       String?
+  recebimentoLoja         String?   // "parcelado" | "a_vista"
+  // Campos para Carta de crédito de consórcio
+  nomeConsorcio           String?
+  // Campos para Consórcio
+  bancoFinanceira         String?
+  // Campos para Cheque
+  agencia                 String?
+  conta                   String?
+  numeroCheque            String?
+  emNomeDe                String?
+  // Campos para Financiamento (bancário)
+  tipoRetorno             String?
+  retorno                 Float?
+  tac                     Float?
+  plus                    Float?
+  tif                     Float?
+  taxaIntermediacaoFinanciamento Float?
+  parcelasDetalhe         Json?    // [{ data, value, numeroDocumento }] para Editar parcelas
+  createdAt               DateTime  @default(now())
+  updatedAt               DateTime  @updatedAt
+  sale                    Sale      @relation(fields: [saleId], references: [id], onDelete: Cascade)
+  veiculoTroca            Vehicle?  @relation("VehicleTrocaPayment", fields: [veiculoTrocaId], references: [id], onDelete: SetNull)
+}
+
+model CategoriaFinanceira {
+  id          Int       @id @default(autoincrement())
+  nome        String
+  nivel       Int       @default(1) // 1, 2, 3 ou 4
+  parentId    Int?      // ID da categoria pai (null para nível 1)
+  codigo      String?   // Código da categoria
+  descricao   String?
+  ativo       Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  parent      CategoriaFinanceira? @relation("CategoriaHierarchy", fields: [parentId], references: [id], onDelete: Cascade)
+  children    CategoriaFinanceira[] @relation("CategoriaHierarchy")
+  transactions FinancialTransaction[]
 }
 
 model FinancialTransaction {
-  id          Int       @id @default(autoincrement())
-  type        String
-  description String
-  amount      Float
-  dueDate     DateTime? // Opcional - se não informado, usa data atual
-  paidDate    DateTime?
-  status      String    @default("pendente")
-  saleId      Int?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  sale        Sale?     @relation(fields: [saleId], references: [id], onDelete: SetNull)
+  id                    Int       @id @default(autoincrement())
+  operacao              String?   // "pagar", "receber" ou "transferencia"
+  posicaoEstoque        Int?      // Posição estoque
+  solicitadoPor         String?   // Solicitado por
+  autorizadoPor          String?   // Autorizado por
+  dataVencimento        DateTime? // Data vencimento
+  mesReferencia         String?   // Mês referência (formato MM/YYYY)
+  numeroDocumento       String?   // Nº documento
+  valorTitulo           Float?    // Valor título
+  customerId            Int?      // Cliente/Fornecedor
+  categoriaFinanceiraId Int?      // Categoria financeira (4º nível)
+  description           String    // Descrição
+  observacoes           String?   // Observações
+  formaPagamento        String?   // Forma pagamento/recebimento
+  isDespesa             Boolean   @default(false) // É despesa? (aparece no DRE)
+  recorrente            Boolean   @default(false) // Recorrente?
+  darBaixa              Boolean   @default(false) // Dar baixa?
+  marcador              String?   // Marcador
+  paidDate              DateTime? // Data de pagamento (quando dar baixa = true)
+  status                String    @default("pendente") // pendente, pago, cancelado
+  saleId                Int?
+  // Campos específicos para transferência
+  dataTransferencia     DateTime? // Data transferência (quando operacao = transferencia)
+  contaOrigem           String?   // Conta origem
+  contaDestino          String?   // Conta destino
+  valorTransferencia    Float?    // Valor transferência (quando operacao = transferencia)
+  createdAt              DateTime  @default(now())
+  updatedAt              DateTime  @updatedAt
+  sale                  Sale?     @relation(fields: [saleId], references: [id], onDelete: SetNull)
+  customer              Customer?  @relation(fields: [customerId], references: [id], onDelete: SetNull)
+  categoriaFinanceira   CategoriaFinanceira? @relation(fields: [categoriaFinanceiraId], references: [id], onDelete: SetNull)
+  // Campos legados (mantidos para compatibilidade)
+  type                  String?   // DEPRECATED: usar operacao
+  amount                Float?    // DEPRECATED: usar valorTitulo
+  dueDate               DateTime? // DEPRECATED: usar dataVencimento
 }
 
 model Promotion {
-  id            Int       @id @default(autoincrement())
-  name          String
-  description   String?
-  discountType  String    // "percentage" ou "fixed"
-  discountValue Float
-  startDate     DateTime
-  endDate       DateTime
-  status        String    @default("ativa") // "ativa", "inativa", "expirada"
-  applicableTo  String?   // "all", "vehicles", "services"
+  id               Int      @id @default(autoincrement())
+  name             String
+  description      String?
+  discountType     String // "percentage" ou "fixed"
+  discountValue    Float
+  startDate        DateTime
+  endDate          DateTime
+  status           String   @default("ativa") // "ativa", "inativa", "expirada"
+  applicableTo     String? // "all", "vehicles", "services"
   minPurchaseValue Float?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  sales         Sale[]
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  sales            Sale[]
 }
 
 model Goal {
-  id          Int       @id @default(autoincrement())
-  userId      Int
-  type        String    // "sales", "revenue", "profit"
-  targetValue Float
-  currentValue Float    @default(0)
-  period      String    // "monthly", "quarterly", "yearly"
-  startDate   DateTime?
-  endDate     DateTime?
-  status      String    @default("active") // "active", "completed", "cancelled"
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id           Int       @id @default(autoincrement())
+  userId       Int
+  type         String // "sales", "revenue", "profit"
+  targetValue  Float
+  currentValue Float     @default(0)
+  period       String // "monthly", "quarterly", "yearly"
+  startDate    DateTime?
+  endDate      DateTime?
+  status       String    @default("active") // "active", "completed", "cancelled"
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Estoque {
-  id             Int       @id @default(autoincrement())
-  brand          String    // Marca do veículo
-  model          String    // Modelo do veículo
-  year           Int       // Ano
-  plate          String?   // Placa (opcional)
-  km             Int?      // Quilometragem (opcional)
-  color          String?   // Cor (opcional)
-  value          Float?    // Valor original
-  promotionValue Float?    // Valor promocional (opcional)
-  discount       Float?    @default(0) // Desconto percentual (opcional)
-  notes          String?   // Observações/Notas
-  photos         String?   // Fotos em base64 (JSON string)
-  totalSize      Float     @default(0) // Tamanho total das imagens em bytes
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
+  id             Int      @id @default(autoincrement())
+  brand          String // Marca do veículo
+  model          String // Modelo do veículo
+  year           Int // Ano
+  plate          String? // Placa (opcional)
+  km             Int? // Quilometragem (opcional)
+  color          String? // Cor (opcional)
+  value          Float? // Valor original
+  promotionValue Float? // Valor promocional (opcional)
+  discount       Float?   @default(0) // Desconto percentual (opcional)
+  notes          String? // Observações/Notas
+  photos         String? // Fotos em base64 (JSON string)
+  totalSize      Float    @default(0) // Tamanho total das imagens em bytes
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model FichaCadastral {
+  id                    Int       @id @default(autoincrement())
+  vehicleId             Int
+  // Dados do Veículo
+  marca                 String?
+  modelo                String?
+  anoFabricacao         Int?
+  anoModelo             Int?
+  placa                 String?
+  chassi                String?
+  renavam               String?
+  cor                   String?
+  valor                 Float?
+  valorEntrada          Float?
+  valorFinanciado       Float?
+  parcelas              Int?
+  valorParcela          Float?
+  // Dados do Cliente
+  tipoPessoa            String?   @default("Física")
+  nomeCompleto          String?
+  cpfCnpj               String?
+  cnh                   String?
+  tipoCNH               String?
+  dataEmissaoCNH        DateTime?
+  rg                    String?
+  orgaoEmissor          String?
+  uf                    String?
+  dataEmissaoRG         DateTime?
+  dataNascimento        DateTime?
+  naturalidade          String?
+  sexo                  String?
+  nomePai               String?
+  nomeMae               String?
+  estadoCivil           String?
+  enderecoCorrespondencia String?
+  grauInstrucao         String?
+  dependentes           Int?
+  // Dados Residenciais
+  cep                   String?
+  endereco              String?
+  numero                String?
+  complemento           String?
+  bairro                String?
+  estado                String?
+  cidade                String?
+  tempoResidencia       String?
+  tipoResidencia        String?
+  telefoneResidencial   String?
+  falarCom              String?
+  tipoTelefone          String?
+  telefoneCelular       String?
+  email                 String?
+  // Dados Profissionais
+  empresa               String?
+  cnpjEmpresa           String?
+  rendaMensal           Float?
+  rendaExtra            Float?
+  rendaExtraOrigem      String?
+  cargoFuncao           String?
+  cepComercial          String?
+  enderecoComercial     String?
+  numeroComercial       String?
+  complementoComercial  String?
+  bairroComercial       String?
+  ufComercial           String?
+  cidadeComercial       String?
+  telefoneComercial     String?
+  tempoEmpresa          String?
+  dataAdmissao          DateTime?
+  empresaAnterior       String?
+  telefoneEmpresaAnterior String?
+  // Dados Cônjuge
+  nomeConjuge           String?
+  celularConjuge        String?
+  cpfConjuge            String?
+  rgConjuge             String?
+  dataNascimentoConjuge DateTime?
+  empresaConjuge        String?
+  telefoneConjuge       String?
+  ocupacaoConjuge       String?
+  rendaConjuge          Float?
+  // Referências Pessoais (JSON)
+  referenciasPessoais   String?   // JSON array
+  // Referências Comerciais
+  possuiCartaoCredito   String?
+  // Referências Bancárias (JSON)
+  referenciasBancarias  String?   // JSON array
+  // Bens Pessoais (JSON)
+  bensPessoais          String?   // JSON array
+  // Informações Adicionais
+  vendedor               String?
+  observacoes            String?
+  createdAt              DateTime  @default(now())
+  updatedAt              DateTime  @updatedAt
+  vehicle                Vehicle   @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+}
+
+model ParcelaQuitacao {
+  id                  Int       @id @default(autoincrement())
+  vehicleId           Int
+  valorQuitacao       Float     // Valor total da quitação
+  qtdParcelas         Int       // Quantidade de parcelas
+  valorParcela        Float     // Valor de cada parcela
+  primeiroVcto        DateTime  // Data do primeiro vencimento
+  observacoesInternas String?   // Observações internas
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  vehicle             Vehicle   @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+}
+
+model Debito {
+  id        Int       @id @default(autoincrement())
+  vehicleId Int
+  data      DateTime  // Data do débito
+  descricao String    // Descrição do débito
+  valor     Float     // Valor do débito
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  vehicle   Vehicle   @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+}
+
+model Pendencia {
+  id           Int       @id @default(autoincrement())
+  vehicleId    Int
+  responsavelId Int?     // Usuário responsável
+  status       String    @default("aberto") // aberto, em_analise, finalizado
+  emailPara    String?   // Email para envio
+  descricao    String    // Descrição da pendência
+  dataLimite   DateTime? // Data limite
+  marcador     String?   // Marcador/tag
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  vehicle      Vehicle   @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  responsavel  User?     @relation(fields: [responsavelId], references: [id], onDelete: SetNull)
+}
+
+model Despachante {
+  id                Int       @id @default(autoincrement())
+  tipo              String    @default("saida") // Tipo: saida
+  despachanteNome   String?   // Nome do despachante
+  vehicleId         Int?      // Veículo relacionado
+  fornecedorId      Int?      // Fornecedor relacionado
+  customerId        Int?      // Cliente relacionado
+  dataEnvio         DateTime? // Data de envio
+  dataRetorno       DateTime? // Data de retorno
+  dataEntrega       DateTime? // Data de entrega
+  obsAdicional      String?   // Observação adicional
+  municipioOrigem   String?   // Município de origem
+  municipioDestino  String?   // Município de destino
+  documentos        Json?     // Array de documentos selecionados
+  valores           Json?     // Valores relacionados
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  vehicle           Vehicle?  @relation(fields: [vehicleId], references: [id], onDelete: SetNull)
+  customer          Customer? @relation(fields: [customerId], references: [id], onDelete: SetNull)
 }

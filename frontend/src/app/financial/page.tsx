@@ -5,14 +5,46 @@ import Layout from '@/components/Layout'
 import api from '@/services/api'
 import Toast from '@/components/Toast'
 import ConfirmModal from '@/components/ConfirmModal'
-import { FiDollarSign, FiTrendingUp, FiTrendingDown, FiPlus, FiEdit, FiTrash2, FiCheck, FiX, FiFilter } from 'react-icons/fi'
+import { FiDollarSign, FiTrendingUp, FiTrendingDown, FiPlus, FiEdit, FiTrash2, FiCheck, FiX, FiFilter, FiSearch } from 'react-icons/fi'
+import { formatCPF, formatCNPJ, formatPhone, removeMask } from '@/utils/formatters'
+
+interface CategoriaFinanceira {
+  id: number
+  nome: string
+  nivel: number
+  codigo?: string
+  parent?: CategoriaFinanceira
+}
 
 interface FinancialTransaction {
   id: number
-  type: 'receber' | 'pagar'
+  operacao?: 'receber' | 'pagar' | 'transferencia'
+  type?: 'receber' | 'pagar' // Legado
+  posicaoEstoque?: number
+  solicitadoPor?: string
+  autorizadoPor?: string
+  dataVencimento?: string
+  dueDate?: string | null // Legado
+  mesReferencia?: string
+  numeroDocumento?: string
+  valorTitulo?: number
+  amount?: number // Legado
+  customerId?: number
+  customer?: {
+    id: number
+    name: string
+    cpf?: string
+    phone?: string
+  }
+  categoriaFinanceiraId?: number
+  categoriaFinanceira?: CategoriaFinanceira
   description: string
-  amount: number
-  dueDate?: string | null
+  observacoes?: string
+  formaPagamento?: string
+  isDespesa?: boolean
+  recorrente?: boolean
+  darBaixa?: boolean
+  marcador?: string
   paidDate?: string | null
   status: 'pendente' | 'pago' | 'vencido'
   saleId?: number
@@ -22,6 +54,11 @@ interface FinancialTransaction {
       name: string
     }
   }
+  // Campos específicos para transferência
+  dataTransferencia?: string
+  contaOrigem?: string
+  contaDestino?: string
+  valorTransferencia?: number
   createdAt: string
 }
 
@@ -50,34 +87,78 @@ export default function FinancialPage() {
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' | 'info' } | null>(null)
   const [showConfirmModal, setShowConfirmModal] = useState(false)
   const [confirmDeleteId, setConfirmDeleteId] = useState<number | null>(null)
+  const [customers, setCustomers] = useState<Array<{ id: number; name: string; cpf?: string; phone?: string }>>([])
+  const [categoriasNivel4, setCategoriasNivel4] = useState<CategoriaFinanceira[]>([])
+  const [todasCategorias, setTodasCategorias] = useState<CategoriaFinanceira[]>([])
+  const [customerSearch, setCustomerSearch] = useState('')
+  const [showCustomerDropdown, setShowCustomerDropdown] = useState(false)
   const [filters, setFilters] = useState({
-    type: '' as '' | 'receber' | 'pagar',
+    operacao: '' as '' | 'receber' | 'pagar' | 'transferencia',
     status: '' as '' | 'pendente' | 'pago' | 'vencido',
     startDate: '',
     endDate: '',
+    mesReferencia: '',
   })
   const [activeTab, setActiveTab] = useState<'entradas' | 'saidas' | 'todos'>('todos')
   const [showFilters, setShowFilters] = useState(false)
   const [formData, setFormData] = useState({
-    type: 'receber' as 'receber' | 'pagar',
+    operacao: 'pagar' as 'receber' | 'pagar' | 'transferencia',
+    posicaoEstoque: '',
+    solicitadoPor: '',
+    autorizadoPor: '',
+    dataVencimento: '',
+    mesReferencia: '',
+    numeroDocumento: '',
+    valorTitulo: '',
+    customerId: '',
+    categoriaFinanceiraId: '',
     description: '',
-    amount: '',
-    dueDate: '',
-    saleId: '',
+    observacoes: '',
+    formaPagamento: '',
+    isDespesa: false,
+    recorrente: false,
+    darBaixa: false,
+    marcador: '',
     status: 'pendente' as 'pendente' | 'pago',
+    // Campos específicos para transferência
+    dataTransferencia: '',
+    contaOrigem: '',
+    contaDestino: '',
+    valorTransferencia: '',
   })
 
   useEffect(() => {
     loadData()
+    loadCustomers()
+    loadTodasCategorias()
   }, [filters])
+
+  const loadCustomers = async () => {
+    try {
+      const response = await api.get('/customers')
+      setCustomers(response.data)
+    } catch (error) {
+      console.error('Erro ao carregar clientes:', error)
+    }
+  }
+
+  const loadTodasCategorias = async () => {
+    try {
+      const response = await api.get('/categoria-financeira?ativo=true')
+      setTodasCategorias(response.data)
+    } catch (error) {
+      console.error('Erro ao carregar todas as categorias:', error)
+    }
+  }
 
   const loadData = async () => {
     try {
       const params = new URLSearchParams()
-      if (filters.type) params.append('type', filters.type)
+      if (filters.operacao) params.append('operacao', filters.operacao)
       if (filters.status) params.append('status', filters.status)
       if (filters.startDate) params.append('startDate', filters.startDate)
       if (filters.endDate) params.append('endDate', filters.endDate)
+      if (filters.mesReferencia) params.append('mesReferencia', filters.mesReferencia)
 
       const [transactionsRes, dashboardRes] = await Promise.all([
         api.get(`/financial/transactions?${params.toString()}`),
@@ -86,8 +167,9 @@ export default function FinancialPage() {
 
       // Marcar transações vencidas
       const now = new Date()
-      const transactionsWithStatus = transactionsRes.data.map((t: FinancialTransaction) => {
-        if (t.status === 'pendente' && t.dueDate && new Date(t.dueDate) < now) {
+      const transactionsWithStatus = transactionsRes.data.map((t: any) => {
+        const dataVenc = t.dataVencimento || t.dueDate
+        if (t.status === 'pendente' && dataVenc && new Date(dataVenc) < now) {
           return { ...t, status: 'vencido' }
         }
         return t
@@ -107,18 +189,43 @@ export default function FinancialPage() {
     e.preventDefault()
     setSaving(true)
     try {
-      const dataToSend = {
-        ...formData,
-        amount: parseFloat(formData.amount),
-        saleId: formData.saleId ? parseInt(formData.saleId) : null,
+      // Formatar mês referência se necessário
+      let mesRefFormatado = formData.mesReferencia
+      if (mesRefFormatado && !mesRefFormatado.includes('/')) {
+        // Se veio como YYYY-MM, converter para MM/YYYY
+        const parts = mesRefFormatado.split('-')
+        if (parts.length === 2) {
+          mesRefFormatado = `${parts[1]}/${parts[0]}`
+        }
+      }
+
+      const dataToSend: any = {
+        operacao: formData.operacao,
+        posicaoEstoque: formData.posicaoEstoque ? parseInt(formData.posicaoEstoque) : null,
+        solicitadoPor: formData.solicitadoPor || null,
+        autorizadoPor: formData.autorizadoPor || null,
+        dataVencimento: formData.dataVencimento || null,
+        mesReferencia: mesRefFormatado || null,
+        numeroDocumento: formData.numeroDocumento || null,
+        valorTitulo: formData.valorTitulo ? parseFloat(formData.valorTitulo) : null,
+        customerId: formData.customerId ? parseInt(formData.customerId) : null,
+        categoriaFinanceiraId: formData.categoriaFinanceiraId ? parseInt(formData.categoriaFinanceiraId) : null,
+        description: formData.description,
+        observacoes: formData.observacoes || null,
+        formaPagamento: formData.formaPagamento || null,
+        isDespesa: formData.isDespesa,
+        recorrente: formData.recorrente,
+        darBaixa: formData.darBaixa,
+        marcador: formData.marcador || null,
+        status: formData.status,
       }
 
       if (editingTransaction) {
         await api.put(`/financial/transactions/${editingTransaction.id}`, dataToSend)
-        setToast({ message: 'Transação atualizada com sucesso!', type: 'success' })
+        setToast({ message: 'Movimentação atualizada com sucesso!', type: 'success' })
       } else {
         await api.post('/financial/transactions', dataToSend)
-        setToast({ message: 'Transação criada com sucesso!', type: 'success' })
+        setToast({ message: 'Movimentação criada com sucesso!', type: 'success' })
       }
       setShowModal(false)
       setEditingTransaction(null)
@@ -134,14 +241,42 @@ export default function FinancialPage() {
 
   const handleEdit = (transaction: FinancialTransaction) => {
     setEditingTransaction(transaction)
+    const operacao = (transaction.operacao || transaction.type || 'pagar') as 'receber' | 'pagar' | 'transferencia'
+    const valor = transaction.valorTitulo || transaction.amount || 0
+    const dataVenc = transaction.dataVencimento || transaction.dueDate
+    const dataTransf = (transaction as any).dataTransferencia
+    
     setFormData({
-      type: transaction.type,
+      operacao: operacao as 'receber' | 'pagar' | 'transferencia',
+      posicaoEstoque: transaction.posicaoEstoque?.toString() || '',
+      solicitadoPor: transaction.solicitadoPor || '',
+      autorizadoPor: transaction.autorizadoPor || '',
+      dataVencimento: dataVenc ? (typeof dataVenc === 'string' ? dataVenc.split('T')[0] : new Date(dataVenc).toISOString().split('T')[0]) : '',
+      mesReferencia: transaction.mesReferencia || '',
+      numeroDocumento: transaction.numeroDocumento || '',
+      valorTitulo: valor.toString(),
+      customerId: transaction.customerId?.toString() || '',
+      categoriaFinanceiraId: transaction.categoriaFinanceiraId?.toString() || '',
       description: transaction.description,
-      amount: transaction.amount.toString(),
-      dueDate: transaction.dueDate ? transaction.dueDate.split('T')[0] : '',
-      saleId: transaction.saleId?.toString() || '',
+      observacoes: transaction.observacoes || '',
+      formaPagamento: transaction.formaPagamento || '',
+      isDespesa: transaction.isDespesa || false,
+      recorrente: transaction.recorrente || false,
+      darBaixa: transaction.darBaixa || false,
+      marcador: transaction.marcador || '',
       status: transaction.status === 'pago' ? 'pago' : 'pendente',
+      // Campos específicos para transferência
+      dataTransferencia: dataTransf ? (typeof dataTransf === 'string' ? dataTransf.split('T')[0] : new Date(dataTransf).toISOString().split('T')[0]) : '',
+      contaOrigem: (transaction as any).contaOrigem || '',
+      contaDestino: (transaction as any).contaDestino || '',
+      valorTransferencia: (transaction as any).valorTransferencia?.toString() || '',
     })
+    
+    // Preencher busca de cliente se houver
+    if (transaction.customer) {
+      setCustomerSearch(transaction.customer.name)
+    }
+    
     setShowModal(true)
   }
 
@@ -176,9 +311,10 @@ export default function FinancialPage() {
     try {
       await api.put(`/financial/transactions/${id}`, {
         status: 'pago',
+        darBaixa: true,
         paidDate: new Date().toISOString(),
       })
-      setToast({ message: 'Transação marcada como paga!', type: 'success' })
+      setToast({ message: 'Movimentação marcada como paga!', type: 'success' })
       loadData()
     } catch (error) {
       console.error('Erro ao marcar como pago:', error)
@@ -186,29 +322,76 @@ export default function FinancialPage() {
     }
   }
 
+  // Fechar dropdown de cliente ao clicar fora
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement
+      if (!target.closest('.customer-search-container')) {
+        setShowCustomerDropdown(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
   const resetForm = () => {
     setFormData({
-      type: 'receber',
+      operacao: 'pagar',
+      posicaoEstoque: '',
+      solicitadoPor: '',
+      autorizadoPor: '',
+      dataVencimento: '',
+      mesReferencia: '',
+      numeroDocumento: '',
+      valorTitulo: '',
+      customerId: '',
+      categoriaFinanceiraId: '',
       description: '',
-      amount: '',
-      dueDate: '',
-      saleId: '',
+      observacoes: '',
+      formaPagamento: '',
+      isDespesa: false,
+      recorrente: false,
+      darBaixa: false,
+      marcador: '',
       status: 'pendente',
+      // Campos específicos para transferência
+      dataTransferencia: '',
+      contaOrigem: '',
+      contaDestino: '',
+      valorTransferencia: '',
     })
+    setCustomerSearch('')
+    setShowCustomerDropdown(false)
   }
 
   const openModal = () => {
     resetForm()
     setEditingTransaction(null)
     setShowModal(true)
+    // Definir data de vencimento padrão como hoje (se não for transferência)
+    const today = new Date().toISOString().split('T')[0]
+    setFormData(prev => {
+      if (prev.operacao === 'transferencia') {
+        return { ...prev, dataTransferencia: today }
+      } else {
+        return { ...prev, dataVencimento: today }
+      }
+    })
+    // Definir mês referência padrão como mês atual (se não for transferência)
+    const now = new Date()
+    const mesRef = `${String(now.getMonth() + 1).padStart(2, '0')}/${now.getFullYear()}`
+    if ((formData.operacao as string) !== 'transferencia') {
+      setFormData(prev => ({ ...prev, mesReferencia: mesRef }))
+    }
   }
 
   const clearFilters = () => {
     setFilters({
-      type: '',
+      operacao: '',
       status: '',
       startDate: '',
       endDate: '',
+      mesReferencia: '',
     })
   }
 
@@ -238,8 +421,9 @@ export default function FinancialPage() {
     }
   }
 
-  const receitas = transactions.filter((t) => t.type === 'receber')
-  const despesas = transactions.filter((t) => t.type === 'pagar')
+  const receitas = transactions.filter((t) => (t.operacao || t.type) === 'receber')
+  const despesas = transactions.filter((t) => (t.operacao || t.type) === 'pagar')
+  const transferencias = transactions.filter((t) => (t.operacao || t.type) === 'transferencia')
 
   return (
     <Layout>
@@ -262,7 +446,7 @@ export default function FinancialPage() {
               className="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors flex items-center gap-2"
             >
               <FiPlus />
-              Nova Transação
+              Nova Movimentação
             </button>
           </div>
         </div>
@@ -350,14 +534,28 @@ export default function FinancialPage() {
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Tipo</label>
                 <select
-                  value={filters.type}
-                  onChange={(e) => setFilters({ ...filters, type: e.target.value as '' | 'receber' | 'pagar' })}
+                  value={filters.operacao}
+                  onChange={(e) => setFilters({ ...filters, operacao: e.target.value as '' | 'receber' | 'pagar' })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900"
                 >
                   <option value="">Todos</option>
                   <option value="receber">Entradas</option>
                   <option value="pagar">Saídas</option>
+                  <option value="transferencia">Transferências</option>
                 </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Mês Referência</label>
+                <input
+                  type="month"
+                  value={filters.mesReferencia}
+                  onChange={(e) => {
+                    const value = e.target.value
+                    const formatted = value ? `${value.split('-')[1]}/${value.split('-')[0]}` : ''
+                    setFilters({ ...filters, mesReferencia: formatted })
+                  }}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
@@ -490,36 +688,48 @@ export default function FinancialPage() {
                         </td>
                       </tr>
                     ) : (
-                      filteredTransactions.map((transaction) => (
+                      filteredTransactions.map((transaction) => {
+                        const operacao = transaction.operacao || transaction.type || 'pagar'
+                        const valor = transaction.valorTitulo || transaction.amount || 0
+                        const dataVenc = transaction.dataVencimento || transaction.dueDate
+                        return (
                         <tr key={transaction.id} className="hover:bg-gray-50">
                           <td className="px-6 py-4 whitespace-nowrap">
                             <span
                               className={`px-2 py-1 text-xs font-semibold rounded-full ${
-                                transaction.type === 'receber'
+                                operacao === 'receber'
                                   ? 'bg-green-100 text-green-800'
+                                  : operacao === 'transferencia'
+                                  ? 'bg-blue-100 text-blue-800'
                                   : 'bg-red-100 text-red-800'
                               }`}
                             >
-                              {transaction.type === 'receber' ? 'Entrada' : 'Saída'}
+                              {operacao === 'receber' ? 'Entrada' : operacao === 'transferencia' ? 'Transferência' : 'Saída'}
                             </span>
                           </td>
                           <td className="px-6 py-4 text-sm">
                             <div className="font-medium text-gray-900">{transaction.description}</div>
+                            {transaction.customer && (
+                              <div className="text-xs text-gray-500">{transaction.customer.name}</div>
+                            )}
                             {transaction.sale && (
                               <div className="text-xs text-gray-500">Venda #{transaction.sale.id}</div>
+                            )}
+                            {transaction.numeroDocumento && (
+                              <div className="text-xs text-gray-500">Doc: {transaction.numeroDocumento}</div>
                             )}
                           </td>
                           <td
                             className={`px-6 py-4 whitespace-nowrap text-sm font-medium ${
-                              transaction.type === 'receber' ? 'text-green-600' : 'text-red-600'
+                              operacao === 'receber' ? 'text-green-600' : operacao === 'transferencia' ? 'text-blue-600' : 'text-red-600'
                             }`}
                           >
-                            {transaction.type === 'receber' ? '+' : '-'}R${' '}
-                            {transaction.amount.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                            {operacao === 'receber' ? '+' : operacao === 'transferencia' ? '↔' : '-'}R${' '}
+                            {valor.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            {transaction.dueDate
-                              ? new Date(transaction.dueDate).toLocaleDateString('pt-BR')
+                            {dataVenc
+                              ? new Date(dataVenc).toLocaleDateString('pt-BR')
                               : '-'}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm">
@@ -560,7 +770,8 @@ export default function FinancialPage() {
                             </button>
                           </td>
                         </tr>
-                      ))
+                        )
+                      })
                     )
                   })()}
                 </tbody>
@@ -569,89 +780,442 @@ export default function FinancialPage() {
           </div>
         )}
 
-        {/* Modal */}
+        {/* Modal Nova Movimentação */}
         {showModal && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="bg-white rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto">
               <div className="p-6">
-                <h2 className="text-xl font-bold mb-4">
-                  {editingTransaction ? 'Editar Transação' : 'Nova Transação'}
+                <h2 className="text-xl font-bold mb-4 text-gray-900">
+                  {editingTransaction ? 'Editar Movimentação' : 'Nova Movimentação'}
                 </h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Tipo *</label>
-                    <select
-                      required
-                      value={formData.type}
-                      onChange={(e) => setFormData({ ...formData, type: e.target.value as 'receber' | 'pagar' })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900"
-                    >
-                      <option value="receber">Entrada</option>
-                      <option value="pagar">Saída</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Descrição *</label>
-                    <input
-                      type="text"
-                      required
-                      value={formData.description}
-                      onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900"
-                      placeholder="Ex: Venda de veículo, Aluguel, etc."
-                    />
-                  </div>
+                  {/* Linha 1: Operação e Posição Estoque */}
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Valor *</label>
-                      <input
-                        type="number"
+                      <label className="block text-xs font-medium text-gray-700 mb-0.5">Operação *</label>
+                      <select
                         required
-                        step="0.01"
-                        min="0"
-                        value={formData.amount}
-                        onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900"
-                        placeholder="0.00"
+                        value={formData.operacao}
+                        onChange={(e) => setFormData({ ...formData, operacao: e.target.value as 'receber' | 'pagar' | 'transferencia' })}
+                        className="w-full px-2 py-1.5 text-xs border border-gray-300 rounded focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                      >
+                        <option value="pagar">Pagar</option>
+                        <option value="receber">Receber</option>
+                        <option value="transferencia">Transferência</option>
+                      </select>
+                    </div>
+                    {formData.operacao !== 'transferencia' && (
+                      <div>
+                        <label className="block text-xs font-medium text-gray-700 mb-0.5">Posição estoque *</label>
+                        <input
+                          type="number"
+                          required
+                          value={formData.posicaoEstoque}
+                          onChange={(e) => setFormData({ ...formData, posicaoEstoque: e.target.value })}
+                          className="w-full px-2 py-1.5 text-xs border border-gray-300 rounded focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                          placeholder="1"
+                          min="1"
+                        />
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Campos específicos para Transferência */}
+                  {formData.operacao === 'transferencia' ? (
+                    <>
+                      {/* Data transferência */}
+                      <div>
+                        <label className="block text-xs font-medium text-gray-700 mb-0.5">Data transferência *</label>
+                        <input
+                          type="date"
+                          required
+                          value={formData.dataTransferencia}
+                          onChange={(e) => setFormData({ ...formData, dataTransferencia: e.target.value })}
+                          className="w-full px-2 py-1.5 text-xs border border-gray-300 rounded focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                        />
+                      </div>
+
+                      {/* Conta origem e Conta destino */}
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-xs font-medium text-gray-700 mb-0.5">Conta origem *</label>
+                          <input
+                            type="text"
+                            required
+                            value={formData.contaOrigem}
+                            onChange={(e) => setFormData({ ...formData, contaOrigem: e.target.value })}
+                            className="w-full px-2 py-1.5 text-xs border border-gray-300 rounded focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                            placeholder="Ex: Conta Corrente - Banco X"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-medium text-gray-700 mb-0.5">Conta destino *</label>
+                          <input
+                            type="text"
+                            required
+                            value={formData.contaDestino}
+                            onChange={(e) => setFormData({ ...formData, contaDestino: e.target.value })}
+                            className="w-full px-2 py-1.5 text-xs border border-gray-300 rounded focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                            placeholder="Ex: Conta Poupança - Banco Y"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Descrição */}
+                      <div>
+                        <label className="block text-xs font-medium text-gray-700 mb-0.5">Descrição</label>
+                        <input
+                          type="text"
+                          value={formData.description}
+                          onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                          className="w-full px-2 py-1.5 text-xs border border-gray-300 rounded focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                        />
+                      </div>
+
+                      {/* Valor transferência */}
+                      <div>
+                        <label className="block text-xs font-medium text-gray-700 mb-0.5">Valor transferência *</label>
+                        <input
+                          type="number"
+                          required
+                          step="0.01"
+                          min="0"
+                          value={formData.valorTransferencia}
+                          onChange={(e) => setFormData({ ...formData, valorTransferencia: e.target.value })}
+                          className="w-full px-2 py-1.5 text-xs border border-gray-300 rounded focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                          placeholder="0,00"
+                        />
+                      </div>
+
+                      {/* Marcador */}
+                      <div>
+                        <label className="block text-xs font-medium text-gray-700 mb-0.5">Marcador</label>
+                        <input
+                          type="text"
+                          value={formData.marcador}
+                          onChange={(e) => setFormData({ ...formData, marcador: e.target.value })}
+                          className="w-full px-2 py-1.5 text-xs border border-gray-300 rounded focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                        />
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      {/* Linha 2: Solicitado por e Autorizado por */}
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-xs font-medium text-gray-700 mb-0.5">Solicitado por</label>
+                          <input
+                            type="text"
+                            value={formData.solicitadoPor}
+                            onChange={(e) => setFormData({ ...formData, solicitadoPor: e.target.value })}
+                            className="w-full px-2 py-1.5 text-xs border border-gray-300 rounded focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-medium text-gray-700 mb-0.5">Autorizado por</label>
+                          <input
+                            type="text"
+                            value={formData.autorizadoPor}
+                            onChange={(e) => setFormData({ ...formData, autorizadoPor: e.target.value })}
+                            className="w-full px-2 py-1.5 text-xs border border-gray-300 rounded focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Linha 3: Data vencimento e Mês referência */}
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-xs font-medium text-gray-700 mb-0.5">Data vencimento *</label>
+                          <input
+                            type="date"
+                            required={true}
+                            value={formData.dataVencimento}
+                            onChange={(e) => setFormData({ ...formData, dataVencimento: e.target.value })}
+                            className="w-full px-2 py-1.5 text-xs border border-gray-300 rounded focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-medium text-gray-700 mb-0.5">Mês referência *</label>
+                          <input
+                            type="month"
+                            required={true}
+                            value={formData.mesReferencia ? `${formData.mesReferencia.split('/')[1]}-${formData.mesReferencia.split('/')[0]}` : ''}
+                            onChange={(e) => {
+                              const value = e.target.value
+                              const formatted = value ? `${value.split('-')[1]}/${value.split('-')[0]}` : ''
+                              setFormData({ ...formData, mesReferencia: formatted })
+                            }}
+                            className="w-full px-2 py-1.5 text-xs border border-gray-300 rounded focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Linha 4: Nº documento e Valor título */}
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-xs font-medium text-gray-700 mb-0.5">Nº documento</label>
+                          <input
+                            type="text"
+                            value={formData.numeroDocumento}
+                            onChange={(e) => setFormData({ ...formData, numeroDocumento: e.target.value })}
+                            className="w-full px-2 py-1.5 text-xs border border-gray-300 rounded focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-medium text-gray-700 mb-0.5">Valor título *</label>
+                          <input
+                            type="number"
+                            required={true}
+                            step="0.01"
+                            min="0"
+                            value={formData.valorTitulo}
+                            onChange={(e) => setFormData({ ...formData, valorTitulo: e.target.value })}
+                            className="w-full px-2 py-1.5 text-xs border border-gray-300 rounded focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                            placeholder="0,00"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Cliente/Fornecedor */}
+                      <div>
+                        <label className="block text-xs font-medium text-gray-700 mb-0.5">Cliente/Fornecedor</label>
+                        <div className="relative customer-search-container">
+                      <FiSearch className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400 w-3.5 h-3.5" />
+                      <input
+                        type="text"
+                        value={customerSearch}
+                        onChange={(e) => {
+                          setCustomerSearch(e.target.value)
+                          setShowCustomerDropdown(e.target.value.length >= 3)
+                        }}
+                        onFocus={() => {
+                          if (customerSearch.length >= 3) {
+                            setShowCustomerDropdown(true)
+                          }
+                        }}
+                        className="w-full pl-8 pr-2 py-1.5 text-xs border border-gray-300 rounded focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                        placeholder="Digite no mínimo 3 caracteres para localizar o cliente / fornecedor (nome ou CPF/CNPJ)"
+                      />
+                      {showCustomerDropdown && customerSearch.length >= 3 && (
+                        <div className="absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded shadow-lg max-h-48 overflow-y-auto">
+                          {customers
+                            .filter(c => 
+                              c.name.toLowerCase().includes(customerSearch.toLowerCase()) ||
+                              c.cpf?.includes(customerSearch) ||
+                              c.phone?.includes(customerSearch)
+                            )
+                            .slice(0, 10)
+                            .map(customer => (
+                              <div
+                                key={customer.id}
+                                onClick={() => {
+                                  setCustomerSearch(customer.name)
+                                  setFormData({ ...formData, customerId: customer.id.toString() })
+                                  setShowCustomerDropdown(false)
+                                }}
+                                className="px-3 py-2 text-xs hover:bg-gray-100 cursor-pointer border-b border-gray-100 last:border-b-0"
+                              >
+                                <div className="font-medium text-gray-900">{customer.name}</div>
+                                {customer.cpf && (
+                                  <div className="text-gray-500 text-xs">{customer.cpf}</div>
+                                )}
+                                {customer.phone && (
+                                  <div className="text-gray-500 text-xs">{customer.phone}</div>
+                                )}
+                              </div>
+                            ))}
+                          {customers.filter(c => 
+                            c.name.toLowerCase().includes(customerSearch.toLowerCase()) ||
+                            c.cpf?.includes(customerSearch) ||
+                            c.phone?.includes(customerSearch)
+                          ).length === 0 && (
+                            <div className="px-3 py-2 text-xs text-gray-500">Nenhum cliente encontrado</div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Categoria financeira (só aparece quando não é transferência) */}
+                  {(formData.operacao as string) !== 'transferencia' && (
+                    <div>
+                      <label className="block text-xs font-medium text-gray-700 mb-0.5">Categoria financeira *</label>
+                      <select
+                        required
+                        value={formData.categoriaFinanceiraId}
+                        onChange={(e) => setFormData({ ...formData, categoriaFinanceiraId: e.target.value })}
+                        className="w-full px-2 py-1.5 text-xs border border-gray-300 rounded focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                      >
+                        <option value="">Selecione</option>
+                        {todasCategorias.map(cat => {
+                          // Construir o caminho completo da hierarquia
+                          const getFullPath = (categoria: CategoriaFinanceira): string => {
+                            const parts: string[] = []
+                            let current: CategoriaFinanceira | null | undefined = categoria
+                            
+                            // Coletar todos os níveis da hierarquia
+                            while (current) {
+                              parts.unshift(current.nome)
+                              current = current.parent
+                            }
+                            
+                            return parts.join(' > ')
+                          }
+                          return (
+                            <option key={cat.id} value={cat.id.toString()}>
+                              {getFullPath(cat)}
+                            </option>
+                          )
+                        })}
+                      </select>
+                    </div>
+                  )}
+
+                      {/* Descrição */}
+                      {(formData.operacao as string) !== 'transferencia' && (
+                        <div>
+                          <label className="block text-xs font-medium text-gray-700 mb-0.5">Descrição *</label>
+                          <input
+                            type="text"
+                            required
+                            value={formData.description}
+                            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                            className="w-full px-2 py-1.5 text-xs border border-gray-300 rounded focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                          />
+                        </div>
+                      )}
+                    </>
+                  )}
+
+                  {/* Descrição (para transferência já está acima) */}
+                  {(formData.operacao as string) !== 'transferencia' && (
+                    <div>
+                      <label className="block text-xs font-medium text-gray-700 mb-0.5">Descrição *</label>
+                      <input
+                        type="text"
+                        required
+                        value={formData.description}
+                        onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                        className="w-full px-2 py-1.5 text-xs border border-gray-300 rounded focus:ring-primary-500 focus:border-primary-500 text-gray-900"
                       />
                     </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Vencimento (opcional)</label>
-                      <input
-                        type="date"
-                      value={formData.dueDate}
-                      onChange={(e) => setFormData({ ...formData, dueDate: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900"
-                    />
-                    <p className="mt-1 text-xs text-gray-500">Deixe vazio para usar a data atual</p>
-                    </div>
-                  </div>
+                  )}
+
+                  {/* Observações */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">ID da Venda (opcional)</label>
-                    <input
-                      type="number"
-                      value={formData.saleId}
-                      onChange={(e) => setFormData({ ...formData, saleId: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900"
-                      placeholder="Deixe vazio se não for relacionado a venda"
+                    <label className="block text-xs font-medium text-gray-700 mb-0.5">Observações</label>
+                    <textarea
+                      value={formData.observacoes}
+                      onChange={(e) => setFormData({ ...formData, observacoes: e.target.value })}
+                      className="w-full px-2 py-1.5 text-xs border border-gray-300 rounded focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                      rows={2}
                     />
                   </div>
+
+                  {/* Forma pagamento/recebimento (só aparece quando não é transferência) */}
+                  {(formData.operacao as string) !== 'transferencia' && (
+                    <div>
+                      <label className="block text-xs font-medium text-gray-700 mb-0.5">Forma pagamento/recebimento</label>
+                      <select
+                        value={formData.formaPagamento}
+                        onChange={(e) => setFormData({ ...formData, formaPagamento: e.target.value })}
+                        className="w-full px-2 py-1.5 text-xs border border-gray-300 rounded focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                      >
+                        <option value="">-------</option>
+                        <option value="dinheiro">Dinheiro</option>
+                        <option value="pix">PIX</option>
+                        <option value="cartao_credito">Cartão de Crédito</option>
+                        <option value="cartao_debito">Cartão de Débito</option>
+                        <option value="transferencia_bancaria">Transferência Bancária</option>
+                        <option value="cheque">Cheque</option>
+                        <option value="boleto">Boleto</option>
+                        <option value="financiamento">Financiamento</option>
+                        <option value="financiamento_proprio">Financiamento Próprio</option>
+                        <option value="consorcio">Consórcio</option>
+                        <option value="troco">Troco</option>
+                        <option value="veiculo">Veículo (Troca)</option>
+                        <option value="deposito">Depósito</option>
+                        <option value="ted">TED</option>
+                        <option value="doc">DOC</option>
+                        <option value="credito_loja">Crédito Loja</option>
+                        <option value="outros">Outros</option>
+                      </select>
+                    </div>
+                  )}
+
+                  {/* Checkboxes (só aparecem quando não é transferência) */}
+                  {(formData.operacao as string) !== 'transferencia' && (
+                    <div className="space-y-2">
+                      <div className="flex items-center">
+                        <input
+                          type="checkbox"
+                          id="isDespesa"
+                          checked={formData.isDespesa}
+                          onChange={(e) => setFormData({ ...formData, isDespesa: e.target.checked })}
+                          className="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
+                        />
+                        <label htmlFor="isDespesa" className="ml-2 text-xs text-gray-700">
+                          Este título é uma despesa? (Ao marcar esta opção o título vai aparecer no DRE)
+                        </label>
+                      </div>
+                      <div className="flex items-center gap-4">
+                        <div className="flex items-center">
+                          <input
+                            type="checkbox"
+                            id="recorrente"
+                            checked={formData.recorrente}
+                            onChange={(e) => setFormData({ ...formData, recorrente: e.target.checked })}
+                            className="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
+                          />
+                          <label htmlFor="recorrente" className="ml-2 text-xs text-gray-700">
+                            Recorrente?
+                          </label>
+                        </div>
+                        <div className="flex items-center">
+                          <input
+                            type="checkbox"
+                            id="darBaixa"
+                            checked={formData.darBaixa}
+                            onChange={(e) => setFormData({ ...formData, darBaixa: e.target.checked })}
+                            className="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
+                          />
+                          <label htmlFor="darBaixa" className="ml-2 text-xs text-gray-700">
+                            Dar baixa
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Marcador (só aparece quando não é transferência, pois já está no bloco de transferência) */}
+                  {(formData.operacao as string) !== 'transferencia' && (
+                    <div>
+                      <label className="block text-xs font-medium text-gray-700 mb-0.5">Marcador</label>
+                      <input
+                        type="text"
+                        value={formData.marcador}
+                        onChange={(e) => setFormData({ ...formData, marcador: e.target.value })}
+                        className="w-full px-2 py-1.5 text-xs border border-gray-300 rounded focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                      />
+                    </div>
+                  )}
+
+                  {/* Status (se editando) */}
                   {editingTransaction && (
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                      <label className="block text-xs font-medium text-gray-700 mb-0.5">Status</label>
                       <select
                         value={formData.status}
-                        onChange={(e) =>
-                          setFormData({ ...formData, status: e.target.value as 'pendente' | 'pago' })
-                        }
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                        onChange={(e) => setFormData({ ...formData, status: e.target.value as 'pendente' | 'pago' })}
+                        className="w-full px-2 py-1.5 text-xs border border-gray-300 rounded focus:ring-primary-500 focus:border-primary-500 text-gray-900"
                       >
                         <option value="pendente">Pendente</option>
                         <option value="pago">Pago</option>
                       </select>
                     </div>
                   )}
-                  <div className="flex justify-end space-x-3 pt-4">
+
+                  <div className="flex justify-end space-x-3 pt-4 border-t border-gray-200">
                     <button
                       type="button"
                       onClick={() => {
@@ -660,14 +1224,14 @@ export default function FinancialPage() {
                         resetForm()
                       }}
                       disabled={saving}
-                      className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
                     >
                       Cancelar
                     </button>
                     <button
                       type="submit"
                       disabled={saving}
-                      className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+                      className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center text-sm"
                     >
                       {saving ? (
                         <>

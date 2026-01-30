@@ -1,0 +1,26 @@
+-- AlterTable
+ALTER TABLE "Vehicle" ADD COLUMN "dataEntrada" TIMESTAMP(3);
+ALTER TABLE "Vehicle" ADD COLUMN "canalEntrada" TEXT;
+ALTER TABLE "Vehicle" ADD COLUMN "fornecedor" TEXT;
+ALTER TABLE "Vehicle" ADD COLUMN "docEmNomeDe" TEXT;
+ALTER TABLE "Vehicle" ADD COLUMN "intermediario" TEXT;
+ALTER TABLE "Vehicle" ADD COLUMN "valorEntrada" DOUBLE PRECISION;
+ALTER TABLE "Vehicle" ADD COLUMN "valorQuitacao" DOUBLE PRECISION;
+ALTER TABLE "Vehicle" ADD COLUMN "valorDebitos" DOUBLE PRECISION;
+ALTER TABLE "Vehicle" ADD COLUMN "valorLiquido" DOUBLE PRECISION;
+ALTER TABLE "Vehicle" ADD COLUMN "precoPromocional" DOUBLE PRECISION;
+ALTER TABLE "Vehicle" ADD COLUMN "valorMinimoVenda" DOUBLE PRECISION;
+ALTER TABLE "Vehicle" ADD COLUMN "anoCRLV" INTEGER;
+ALTER TABLE "Vehicle" ADD COLUMN "valorIPVA" DOUBLE PRECISION;
+ALTER TABLE "Vehicle" ADD COLUMN "situacaoRecibo" TEXT;
+ALTER TABLE "Vehicle" ADD COLUMN "vencimentoIPVA" TIMESTAMP(3);
+ALTER TABLE "Vehicle" ADD COLUMN "valorLicencSeg" DOUBLE PRECISION;
+ALTER TABLE "Vehicle" ADD COLUMN "vencimentoGarantiaFabrica" TIMESTAMP(3);
+ALTER TABLE "Vehicle" ADD COLUMN "documentoCRV" TEXT;
+ALTER TABLE "Vehicle" ADD COLUMN "informacao1" TEXT;
+ALTER TABLE "Vehicle" ADD COLUMN "marcador1" TEXT;
+ALTER TABLE "Vehicle" ADD COLUMN "informacao2" TEXT;
+ALTER TABLE "Vehicle" ADD COLUMN "marcador2" TEXT;
+ALTER TABLE "Vehicle" ADD COLUMN "vendedorAngariador" TEXT;
+ALTER TABLE "Vehicle" ADD COLUMN "observacaoEntrada" TEXT;
+ALTER TABLE "Vehicle" ADD COLUMN "observacoesInternas" TEXT;

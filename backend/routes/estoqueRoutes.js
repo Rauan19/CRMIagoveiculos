@@ -24,5 +24,8 @@ router.put('/:id', authenticateToken, (req, res) => estoqueController.update(req
 // Deletar item
 router.delete('/:id', authenticateToken, (req, res) => estoqueController.delete(req, res));
 
+// Processar saída de estoque
+router.post('/exit', authenticateToken, (req, res) => estoqueController.exitStock(req, res));
+
 module.exports = router;
 

@@ -29,7 +29,8 @@ class SaleController {
           },
           seller: {
             select: { id: true, name: true }
-          }
+          },
+          paymentMethods: true // Incluir formas de pagamento
         },
         orderBy: { date: 'desc' }
       });
@@ -52,7 +53,8 @@ class SaleController {
           tradeIn: true,
           seller: {
             select: { id: true, name: true, email: true }
-          }
+          },
+          paymentMethods: true // Incluir formas de pagamento
         }
       });
 
@@ -85,11 +87,21 @@ class SaleController {
         paymentMethod,
         paymentInstallments,
         paymentInstallmentValue,
-        financedValue, 
+        financedValue,
+        financingBank,
         commission,
         contractClauses,
         notes,
-        status 
+        saleType,
+        transferStatus,
+        transferNotes,
+        transferenciaValorEmbutido,
+        transferenciaPagoFormasPagamento,
+        saleChannel,
+        saleChannelNotes,
+        internalNotes,
+        status,
+        paymentMethods // Array de múltiplas formas de pagamento
       } = req.body;
 
       if (!customerId || !vehicleId || !sellerId) {
@@ -146,9 +158,18 @@ class SaleController {
           paymentInstallments: paymentInstallments ? parseInt(paymentInstallments) : null,
           paymentInstallmentValue: paymentInstallmentValue ? parseFloat(paymentInstallmentValue) : null,
           financedValue: financedValue ? parseFloat(financedValue) : null,
+          financingBank: financingBank || null,
           commission: commission ? parseFloat(commission) : null,
           contractClauses: contractClauses || null,
           notes: notes || null,
+          saleType: saleType || null,
+          transferStatus: transferStatus || null,
+          transferNotes: transferNotes || null,
+          transferenciaValorEmbutido: transferenciaValorEmbutido != null ? parseFloat(transferenciaValorEmbutido) : null,
+          transferenciaPagoFormasPagamento: transferenciaPagoFormasPagamento && Array.isArray(transferenciaPagoFormasPagamento) ? transferenciaPagoFormasPagamento : null,
+          saleChannel: saleChannel || null,
+          saleChannelNotes: saleChannelNotes || null,
+          internalNotes: internalNotes || null,
           status: status || 'em_andamento'
         },
         include: {
@@ -175,7 +196,65 @@ class SaleController {
         });
       }
 
-      res.status(201).json({ message: 'Venda criada com sucesso', sale });
+      // Criar múltiplas formas de pagamento se fornecidas
+      if (paymentMethods && Array.isArray(paymentMethods) && paymentMethods.length > 0) {
+        const paymentMethodsData = paymentMethods.map((pm) => ({
+          saleId: sale.id,
+          date: pm.date ? new Date(pm.date) : new Date(),
+          type: pm.type,
+          value: parseFloat(pm.value) || 0,
+          valorFinanciado: pm.valorFinanciado ? parseFloat(pm.valorFinanciado) : null,
+          quantidadeParcelas: pm.quantidadeParcelas ? parseInt(pm.quantidadeParcelas) : null,
+          frequencia15Dias: pm.frequencia15Dias || false,
+          manterDataFixa: pm.manterDataFixa || false,
+          valorParcela: pm.valorParcela ? parseFloat(pm.valorParcela) : null,
+          numeroPrimeiroDoc: pm.numeroPrimeiroDoc || null,
+          numeroDocumento: pm.numeroDocumento || null,
+          descricao: pm.descricao || null,
+          avalista: pm.avalista || null,
+          avalistaAdicional: pm.avalistaAdicional || null,
+          formaPagamentoFinanciamentoProprio: pm.formaPagamentoFinanciamentoProprio || null,
+          codigoAutorizacao: pm.codigoAutorizacao || null,
+          recebimentoLoja: pm.recebimentoLoja || null,
+          nomeConsorcio: pm.nomeConsorcio || null,
+          bancoFinanceira: pm.bancoFinanceira || null,
+          agencia: pm.agencia || null,
+          conta: pm.conta || null,
+          numeroCheque: pm.numeroCheque || null,
+          emNomeDe: pm.emNomeDe || null,
+          tipoRetorno: pm.tipoRetorno || null,
+          retorno: pm.retorno != null ? parseFloat(pm.retorno) : null,
+          tac: pm.tac != null ? parseFloat(pm.tac) : null,
+          plus: pm.plus != null ? parseFloat(pm.plus) : null,
+          tif: pm.tif != null ? parseFloat(pm.tif) : null,
+          taxaIntermediacaoFinanciamento: pm.taxaIntermediacaoFinanciamento != null ? parseFloat(pm.taxaIntermediacaoFinanciamento) : null,
+          parcelasDetalhe: pm.parcelasDetalhe && Array.isArray(pm.parcelasDetalhe) ? pm.parcelasDetalhe : null,
+          trocoData: pm.trocoData ? new Date(pm.trocoData) : null,
+          trocoDescricao: pm.trocoDescricao || null,
+          trocoValorTotal: pm.trocoValorTotal != null ? parseFloat(pm.trocoValorTotal) : null,
+          veiculoTrocaId: pm.veiculoTrocaId ? parseInt(pm.veiculoTrocaId) : null,
+        }));
+
+        await prisma.salePaymentMethod.createMany({
+          data: paymentMethodsData
+        });
+      }
+
+      // Buscar a venda com as formas de pagamento
+      const saleWithPayments = await prisma.sale.findUnique({
+        where: { id: sale.id },
+        include: {
+          customer: true,
+          vehicle: true,
+          tradeIn: true,
+          seller: {
+            select: { id: true, name: true }
+          },
+          paymentMethods: true
+        }
+      });
+
+      res.status(201).json({ message: 'Venda criada com sucesso', sale: saleWithPayments });
     } catch (error) {
       console.error('Erro ao criar venda:', error);
       res.status(500).json({ error: 'Erro ao criar venda' });
@@ -191,15 +270,26 @@ class SaleController {
         entryValue,
         entryType,
         entryVehicleValue,
+        entryAdditionalValue,
         entryCardInstallments,
         remainingValue,
         paymentMethod,
         paymentInstallments,
-        financedValue, 
+        paymentInstallmentValue,
+        financedValue,
+        financingBank,
         commission,
         contractUrl,
         contractClauses,
         notes,
+        saleType,
+        transferStatus,
+        transferNotes,
+        transferenciaValorEmbutido,
+        transferenciaPagoFormasPagamento,
+        saleChannel,
+        saleChannelNotes,
+        internalNotes,
         status
       } = req.body;
 
@@ -229,10 +319,19 @@ class SaleController {
       if (paymentInstallments !== undefined) updateData.paymentInstallments = paymentInstallments ? parseInt(paymentInstallments) : null;
       if (paymentInstallmentValue !== undefined) updateData.paymentInstallmentValue = paymentInstallmentValue ? parseFloat(paymentInstallmentValue) : null;
       if (financedValue !== undefined) updateData.financedValue = financedValue ? parseFloat(financedValue) : null;
+      if (financingBank !== undefined) updateData.financingBank = financingBank || null;
       if (commission !== undefined) updateData.commission = commission ? parseFloat(commission) : null;
       if (contractUrl !== undefined) updateData.contractUrl = contractUrl || null;
       if (contractClauses !== undefined) updateData.contractClauses = contractClauses || null;
       if (notes !== undefined) updateData.notes = notes || null;
+      if (saleType !== undefined) updateData.saleType = saleType || null;
+      if (transferStatus !== undefined) updateData.transferStatus = transferStatus || null;
+      if (transferNotes !== undefined) updateData.transferNotes = transferNotes || null;
+      if (transferenciaValorEmbutido !== undefined) updateData.transferenciaValorEmbutido = transferenciaValorEmbutido != null ? parseFloat(transferenciaValorEmbutido) : null;
+      if (transferenciaPagoFormasPagamento !== undefined) updateData.transferenciaPagoFormasPagamento = transferenciaPagoFormasPagamento && Array.isArray(transferenciaPagoFormasPagamento) ? transferenciaPagoFormasPagamento : null;
+      if (saleChannel !== undefined) updateData.saleChannel = saleChannel || null;
+      if (saleChannelNotes !== undefined) updateData.saleChannelNotes = saleChannelNotes || null;
+      if (internalNotes !== undefined) updateData.internalNotes = internalNotes || null;
       if (status) updateData.status = status;
 
       const sale = await prisma.sale.update({
@@ -244,9 +343,78 @@ class SaleController {
           tradeIn: true,
           seller: {
             select: { id: true, name: true }
-          }
+          },
+          paymentMethods: true // Incluir formas de pagamento
         }
       });
+
+      // Atualizar formas de pagamento se fornecidas
+      if (req.body.paymentMethods !== undefined && Array.isArray(req.body.paymentMethods)) {
+        // Deletar formas de pagamento existentes
+        await prisma.salePaymentMethod.deleteMany({
+          where: { saleId: parseInt(id) }
+        });
+
+        // Criar novas formas de pagamento
+        if (req.body.paymentMethods.length > 0) {
+          const paymentMethodsData = req.body.paymentMethods.map((pm) => ({
+            saleId: parseInt(id),
+            date: pm.date ? new Date(pm.date) : new Date(),
+            type: pm.type,
+            value: parseFloat(pm.value) || 0,
+            valorFinanciado: pm.valorFinanciado ? parseFloat(pm.valorFinanciado) : null,
+            quantidadeParcelas: pm.quantidadeParcelas ? parseInt(pm.quantidadeParcelas) : null,
+            frequencia15Dias: pm.frequencia15Dias || false,
+            manterDataFixa: pm.manterDataFixa || false,
+            valorParcela: pm.valorParcela ? parseFloat(pm.valorParcela) : null,
+            numeroPrimeiroDoc: pm.numeroPrimeiroDoc || null,
+            numeroDocumento: pm.numeroDocumento || null,
+            descricao: pm.descricao || null,
+            avalista: pm.avalista || null,
+            avalistaAdicional: pm.avalistaAdicional || null,
+            formaPagamentoFinanciamentoProprio: pm.formaPagamentoFinanciamentoProprio || null,
+            trocoData: pm.trocoData ? new Date(pm.trocoData) : null,
+            trocoDescricao: pm.trocoDescricao || null,
+            trocoValorTotal: pm.trocoValorTotal ? parseFloat(pm.trocoValorTotal) : null,
+            veiculoTrocaId: pm.veiculoTrocaId ? parseInt(pm.veiculoTrocaId) : null,
+            codigoAutorizacao: pm.codigoAutorizacao || null,
+            recebimentoLoja: pm.recebimentoLoja || null,
+            nomeConsorcio: pm.nomeConsorcio || null,
+            bancoFinanceira: pm.bancoFinanceira || null,
+            agencia: pm.agencia || null,
+            conta: pm.conta || null,
+            numeroCheque: pm.numeroCheque || null,
+            emNomeDe: pm.emNomeDe || null,
+            tipoRetorno: pm.tipoRetorno || null,
+            retorno: pm.retorno != null ? parseFloat(pm.retorno) : null,
+            tac: pm.tac != null ? parseFloat(pm.tac) : null,
+            plus: pm.plus != null ? parseFloat(pm.plus) : null,
+            tif: pm.tif != null ? parseFloat(pm.tif) : null,
+            taxaIntermediacaoFinanciamento: pm.taxaIntermediacaoFinanciamento != null ? parseFloat(pm.taxaIntermediacaoFinanciamento) : null,
+            parcelasDetalhe: pm.parcelasDetalhe && Array.isArray(pm.parcelasDetalhe) ? pm.parcelasDetalhe : null,
+          }));
+
+          await prisma.salePaymentMethod.createMany({
+            data: paymentMethodsData
+          });
+        }
+
+        // Buscar venda atualizada com formas de pagamento
+        const updatedSale = await prisma.sale.findUnique({
+          where: { id: parseInt(id) },
+          include: {
+            customer: true,
+            vehicle: true,
+            tradeIn: true,
+            seller: {
+              select: { id: true, name: true }
+            },
+            paymentMethods: true
+          }
+        });
+
+        return res.json({ message: 'Venda atualizada com sucesso', sale: updatedSale });
+      }
 
       res.json({ message: 'Venda atualizada com sucesso', sale });
     } catch (error) {

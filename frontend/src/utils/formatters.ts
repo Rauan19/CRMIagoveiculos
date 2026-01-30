@@ -85,8 +85,70 @@ export const formatRG = (value: string): string => {
   }
 }
 
+export const formatCNPJ = (value: string): string => {
+  // Remove tudo que não é dígito
+  const digits = value.replace(/\D/g, '')
+  
+  // Aplica a máscara: 00.000.000/0000-00
+  if (digits.length <= 2) {
+    return digits
+  } else if (digits.length <= 5) {
+    return `${digits.slice(0, 2)}.${digits.slice(2)}`
+  } else if (digits.length <= 8) {
+    return `${digits.slice(0, 2)}.${digits.slice(2, 5)}.${digits.slice(5)}`
+  } else if (digits.length <= 12) {
+    return `${digits.slice(0, 2)}.${digits.slice(2, 5)}.${digits.slice(5, 8)}/${digits.slice(8)}`
+  } else {
+    return `${digits.slice(0, 2)}.${digits.slice(2, 5)}.${digits.slice(5, 8)}/${digits.slice(8, 12)}-${digits.slice(12, 14)}`
+  }
+}
+
 // Remove formatação (máscaras) para salvar no banco
 export const removeMask = (value: string): string => {
   return value.replace(/\D/g, '')
 }
 
+// Valor por extenso em reais (para recibos)
+const unidades = ['', 'Um', 'Dois', 'Três', 'Quatro', 'Cinco', 'Seis', 'Sete', 'Oito', 'Nove']
+const dezA19 = ['Dez', 'Onze', 'Doze', 'Treze', 'Catorze', 'Quinze', 'Dezesseis', 'Dezessete', 'Dezoito', 'Dezenove']
+const dezenas = ['', '', 'Vinte', 'Trinta', 'Quarenta', 'Cinquenta', 'Sessenta', 'Setenta', 'Oitenta', 'Noventa']
+const centenas = ['', 'Cento', 'Duzentos', 'Trezentos', 'Quatrocentos', 'Quinhentos', 'Seiscentos', 'Setecentos', 'Oitocentos', 'Novecentos']
+
+function centenasExtenso(n: number): string {
+  if (n === 0) return ''
+  if (n === 100) return 'Cem'
+  const c = Math.floor(n / 100)
+  const rest = n % 100
+  return (centenas[c] + (rest ? ' e ' + dezenasExtenso(rest) : '')).trim()
+}
+
+function dezenasExtenso(n: number): string {
+  if (n === 0) return ''
+  if (n < 10) return unidades[n]
+  if (n < 20) return dezA19[n - 10]
+  const d = Math.floor(n / 10)
+  const u = n % 10
+  return dezenas[d] + (u ? ' e ' + unidades[u] : '')
+}
+
+export function valorPorExtensoReais(valor: number): string {
+  if (valor === 0) return 'Zero'
+  const int = Math.floor(valor)
+  const cent = Math.round((valor - int) * 100)
+  const bil = Math.floor(int / 1e9)
+  const mil = Math.floor((int % 1e9) / 1e6)
+  const milhares = Math.floor((int % 1e6) / 1e3)
+  const resto = int % 1000
+
+  const parts: string[] = []
+  if (bil > 0) parts.push((bil === 1 ? 'Um' : centenasExtenso(bil)) + ' Bilhão' + (bil > 1 ? 'ões' : ''))
+  if (mil > 0) parts.push((mil === 1 ? 'Um' : centenasExtenso(mil)) + ' Milhão' + (mil > 1 ? 'ões' : ''))
+  if (milhares > 0) parts.push((milhares === 1 ? 'Um' : centenasExtenso(milhares)) + ' Mil')
+  if (resto > 0) parts.push(centenasExtenso(resto))
+
+  let s = parts.join(' e ').trim()
+  if (!s) s = 'Zero'
+  s += int === 1 ? ' real' : ' reais'
+  if (cent > 0) s += ' e ' + (cent < 10 ? unidades[cent] : dezenasExtenso(cent)) + (cent === 1 ? ' centavo' : ' centavos')
+  return s
+}

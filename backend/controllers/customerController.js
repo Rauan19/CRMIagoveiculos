@@ -17,10 +17,21 @@ class CustomerController {
 
       const customers = await prisma.customer.findMany({
         where,
+        include: {
+          sales: {
+            select: { id: true }
+          }
+        },
         orderBy: { createdAt: 'desc' }
       });
 
-      res.json(customers);
+      // Adicionar contagem de compras para cada cliente
+      const customersWithSales = customers.map(customer => ({
+        ...customer,
+        compras: customer.sales?.length || 0
+      }));
+
+      res.json(customersWithSales);
     } catch (error) {
       console.error('Erro ao listar clientes:', error);
       res.status(500).json({ error: 'Erro ao buscar clientes' });
@@ -71,12 +82,28 @@ class CustomerController {
         district, 
         cep, 
         birthDate,
+        pessoaType,
+        apelido,
+        marcador,
+        nomeMae,
+        facebook,
+        instagram,
+        website,
+        nacionalidade,
+        naturalidade,
+        sexo,
+        estadoCivil,
+        profissao,
+        cnh,
+        cnhVencimento,
+        adicional,
+        pendenciasFinanceiras,
         status 
       } = req.body;
 
-      if (!name || !phone) {
+      if (!name || !phone || !pessoaType || !cpf) {
         return res.status(400).json({ 
-          error: 'Campos obrigatórios: name, phone' 
+          error: 'Campos obrigatórios: name, phone, pessoaType, cpf' 
         });
       }
 
@@ -92,6 +119,22 @@ class CustomerController {
           district: district || null,
           cep: cep || null,
           birthDate: birthDate ? new Date(birthDate) : null,
+          pessoaType: pessoaType || 'Física',
+          apelido: apelido || null,
+          marcador: marcador || null,
+          nomeMae: nomeMae || null,
+          facebook: facebook || null,
+          instagram: instagram || null,
+          website: website || null,
+          nacionalidade: nacionalidade || 'BRASILEIRA',
+          naturalidade: naturalidade || null,
+          sexo: sexo || null,
+          estadoCivil: estadoCivil || null,
+          profissao: profissao || null,
+          cnh: cnh || null,
+          cnhVencimento: cnhVencimento ? new Date(cnhVencimento) : null,
+          adicional: adicional || null,
+          pendenciasFinanceiras: pendenciasFinanceiras || null,
           status: status || 'novo'
         }
       });
@@ -117,6 +160,22 @@ class CustomerController {
         district, 
         cep, 
         birthDate,
+        pessoaType,
+        apelido,
+        marcador,
+        nomeMae,
+        facebook,
+        instagram,
+        website,
+        nacionalidade,
+        naturalidade,
+        sexo,
+        estadoCivil,
+        profissao,
+        cnh,
+        cnhVencimento,
+        adicional,
+        pendenciasFinanceiras,
         status 
       } = req.body;
 
@@ -131,7 +190,23 @@ class CustomerController {
       if (district !== undefined) updateData.district = district;
       if (cep !== undefined) updateData.cep = cep;
       if (birthDate !== undefined) updateData.birthDate = birthDate ? new Date(birthDate) : null;
-      if (status) updateData.status = status;
+      if (pessoaType !== undefined) updateData.pessoaType = pessoaType;
+      if (apelido !== undefined) updateData.apelido = apelido;
+      if (marcador !== undefined) updateData.marcador = marcador;
+      if (nomeMae !== undefined) updateData.nomeMae = nomeMae;
+      if (facebook !== undefined) updateData.facebook = facebook;
+      if (instagram !== undefined) updateData.instagram = instagram;
+      if (website !== undefined) updateData.website = website;
+      if (nacionalidade !== undefined) updateData.nacionalidade = nacionalidade;
+      if (naturalidade !== undefined) updateData.naturalidade = naturalidade;
+      if (sexo !== undefined) updateData.sexo = sexo;
+      if (estadoCivil !== undefined) updateData.estadoCivil = estadoCivil;
+      if (profissao !== undefined) updateData.profissao = profissao;
+      if (cnh !== undefined) updateData.cnh = cnh;
+      if (cnhVencimento !== undefined) updateData.cnhVencimento = cnhVencimento ? new Date(cnhVencimento) : null;
+      if (adicional !== undefined) updateData.adicional = adicional;
+      if (pendenciasFinanceiras !== undefined) updateData.pendenciasFinanceiras = pendenciasFinanceiras;
+      if (status !== undefined) updateData.status = status;
 
       const customer = await prisma.customer.update({
         where: { id: parseInt(id) },

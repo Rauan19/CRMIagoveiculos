@@ -6,6 +6,8 @@ interface User {
   name: string
   email: string
   role: string
+  phone?: string
+  avatar?: string
 }
 
 interface AuthState {
@@ -16,6 +18,7 @@ interface AuthState {
   login: (email: string, password: string) => Promise<void>
   logout: () => void
   setAuth: (user: User, accessToken: string, refreshToken: string) => void
+  setUser: (user: Partial<User>) => void
   checkAuth: () => Promise<void>
 }
 
@@ -34,6 +37,15 @@ export const useAuthStore = create<AuthState>()(
           refreshToken,
           isAuthenticated: true,
         })
+      },
+
+      setUser: (userData) => {
+        const currentUser = get().user
+        if (currentUser) {
+          set({
+            user: { ...currentUser, ...userData }
+          })
+        }
       },
 
       login: async (email: string, password: string) => {

@@ -85,7 +85,9 @@ class AuthController {
           id: user.id,
           name: user.name,
           email: user.email,
-          role: user.role
+          role: user.role,
+          phone: user.phone || null,
+          avatar: user.avatar || null
         }
       });
     } catch (error) {

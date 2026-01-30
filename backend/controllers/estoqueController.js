@@ -298,6 +298,193 @@ class EstoqueController {
       res.status(500).json({ error: 'Erro ao buscar opções' });
     }
   }
+
+  async exitStock(req, res) {
+    try {
+      const {
+        estoqueId,
+        exitType,
+        saleType,
+        exitDate,
+        customerId,
+        sellerId,
+        tableValue,
+        discount,
+        saleValue,
+        paymentMethods,
+        transferStatus,
+        transferNotes,
+        saleChannel,
+        saleChannelNotes,
+        contractNotes,
+        internalNotes
+      } = req.body;
+
+      if (!estoqueId || !exitType) {
+        return res.status(400).json({ 
+          error: 'Campos obrigatórios: estoqueId, exitType' 
+        });
+      }
+
+      // Buscar o item do estoque
+      const estoqueItem = await prisma.estoque.findUnique({
+        where: { id: parseInt(estoqueId) }
+      });
+
+      if (!estoqueItem) {
+        return res.status(404).json({ error: 'Item do estoque não encontrado' });
+      }
+
+      // Se for venda, criar uma venda e criar um veículo se necessário
+      if (exitType === 'venda' || exitType === 'pre_venda') {
+        if (!customerId || !sellerId) {
+          return res.status(400).json({ 
+            error: 'Para venda ou pré-venda, customerId e sellerId são obrigatórios' 
+          });
+        }
+
+        // Verificar se já existe um veículo com esses dados
+        let vehicle = await prisma.vehicle.findFirst({
+          where: {
+            brand: estoqueItem.brand,
+            model: estoqueItem.model,
+            year: estoqueItem.year,
+            plate: estoqueItem.plate || null
+          }
+        });
+
+        // Se não existir, criar um veículo
+        if (!vehicle) {
+          vehicle = await prisma.vehicle.create({
+            data: {
+              brand: estoqueItem.brand,
+              model: estoqueItem.model,
+              year: estoqueItem.year,
+              plate: estoqueItem.plate || null,
+              km: estoqueItem.km || null,
+              color: estoqueItem.color || null,
+              price: saleValue ? parseFloat(saleValue) : (estoqueItem.value || null),
+              cost: estoqueItem.value || null,
+              tableValue: tableValue ? parseFloat(tableValue) : null,
+              status: exitType === 'pre_venda' ? 'reservado' : 'vendido',
+              notes: internalNotes || null,
+              photos: estoqueItem.photos || null,
+              customerId: parseInt(customerId)
+            }
+          });
+        } else {
+          // Atualizar o veículo existente
+          vehicle = await prisma.vehicle.update({
+            where: { id: vehicle.id },
+            data: {
+              price: saleValue ? parseFloat(saleValue) : (vehicle.price || estoqueItem.value || null),
+              cost: vehicle.cost || estoqueItem.value || null,
+              tableValue: tableValue ? parseFloat(tableValue) : (vehicle.tableValue || null),
+              status: exitType === 'pre_venda' ? 'reservado' : 'vendido',
+              notes: internalNotes || vehicle.notes || null,
+              customerId: parseInt(customerId)
+            }
+          });
+        }
+
+        // Criar a venda
+        const saleData = {
+          customerId: parseInt(customerId),
+          vehicleId: vehicle.id,
+          sellerId: parseInt(sellerId),
+          salePrice: saleValue ? parseFloat(saleValue) : null,
+          purchasePrice: estoqueItem.value || null,
+          profit: saleValue && estoqueItem.value 
+            ? parseFloat(saleValue) - parseFloat(estoqueItem.value) 
+            : null,
+          discountAmount: discount ? parseFloat(discount) : null,
+          status: exitType === 'pre_venda' ? 'em_andamento' : 'concluida',
+          date: exitDate ? new Date(exitDate) : new Date(),
+          contractClauses: contractNotes || null,
+          notes: internalNotes || null,
+          saleType: saleType || null,
+          transferStatus: transferStatus || null,
+          transferNotes: transferNotes || null,
+          saleChannel: saleChannel || null,
+          saleChannelNotes: saleChannelNotes || null,
+          internalNotes: internalNotes || null
+        };
+
+        // Processar formas de pagamento
+        if (paymentMethods && paymentMethods.length > 0) {
+          // Calcular entrada e restante
+          let entryValue = 0;
+          let remainingValue = saleValue ? parseFloat(saleValue) : 0;
+          
+          paymentMethods.forEach((pm) => {
+            const value = parseFloat(pm.value) || 0;
+            if (pm.type === 'dinheiro' || pm.type === 'pix') {
+              entryValue += value;
+            }
+            remainingValue -= value;
+          });
+
+          saleData.entryValue = entryValue > 0 ? entryValue : null;
+          saleData.remainingValue = remainingValue > 0 ? remainingValue : null;
+          
+          // Se houver financiamento, definir
+          const financing = paymentMethods.find((pm) => pm.type === 'financiamento_bancario');
+          if (financing) {
+            saleData.financedValue = parseFloat(financing.value) || null;
+            saleData.paymentMethod = 'financiamento_bancario';
+          }
+        }
+
+        const sale = await prisma.sale.create({
+          data: saleData
+        });
+
+        // Criar transações financeiras para cada forma de pagamento
+        if (paymentMethods && paymentMethods.length > 0) {
+          const transactions = paymentMethods.map((pm) => ({
+            type: 'receita',
+            description: `Venda - ${pm.type} - ${estoqueItem.brand} ${estoqueItem.model}`,
+            amount: parseFloat(pm.value) || 0,
+            dueDate: pm.date ? new Date(pm.date) : new Date(),
+            status: 'pendente',
+            saleId: sale.id
+          }));
+
+          await prisma.financialTransaction.createMany({
+            data: transactions
+          });
+        }
+
+        // Remover do estoque
+        await prisma.estoque.delete({
+          where: { id: parseInt(estoqueId) }
+        });
+
+        res.json({ 
+          message: 'Saída de estoque processada com sucesso. Venda criada.',
+          sale,
+          vehicle
+        });
+      } else if (exitType === 'transferencia') {
+        // Para transferência, apenas remover do estoque e registrar as informações
+        // (você pode criar uma tabela de transferências se necessário)
+        await prisma.estoque.delete({
+          where: { id: parseInt(estoqueId) }
+        });
+
+        res.json({ 
+          message: 'Transferência registrada. Item removido do estoque.',
+          transferStatus,
+          transferNotes
+        });
+      } else {
+        return res.status(400).json({ error: 'Tipo de saída inválido' });
+      }
+    } catch (error) {
+      console.error('Erro ao processar saída de estoque:', error);
+      res.status(500).json({ error: 'Erro ao processar saída de estoque' });
+    }
+  }
 }
 
 module.exports = new EstoqueController();

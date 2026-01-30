@@ -3,24 +3,70 @@
 import { useState, useEffect } from 'react'
 import Layout from '@/components/Layout'
 import api from '@/services/api'
-import { FiUsers, FiTruck, FiDollarSign, FiTrendingUp, FiShoppingCart, FiCalendar } from 'react-icons/fi'
+import { FiUsers, FiTruck, FiDollarSign, FiTrendingUp, FiShoppingCart, FiCalendar, FiGift, FiClock, FiCheckCircle, FiUser, FiAward, FiFilter } from 'react-icons/fi'
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 
 interface DashboardStats {
   customers: {
     total: number
+    birthdayThisMonth: number
   }
   vehicles: {
     total: number
     disponivel: number
+    estoque: number
+    totalInStock: number
     reservado: number
     vendido: number
+    proprios: number
+    consignados: number
+    averageDaysInStock: number
   }
   sales: {
     total: number
     revenue: number
     profit: number
+    currentMonth: number
+    previousMonth: number
   }
+  tradeIns: {
+    pending: number
+  }
+  recentRegistrations: {
+    customers: Array<{
+      id: number
+      name: string
+      phone: string
+      email: string | null
+      createdAt: string
+    }>
+    vehicles: Array<{
+      id: number
+      brand: string
+      model: string
+      year: number
+      status: string
+      createdAt: string
+    }>
+  }
+  vehiclesByStockTime: Array<{
+    id: number
+    brand: string
+    model: string
+    year: number
+    price: number | null
+    cost: number | null
+    createdAt: string
+    daysInStock: number
+  }>
+  sellerRanking: Array<{
+    sellerId: number
+    sellerName: string
+    sellerEmail: string
+    totalSales: number
+    totalRevenue: number
+    totalProfit: number
+  }>
   chartData: Array<{
     date: string
     revenue: number
@@ -43,6 +89,7 @@ export default function DashboardPage() {
   const [showCalendar, setShowCalendar] = useState(false)
   const [calendarMonth, setCalendarMonth] = useState(new Date().getMonth())
   const [calendarYear, setCalendarYear] = useState(new Date().getFullYear())
+  const [stockDaysFilter, setStockDaysFilter] = useState(30) // Filtro mínimo padrão: 30 dias
 
   useEffect(() => {
     loadStats()
@@ -340,11 +387,26 @@ export default function DashboardPage() {
           <div className="space-y-6">
             {/* Cards Principais */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              {/* Aniversariantes do Mês */}
+              <div className="bg-white rounded-lg shadow-md border border-gray-200 p-4 hover:shadow-lg transition-shadow">
+                <div className="flex items-center justify-between">
+                  <div className="flex-1">
+                    <p className="text-xs text-gray-500 mb-1">Aniversariantes do Mês</p>
+                    <p className="text-2xl font-bold text-gray-900">
+                      {stats.customers.birthdayThisMonth || 0}
+                    </p>
+                  </div>
+                  <div className="p-3 bg-pink-50 rounded-lg">
+                    <FiGift className="h-6 w-6 text-pink-600" />
+                  </div>
+                </div>
+              </div>
+
               {/* Total de Clientes */}
               <div className="bg-white rounded-lg shadow-md border border-gray-200 p-4 hover:shadow-lg transition-shadow">
                 <div className="flex items-center justify-between">
                   <div className="flex-1">
-                    <p className="text-xs text-gray-500 mb-1">Clientes</p>
+                    <p className="text-xs text-gray-500 mb-1">Clientes Cadastrados</p>
                     <p className="text-2xl font-bold text-gray-900">
                       {stats.customers.total}
                     </p>
@@ -355,13 +417,19 @@ export default function DashboardPage() {
                 </div>
               </div>
 
-              {/* Total de Veículos */}
+              {/* Veículos no Estoque */}
               <div className="bg-white rounded-lg shadow-md border border-gray-200 p-4 hover:shadow-lg transition-shadow">
                 <div className="flex items-center justify-between">
                   <div className="flex-1">
-                    <p className="text-xs text-gray-500 mb-1">Veículos</p>
+                    <p className="text-xs text-gray-500 mb-1">Veículos no Estoque</p>
                     <p className="text-2xl font-bold text-gray-900">
-                      {stats.vehicles.total}
+                      {stats.vehicles.totalInStock || stats.vehicles.disponivel}
+                    </p>
+                    <p className="text-xs text-gray-600 mt-1">
+                      Veículos: {stats.vehicles.disponivel || 0} • Estoque: {stats.vehicles.estoque || 0}
+                    </p>
+                    <p className="text-xs text-gray-600">
+                      Próprios/Consignados: {stats.vehicles.proprios || 0}/{stats.vehicles.consignados || 0}
                     </p>
                   </div>
                   <div className="p-3 bg-green-50 rounded-lg">
@@ -370,17 +438,70 @@ export default function DashboardPage() {
                 </div>
               </div>
 
-              {/* Total de Vendas */}
+              {/* Média de Dias do Estoque */}
               <div className="bg-white rounded-lg shadow-md border border-gray-200 p-4 hover:shadow-lg transition-shadow">
                 <div className="flex items-center justify-between">
                   <div className="flex-1">
-                    <p className="text-xs text-gray-500 mb-1">Vendas</p>
+                    <p className="text-xs text-gray-500 mb-1">Média de Dias do Estoque</p>
+                    <p className="text-2xl font-bold text-gray-900">
+                      {stats.vehicles.averageDaysInStock || 0}
+                    </p>
+                  </div>
+                  <div className="p-3 bg-orange-50 rounded-lg">
+                    <FiClock className="h-6 w-6 text-orange-600" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Segunda Linha de Cards */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              {/* Vendas Mês Atual */}
+              <div className="bg-white rounded-lg shadow-md border border-gray-200 p-4 hover:shadow-lg transition-shadow">
+                <div className="flex items-center justify-between">
+                  <div className="flex-1">
+                    <p className="text-xs text-gray-500 mb-1">Vendas Mês Atual</p>
+                    <p className="text-2xl font-bold text-gray-900">
+                      {stats.sales.currentMonth || 0}
+                    </p>
+                    {stats.sales.previousMonth !== undefined && (
+                      <p className="text-xs text-gray-600 mt-1">
+                        Mês anterior: {stats.sales.previousMonth || 0}
+                      </p>
+                    )}
+                  </div>
+                  <div className="p-3 bg-purple-50 rounded-lg">
+                    <FiShoppingCart className="h-6 w-6 text-purple-600" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Avaliações Pendentes */}
+              <div className="bg-white rounded-lg shadow-md border border-gray-200 p-4 hover:shadow-lg transition-shadow">
+                <div className="flex items-center justify-between">
+                  <div className="flex-1">
+                    <p className="text-xs text-gray-500 mb-1">Avaliações Pendentes</p>
+                    <p className="text-2xl font-bold text-gray-900">
+                      {stats.tradeIns?.pending || 0}
+                    </p>
+                  </div>
+                  <div className="p-3 bg-yellow-50 rounded-lg">
+                    <FiCheckCircle className="h-6 w-6 text-yellow-600" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Total de Vendas (período selecionado) */}
+              <div className="bg-white rounded-lg shadow-md border border-gray-200 p-4 hover:shadow-lg transition-shadow">
+                <div className="flex items-center justify-between">
+                  <div className="flex-1">
+                    <p className="text-xs text-gray-500 mb-1">Vendas (Período)</p>
                     <p className="text-2xl font-bold text-gray-900">
                       {stats.sales.total}
                     </p>
                   </div>
-                  <div className="p-3 bg-purple-50 rounded-lg">
-                    <FiShoppingCart className="h-6 w-6 text-purple-600" />
+                  <div className="p-3 bg-indigo-50 rounded-lg">
+                    <FiShoppingCart className="h-6 w-6 text-indigo-600" />
                   </div>
                 </div>
               </div>
@@ -578,57 +699,45 @@ export default function DashboardPage() {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   <div className="space-y-3">
-                    <div className="p-3 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg border border-blue-200">
+                    <div className="p-3 bg-gray-50 rounded-lg border border-gray-200">
                       <div className="flex items-center justify-between mb-1">
-                        <p className="text-xs font-semibold text-blue-700 uppercase tracking-wide">Receita Total</p>
-                        <FiDollarSign className="h-4 w-4 text-blue-600" />
+                        <p className="text-xs font-semibold text-gray-700 uppercase tracking-wide">Receita Total</p>
+                        <FiDollarSign className="h-4 w-4 text-gray-600" />
                       </div>
-                      <p className="text-xl font-bold text-blue-700 mb-0.5">
+                      <p className="text-xl font-bold text-gray-900 mb-0.5">
                         {formatCurrency(stats.sales.revenue)}
                       </p>
-                      <p className="text-xs text-blue-600">
+                      <p className="text-xs text-gray-600">
                         {stats.sales.total} {stats.sales.total === 1 ? 'venda realizada' : 'vendas realizadas'}
                       </p>
                     </div>
                     {stats.sales.total > 0 && (
-                      <div className="p-3 bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg border border-purple-200">
+                      <div className="p-3 bg-gray-50 rounded-lg border border-gray-200">
                         <div className="flex items-center justify-between mb-1">
-                          <p className="text-xs font-semibold text-purple-700 uppercase tracking-wide">Ticket Médio</p>
-                          <FiShoppingCart className="h-4 w-4 text-purple-600" />
+                          <p className="text-xs font-semibold text-gray-700 uppercase tracking-wide">Ticket Médio</p>
+                          <FiShoppingCart className="h-4 w-4 text-gray-600" />
                         </div>
-                        <p className="text-xl font-bold text-purple-700 mb-0.5">
+                        <p className="text-xl font-bold text-gray-900 mb-0.5">
                           {formatCurrency(stats.sales.revenue / stats.sales.total)}
                         </p>
-                        <p className="text-xs text-purple-600">
+                        <p className="text-xs text-gray-600">
                           Valor médio por venda
                         </p>
                       </div>
                     )}
                   </div>
                   <div className="space-y-3">
-                    <div className={`p-3 rounded-lg border shadow-sm ${
-                      (stats.sales.profit || 0) >= 0 
-                        ? 'bg-gradient-to-br from-green-50 to-green-100 border-green-200' 
-                        : 'bg-gradient-to-br from-red-50 to-red-100 border-red-200'
-                    }`}>
+                    <div className="p-3 bg-gray-50 rounded-lg border border-gray-200">
                       <div className="flex items-center justify-between mb-1">
-                        <p className={`text-xs font-semibold uppercase tracking-wide ${
-                          (stats.sales.profit || 0) >= 0 ? 'text-green-700' : 'text-red-700'
-                        }`}>
+                        <p className="text-xs font-semibold text-gray-700 uppercase tracking-wide">
                           Lucro Total
                         </p>
-                        <FiTrendingUp className={`h-4 w-4 ${
-                          (stats.sales.profit || 0) >= 0 ? 'text-green-600' : 'text-red-600'
-                        }`} />
+                        <FiTrendingUp className="h-4 w-4 text-gray-600" />
                       </div>
-                      <p className={`text-xl font-bold mb-0.5 ${
-                        (stats.sales.profit || 0) >= 0 ? 'text-green-700' : 'text-red-700'
-                      }`}>
+                      <p className="text-xl font-bold text-gray-900 mb-0.5">
                         {formatCurrency(stats.sales.profit || 0)}
                       </p>
-                      <p className={`text-xs ${
-                        (stats.sales.profit || 0) >= 0 ? 'text-green-600' : 'text-red-600'
-                      }`}>
+                      <p className="text-xs text-gray-600">
                         {stats.sales.revenue > 0 
                           ? `${((stats.sales.profit / stats.sales.revenue) * 100).toFixed(1)}% da receita`
                           : 'Sem receita registrada'
@@ -636,12 +745,12 @@ export default function DashboardPage() {
                       </p>
                     </div>
                     {stats.sales.total > 0 && stats.sales.revenue > 0 && (
-                      <div className="p-3 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg border border-gray-200">
+                      <div className="p-3 bg-gray-50 rounded-lg border border-gray-200">
                         <div className="flex items-center justify-between mb-1">
                           <p className="text-xs font-semibold text-gray-700 uppercase tracking-wide">Margem de Lucro</p>
                           <FiTrendingUp className="h-4 w-4 text-gray-600" />
                         </div>
-                        <p className="text-xl font-bold text-gray-700 mb-0.5">
+                        <p className="text-xl font-bold text-gray-900 mb-0.5">
                           {((stats.sales.profit / stats.sales.revenue) * 100).toFixed(1)}%
                         </p>
                         <p className="text-xs text-gray-600">
@@ -654,6 +763,258 @@ export default function DashboardPage() {
                         </p>
                       </div>
                     )}
+                </div>
+              </div>
+            </div>
+
+            {/* Cadastros Recentes */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Clientes Recentes */}
+              <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6">
+                <div className="mb-4">
+                  <h2 className="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
+                    <FiUsers className="text-primary-600" />
+                    Clientes Recentes
+                  </h2>
+                  <p className="text-xs text-gray-500">Últimos 10 clientes cadastrados</p>
+                </div>
+                <div className="overflow-x-auto">
+                  <table className="w-full min-w-[500px]">
+                    <thead>
+                      <tr className="border-b border-gray-200">
+                        <th className="text-left py-2 px-3 text-xs font-semibold text-gray-700">Nome</th>
+                        <th className="text-left py-2 px-3 text-xs font-semibold text-gray-700">Telefone</th>
+                        <th className="text-left py-2 px-3 text-xs font-semibold text-gray-700">Email</th>
+                        <th className="text-right py-2 px-3 text-xs font-semibold text-gray-700">Data</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {stats.recentRegistrations?.customers && stats.recentRegistrations.customers.length > 0 ? (
+                        stats.recentRegistrations.customers.map((customer) => (
+                          <tr key={customer.id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                            <td className="py-2 px-3">
+                              <p className="text-sm font-medium text-gray-900">{customer.name}</p>
+                            </td>
+                            <td className="py-2 px-3">
+                              <p className="text-xs text-gray-600">{customer.phone}</p>
+                            </td>
+                            <td className="py-2 px-3">
+                              <p className="text-xs text-gray-600 truncate max-w-[200px]">{customer.email || '-'}</p>
+                            </td>
+                            <td className="py-2 px-3 text-right">
+                              <p className="text-xs text-gray-500">
+                                {new Date(customer.createdAt).toLocaleDateString('pt-BR', {
+                                  day: '2-digit',
+                                  month: '2-digit',
+                                  year: 'numeric'
+                                })}
+                              </p>
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan={4} className="py-4 text-center">
+                            <p className="text-sm text-gray-500">Nenhum cliente recente</p>
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* Veículos Recentes */}
+              <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6">
+                <div className="mb-4">
+                  <h2 className="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
+                    <FiTruck className="text-primary-600" />
+                    Veículos Recentes
+                  </h2>
+                  <p className="text-xs text-gray-500">Últimos 10 veículos cadastrados</p>
+                </div>
+                <div className="overflow-x-auto">
+                  <table className="w-full min-w-[500px]">
+                    <thead>
+                      <tr className="border-b border-gray-200">
+                        <th className="text-left py-2 px-3 text-xs font-semibold text-gray-700">Veículo</th>
+                        <th className="text-left py-2 px-3 text-xs font-semibold text-gray-700">Status</th>
+                        <th className="text-right py-2 px-3 text-xs font-semibold text-gray-700">Data</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {stats.recentRegistrations?.vehicles && stats.recentRegistrations.vehicles.length > 0 ? (
+                        stats.recentRegistrations.vehicles.map((vehicle) => (
+                          <tr key={vehicle.id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                            <td className="py-2 px-3">
+                              <p className="text-sm font-medium text-gray-900">
+                                {vehicle.brand} {vehicle.model} {vehicle.year}
+                              </p>
+                            </td>
+                            <td className="py-2 px-3">
+                              <span className="inline-flex px-2 py-1 text-xs font-medium rounded-full capitalize bg-blue-100 text-blue-800">
+                                {vehicle.status}
+                              </span>
+                            </td>
+                            <td className="py-2 px-3 text-right">
+                              <p className="text-xs text-gray-500">
+                                {new Date(vehicle.createdAt).toLocaleDateString('pt-BR', {
+                                  day: '2-digit',
+                                  month: '2-digit',
+                                  year: 'numeric'
+                                })}
+                              </p>
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan={3} className="py-4 text-center">
+                            <p className="text-sm text-gray-500">Nenhum veículo recente</p>
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            {/* Tempo no Estoque e Ranking de Vendedores */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Veículos por Tempo no Estoque */}
+              <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6">
+                <div className="mb-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                      <FiClock className="text-primary-600" />
+                      Tempo no Estoque
+                    </h2>
+                    <div className="flex items-center gap-2">
+                      <FiFilter className="text-gray-400 text-sm" />
+                      <select
+                        value={stockDaysFilter}
+                        onChange={(e) => setStockDaysFilter(Number(e.target.value))}
+                        className="text-xs px-2 py-1 border border-gray-300 rounded focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                      >
+                        <option value={1}>1+ dia</option>
+                        <option value={7}>7+ dias</option>
+                        <option value={15}>15+ dias</option>
+                        <option value={30}>30+ dias</option>
+                        <option value={60}>60+ dias</option>
+                        <option value={90}>90+ dias</option>
+                        <option value={120}>120+ dias</option>
+                        <option value={180}>180+ dias</option>
+                      </select>
+                    </div>
+                  </div>
+                  <p className="text-xs text-gray-500">Veículos disponíveis há {stockDaysFilter === 1 ? '1 ou mais dias' : `${stockDaysFilter} ou mais dias`}</p>
+                </div>
+                <div className="space-y-3 max-h-96 overflow-y-auto">
+                  {stats.vehiclesByStockTime && stats.vehiclesByStockTime.filter(v => v.daysInStock >= stockDaysFilter).length > 0 ? (
+                    stats.vehiclesByStockTime
+                      .filter(v => v.daysInStock >= stockDaysFilter)
+                      .slice(0, 10)
+                      .map((vehicle) => (
+                        <div key={vehicle.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-medium text-gray-900 truncate">
+                              {vehicle.brand} {vehicle.model} {vehicle.year}
+                            </p>
+                            <div className="flex items-center gap-3 mt-1">
+                              <p className="text-xs text-gray-600">
+                                {vehicle.daysInStock} {vehicle.daysInStock === 1 ? 'dia' : 'dias'}
+                              </p>
+                              {vehicle.price && (
+                                <p className="text-xs text-gray-500">
+                                  {formatCurrency(vehicle.price)}
+                                </p>
+                              )}
+                            </div>
+                          </div>
+                          <div className={`ml-3 px-2 py-1 rounded text-xs font-medium ${
+                            vehicle.daysInStock >= 180 ? 'bg-red-100 text-red-800' :
+                            vehicle.daysInStock >= 120 ? 'bg-orange-100 text-orange-800' :
+                            vehicle.daysInStock >= 90 ? 'bg-yellow-100 text-yellow-800' :
+                            'bg-blue-100 text-blue-800'
+                          }`}>
+                            {vehicle.daysInStock >= 180 ? 'Crítico' :
+                             vehicle.daysInStock >= 120 ? 'Alto' :
+                             vehicle.daysInStock >= 90 ? 'Médio' : 'Normal'}
+                          </div>
+                        </div>
+                      ))
+                  ) : (
+                    <p className="text-sm text-gray-500 text-center py-4">
+                      Nenhum veículo com {stockDaysFilter}+ dias no estoque
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              {/* Ranking de Vendedores */}
+              <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6">
+                <div className="mb-4">
+                  <h2 className="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
+                    <FiAward className="text-primary-600" />
+                    Ranking de Vendedores
+                  </h2>
+                  <p className="text-xs text-gray-500">Top vendedores do período selecionado</p>
+                </div>
+                <div className="overflow-x-auto">
+                  <table className="w-full min-w-[500px]">
+                    <thead>
+                      <tr className="border-b border-gray-200">
+                        <th className="text-left py-2 px-3 text-xs font-semibold text-gray-700">Posição</th>
+                        <th className="text-left py-2 px-3 text-xs font-semibold text-gray-700">Nome</th>
+                        <th className="text-center py-2 px-3 text-xs font-semibold text-gray-700">Vendas</th>
+                        <th className="text-right py-2 px-3 text-xs font-semibold text-gray-700">Receita</th>
+                        <th className="text-right py-2 px-3 text-xs font-semibold text-gray-700">Lucro</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {stats.sellerRanking && stats.sellerRanking.length > 0 ? (
+                        stats.sellerRanking.map((seller, index) => (
+                          <tr key={seller.sellerId} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                            <td className="py-2 px-3">
+                              <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm ${
+                                index === 0 ? 'bg-yellow-100 text-yellow-800' :
+                                index === 1 ? 'bg-gray-100 text-gray-800' :
+                                index === 2 ? 'bg-orange-100 text-orange-800' :
+                                'bg-blue-100 text-blue-800'
+                              }`}>
+                                {index + 1}
+                              </div>
+                            </td>
+                            <td className="py-2 px-3">
+                              <p className="text-sm font-medium text-gray-900">{seller.sellerName}</p>
+                            </td>
+                            <td className="py-2 px-3 text-center">
+                              <p className="text-xs text-gray-600">
+                                {seller.totalSales} {seller.totalSales === 1 ? 'venda' : 'vendas'}
+                              </p>
+                            </td>
+                            <td className="py-2 px-3 text-right">
+                              <p className="text-xs text-gray-600">
+                                {formatCurrency(seller.totalRevenue)}
+                              </p>
+                            </td>
+                            <td className="py-2 px-3 text-right">
+                              <p className="text-sm font-semibold text-green-600">
+                                {formatCurrency(seller.totalProfit)}
+                              </p>
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan={5} className="py-4 text-center">
+                            <p className="text-sm text-gray-500">Nenhum vendedor no período</p>
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>

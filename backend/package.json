@@ -4,7 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "nodemon server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "test:db": "node test-connection.js",
+    "seed": "node prisma/seed.js",
+    "generate": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
@@ -14,6 +17,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.0",
+    "multer": "^2.0.2",
     "node-cron": "^4.2.1",
     "nodemailer": "^7.0.12",
     "prisma": "^5.22.0"

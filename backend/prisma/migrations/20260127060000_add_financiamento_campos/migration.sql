@@ -1,0 +1,8 @@
+-- AlterTable
+ALTER TABLE "SalePaymentMethod" ADD COLUMN "tipoRetorno" TEXT,
+ADD COLUMN "retorno" DOUBLE PRECISION,
+ADD COLUMN "tac" DOUBLE PRECISION,
+ADD COLUMN "plus" DOUBLE PRECISION,
+ADD COLUMN "tif" DOUBLE PRECISION,
+ADD COLUMN "taxaIntermediacaoFinanciamento" DOUBLE PRECISION,
+ADD COLUMN "parcelasDetalhe" JSONB;

@@ -63,6 +63,213 @@ class ReportController {
       const vehiclesReservado = await prisma.vehicle.count({ where: { status: 'reservado' } });
       const vehiclesVendido = await prisma.vehicle.count({ where: { status: 'vendido' } });
 
+      // Contar itens da tabela Estoque (anúncios)
+      const estoqueItemsCount = await prisma.estoque.count();
+
+      // Total de veículos no estoque = Vehicle disponíveis + Estoque
+      const totalVehiclesInStock = vehiclesDisponivel + estoqueItemsCount;
+
+      // Contar veículos próprios e consignados (disponíveis)
+      const vehiclesProprios = await prisma.vehicle.count({ 
+        where: { 
+          status: 'disponivel',
+          customerId: null 
+        } 
+      });
+      const vehiclesConsignados = await prisma.vehicle.count({ 
+        where: { 
+          status: 'disponivel',
+          customerId: { not: null }
+        } 
+      });
+
+      // Calcular média de dias do estoque (veículos disponíveis + estoque)
+      const vehiclesDisponivelList = await prisma.vehicle.findMany({
+        where: { status: 'disponivel' },
+        select: { createdAt: true }
+      });
+
+      const estoqueItemsList = await prisma.estoque.findMany({
+        select: { createdAt: true }
+      });
+
+      // Combinar todas as datas de criação
+      const allStockItems = [
+        ...vehiclesDisponivelList.map(v => ({ createdAt: v.createdAt })),
+        ...estoqueItemsList.map(e => ({ createdAt: e.createdAt }))
+      ];
+      
+      let averageDaysInStock = 0;
+      if (allStockItems.length > 0) {
+        const totalDays = allStockItems.reduce((sum, item) => {
+          const days = Math.floor((now - new Date(item.createdAt)) / (1000 * 60 * 60 * 24));
+          return sum + days;
+        }, 0);
+        averageDaysInStock = Math.round(totalDays / allStockItems.length);
+      }
+
+      // Aniversariantes do mês atual
+      const currentMonth = now.getMonth() + 1; // getMonth() retorna 0-11
+      const customersWithBirthday = await prisma.customer.findMany({
+        where: {
+          birthDate: { not: null }
+        },
+        select: { birthDate: true }
+      });
+      
+      const birthdayCustomersThisMonth = customersWithBirthday.filter(customer => {
+        if (!customer.birthDate) return false;
+        const birthDate = new Date(customer.birthDate);
+        return birthDate.getMonth() + 1 === currentMonth;
+      }).length;
+
+      // Vendas do mês atual
+      const currentMonthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+      const currentMonthEnd = new Date(now);
+      currentMonthEnd.setHours(23, 59, 59, 999);
+      const salesCurrentMonth = await prisma.sale.count({
+        where: {
+          date: { gte: currentMonthStart, lte: currentMonthEnd }
+        }
+      });
+
+      // Vendas do mês anterior
+      const previousMonthStart = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+      const previousMonthEnd = new Date(now.getFullYear(), now.getMonth(), 0, 23, 59, 59, 999);
+      const salesPreviousMonth = await prisma.sale.count({
+        where: {
+          date: { gte: previousMonthStart, lte: previousMonthEnd }
+        }
+      });
+
+      // Avaliações pendentes (TradeIns com status pendente)
+      const pendingTradeIns = await prisma.tradeIn.count({
+        where: { status: 'pendente' }
+      });
+
+      // Cadastros recentes (últimos 10 clientes e veículos)
+      const recentCustomers = await prisma.customer.findMany({
+        take: 10,
+        orderBy: { createdAt: 'desc' },
+        select: {
+          id: true,
+          name: true,
+          phone: true,
+          email: true,
+          createdAt: true
+        }
+      });
+
+      const recentVehicles = await prisma.vehicle.findMany({
+        take: 10,
+        orderBy: { createdAt: 'desc' },
+        select: {
+          id: true,
+          brand: true,
+          model: true,
+          year: true,
+          status: true,
+          createdAt: true
+        }
+      });
+
+      // Veículos no estoque com tempo calculado (Vehicle + Estoque)
+      const vehiclesInStock = await prisma.vehicle.findMany({
+        where: { status: 'disponivel' },
+        select: {
+          id: true,
+          brand: true,
+          model: true,
+          year: true,
+          price: true,
+          cost: true,
+          createdAt: true
+        }
+      });
+
+      // Buscar também itens da tabela Estoque
+      const estoqueItems = await prisma.estoque.findMany({
+        select: {
+          id: true,
+          brand: true,
+          model: true,
+          year: true,
+          value: true,
+          promotionValue: true,
+          createdAt: true
+        }
+      });
+
+      // Combinar veículos e itens do estoque
+      const allVehicles = [
+        ...vehiclesInStock.map(vehicle => ({
+          id: vehicle.id,
+          brand: vehicle.brand,
+          model: vehicle.model,
+          year: vehicle.year,
+          price: vehicle.price,
+          cost: vehicle.cost,
+          createdAt: vehicle.createdAt,
+          source: 'vehicle'
+        })),
+        ...estoqueItems.map(item => ({
+          id: item.id,
+          brand: item.brand,
+          model: item.model,
+          year: item.year,
+          price: item.promotionValue || item.value,
+          cost: null,
+          createdAt: item.createdAt,
+          source: 'estoque'
+        }))
+      ];
+
+      const vehiclesWithDays = allVehicles.map(vehicle => {
+        const daysInStock = Math.floor((now - new Date(vehicle.createdAt)) / (1000 * 60 * 60 * 24));
+        return {
+          ...vehicle,
+          daysInStock
+        };
+      }).sort((a, b) => b.daysInStock - a.daysInStock);
+
+      // Ranking de vendedores (por quantidade de vendas no período)
+      const salesWithSellers = await prisma.sale.findMany({
+        where: salesWhere,
+        include: {
+          seller: {
+            select: {
+              id: true,
+              name: true,
+              email: true
+            }
+          }
+        }
+      });
+
+      // Agrupar vendas por vendedor
+      const sellerRanking = {};
+      salesWithSellers.forEach(sale => {
+        const sellerId = sale.sellerId;
+        if (!sellerRanking[sellerId]) {
+          sellerRanking[sellerId] = {
+            sellerId: sellerId,
+            sellerName: sale.seller.name,
+            sellerEmail: sale.seller.email,
+            totalSales: 0,
+            totalRevenue: 0,
+            totalProfit: 0
+          };
+        }
+        sellerRanking[sellerId].totalSales++;
+        sellerRanking[sellerId].totalRevenue += sale.salePrice || 0;
+        sellerRanking[sellerId].totalProfit += sale.profit || 0;
+      });
+
+      // Converter para array e ordenar por quantidade de vendas
+      const sellerRankingArray = Object.values(sellerRanking)
+        .sort((a, b) => b.totalSales - a.totalSales)
+        .slice(0, 10); // Top 10 vendedores
+
       // Estatísticas de vendas com filtro de período
       const totalSales = await prisma.sale.count({ where: salesWhere });
       
@@ -131,19 +338,36 @@ class ReportController {
 
       res.json({
         customers: {
-          total: totalCustomers
+          total: totalCustomers,
+          birthdayThisMonth: birthdayCustomersThisMonth
         },
         vehicles: {
           total: totalVehicles,
           disponivel: vehiclesDisponivel,
+          estoque: estoqueItemsCount,
+          totalInStock: totalVehiclesInStock,
           reservado: vehiclesReservado,
-          vendido: vehiclesVendido
+          vendido: vehiclesVendido,
+          proprios: vehiclesProprios,
+          consignados: vehiclesConsignados,
+          averageDaysInStock: averageDaysInStock
         },
         sales: {
           total: totalSales,
           revenue: totalRevenue,
-          profit: totalProfit
+          profit: totalProfit,
+          currentMonth: salesCurrentMonth,
+          previousMonth: salesPreviousMonth
         },
+        tradeIns: {
+          pending: pendingTradeIns
+        },
+        recentRegistrations: {
+          customers: recentCustomers,
+          vehicles: recentVehicles
+        },
+        vehiclesByStockTime: vehiclesWithDays,
+        sellerRanking: sellerRankingArray,
         chartData: chartData
       });
     } catch (error) {
@@ -530,7 +754,7 @@ class ReportController {
    */
   async getSellerPerformanceReport(req, res) {
     try {
-      const { startDate, endDate } = req.query;
+      const { startDate, endDate, sellerId } = req.query;
       
       const where = {};
       if (startDate || endDate) {
@@ -538,6 +762,7 @@ class ReportController {
         if (startDate) where.date.gte = new Date(startDate);
         if (endDate) where.date.lte = new Date(endDate);
       }
+      if (sellerId) where.sellerId = parseInt(sellerId);
 
       const sales = await prisma.sale.findMany({
         where,
