@@ -51,11 +51,22 @@ const STATUS_OPCOES = [
   { value: 'finalizado', label: 'Finalizado' },
 ]
 
-const emptyForm = {
+type StatusForm = 'aberto' | 'em_analise' | 'finalizado'
+
+const emptyForm: {
+  vehicleId: string
+  vehicleSearch: string
+  responsavelId: string
+  status: StatusForm
+  emailPara: string
+  descricao: string
+  dataLimite: string
+  marcador: string
+} = {
   vehicleId: '',
   vehicleSearch: '',
   responsavelId: '',
-  status: 'aberto' as const,
+  status: 'aberto',
   emailPara: '',
   descricao: '',
   dataLimite: '',
@@ -151,7 +162,7 @@ export default function PendenciasPage() {
         vehicleId: String(edit.vehicle.id),
         vehicleSearch: `${v.brand} ${v.model} ${v.year}${v.plate ? ` – ${v.plate}` : ''}`,
         responsavelId: edit.responsavel ? String(edit.responsavel.id) : '',
-        status: (edit.status as 'aberto' | 'em_analise' | 'finalizado') || 'aberto',
+        status: (['aberto', 'em_analise', 'finalizado'].includes(edit.status) ? edit.status : 'aberto') as StatusForm,
         emailPara: edit.emailPara || '',
         descricao: edit.descricao,
         dataLimite: edit.dataLimite ? edit.dataLimite.slice(0, 10) : '',
@@ -632,7 +643,7 @@ export default function PendenciasPage() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Status *</label>
                   <select
                     value={formData.status}
-                    onChange={(e) => setFormData({ ...formData, status: e.target.value })}
+                    onChange={(e) => setFormData({ ...formData, status: e.target.value as StatusForm })}
                     required
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-primary-500 focus:border-primary-500 text-gray-900"
                   >

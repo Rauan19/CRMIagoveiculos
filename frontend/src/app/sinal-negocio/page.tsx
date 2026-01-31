@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import Layout from '@/components/Layout'
 import api from '@/services/api'
@@ -91,7 +91,7 @@ function formatBrl(v: number): string {
   return v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 }
 
-export default function SinalNegocioPage() {
+function SinalNegocioPageContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const [sinais, setSinais] = useState<SinalNegocio[]>([])
@@ -165,6 +165,7 @@ export default function SinalNegocioPage() {
   }, [filterSellerId, searchQuery])
 
   useEffect(() => {
+    if (!searchParams) return
     const newCustomerId = searchParams.get('newCustomerId')
     const newVehicleId = searchParams.get('newVehicleId')
     const openModal = searchParams.get('openModal')
@@ -400,7 +401,7 @@ export default function SinalNegocioPage() {
                     sinais.map((s) => (
                       <tr key={s.id} className="hover:bg-gray-50">
                         <td className="px-1.5 py-1 text-gray-700 whitespace-nowrap">{formatDate(s.data)}</td>
-                        <td className="px-1.5 py-1 text-gray-700 whitespace-nowrap">{formatDate(s.dataValidade) ?? '-'}</td>
+                        <td className="px-1.5 py-1 text-gray-700 whitespace-nowrap">{s.dataValidade ? formatDate(s.dataValidade) : '-'}</td>
                         <td className="px-1.5 py-1 text-gray-700 max-w-[120px] truncate" title={s.vehicle ? `${s.vehicle.brand} ${s.vehicle.model} ${s.vehicle.year}` : ''}>
                           {s.vehicle ? `${s.vehicle.brand} ${s.vehicle.model} ${s.vehicle.year}` : '-'}
                         </td>
@@ -719,7 +720,7 @@ export default function SinalNegocioPage() {
               </div>
               <div className="p-3 space-y-2">
                 <div className="flex justify-between gap-2"><span className="text-gray-500">Data de criação</span><span className="text-gray-900 font-medium">{formatDate(selectedSinal.data)}</span></div>
-                <div className="flex justify-between gap-2"><span className="text-gray-500">Data de validade</span><span className="text-gray-900 font-medium">{formatDate(selectedSinal.dataValidade) ?? '-'}</span></div>
+                <div className="flex justify-between gap-2"><span className="text-gray-500">Data de validade</span><span className="text-gray-900 font-medium">{selectedSinal.dataValidade ? formatDate(selectedSinal.dataValidade) : '-'}</span></div>
                 <div className="flex justify-between gap-2"><span className="text-gray-500">Veículo</span><span className="text-gray-900 font-medium text-right">{selectedSinal.vehicle ? `${selectedSinal.vehicle.brand} ${selectedSinal.vehicle.model} ${selectedSinal.vehicle.year}${selectedSinal.vehicle.plate ? ` – ${selectedSinal.vehicle.plate}` : ''}` : '-'}</span></div>
                 <div className="flex justify-between gap-2"><span className="text-gray-500">Valor do sinal</span><span className="text-gray-900 font-medium">{formatMoney(selectedSinal.valor)}</span></div>
                 <div className="flex justify-between gap-2"><span className="text-gray-500">Valor veículo</span><span className="text-gray-900 font-medium">{selectedSinal.valorVeiculo != null ? formatMoney(selectedSinal.valorVeiculo) : '-'}</span></div>
@@ -756,5 +757,13 @@ export default function SinalNegocioPage() {
         <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />
       )}
     </Layout>
+  )
+}
+
+export default function SinalNegocioPage() {
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center min-h-screen text-gray-500">Carregando...</div>}>
+      <SinalNegocioPageContent />
+    </Suspense>
   )
 }

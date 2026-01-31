@@ -821,14 +821,14 @@ export default function DespachantesPage() {
       doc.setFontSize(9)
       doc.text('Despachantes - ' + new Date().toLocaleString('pt-BR'), 10, y)
       y += 7
-      doc.setFont(undefined, 'bold')
+      doc.setFont('helvetica', 'bold')
       doc.setFontSize(7)
       headers.forEach((h, i) => {
         doc.text(h, x, y)
         x += colWidths[i]
       })
       y += 5
-      doc.setFont(undefined, 'normal')
+      doc.setFont('helvetica', 'normal')
       lista.forEach(d => {
         if (y > 195) { doc.addPage('a4', 'landscape'); y = 12 }
         x = 10
@@ -1605,7 +1605,7 @@ export default function DespachantesPage() {
 
         <ConfirmModal
           isOpen={showConfirmModal}
-          onClose={() => {
+          onCancel={() => {
             setShowConfirmModal(false)
             setConfirmDeleteId(null)
           }}

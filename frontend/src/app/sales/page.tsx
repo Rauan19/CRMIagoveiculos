@@ -1312,12 +1312,12 @@ export default function SalesPage() {
       
       // Cabeçalho
       doc.setFontSize(20)
-      doc.setFont(undefined, 'bold')
+      doc.setFont('helvetica', 'bold')
       doc.text('CONTRATO DE COMPRA E VENDA DE VEÍCULO', pageWidth / 2, y, { align: 'center' })
       y += 12
       
       doc.setFontSize(10)
-      doc.setFont(undefined, 'normal')
+      doc.setFont('helvetica', 'normal')
       doc.text(`Nº ${selectedSale.id}`, pageWidth / 2, y, { align: 'center' })
       y += 15
       
@@ -1333,22 +1333,22 @@ export default function SalesPage() {
       
       // PARTES CONTRATANTES
       doc.setFontSize(14)
-      doc.setFont(undefined, 'bold')
+      doc.setFont('helvetica', 'bold')
       doc.text('1. PARTES CONTRATANTES', margin, y)
       y += 10
       
       doc.setFontSize(11)
-      doc.setFont(undefined, 'bold')
+      doc.setFont('helvetica', 'bold')
       doc.text('VENDEDOR:', margin, y)
       y += 7
-      doc.setFont(undefined, 'normal')
+      doc.setFont('helvetica', 'normal')
       doc.text(`Nome: ${selectedSale.seller?.name || ''}`, margin + 5, y)
       y += 6
       
-      doc.setFont(undefined, 'bold')
+      doc.setFont('helvetica', 'bold')
       doc.text('COMPRADOR:', margin, y)
       y += 7
-      doc.setFont(undefined, 'normal')
+      doc.setFont('helvetica', 'normal')
       doc.text(`Nome: ${selectedSale.customer?.name || ''}`, margin + 5, y)
       y += 6
       if (selectedSale.customer?.cpf) {
@@ -1364,19 +1364,19 @@ export default function SalesPage() {
       
       // OBJETO DO CONTRATO
       doc.setFontSize(14)
-      doc.setFont(undefined, 'bold')
+      doc.setFont('helvetica', 'bold')
       doc.text('2. OBJETO DO CONTRATO', margin, y)
       y += 10
       
       doc.setFontSize(11)
-      doc.setFont(undefined, 'normal')
+      doc.setFont('helvetica', 'normal')
       doc.text(`O presente contrato tem por objeto a venda do seguinte veículo:`, margin, y)
       y += 10
       
-      doc.setFont(undefined, 'bold')
+      doc.setFont('helvetica', 'bold')
       doc.text('VEÍCULO:', margin, y)
       y += 7
-      doc.setFont(undefined, 'normal')
+      doc.setFont('helvetica', 'normal')
       doc.text(`Marca: ${selectedSale.vehicle?.brand || ''}`, margin + 5, y)
       y += 6
       doc.text(`Modelo: ${selectedSale.vehicle?.model || ''}`, margin + 5, y)
@@ -1395,26 +1395,26 @@ export default function SalesPage() {
       
       // VALOR E FORMA DE PAGAMENTO
       doc.setFontSize(14)
-      doc.setFont(undefined, 'bold')
+      doc.setFont('helvetica', 'bold')
       doc.text('3. VALOR E FORMA DE PAGAMENTO', margin, y)
       y += 10
       
       doc.setFontSize(11)
-      doc.setFont(undefined, 'normal')
+      doc.setFont('helvetica', 'normal')
       
       if (selectedSale.salePrice) {
-        doc.setFont(undefined, 'bold')
+        doc.setFont('helvetica', 'bold')
         doc.text(`Valor Total da Venda: R$ ${selectedSale.salePrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`, margin, y)
         y += 10
-        doc.setFont(undefined, 'normal')
+        doc.setFont('helvetica', 'normal')
       }
       
       // Entrada
       if (selectedSale.entryType) {
-        doc.setFont(undefined, 'bold')
+        doc.setFont('helvetica', 'bold')
         doc.text('ENTRADA:', margin, y)
         y += 7
-        doc.setFont(undefined, 'normal')
+        doc.setFont('helvetica', 'normal')
         doc.text(`Tipo: ${formatEntryType(selectedSale.entryType)}`, margin + 5, y)
         y += 6
         
@@ -1447,18 +1447,18 @@ export default function SalesPage() {
       
       // Restante
       if (selectedSale.remainingValue) {
-        doc.setFont(undefined, 'bold')
+        doc.setFont('helvetica', 'bold')
         doc.text(`Valor Restante: R$ ${selectedSale.remainingValue.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`, margin, y)
         y += 10
-        doc.setFont(undefined, 'normal')
+        doc.setFont('helvetica', 'normal')
       }
       
       // Forma de pagamento do restante
       if (selectedSale.paymentMethod) {
-        doc.setFont(undefined, 'bold')
+        doc.setFont('helvetica', 'bold')
         doc.text('FORMA DE PAGAMENTO DO RESTANTE:', margin, y)
         y += 7
-        doc.setFont(undefined, 'normal')
+        doc.setFont('helvetica', 'normal')
         doc.text(`Método: ${formatPaymentMethod(selectedSale.paymentMethod)}`, margin + 5, y)
         y += 6
         
@@ -1490,13 +1490,13 @@ export default function SalesPage() {
       
       // CLÁUSULAS
       doc.setFontSize(14)
-      doc.setFont(undefined, 'bold')
+      doc.setFont('helvetica', 'bold')
       doc.text('4. CLÁUSULAS CONTRATUAIS', margin, y)
       y += 10
       
       if (selectedSale.contractClauses) {
         doc.setFontSize(11)
-        doc.setFont(undefined, 'normal')
+        doc.setFont('helvetica', 'normal')
         const clauses = selectedSale.contractClauses.split('\n').filter((c: string) => c.trim() !== '')
         clauses.forEach((clause: string, index: number) => {
           if (y > 260) {
@@ -1510,7 +1510,7 @@ export default function SalesPage() {
         })
       } else {
         doc.setFontSize(11)
-        doc.setFont(undefined, 'normal')
+        doc.setFont('helvetica', 'normal')
         doc.text('As cláusulas específicas deste contrato serão definidas pelas partes.', margin, y)
         y += 10
       }
@@ -1528,12 +1528,12 @@ export default function SalesPage() {
       // OBSERVAÇÕES
       if (selectedSale.notes) {
         doc.setFontSize(14)
-        doc.setFont(undefined, 'bold')
+        doc.setFont('helvetica', 'bold')
         doc.text('5. OBSERVAÇÕES', margin, y)
         y += 10
         
         doc.setFontSize(11)
-        doc.setFont(undefined, 'normal')
+        doc.setFont('helvetica', 'normal')
         const notesLines = doc.splitTextToSize(selectedSale.notes, contentWidth)
         doc.text(notesLines, margin, y)
         y += notesLines.length * 5 + 5
@@ -1553,12 +1553,12 @@ export default function SalesPage() {
       }
       
       doc.setFontSize(14)
-      doc.setFont(undefined, 'bold')
+      doc.setFont('helvetica', 'bold')
       doc.text('6. ASSINATURAS', margin, y)
       y += 15
       
       doc.setFontSize(11)
-      doc.setFont(undefined, 'normal')
+      doc.setFont('helvetica', 'normal')
       
       // Vendedor
       const signatureY = y + 30

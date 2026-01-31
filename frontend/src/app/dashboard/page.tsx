@@ -571,9 +571,9 @@ export default function DashboardPage() {
                         }}
                       />
                       <Tooltip 
-                        formatter={(value: number, name: string) => [
-                          formatCurrency(value),
-                          name === 'revenue' ? 'Receita' : name === 'profit' ? 'Lucro' : name
+                        formatter={(value: number | undefined, name: string | undefined) => [
+                          formatCurrency(value ?? 0),
+                          (name === 'revenue' ? 'Receita' : name === 'profit' ? 'Lucro' : name) ?? ''
                         ]}
                         contentStyle={{ 
                           backgroundColor: '#fff', 
@@ -659,7 +659,7 @@ export default function DashboardPage() {
                         tick={{ fill: '#6B7280' }}
                       />
                       <Tooltip 
-                        formatter={(value: number) => [`${value} vendas`, 'Quantidade']}
+                        formatter={(value) => [`${value ?? 0} vendas`, 'Quantidade']}
                         contentStyle={{ 
                           backgroundColor: '#fff', 
                           border: '1px solid #E5E7EB', 

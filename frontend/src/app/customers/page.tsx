@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import Layout from '@/components/Layout'
 import api from '@/services/api'
@@ -42,7 +42,7 @@ interface Customer {
   createdAt: string
 }
 
-export default function CustomersPage() {
+function CustomersPageContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const [customers, setCustomers] = useState<Customer[]>([])
@@ -1477,5 +1477,13 @@ export default function CustomersPage() {
         </div>
       )}
     </Layout>
+  )
+}
+
+export default function CustomersPage() {
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center min-h-screen text-gray-500">Carregando...</div>}>
+      <CustomersPageContent />
+    </Suspense>
   )
 }

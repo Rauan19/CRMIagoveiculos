@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import Layout from '@/components/Layout'
 import api from '@/services/api'
@@ -154,7 +154,7 @@ const formasPagamentoFinanciamentoProprio = [
   { value: 'transferencia', label: 'Transferência' },
 ]
 
-export default function VehiclesPage() {
+function VehiclesPageContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const [vehicles, setVehicles] = useState<Vehicle[]>([])
@@ -562,6 +562,7 @@ export default function VehiclesPage() {
   }, [])
 
   useEffect(() => {
+    if (!searchParams) return
     if (searchParams.get('openModal') === 'create' && searchParams.get('returnTo') === 'sinal-negocio') {
       setShowModal(true)
       setEditingVehicle(null)
@@ -802,10 +803,13 @@ export default function VehiclesPage() {
           aValue = a.createdAt ? new Date(a.createdAt).getTime() : 0
           bValue = b.createdAt ? new Date(b.createdAt).getTime() : 0
           break
-        case 'saleDate':
-          aValue = a.saleDate || a.sale?.date ? new Date(a.saleDate || a.sale!.date).getTime() : 0
-          bValue = b.saleDate || b.sale?.date ? new Date(b.saleDate || b.sale!.date).getTime() : 0
+        case 'saleDate': {
+          const aDateVal = a.saleDate ?? a.sale?.date
+          const bDateVal = b.saleDate ?? b.sale?.date
+          aValue = aDateVal != null ? new Date(aDateVal as string).getTime() : 0
+          bValue = bDateVal != null ? new Date(bDateVal as string).getTime() : 0
           break
+        }
         default:
           aValue = a.createdAt ? new Date(a.createdAt).getTime() : 0
           bValue = b.createdAt ? new Date(b.createdAt).getTime() : 0
@@ -2122,7 +2126,7 @@ export default function VehiclesPage() {
       
       const parcelas = generateParcelas(quantidade, dataPrimeiraParcela, frequencia15Dias, manterDataFixa, valorParcela, numeroPrimeiroDoc)
       
-      updated[index] = { ...currentMethod, [field]: value, parcelasDetalhe: parcelas }
+      updated[index] = { ...currentMethod, [field]: (value as unknown) as string | undefined, parcelasDetalhe: parcelas }
     }
     // Se mudou a data da primeira parcela, frequência ou manter data fixa, recalcular parcelas
     else if ((field === 'dataPrimeiraParcela' || field === 'frequencia15Dias' || field === 'manterDataFixa' || field === 'valorParcela' || field === 'numeroPrimeiroDoc') && currentMethod?.type === 'financiamento_proprio') {
@@ -2135,12 +2139,12 @@ export default function VehiclesPage() {
       
       if (quantidade > 0 && dataPrimeiraParcela) {
         const parcelas = generateParcelas(quantidade, dataPrimeiraParcela, frequencia15Dias, manterDataFixa, valorParcela, numeroPrimeiroDoc)
-        updated[index] = { ...currentMethod, [field]: value, parcelasDetalhe: parcelas }
+        updated[index] = { ...currentMethod, [field]: (value as unknown) as string | undefined, parcelasDetalhe: parcelas }
       } else {
-        updated[index] = { ...currentMethod, [field]: value }
+        updated[index] = { ...currentMethod, [field]: value as string | undefined }
       }
     } else {
-      updated[index] = { ...currentMethod, [field]: value }
+      updated[index] = { ...currentMethod, [field]: value as string | undefined }
     }
     
     setExitFormData({ ...exitFormData, paymentMethods: updated })
@@ -2574,7 +2578,7 @@ export default function VehiclesPage() {
                           {vehicle.createdAt ? new Date(vehicle.createdAt).toLocaleDateString('pt-BR') : '-'}
                         </td>
                         <td className="px-2 py-2 whitespace-nowrap text-gray-500">
-                          {(vehicle.saleDate || vehicle.sale?.date) ? new Date(vehicle.saleDate || vehicle.sale!.date).toLocaleDateString('pt-BR') : '-'}
+                          {(() => { const d = vehicle.saleDate ?? vehicle.sale?.date; return d ? new Date(d).toLocaleDateString('pt-BR') : '-' })()}
                         </td>
                         <td className="px-2 py-2 whitespace-nowrap text-gray-500">{vehicle.customer?.name || '-'}</td>
                         <td className="px-2 py-2 whitespace-nowrap">
@@ -9474,5 +9478,13 @@ export default function VehiclesPage() {
         confirmColor="red"
       />
     </Layout>
+  )
+}
+
+export default function VehiclesPage() {
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center min-h-screen text-gray-500">Carregando...</div>}>
+      <VehiclesPageContent />
+    </Suspense>
   )
 }
