@@ -120,7 +120,9 @@ function centenasExtenso(n: number): string {
   const c = Math.floor(n / 100)
   const rest = n % 100
   return (centenas[c] + (rest ? ' e ' + dezenasExtenso(rest) : '')).trim()
-}function dezenasExtenso(n: number): string {
+}
+
+function dezenasExtenso(n: number): string {
   if (n === 0) return ''
   if (n < 10) return unidades[n]
   if (n < 20) return dezA19[n - 10]

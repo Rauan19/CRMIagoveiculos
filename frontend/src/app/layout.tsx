@@ -20,25 +20,23 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              // Remove atributos adicionados por extensões do navegador antes da hidratação
-              if (typeof window !== 'undefined') {
+              // Remove atributos adicionados por extensões do navegador (ex: ColorZilla)
+              if (typeof document !== 'undefined') {
                 document.addEventListener('DOMContentLoaded', function() {
-                  const body = document.body;
-                  const html = document.documentElement;
-                  if (body) body.removeAttribute('cz-shortcut-listen');
-                  if (html) html.removeAttribute('cz-shortcut-listen');
+                  document.body?.removeAttribute('cz-shortcut-listen');
+                  document.documentElement?.removeAttribute('cz-shortcut-listen');
                 });
               }
             `,
           }}
         />
       </head>
-      <body className={inter.className}>
+      <body className={inter.className} suppressHydrationWarning>
         <Providers>{children}</Providers>
       </body>
     </html>

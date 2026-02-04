@@ -97,6 +97,25 @@ class EstoqueController {
         });
       }
 
+      // Validar ano (Int 32-bit: máximo 2147483647; ano deve ser razoável)
+      const yearNum = parseInt(year, 10);
+      if (Number.isNaN(yearNum) || yearNum < 1900 || yearNum > 2100) {
+        return res.status(400).json({
+          error: 'Ano inválido. Informe um ano entre 1900 e 2100.'
+        });
+      }
+
+      // Validar km se informado (Int 32-bit: máximo 2147483647)
+      const INT4_MAX = 2147483647;
+      if (km != null && km !== '') {
+        const kmNum = parseInt(km, 10);
+        if (Number.isNaN(kmNum) || kmNum < 0 || kmNum > INT4_MAX) {
+          return res.status(400).json({
+            error: `Quilometragem inválida. Informe um valor entre 0 e ${INT4_MAX.toLocaleString('pt-BR')}.`
+          });
+        }
+      }
+
       // Calcular tamanho das imagens
       let photosArray = [];
       let totalSize = 0;
@@ -119,13 +138,15 @@ class EstoqueController {
         });
       }
 
+      const kmSafe = (km != null && km !== '') ? parseInt(km, 10) : null;
+
       const item = await prisma.estoque.create({
         data: {
           brand,
           model,
-          year: parseInt(year),
+          year: yearNum,
           plate: plate || null,
-          km: km ? parseInt(km) : null,
+          km: kmSafe,
           color: color || null,
           value: value ? parseFloat(value) : null,
           promotionValue: promotionValue ? parseFloat(promotionValue) : null,
@@ -191,12 +212,28 @@ class EstoqueController {
         }
       }
 
+      const INT4_MAX = 2147483647;
+      if (year !== undefined) {
+        const yearNum = parseInt(year, 10);
+        if (Number.isNaN(yearNum) || yearNum < 1900 || yearNum > 2100) {
+          return res.status(400).json({ error: 'Ano inválido. Informe um ano entre 1900 e 2100.' });
+        }
+      }
+      if (km !== undefined && km != null && km !== '') {
+        const kmNum = parseInt(km, 10);
+        if (Number.isNaN(kmNum) || kmNum < 0 || kmNum > INT4_MAX) {
+          return res.status(400).json({
+            error: `Quilometragem inválida. Informe um valor entre 0 e ${INT4_MAX.toLocaleString('pt-BR')}.`
+          });
+        }
+      }
+
       const updateData = {};
       if (brand !== undefined) updateData.brand = brand;
       if (model !== undefined) updateData.model = model;
-      if (year !== undefined) updateData.year = parseInt(year);
+      if (year !== undefined) updateData.year = parseInt(year, 10);
       if (plate !== undefined) updateData.plate = plate || null;
-      if (km !== undefined) updateData.km = km ? parseInt(km) : null;
+      if (km !== undefined) updateData.km = (km != null && km !== '') ? parseInt(km, 10) : null;
       if (color !== undefined) updateData.color = color || null;
       if (value !== undefined) updateData.value = value ? parseFloat(value) : null;
       if (promotionValue !== undefined) updateData.promotionValue = promotionValue ? parseFloat(promotionValue) : null;
