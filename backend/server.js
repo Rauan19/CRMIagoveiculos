@@ -31,8 +31,31 @@ const birthdayScheduler = require('./services/birthdayScheduler');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// Configuração de CORS
+const allowedOrigins = [
+  'http://localhost:8080',
+  'http://localhost:3000',
+  'https://servico.iagoveiculos.com.br'
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Permite requisições sem origin (ex: Postman, curl)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      return callback(null, true);
+    }
+    console.warn(`⚠️ Origin não permitida pelo CORS: ${origin}`);
+    return callback(new Error('Not allowed by CORS'));
+  },
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+  allowedHeaders: 'Content-Type, Authorization, X-Requested-With',
+  credentials: true
+};
+
 // Middlewares
-app.use(cors());
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
