@@ -35,7 +35,8 @@ const PORT = process.env.PORT || 3001;
 const allowedOrigins = [
   'http://localhost:8080',
   'http://localhost:3000',
-  'https://servico.iagoveiculos.com.br'
+  'https://servico.iagoveiculos.com.br',
+  'https://iagoveiculos.com.br'
 ];
 
 const corsOptions = {
