@@ -19,7 +19,14 @@ import {
   FiUser,
   FiChevronLeft,
   FiChevronRight,
-  FiAlertCircle
+  FiAlertCircle,
+  FiList,
+  FiShoppingCart,
+  FiCheckCircle,
+  FiPackage,
+  FiRadio,
+  FiSend,
+  FiZap
 } from 'react-icons/fi'
 
 interface LayoutProps {
@@ -53,16 +60,19 @@ export default function Layout({ children }: LayoutProps) {
     { name: 'Aniversários', href: '/birthdays', icon: FiGift },
     { name: 'Funcionários', href: '/users', icon: FiUserCheck },
     { name: 'Veículos', href: '/vehicles', icon: FiTruck },
+    { name: 'Veículos à venda', href: '/veiculos-a-venda', icon: FiShoppingCart },
+    { name: 'Veículos vendidos', href: '/veiculos-vendidos', icon: FiCheckCircle },
     { name: 'Vendas', href: '/sales', icon: FiDollarSign },
-    { name: 'Estoque', href: '/estoque', icon: FiTruck },
+    { name: 'Estoque', href: '/estoque', icon: FiPackage },
     { name: 'Metas', href: '/goals', icon: FiTarget },
-    { name: 'Anúncios', href: '/announcements', icon: FiFileText },
+    { name: 'Anúncios', href: '/announcements', icon: FiRadio },
     { name: 'Financeiro', href: '/financial', icon: FiCreditCard },
+    { name: 'Lançamentos', href: '/lancamentos', icon: FiList },
     { name: 'Relatórios', href: '/reports', icon: FiBarChart2 },
     { name: 'Pendências', href: '/pendencias', icon: FiAlertCircle },
-    { name: 'Sinal de negócio', href: '/sinal-negocio', icon: FiDollarSign },
+    { name: 'Sinal de negócio', href: '/sinal-negocio', icon: FiZap },
     { name: 'Consulta FIPE', href: '/fipe', icon: FiSearch },
-    { name: 'Despachantes', href: '/despachantes', icon: FiFileText },
+    { name: 'Despachantes', href: '/despachantes', icon: FiSend },
   ], [])
 
   const handleLogout = useCallback(() => {

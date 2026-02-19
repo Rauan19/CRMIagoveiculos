@@ -344,7 +344,7 @@ function VehiclesPageContent() {
   const [showConfirmModal, setShowConfirmModal] = useState(false)
   const [confirmDeleteId, setConfirmDeleteId] = useState<number | null>(null)
   const [openMenuId, setOpenMenuId] = useState<number | null>(null)
-  const [menuPosition, setMenuPosition] = useState<{ top: number; left: number } | null>(null)
+  const [menuPosition, setMenuPosition] = useState<boolean>(false)
   const menuRefs = useRef<{ [key: number]: HTMLDivElement | null }>({})
   const buttonRefs = useRef<{ [key: number]: HTMLButtonElement | null }>({})
   const [vehicleDocumentFile, setVehicleDocumentFile] = useState<File | null>(null)
@@ -584,7 +584,7 @@ function VehiclesPageContent() {
           !buttonElement.contains(event.target as Node)
         ) {
           setOpenMenuId(null)
-          setMenuPosition(null)
+          setMenuPosition(false)
         }
       }
     }
@@ -2593,17 +2593,9 @@ function VehiclesPageContent() {
                               e.stopPropagation()
                               if (openMenuId === vehicle.id) {
                                 setOpenMenuId(null)
-                                setMenuPosition(null)
+                                setMenuPosition(false)
                               } else {
-                                const button = buttonRefs.current[vehicle.id]
-                                if (button) {
-                                  const rect = button.getBoundingClientRect()
-                                  // Posicionar acima do botão, alinhado à direita
-                                  setMenuPosition({
-                                    top: rect.top, // Topo do botão
-                                    left: rect.right - 192 // 192px é aproximadamente a largura do menu (w-48)
-                                  })
-                                }
+                                setMenuPosition(true)
                                 setOpenMenuId(vehicle.id)
                               }
                             }}
@@ -2622,82 +2614,82 @@ function VehiclesPageContent() {
           </>
         )}
 
-        {/* Menu de Ações Flutuante */}
-        {openMenuId !== null && menuPosition && vehicles.find(v => v.id === openMenuId) && (
+        {/* Menu de Ações Flutuante - fixo no centro da tela */}
+        {openMenuId !== null && menuPosition && vehicles.find(v => v.id === openMenuId) ? (
           <>
             <div
               className="fixed inset-0 z-[9998]"
               onClick={(e) => {
                 e.stopPropagation()
                 setOpenMenuId(null)
-                setMenuPosition(null)
+                setMenuPosition(false)
               }}
             />
             <div
-              ref={(el) => { menuRefs.current[openMenuId] = el }}
-              className="fixed w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-[9999] py-1"
-              style={{
-                top: `${Math.max(4, menuPosition.top)}px`, // Garantir que não fique acima da tela
-                left: `${menuPosition.left}px`,
-                transform: 'translateY(-100%)', // Posicionar acima do botão
-              }}
-              onClick={(e) => e.stopPropagation()}
+              className="fixed inset-0 z-[9999] flex items-center justify-center pointer-events-none"
+              aria-hidden
             >
+              <div
+                ref={(el) => { menuRefs.current[openMenuId] = el }}
+                className="w-48 bg-white rounded-lg shadow-xl border border-gray-200 py-1 max-h-[80vh] overflow-y-auto pointer-events-auto"
+                onClick={(e) => e.stopPropagation()}
+              >
             {(() => {
               const vehicle = vehicles.find(v => v.id === openMenuId)
               if (!vehicle) return null
               return (
                 <>
-                  <button onClick={(e) => { e.stopPropagation(); handleEdit(vehicle); setOpenMenuId(null); setMenuPosition(null); }} className="w-full px-3 py-1.5 text-left text-gray-700 hover:bg-gray-50 flex items-center gap-2">
+                  <button onClick={(e) => { e.stopPropagation(); handleEdit(vehicle); setOpenMenuId(null); setMenuPosition(false); }} className="w-full px-3 py-1.5 text-left text-gray-700 hover:bg-gray-50 flex items-center gap-2">
                     <FiEdit className="w-3.5 h-3.5" /> Editar
                   </button>
-                  <button onClick={(e) => { e.stopPropagation(); handleViewDetails(vehicle); setOpenMenuId(null); setMenuPosition(null); }} className="w-full px-3 py-1.5 text-left text-gray-700 hover:bg-gray-50 flex items-center gap-2">
+                  <button onClick={(e) => { e.stopPropagation(); handleViewDetails(vehicle); setOpenMenuId(null); setMenuPosition(false); }} className="w-full px-3 py-1.5 text-left text-gray-700 hover:bg-gray-50 flex items-center gap-2">
                     <FiEye className="w-3.5 h-3.5" /> Ver Detalhes
                   </button>
-                  <button onClick={(e) => { e.stopPropagation(); handleDuplicate(vehicle); setOpenMenuId(null); setMenuPosition(null); }} className="w-full px-3 py-1.5 text-left text-gray-700 hover:bg-gray-50 flex items-center gap-2">
+                  <button onClick={(e) => { e.stopPropagation(); handleDuplicate(vehicle); setOpenMenuId(null); setMenuPosition(false); }} className="w-full px-3 py-1.5 text-left text-gray-700 hover:bg-gray-50 flex items-center gap-2">
                     <FiCopy className="w-3.5 h-3.5" /> Duplicar
                   </button>
-                  <button onClick={(e) => { e.stopPropagation(); handleShare(vehicle); setOpenMenuId(null); setMenuPosition(null); }} className="w-full px-3 py-1.5 text-left text-gray-700 hover:bg-gray-50 flex items-center gap-2">
+                  <button onClick={(e) => { e.stopPropagation(); handleShare(vehicle); setOpenMenuId(null); setMenuPosition(false); }} className="w-full px-3 py-1.5 text-left text-gray-700 hover:bg-gray-50 flex items-center gap-2">
                     <FiShare2 className="w-3.5 h-3.5" /> Compartilhar
                   </button>
-                  <button onClick={(e) => { e.stopPropagation(); handleAlterarEntrada(vehicle); setOpenMenuId(null); setMenuPosition(null); }} className="w-full px-3 py-1.5 text-left text-purple-600 hover:bg-purple-50 flex items-center gap-2">
+                  <button onClick={(e) => { e.stopPropagation(); handleAlterarEntrada(vehicle); setOpenMenuId(null); setMenuPosition(false); }} className="w-full px-3 py-1.5 text-left text-purple-600 hover:bg-purple-50 flex items-center gap-2">
                     <FiEdit className="w-3.5 h-3.5" /> Alterar Entrada de Estoque
                   </button>
-                  <button onClick={(e) => { e.stopPropagation(); handleIncluirFichaCadastral(vehicle); setOpenMenuId(null); setMenuPosition(null); }} className="w-full px-3 py-1.5 text-left text-indigo-600 hover:bg-indigo-50 flex items-center gap-2">
+                  <button onClick={(e) => { e.stopPropagation(); handleIncluirFichaCadastral(vehicle); setOpenMenuId(null); setMenuPosition(false); }} className="w-full px-3 py-1.5 text-left text-indigo-600 hover:bg-indigo-50 flex items-center gap-2">
                     <FiFileText className="w-3.5 h-3.5" /> Incluir Ficha Cadastral
                   </button>
-                  <button onClick={(e) => { e.stopPropagation(); handleEntradaStock(vehicle); setOpenMenuId(null); setMenuPosition(null); }} className="w-full px-3 py-1.5 text-left text-green-600 hover:bg-green-50 flex items-center gap-2">
+                  <button onClick={(e) => { e.stopPropagation(); handleEntradaStock(vehicle); setOpenMenuId(null); setMenuPosition(false); }} className="w-full px-3 py-1.5 text-left text-green-600 hover:bg-green-50 flex items-center gap-2">
                     <FiPlus className="w-3.5 h-3.5" /> Entrada de Estoque
                   </button>
-                  <button onClick={(e) => { e.stopPropagation(); handleExitStock(vehicle); setOpenMenuId(null); setMenuPosition(null); }} className="w-full px-3 py-1.5 text-left text-blue-600 hover:bg-blue-50 flex items-center gap-2">
+                  <button onClick={(e) => { e.stopPropagation(); handleExitStock(vehicle); setOpenMenuId(null); setMenuPosition(false); }} className="w-full px-3 py-1.5 text-left text-blue-600 hover:bg-blue-50 flex items-center gap-2">
                     <FiFileText className="w-3.5 h-3.5" /> Saída de Estoque
                   </button>
                   {vehicle.hasDocument && (
-                    <button onClick={(e) => { e.stopPropagation(); handleDownloadDocument(vehicle.id, vehicle.documentName || undefined); setOpenMenuId(null); setMenuPosition(null); }} className="w-full px-3 py-1.5 text-left text-gray-700 hover:bg-gray-50 flex items-center gap-2">
+                    <button onClick={(e) => { e.stopPropagation(); handleDownloadDocument(vehicle.id, vehicle.documentName || undefined); setOpenMenuId(null); setMenuPosition(false); }} className="w-full px-3 py-1.5 text-left text-gray-700 hover:bg-gray-50 flex items-center gap-2">
                       <FiFileText className="w-3.5 h-3.5" /> Ver Documento
                     </button>
                   )}
                   <div className="border-t border-gray-200 my-1" />
                   {vehicle.sale && (
-                    <button onClick={(e) => { e.stopPropagation(); handleEstornarVenda(vehicle); setOpenMenuId(null); setMenuPosition(null); }} className="w-full px-3 py-1.5 text-left text-orange-600 hover:bg-orange-50 flex items-center gap-2">
+                    <button onClick={(e) => { e.stopPropagation(); handleEstornarVenda(vehicle); setOpenMenuId(null); setMenuPosition(false); }} className="w-full px-3 py-1.5 text-left text-orange-600 hover:bg-orange-50 flex items-center gap-2">
                       <FiRotateCcw className="w-3.5 h-3.5" /> Estornar Venda
                     </button>
                   )}
                   {vehicle.cost && vehicle.cost > 0 && (
-                    <button onClick={(e) => { e.stopPropagation(); handleEstornarCompra(vehicle); setOpenMenuId(null); setMenuPosition(null); }} className="w-full px-3 py-1.5 text-left text-orange-600 hover:bg-orange-50 flex items-center gap-2">
+                    <button onClick={(e) => { e.stopPropagation(); handleEstornarCompra(vehicle); setOpenMenuId(null); setMenuPosition(false); }} className="w-full px-3 py-1.5 text-left text-orange-600 hover:bg-orange-50 flex items-center gap-2">
                       <FiRotateCcw className="w-3.5 h-3.5" /> Estornar Compra
                     </button>
                   )}
                   <div className="border-t border-gray-200 my-1" />
-                  <button onClick={(e) => { e.stopPropagation(); handleDeleteClick(vehicle.id); setOpenMenuId(null); setMenuPosition(null); }} disabled={deleting === vehicle.id} className="w-full px-3 py-1.5 text-left text-red-600 hover:bg-red-50 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                  <button onClick={(e) => { e.stopPropagation(); handleDeleteClick(vehicle.id); setOpenMenuId(null); setMenuPosition(false); }} disabled={deleting === vehicle.id} className="w-full px-3 py-1.5 text-left text-red-600 hover:bg-red-50 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
                     <FiTrash2 className="w-3.5 h-3.5" /> {deleting === vehicle.id ? 'Excluindo...' : 'Excluir'}
                   </button>
                 </>
               )
             })()}
-          </div>
+              </div>
+            </div>
           </>
-        )}
+        ) : null}
 
         {/* Modal */}
         {showModal && (
