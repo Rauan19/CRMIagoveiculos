@@ -21,6 +21,30 @@ model User {
   role      String
   phone     String?
   avatar    String?  // URL da imagem do avatar
+  // Dados adicionais do funcionário
+  admissionDate   DateTime?
+  dismissalDate   DateTime?
+  cpf             String?
+  rg              String?
+  sexo            String?
+  birthDate       DateTime?
+  ctps            String?
+  cnh             String?
+  // Endereço
+  cep             String?
+  street          String?
+  number          String?
+  complement      String?
+  neighborhood    String?
+  state           String?
+  city            String?
+  // Remuneração
+  cargo           String?
+  beneficios      String?
+  salary          Float?
+  receivesCommission Boolean? @default(false)
+  // Documentos (JSON array: [{ name, url }])
+  documents       Json?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   sales     Sale[]
@@ -166,6 +190,7 @@ model Vehicle {
   debitos             Debito[] // Débitos do veículo
   pendencias          Pendencia[] // Pendências do veículo
   despachantes        Despachante[] // Controles de despachante
+  locations           Location[] // Localizações do veículo
   sinaisNegocio       SinalNegocio[] // Sinais de negócio (reserva) vinculados ao veículo
 }
 
@@ -562,4 +587,20 @@ model Despachante {
   updatedAt         DateTime  @updatedAt
   vehicle           Vehicle?  @relation(fields: [vehicleId], references: [id], onDelete: SetNull)
   customer          Customer? @relation(fields: [customerId], references: [id], onDelete: SetNull)
+}
+
+// Modelo Location separado para controle de localização e previsão de retorno dos veículos.
+// Relaciona-se opcionalmente com Vehicle (vehicleId).
+model Location {
+  id             Int       @id @default(autoincrement())
+  vehicleId      Int?      // veículo relacionado (opcional)
+  location       String    // descrição/localização atual (ex: Pátio A, Oficina X)
+  yard           String?   // pátio específico (opcional)
+  expectedReturn DateTime? // previsão de retorno
+  status         String?   // status da localização (atrasado, previsto, sem_previsao, etc.)
+  notes          String?   // observações adicionais
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  vehicle        Vehicle?  @relation(fields: [vehicleId], references: [id], onDelete: SetNull)
 }

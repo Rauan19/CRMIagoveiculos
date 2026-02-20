@@ -1,11 +1,37 @@
 const prisma = require('../models/prisma');
 const { hashPassword, comparePassword } = require('../utils/password');
 const { generateAccessToken, generateRefreshToken, verifyRefreshToken } = require('../utils/jwt');
+const { isValidCPF } = require('../utils/validators');
 
 class AuthController {
   async register(req, res) {
     try {
-      const { name, email, password, role = 'vendedor' } = req.body;
+      const {
+        name,
+        email,
+        password,
+        role = 'vendedor',
+        admissionDate,
+        dismissalDate,
+        cpf,
+        rg,
+        sexo,
+        birthDate,
+        ctps,
+        cnh,
+        cep,
+        street,
+        number,
+        complement,
+        neighborhood,
+        state,
+        city,
+        cargo,
+        beneficios,
+        salary,
+        receivesCommission,
+        documents
+      } = req.body;
 
       if (!name || !email || !password) {
         return res.status(400).json({ error: 'Campos obrigatórios: name, email, password' });
@@ -23,14 +49,43 @@ class AuthController {
       // Hash da senha
       const hashedPassword = await hashPassword(password);
 
+      // Validar CPF quando enviado
+      if (cpf && !isValidCPF(cpf)) {
+        return res.status(400).json({ error: 'CPF inválido' });
+      }
+
       // Criar usuário
+      const createData = {
+        name,
+        email,
+        password: hashedPassword,
+        role,
+      }
+
+      // Campos opcionais do funcionário (se enviados)
+      if (admissionDate) createData.admissionDate = new Date(admissionDate)
+      if (dismissalDate) createData.dismissalDate = new Date(dismissalDate)
+      if (cpf) createData.cpf = cpf
+      if (rg) createData.rg = rg
+      if (sexo) createData.sexo = sexo
+      if (birthDate) createData.birthDate = new Date(birthDate)
+      if (ctps) createData.ctps = ctps
+      if (cnh) createData.cnh = cnh
+      if (cep) createData.cep = cep
+      if (street) createData.street = street
+      if (number) createData.number = number
+      if (complement) createData.complement = complement
+      if (neighborhood) createData.neighborhood = neighborhood
+      if (state) createData.state = state
+      if (city) createData.city = city
+      if (cargo) createData.cargo = cargo
+      if (beneficios) createData.beneficios = beneficios
+      if (salary) createData.salary = parseFloat(String(salary)) || undefined
+      if (receivesCommission !== undefined) createData.receivesCommission = receivesCommission === true || receivesCommission === 'true'
+      if (documents) createData.documents = documents
+
       const user = await prisma.user.create({
-        data: {
-          name,
-          email,
-          password: hashedPassword,
-          role
-        },
+        data: createData,
         select: {
           id: true,
           name: true,

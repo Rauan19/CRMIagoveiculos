@@ -238,6 +238,24 @@ class SaleController {
         await prisma.salePaymentMethod.createMany({
           data: paymentMethodsData
         });
+      } else if (paymentMethod) {
+        // Criar registro único de forma de pagamento a partir dos campos simples
+        try {
+          await prisma.salePaymentMethod.create({
+            data: {
+              saleId: sale.id,
+              date: new Date(),
+              type: paymentMethod,
+              value: finalSalePrice || 0,
+              valorFinanciado: financedValue ? parseFloat(financedValue) : null,
+              quantidadeParcelas: paymentInstallments ? parseInt(paymentInstallments) : null,
+              valorParcela: paymentInstallmentValue ? parseFloat(paymentInstallmentValue) : null,
+              financiamentoBanco: financingBank || null
+            }
+          });
+        } catch (e) {
+          console.warn('Não foi possível criar salePaymentMethod único:', e);
+        }
       }
 
       // Buscar a venda com as formas de pagamento

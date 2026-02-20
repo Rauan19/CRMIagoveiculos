@@ -1,5 +1,6 @@
 const prisma = require('../models/prisma');
 const { hashPassword } = require('../utils/password');
+const { isValidCPF } = require('../utils/validators');
 
 class UserController {
   async list(req, res) {
@@ -10,6 +11,10 @@ class UserController {
           name: true,
           email: true,
           role: true,
+          admissionDate: true,
+          dismissalDate: true,
+          cpf: true,
+          phone: true,
           createdAt: true,
           _count: {
             select: { sales: true }
@@ -62,6 +67,26 @@ class UserController {
           role: true,
           phone: true,
           avatar: true,
+          admissionDate: true,
+          dismissalDate: true,
+          cpf: true,
+          rg: true,
+          sexo: true,
+          birthDate: true,
+          ctps: true,
+          cnh: true,
+          cep: true,
+          street: true,
+          number: true,
+          complement: true,
+          neighborhood: true,
+          state: true,
+          city: true,
+          cargo: true,
+          beneficios: true,
+          salary: true,
+          receivesCommission: true,
+          documents: true,
           createdAt: true,
           sales: {
             select: {
@@ -88,7 +113,39 @@ class UserController {
   async update(req, res) {
     try {
       const { id } = req.params;
-      const { name, email, role, password, phone, avatar } = req.body;
+      const {
+        name,
+        email,
+        role,
+        password,
+        phone,
+        avatar,
+        admissionDate,
+        dismissalDate,
+        cpf,
+        rg,
+        sexo,
+        birthDate,
+        ctps,
+        cnh,
+        cep,
+        street,
+        number,
+        complement,
+        neighborhood,
+        state,
+        city,
+        cargo,
+        beneficios,
+        salary,
+        receivesCommission,
+        documents
+      } = req.body;
+
+      // Validar CPF quando enviado
+      if (cpf !== undefined && cpf && !isValidCPF(cpf)) {
+        return res.status(400).json({ error: 'CPF inválido' });
+      }
 
       const updateData = {};
       if (name) updateData.name = name;
@@ -97,6 +154,26 @@ class UserController {
       if (password) updateData.password = await hashPassword(password);
       if (phone !== undefined) updateData.phone = phone;
       if (avatar !== undefined) updateData.avatar = avatar;
+      if (admissionDate !== undefined) updateData.admissionDate = admissionDate ? new Date(admissionDate) : null;
+      if (dismissalDate !== undefined) updateData.dismissalDate = dismissalDate ? new Date(dismissalDate) : null;
+      if (cpf !== undefined) updateData.cpf = cpf;
+      if (rg !== undefined) updateData.rg = rg;
+      if (sexo !== undefined) updateData.sexo = sexo;
+      if (birthDate !== undefined) updateData.birthDate = birthDate ? new Date(birthDate) : null;
+      if (ctps !== undefined) updateData.ctps = ctps;
+      if (cnh !== undefined) updateData.cnh = cnh;
+      if (cep !== undefined) updateData.cep = cep;
+      if (street !== undefined) updateData.street = street;
+      if (number !== undefined) updateData.number = number;
+      if (complement !== undefined) updateData.complement = complement;
+      if (neighborhood !== undefined) updateData.neighborhood = neighborhood;
+      if (state !== undefined) updateData.state = state;
+      if (city !== undefined) updateData.city = city;
+      if (cargo !== undefined) updateData.cargo = cargo;
+      if (beneficios !== undefined) updateData.beneficios = beneficios;
+      if (salary !== undefined) updateData.salary = salary ? parseFloat(String(salary)) : null;
+      if (receivesCommission !== undefined) updateData.receivesCommission = receivesCommission === true || receivesCommission === 'true';
+      if (documents !== undefined) updateData.documents = documents;
 
       const user = await prisma.user.update({
         where: { id: parseInt(id) },

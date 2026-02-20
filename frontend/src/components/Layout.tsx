@@ -3,7 +3,7 @@
 import { useRouter, usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { useAuthStore } from '@/store/authStore'
-import { useEffect, useState, useMemo, useCallback } from 'react'
+import { useEffect, useState, useMemo, useCallback, useRef } from 'react'
 import { 
   FiLayout, 
   FiUsers, 
@@ -13,6 +13,7 @@ import {
   FiCreditCard,
   FiBarChart2,
   FiSearch,
+  FiMap,
   FiTarget,
   FiUserCheck,
   FiGift,
@@ -37,8 +38,12 @@ export default function Layout({ children }: LayoutProps) {
   const router = useRouter()
   const pathname = usePathname()
   const { user, isAuthenticated, logout } = useAuthStore()
+  const { checkAuth } = useAuthStore()
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
+  const [isChecking, setIsChecking] = useState(true)
+  const [navLoading, setNavLoading] = useState(false)
+  const prevPath = useRef<string | null>(null)
 
   useEffect(() => {
     const saved = localStorage.getItem('sidebarCollapsed')
@@ -55,18 +60,21 @@ export default function Layout({ children }: LayoutProps) {
 
   // Memoizar array de navegação para evitar recriação (ANTES de qualquer return condicional)
   const navigation = useMemo(() => [
-    { name: 'Dashboard', href: '/dashboard', icon: FiLayout },
+    { name: 'Inicio', href: '/dashboard', icon: FiLayout },
     { name: 'Clientes', href: '/customers', icon: FiUsers },
     { name: 'Aniversários', href: '/birthdays', icon: FiGift },
     { name: 'Funcionários', href: '/users', icon: FiUserCheck },
     { name: 'Veículos', href: '/vehicles', icon: FiTruck },
+    { name: 'Localização de veículos', href: '/locations', icon: FiMap },
     { name: 'Veículos à venda', href: '/veiculos-a-venda', icon: FiShoppingCart },
     { name: 'Veículos vendidos', href: '/veiculos-vendidos', icon: FiCheckCircle },
     { name: 'Vendas', href: '/sales', icon: FiDollarSign },
-    { name: 'Estoque', href: '/estoque', icon: FiPackage },
+    { name: 'Estoque/Site', href: '/estoque', icon: FiPackage },
     { name: 'Metas', href: '/goals', icon: FiTarget },
     { name: 'Anúncios', href: '/announcements', icon: FiRadio },
     { name: 'Financeiro', href: '/financial', icon: FiCreditCard },
+      { name: 'Financiamentos', href: '/financings', icon: FiCreditCard },
+      { name: 'Comissões', href: '/commissions', icon: FiList },
     { name: 'Lançamentos', href: '/lancamentos', icon: FiList },
     { name: 'Relatórios', href: '/reports', icon: FiBarChart2 },
     { name: 'Pendências', href: '/pendencias', icon: FiAlertCircle },
@@ -90,10 +98,46 @@ export default function Layout({ children }: LayoutProps) {
 
   // Verificar redirecionamento apenas quando necessário
   useEffect(() => {
-    if (!isAuthenticated && pathname !== '/login' && pathname !== '/register') {
-      router.push('/login')
+    // Garantir que a autenticação seja carregada do estado persistido antes de redirecionar
+    const timer = setTimeout(async () => {
+      try {
+        await checkAuth()
+      } catch (e) {
+        console.error('Erro em checkAuth:', e)
+      } finally {
+        setIsChecking(false)
+      }
+    }, 50)
+
+    return () => clearTimeout(timer)
+  }, [checkAuth])
+
+  useEffect(() => {
+    if (!isChecking) {
+      if (!isAuthenticated && pathname !== '/login' && pathname !== '/register') {
+        router.push('/login')
+      }
     }
-  }, [isAuthenticated, pathname, router])
+  }, [isAuthenticated, pathname, router, isChecking])
+
+  // Perceived navigation feedback: show small progress bar when pathname changes
+  useEffect(() => {
+    if (prevPath.current && prevPath.current !== pathname) {
+      setNavLoading(true)
+      const t = setTimeout(() => setNavLoading(false), 700) // hide after 700ms or when page renders
+      return () => clearTimeout(t)
+    }
+    prevPath.current = pathname
+  }, [pathname])
+
+  // Enquanto verificamos a autenticação, mostramos loading
+  if (isChecking) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+      </div>
+    )
+  }
 
   // Return condicional DEPOIS de todos os hooks
   if (!isAuthenticated) {
@@ -102,6 +146,23 @@ export default function Layout({ children }: LayoutProps) {
 
   return (
     <div className="h-screen bg-gray-50 flex overflow-hidden">
+      {/* Top nav progress */}
+      {navLoading && (
+        <div className="fixed left-0 right-0 top-0 h-1 z-50">
+          <div className="h-1 bg-primary-600 animate-progress" />
+        </div>
+      )}
+
+      <style>{`
+        @keyframes progress {
+          0% { transform: translateX(-100%); }
+          50% { transform: translateX(0%); }
+          100% { transform: translateX(100%); }
+        }
+        .animate-progress {
+          animation: progress 0.7s linear infinite;
+        }
+      `}</style>
       {/* Sidebar */}
       <div className={`
         fixed inset-y-0 left-0 z-50 bg-gray-900 transform transition-all duration-200 ease-out
@@ -131,7 +192,7 @@ export default function Layout({ children }: LayoutProps) {
                     }
                   `}
                 >
-                  <Icon className={sidebarCollapsed ? 'text-xl' : 'mr-3 text-xl flex-shrink-0'} />
+                  <span className={sidebarCollapsed ? 'text-xl' : 'mr-3 text-xl flex-shrink-0'} aria-hidden>•</span>
                   {!sidebarCollapsed && <span className="text-sm font-medium truncate">{item.name}</span>}
                 </Link>
               )
@@ -161,11 +222,11 @@ export default function Layout({ children }: LayoutProps) {
             <div className={`flex items-center ${sidebarCollapsed ? 'justify-center' : 'gap-3'} mb-2`}>
               <div className="flex-shrink-0">
                 <div className={`rounded-full bg-gray-700 flex items-center justify-center overflow-hidden border border-gray-600 ${sidebarCollapsed ? 'w-9 h-9' : 'w-10 h-10'}`}>
-                  {user?.avatar ? (
-                    user.avatar.startsWith('data:image') ? (
-                      <img src={user.avatar} alt={user.name} className="w-full h-full object-cover" />
+                  { (user as any)?.avatar ? (
+                    (user as any).avatar.startsWith('data:image') ? (
+                      <img src={(user as any).avatar} alt={user?.name} className="w-full h-full object-cover" />
                     ) : (
-                      <span className="text-xl">{user.avatar}</span>
+                      <span className="text-xl">{(user as any).avatar}</span>
                     )
                   ) : (
                     <FiUser className={`text-gray-400 ${sidebarCollapsed ? 'w-5 h-5' : 'w-6 h-6'}`} />
