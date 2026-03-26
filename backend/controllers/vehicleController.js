@@ -286,14 +286,19 @@ class VehicleController {
 
       // Criar transação financeira de saída se houver custo
       if (totalCost && totalCost > 0) {
+        const now = new Date();
         await prisma.financialTransaction.create({
           data: {
+            operacao: 'pagar',
             type: 'pagar',
             description: `Compra de veículo: ${brand} ${model} ${year}${plate ? ` - ${plate}` : ''}`,
+            valorTitulo: totalCost,
             amount: totalCost,
-            dueDate: new Date(), // Data atual se não especificado
-            status: 'pendente'
-          }
+            dataVencimento: now,
+            dueDate: now,
+            customerId: customerId ? parseInt(customerId) : null,
+            status: 'pendente',
+          },
         });
       }
 

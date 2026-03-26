@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import { jsPDF } from 'jspdf'
 import Layout from '@/components/Layout'
 import api from '@/services/api'
@@ -149,6 +149,8 @@ export default function DespachantesPage() {
   const [showViewModal, setShowViewModal] = useState(false)
   const [viewingDespachante, setViewingDespachante] = useState<Despachante | null>(null)
   const [imprimirExportarValue, setImprimirExportarValue] = useState('')
+  const [page, setPage] = useState(1)
+  const [pageSize, setPageSize] = useState(40)
   const [newCustomerData, setNewCustomerData] = useState({
     pessoaType: 'Física' as 'Física' | 'Jurídica',
     cpf: '',
@@ -308,6 +310,40 @@ export default function DespachantesPage() {
 
     setFilteredDespachantes(filtered)
   }, [despachantes, searchTerm, filterTipo, filterDataEnvioInicio, filterDataEnvioFim, filterDataRetornoInicio, filterDataRetornoFim, filterDataEntregaInicio, filterDataEntregaFim, sortBy, sortOrder])
+
+  useEffect(() => {
+    setPage(1)
+  }, [searchTerm, filterTipo, filterDataEnvioInicio, filterDataEnvioFim, filterDataRetornoInicio, filterDataRetornoFim, filterDataEntregaInicio, filterDataEntregaFim, sortBy, sortOrder, pageSize])
+
+  const totalResults = filteredDespachantes.length
+  const totalPages = Math.max(1, Math.ceil(totalResults / pageSize))
+  const safePage = Math.min(page, totalPages)
+  const startIndex = totalResults === 0 ? 0 : (safePage - 1) * pageSize
+  const endIndexExclusive = Math.min(startIndex + pageSize, totalResults)
+  const pageDespachantes = filteredDespachantes.slice(startIndex, endIndexExclusive)
+
+  const pagesToShow = useMemo(() => {
+    const total = totalPages
+    const current = safePage
+    if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1)
+    const pages = new Set<number>()
+    pages.add(1)
+    pages.add(total)
+    pages.add(current)
+    pages.add(current - 1)
+    pages.add(current + 1)
+    pages.add(current - 2)
+    pages.add(current + 2)
+    const arr = Array.from(pages).filter((p) => p >= 1 && p <= total).sort((a, b) => a - b)
+    const out: Array<number> = []
+    for (let i = 0; i < arr.length; i++) {
+      const p = arr[i]
+      const prev = arr[i - 1]
+      if (i > 0 && prev != null && p - prev > 1) out.push(-1)
+      out.push(p)
+    }
+    return out
+  }, [safePage, totalPages])
 
   const loadData = async () => {
     try {
@@ -997,7 +1033,7 @@ export default function DespachantesPage() {
               </div>
             </div>
             <div className="text-xs text-gray-500 mt-1">
-              {filteredDespachantes.length} de {despachantes.length} despachante(s)
+              {totalResults} de {despachantes.length} despachante(s)
             </div>
           </div>
         </div>
@@ -1019,7 +1055,7 @@ export default function DespachantesPage() {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {filteredDespachantes.map((despachante) => (
+              {pageDespachantes.map((despachante) => (
                 <tr key={despachante.id} className="hover:bg-gray-50">
                   <td className="px-3 py-2 whitespace-nowrap text-xs text-gray-900">
                     {despachante.despachanteNome || '-'}
@@ -1070,12 +1106,92 @@ export default function DespachantesPage() {
             </tbody>
           </table>
           </div>
-          {filteredDespachantes.length === 0 && (
+          {totalResults === 0 && (
             <div className="text-center py-6 text-sm text-gray-500">
               Nenhum despachante encontrado
             </div>
           )}
         </div>
+
+        {!loading && totalResults > 0 && (
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-3">
+            <div className="text-xs text-gray-600">
+              Mostrando <span className="font-medium text-gray-900">{startIndex + 1}</span>–<span className="font-medium text-gray-900">{endIndexExclusive}</span> de{' '}
+              <span className="font-medium text-gray-900">{totalResults}</span>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <select
+                value={pageSize}
+                onChange={(e) => setPageSize(parseInt(e.target.value))}
+                className="px-2 py-1.5 border border-gray-300 rounded-lg text-sm text-gray-900 bg-white"
+                aria-label="Itens por página"
+                title="Itens por página"
+              >
+                <option value={20}>20</option>
+                <option value={40}>40</option>
+                <option value={80}>80</option>
+                <option value={120}>120</option>
+              </select>
+
+              <button
+                type="button"
+                onClick={() => setPage(1)}
+                disabled={safePage <= 1}
+                className="px-2 py-1.5 border border-gray-300 rounded-md text-sm text-gray-700 disabled:opacity-50"
+              >
+                Primeira
+              </button>
+              <button
+                type="button"
+                onClick={() => setPage((p) => Math.max(1, p - 1))}
+                disabled={safePage <= 1}
+                className="px-2 py-1.5 border border-gray-300 rounded-md text-sm text-gray-700 disabled:opacity-50"
+              >
+                Anterior
+              </button>
+
+              <div className="flex items-center gap-1">
+                {pagesToShow.map((p, idx) =>
+                  p === -1 ? (
+                    <span key={`e-${idx}`} className="px-2 text-sm text-gray-500">
+                      …
+                    </span>
+                  ) : (
+                    <button
+                      key={p}
+                      type="button"
+                      onClick={() => setPage(p)}
+                      className={`h-8 min-w-8 px-2 rounded-md text-sm border ${
+                        p === safePage ? 'bg-primary-600 text-white border-primary-600' : 'border-gray-300 text-gray-700 hover:bg-gray-50'
+                      }`}
+                      aria-current={p === safePage ? 'page' : undefined}
+                    >
+                      {p}
+                    </button>
+                  )
+                )}
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                disabled={safePage >= totalPages}
+                className="px-2 py-1.5 border border-gray-300 rounded-md text-sm text-gray-700 disabled:opacity-50"
+              >
+                Próxima
+              </button>
+              <button
+                type="button"
+                onClick={() => setPage(totalPages)}
+                disabled={safePage >= totalPages}
+                className="px-2 py-1.5 border border-gray-300 rounded-md text-sm text-gray-700 disabled:opacity-50"
+              >
+                Última
+              </button>
+            </div>
+          </div>
+        )}
 
         {/* Modal */}
         {showModal && (

@@ -1,0 +1,73 @@
+name: Backend CI
+
+on:
+  push:
+    paths:
+      - "backend/**"
+      - ".github/workflows/backend-ci.yml"
+  pull_request:
+    paths:
+      - "backend/**"
+      - ".github/workflows/backend-ci.yml"
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: crmiago
+          POSTGRES_USER: crmiago
+          POSTGRES_PASSWORD: crmiago
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U crmiago -d crmiago"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 20
+
+    env:
+      DATABASE_URL: postgresql://crmiago:crmiago@localhost:5432/crmiago?schema=public
+      NODE_ENV: test
+      JWT_SECRET: ci_jwt_secret
+      JWT_REFRESH_SECRET: ci_jwt_refresh_secret
+      JWT_EXPIRES_IN: 24h
+      JWT_REFRESH_EXPIRES_IN: 7d
+
+    defaults:
+      run:
+        working-directory: backend
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Prisma generate
+        run: npx prisma generate
+
+      - name: Prisma migrate deploy
+        run: npx prisma migrate deploy
+
+      - name: DB smoke test
+        run: node test-connection.js
+
+      - name: Start API (background)
+        run: |
+          nohup node server.js > server.log 2>&1 &
+
+      - name: API smoke test
+        env:
+          BASE_URL: http://localhost:3001
+        run: npm run test:smoke

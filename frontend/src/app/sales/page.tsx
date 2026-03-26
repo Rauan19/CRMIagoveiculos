@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useMemo, useState, useEffect, useRef } from 'react'
 import Layout from '@/components/Layout'
 import api from '@/services/api'
 import { useAuthStore } from '@/store/authStore'
@@ -9,6 +9,7 @@ import ConfirmModal from '@/components/ConfirmModal'
 import { FiMoreVertical, FiEdit, FiTrash2, FiFileText, FiEye, FiPlus, FiImage, FiUpload, FiX, FiDownload } from 'react-icons/fi'
 import { formatCPF, formatPhone, formatCEP, formatRG, formatCNPJ, formatPlate, removeMask } from '@/utils/formatters'
 import { ESPECIES, COMBUSTIVEIS, PORTAS, CAMBIOS, BLINDADO, ORIGEM, PERICIA_CAUTELAR, OPCIONAIS_LIST } from '@/utils/vehicleOptions'
+import { downloadSaleNfPdf } from '@/utils/nfPdf'
 
 interface Customer {
   id: number
@@ -73,6 +74,14 @@ interface SalePaymentMethod {
   avalistaAdicional?: string
   // Campo para forma de pagamento dentro do Financiamento Próprio
   formaPagamentoFinanciamentoProprio?: string
+  // Campos para financiamentos/integrações
+  financingBank?: string
+  tipoRetorno?: string
+  retorno?: string
+  tac?: string
+  plus?: string
+  tif?: string
+  taxaIntermediacao?: string
   // Parcelas (data, valor, nº doc) — só no frontend; gera ao selecionar quantidade
   parcelasDetalhe?: ParcelaDetalhe[]
   // Campos para Troco na troca
@@ -209,10 +218,14 @@ export default function SalesPage() {
   const [showFinanciamentoProprioModal, setShowFinanciamentoProprioModal] = useState(false)
   const [financiamentoProprioIndex, setFinanciamentoProprioIndex] = useState<number | null>(null)
   const [financiamentoProprioQty, setFinanciamentoProprioQty] = useState('')
+  const [showFinanciamentoModal, setShowFinanciamentoModal] = useState(false)
+  const [financiamentoIndex, setFinanciamentoIndex] = useState<number | null>(null)
   const [confirmDeleteId, setConfirmDeleteId] = useState<number | null>(null)
   const [editingSale, setEditingSale] = useState<Sale | null>(null)
   const [selectedSale, setSelectedSale] = useState<Sale | null>(null)
   const [openMenuId, setOpenMenuId] = useState<number | null>(null)
+  const [page, setPage] = useState(1)
+  const [pageSize, setPageSize] = useState(40)
   const menuRefs = useRef<{ [key: number]: HTMLDivElement | null }>({})
   const [newSellerData, setNewSellerData] = useState({ name: '', email: '', password: '' })
   const [creatingCustomer, setCreatingCustomer] = useState(false)
@@ -380,6 +393,40 @@ export default function SalesPage() {
   useEffect(() => {
     loadData()
   }, [periodFilter, specificDate])
+
+  useEffect(() => {
+    setPage(1)
+  }, [periodFilter, specificDate, pageSize])
+
+  const totalResults = sales.length
+  const totalPages = Math.max(1, Math.ceil(totalResults / pageSize))
+  const safePage = Math.min(page, totalPages)
+  const startIndex = totalResults === 0 ? 0 : (safePage - 1) * pageSize
+  const endIndexExclusive = Math.min(startIndex + pageSize, totalResults)
+  const pageSales = sales.slice(startIndex, endIndexExclusive)
+
+  const pagesToShow = useMemo(() => {
+    const total = totalPages
+    const current = safePage
+    if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1)
+    const pages = new Set<number>()
+    pages.add(1)
+    pages.add(total)
+    pages.add(current)
+    pages.add(current - 1)
+    pages.add(current + 1)
+    pages.add(current - 2)
+    pages.add(current + 2)
+    const arr = Array.from(pages).filter((p) => p >= 1 && p <= total).sort((a, b) => a - b)
+    const out: Array<number> = []
+    for (let i = 0; i < arr.length; i++) {
+      const p = arr[i]
+      const prev = arr[i - 1]
+      if (i > 0 && prev != null && p - prev > 1) out.push(-1)
+      out.push(p)
+    }
+    return out
+  }, [safePage, totalPages])
 
   // Carregar marcas FIPE quando abrir o modal de veículo
   useEffect(() => {
@@ -1841,11 +1888,11 @@ export default function SalesPage() {
           onClose={() => setToast(null)}
         />
       )}
-      <div className="space-y-6 h-full flex flex-col">
+      <div className="space-y-4 h-full flex flex-col">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div>
-            <h1 className="text-xl font-bold text-gray-900">Vendas</h1>
-            <p className="text-sm text-gray-600 mt-0.5">
+            <h1 className="text-lg font-bold text-gray-900">Vendas</h1>
+            <p className="text-xs text-gray-600 mt-0.5">
               {sales.length} {sales.length === 1 ? 'venda encontrada' : 'vendas encontradas'}
               {periodFilter !== 'all' && ` no período selecionado`}
             </p>
@@ -1855,7 +1902,7 @@ export default function SalesPage() {
               resetForm()
               setShowModal(true)
             }}
-            className="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors text-sm font-medium whitespace-nowrap"
+            className="bg-primary-600 text-white px-3 py-1.5 rounded-md hover:bg-primary-700 transition-colors text-sm font-medium whitespace-nowrap"
           >
             Nova Venda
           </button>
@@ -1874,10 +1921,10 @@ export default function SalesPage() {
               </button>
             )}
           </div>
-          <div className="flex flex-wrap gap-2 mb-3">
+          <div className="flex flex-wrap gap-1 mb-2">
             <button
               onClick={() => setPeriodFilter('all')}
-              className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
+              className={`px-2 py-1 rounded-md text-xs font-medium transition-colors ${
                 periodFilter === 'all'
                   ? 'bg-primary-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -1887,7 +1934,7 @@ export default function SalesPage() {
             </button>
             <button
               onClick={() => setPeriodFilter('today')}
-              className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
+              className={`px-2 py-1 rounded-md text-xs font-medium transition-colors ${
                 periodFilter === 'today'
                   ? 'bg-primary-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -1897,7 +1944,7 @@ export default function SalesPage() {
             </button>
             <button
               onClick={() => setPeriodFilter('week')}
-              className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
+              className={`px-2 py-1 rounded-md text-xs font-medium transition-colors ${
                 periodFilter === 'week'
                   ? 'bg-primary-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -1907,7 +1954,7 @@ export default function SalesPage() {
             </button>
             <button
               onClick={() => setPeriodFilter('month')}
-              className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
+              className={`px-2 py-1 rounded-md text-xs font-medium transition-colors ${
                 periodFilter === 'month'
                   ? 'bg-primary-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -1917,7 +1964,7 @@ export default function SalesPage() {
             </button>
             <button
               onClick={() => setPeriodFilter('year')}
-              className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
+              className={`px-2 py-1 rounded-md text-xs font-medium transition-colors ${
                 periodFilter === 'year'
                   ? 'bg-primary-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -1926,13 +1973,13 @@ export default function SalesPage() {
               Este Ano
             </button>
           </div>
-          <div className="flex items-center gap-2 border-t border-gray-200 pt-2">
+          <div className="flex items-center gap-2 border-t border-gray-200 pt-1">
             <label className="text-xs font-medium text-gray-700 whitespace-nowrap">Data específica:</label>
             <input
               type="date"
               value={specificDate}
               onChange={(e) => handleDateChange(e.target.value)}
-              className="px-2 py-1.5 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500 text-gray-900 text-sm"
+              className="px-2 py-1 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500 text-gray-900 text-sm"
             />
             {specificDate && (
               <span className="text-xs text-gray-600">
@@ -1950,31 +1997,31 @@ export default function SalesPage() {
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50 sticky top-0 z-10">
                   <tr>
-                    <th className="px-4 py-2.5 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Cliente</th>
-                    <th className="px-4 py-2.5 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Veículo</th>
-                    <th className="px-4 py-2.5 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Valor Venda</th>
-                    <th className="px-4 py-2.5 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Valor Compra</th>
-                    <th className="px-4 py-2.5 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Lucro</th>
-                    <th className="px-4 py-2.5 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Vendedor</th>
-                    <th className="px-4 py-2.5 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Status</th>
-                    <th className="px-4 py-2.5 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Ações</th>
+                    <th className="px-3 py-1.5 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Cliente</th>
+                    <th className="px-3 py-1.5 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Veículo</th>
+                    <th className="px-3 py-1.5 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Valor Venda</th>
+                    <th className="px-3 py-1.5 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Valor Compra</th>
+                    <th className="px-3 py-1.5 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Lucro</th>
+                    <th className="px-3 py-1.5 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Vendedor</th>
+                    <th className="px-3 py-1.5 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Status</th>
+                    <th className="px-3 py-1.5 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Ações</th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {sales.length === 0 ? (
                     <tr>
-                      <td colSpan={8} className="px-4 py-6 text-center text-gray-500 text-sm">
+                      <td colSpan={8} className="px-3 py-4 text-center text-gray-500 text-sm">
                         Nenhuma venda cadastrada
                       </td>
                     </tr>
                   ) : (
-                    sales.map((sale) => (
+                    pageSales.map((sale) => (
                       <tr key={sale.id} className="hover:bg-gray-50 transition-colors">
-                        <td className="px-4 py-3">
+                        <td className="px-3 py-2">
                           <div className="text-sm font-medium text-gray-900">{sale.customer?.name || '-'}</div>
                           <div className="text-xs text-gray-500 mt-0.5">{sale.customer?.cpf || sale.customer?.phone || '-'}</div>
                         </td>
-                        <td className="px-4 py-3">
+                        <td className="px-3 py-2">
                           <div className="text-sm font-medium text-gray-900">
                             {sale.vehicle?.brand} {sale.vehicle?.model}
                           </div>
@@ -1982,28 +2029,28 @@ export default function SalesPage() {
                             {sale.vehicle?.year} {sale.vehicle?.plate && `• ${sale.vehicle.plate}`}
                           </div>
                         </td>
-                        <td className="px-4 py-3 whitespace-nowrap">
+                        <td className="px-3 py-2 whitespace-nowrap">
                           <div className="text-sm font-semibold text-gray-900">
                             {sale.salePrice ? `R$ ${sale.salePrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` : '-'}
                           </div>
                         </td>
-                        <td className="px-4 py-3 whitespace-nowrap">
+                        <td className="px-3 py-2 whitespace-nowrap">
                           <div className="text-sm text-gray-700">
                             {sale.purchasePrice ? `R$ ${sale.purchasePrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` : '-'}
                           </div>
                         </td>
-                        <td className="px-4 py-3 whitespace-nowrap">
+                        <td className="px-3 py-2 whitespace-nowrap">
                           <div className="text-sm font-semibold text-green-600">
                             {sale.profit ? `R$ ${sale.profit.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` : '-'}
                           </div>
                         </td>
-                        <td className="px-4 py-3 whitespace-nowrap">
+                        <td className="px-3 py-2 whitespace-nowrap">
                           <div className="text-sm text-gray-700">
                             {sale.seller?.name || '-'}
                           </div>
                         </td>
-                        <td className="px-4 py-3 whitespace-nowrap">
-                          <span className={`inline-flex px-2.5 py-1 text-xs font-medium rounded-full ${
+                        <td className="px-3 py-2 whitespace-nowrap">
+                          <span className={`inline-flex px-2 py-0.5 text-xs font-medium rounded-full ${
                             sale.status === 'concluida' 
                               ? 'bg-green-100 text-green-800' 
                               : sale.status === 'cancelada'
@@ -2013,7 +2060,7 @@ export default function SalesPage() {
                             {sale.status === 'concluida' ? 'Concluída' : sale.status === 'cancelada' ? 'Cancelada' : 'Em Andamento'}
                           </span>
                         </td>
-                        <td className="px-4 py-3 whitespace-nowrap">
+                        <td className="px-3 py-2 whitespace-nowrap">
                           <div className="relative">
                             <button
                               onClick={(e) => {
@@ -2030,13 +2077,13 @@ export default function SalesPage() {
                                 ref={(el) => { menuRefs.current[sale.id] = el }}
                                 className="absolute right-0 mt-1 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50"
                               >
-                                <button
+                              <button
                                   onClick={(e) => {
                                     e.stopPropagation()
                                     handleEdit(sale)
                                     setOpenMenuId(null)
                                   }}
-                                  className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2"
+                                  className="w-full px-3 py-1.5 text-left text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2"
                                 >
                                   <FiEdit className="w-4 h-4" />
                                   Editar
@@ -2048,7 +2095,7 @@ export default function SalesPage() {
                                     setShowDetailsModal(true)
                                     setOpenMenuId(null)
                                   }}
-                                  className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2"
+                                  className="w-full px-3 py-1.5 text-left text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2"
                                 >
                                   <FiEye className="w-4 h-4" />
                                   Ver Detalhes
@@ -2059,7 +2106,7 @@ export default function SalesPage() {
                                     handleGenerateContract(sale)
                                     setOpenMenuId(null)
                                   }}
-                                  className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2"
+                                  className="w-full px-3 py-1.5 text-left text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2"
                                 >
                                   <FiFileText className="w-4 h-4" />
                                   Contrato
@@ -2072,7 +2119,7 @@ export default function SalesPage() {
                                     setOpenMenuId(null)
                                   }}
                                   disabled={deleting === sale.id}
-                                  className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                                  className="w-full px-3 py-1.5 text-left text-sm text-red-600 hover:bg-red-50 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                   <FiTrash2 className="w-4 h-4" />
                                   {deleting === sale.id ? 'Excluindo...' : 'Excluir'}
@@ -2090,13 +2137,93 @@ export default function SalesPage() {
           </div>
         )}
 
+        {!loading && totalResults > 0 && (
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="text-xs text-gray-600">
+              Mostrando <span className="font-medium text-gray-900">{startIndex + 1}</span>–<span className="font-medium text-gray-900">{endIndexExclusive}</span> de{' '}
+              <span className="font-medium text-gray-900">{totalResults}</span>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <select
+                value={pageSize}
+                onChange={(e) => setPageSize(parseInt(e.target.value))}
+                className="px-2 py-1.5 border border-gray-300 rounded-lg text-sm text-gray-900 bg-white"
+                aria-label="Itens por página"
+                title="Itens por página"
+              >
+                <option value={20}>20</option>
+                <option value={40}>40</option>
+                <option value={80}>80</option>
+                <option value={120}>120</option>
+              </select>
+
+              <button
+                type="button"
+                onClick={() => setPage(1)}
+                disabled={safePage <= 1}
+                className="px-2 py-1.5 border border-gray-300 rounded-md text-sm text-gray-700 disabled:opacity-50"
+              >
+                Primeira
+              </button>
+              <button
+                type="button"
+                onClick={() => setPage((p) => Math.max(1, p - 1))}
+                disabled={safePage <= 1}
+                className="px-2 py-1.5 border border-gray-300 rounded-md text-sm text-gray-700 disabled:opacity-50"
+              >
+                Anterior
+              </button>
+
+              <div className="flex items-center gap-1">
+                {pagesToShow.map((p, idx) =>
+                  p === -1 ? (
+                    <span key={`e-${idx}`} className="px-2 text-sm text-gray-500">
+                      …
+                    </span>
+                  ) : (
+                    <button
+                      key={p}
+                      type="button"
+                      onClick={() => setPage(p)}
+                      className={`h-8 min-w-8 px-2 rounded-md text-sm border ${
+                        p === safePage ? 'bg-primary-600 text-white border-primary-600' : 'border-gray-300 text-gray-700 hover:bg-gray-50'
+                      }`}
+                      aria-current={p === safePage ? 'page' : undefined}
+                    >
+                      {p}
+                    </button>
+                  )
+                )}
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                disabled={safePage >= totalPages}
+                className="px-2 py-1.5 border border-gray-300 rounded-md text-sm text-gray-700 disabled:opacity-50"
+              >
+                Próxima
+              </button>
+              <button
+                type="button"
+                onClick={() => setPage(totalPages)}
+                disabled={safePage >= totalPages}
+                className="px-2 py-1.5 border border-gray-300 rounded-md text-sm text-gray-700 disabled:opacity-50"
+              >
+                Última
+              </button>
+            </div>
+          </div>
+        )}
+
         {/* Modal Nova Venda */}
         {showModal && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-3">
             <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-              <div className="p-3">
-                <h2 className="text-lg font-bold mb-3">Incluir Venda</h2>
-                <form onSubmit={handleSubmit} className="space-y-3">
+              <div className="p-2">
+                <h2 className="text-lg font-bold mb-2">Incluir Venda</h2>
+                <form onSubmit={handleSubmit} className="space-y-2">
                   {/* Veículo */}
                   <div>
                     <label className="block text-xs font-medium text-gray-700 mb-0.5">Veículo</label>
@@ -2214,7 +2341,7 @@ export default function SalesPage() {
                                         setCustomerSearch(`${customer.name} ${customer.cpf || customer.phone}`)
                                         setShowCustomerDropdown(false)
                                       }}
-                                      className="w-full text-left px-4 py-2 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none text-gray-900"
+                                      className="w-full text-left px-3 py-1.5 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none text-gray-900 text-sm"
                                     >
                                       <div className="font-medium">{customer.name}</div>
                                       <div className="text-xs text-gray-500">{customer.cpf || customer.phone}</div>
@@ -2266,7 +2393,7 @@ export default function SalesPage() {
                                         setCustomerSearch(`${customer.name} ${customer.cpf || customer.phone}`)
                                         setShowCustomerDropdown(false)
                                       }}
-                                      className="w-full text-left px-4 py-2 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none text-gray-900"
+                                      className="w-full text-left px-3 py-1.5 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none text-gray-900 text-sm"
                                     >
                                       <div className="font-medium">{customer.name}</div>
                                       <div className="text-xs text-gray-500">{customer.cpf || customer.phone}</div>
@@ -2639,7 +2766,7 @@ export default function SalesPage() {
                                                     setAvalistaSearch((prev) => ({ ...prev, [index]: customer.name }))
                                                     setShowAvalistaDropdown((prev) => ({ ...prev, [index]: false }))
                                                   }}
-                                                  className="w-full text-left px-4 py-2 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none text-gray-900"
+                                                  className="w-full text-left px-3 py-1.5 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none text-gray-900 text-sm"
                                                 >
                                                   <div className="font-medium">{customer.name}</div>
                                                   <div className="text-xs text-gray-500">{customer.cpf || customer.phone}</div>
@@ -2694,7 +2821,7 @@ export default function SalesPage() {
                                                     setAvalistaAdicionalSearch((prev) => ({ ...prev, [index]: customer.name }))
                                                     setShowAvalistaAdicionalDropdown((prev) => ({ ...prev, [index]: false }))
                                                   }}
-                                                  className="w-full text-left px-4 py-2 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none text-gray-900"
+                                                  className="w-full text-left px-3 py-1.5 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none text-gray-900 text-sm"
                                                 >
                                                   <div className="font-medium">{customer.name}</div>
                                                   <div className="text-xs text-gray-500">{customer.cpf || customer.phone}</div>
@@ -2837,7 +2964,7 @@ export default function SalesPage() {
                                                     setVehicleSearchByPayment({ ...vehicleSearchByPayment, [index]: `${vehicle.brand} ${vehicle.model} ${vehicle.year} ${vehicle.plate || ''}` })
                                                     setShowVehicleDropdownByPayment({ ...showVehicleDropdownByPayment, [index]: false })
                                                   }}
-                                                  className="w-full text-left px-4 py-2 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none text-gray-900"
+                                                  className="w-full text-left px-3 py-1.5 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none text-gray-900 text-sm"
                                                 >
                                                   <div className="font-medium text-xs">{vehicle.brand} {vehicle.model} {vehicle.year}</div>
                                                   {vehicle.plate && <div className="text-xs text-gray-500">Placa: {vehicle.plate}</div>}
@@ -2984,7 +3111,14 @@ export default function SalesPage() {
                                       <select
                                         required
                                         value={pm.type}
-                                        onChange={(e) => updatePaymentMethod(index, 'type', e.target.value)}
+                                        onChange={(e) => {
+                                          const newType = e.target.value
+                                          updatePaymentMethod(index, 'type', newType)
+                                          if (newType === 'financiamento') {
+                                            setFinanciamentoIndex(index)
+                                            setShowFinanciamentoModal(true)
+                                          }
+                                        }}
                                         className="w-full px-2 py-1 text-xs border border-gray-300 rounded focus:ring-primary-500 focus:border-primary-500 text-gray-900"
                                       >
                                         <option value="">Selecione</option>
@@ -3020,14 +3154,28 @@ export default function SalesPage() {
                                         className="w-full px-2 py-1 text-xs border border-gray-300 rounded focus:ring-primary-500 focus:border-primary-500 text-gray-900"
                                       />
                                     </div>
-                                    <div>
-                                      <button
-                                        type="button"
-                                        onClick={() => removePaymentMethod(index)}
-                                        className="text-red-600 hover:text-red-800 text-xs"
-                                      >
-                                        Remover
-                                      </button>
+                                    <div className="flex items-center gap-2">
+                                      {pm.type === 'financiamento' && (
+                                        <button
+                                          type="button"
+                                          onClick={() => {
+                                            setFinanciamentoIndex(index)
+                                            setShowFinanciamentoModal(true)
+                                          }}
+                                          className="text-xs bg-primary-600 text-white px-2 py-1 rounded hover:bg-primary-700"
+                                        >
+                                          Configurar
+                                        </button>
+                                      )}
+                                      <div>
+                                        <button
+                                          type="button"
+                                          onClick={() => removePaymentMethod(index)}
+                                          className="text-red-600 hover:text-red-800 text-xs"
+                                        >
+                                          Remover
+                                        </button>
+                                      </div>
                                     </div>
                                   </div>
                                 </>
@@ -3231,13 +3379,13 @@ export default function SalesPage() {
                         setShowNewSellerModal(false)
                         setNewSellerData({ name: '', email: '', password: '' })
                       }}
-                      className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
+                      className="px-3 py-1.5 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 text-sm"
                     >
                       Cancelar
                     </button>
                     <button
                       type="submit"
-                      className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700"
+                      className="px-3 py-1.5 bg-primary-600 text-white rounded-md hover:bg-primary-700 text-sm"
                     >
                       Criar
                     </button>
@@ -3255,15 +3403,35 @@ export default function SalesPage() {
               <div className="p-6">
                 <div className="flex justify-between items-center mb-4">
                   <h2 className="text-xl font-bold text-gray-900">Detalhes da Venda #{selectedSale.id}</h2>
-                  <button
-                    onClick={() => {
-                      setShowDetailsModal(false)
-                      setSelectedSale(null)
-                    }}
-                    className="text-gray-400 hover:text-gray-600"
-                  >
-                    ✕
-                  </button>
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={async () => {
+                        try {
+                          await downloadSaleNfPdf(selectedSale)
+                        } catch (e) {
+                          console.error('Erro ao gerar NF (PDF):', e)
+                          setToast({ message: 'Erro ao gerar NF (PDF)', type: 'error' })
+                        }
+                      }}
+                      className="inline-flex items-center gap-2 px-3 py-1.5 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 text-sm"
+                      title="Baixar NF (PDF)"
+                    >
+                      <FiDownload className="w-4 h-4" />
+                      Baixar NF
+                    </button>
+                    <button
+                      onClick={() => {
+                        setShowDetailsModal(false)
+                        setSelectedSale(null)
+                      }}
+                      className="text-gray-400 hover:text-gray-600"
+                      aria-label="Fechar"
+                      title="Fechar"
+                    >
+                      ✕
+                    </button>
+                  </div>
                 </div>
 
                 <div className="space-y-4">
@@ -3392,6 +3560,59 @@ export default function SalesPage() {
                     </div>
                   )}
 
+                  {/* Formas de Pagamento (múltiplas) */}
+                  {selectedSale.paymentMethods && selectedSale.paymentMethods.length > 0 && (
+                    <div className="border border-gray-300 p-4 rounded-lg">
+                      <h3 className="font-bold text-lg mb-3 text-gray-900">Formas de Pagamento</h3>
+                      <div className="overflow-x-auto">
+                        <table className="min-w-full divide-y divide-gray-200">
+                          <thead className="bg-gray-50">
+                            <tr>
+                              <th className="px-3 py-2 text-left text-xs font-semibold text-gray-700">Data</th>
+                              <th className="px-3 py-2 text-left text-xs font-semibold text-gray-700">Tipo</th>
+                              <th className="px-3 py-2 text-right text-xs font-semibold text-gray-700">Valor</th>
+                              <th className="px-3 py-2 text-left text-xs font-semibold text-gray-700">Detalhes</th>
+                            </tr>
+                          </thead>
+                          <tbody className="bg-white divide-y divide-gray-200">
+                            {selectedSale.paymentMethods.map((pm: any, idx: number) => {
+                              const date = pm.date ? new Date(pm.date).toLocaleDateString('pt-BR') : '-'
+                              const value = pm.value != null ? `R$ ${Number(pm.value).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` : '-'
+                              const banco = pm.bancoFinanceira || pm.financingBank || null
+                              const parcelas = pm.quantidadeParcelas || null
+                              const valorFin = pm.valorFinanciado != null ? `R$ ${Number(pm.valorFinanciado).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` : null
+                              const extras: string[] = []
+                              if (banco) extras.push(`Banco/Financeira: ${banco}`)
+                              if (parcelas) extras.push(`Parcelas: ${parcelas}x`)
+                              if (valorFin) extras.push(`Valor financiado: ${valorFin}`)
+                              if (pm.numeroDocumento) extras.push(`Doc: ${pm.numeroDocumento}`)
+                              if (pm.descricao) extras.push(pm.descricao)
+
+                              return (
+                                <tr key={pm.id ?? `${pm.type}-${idx}`}>
+                                  <td className="px-3 py-2 text-sm text-gray-700 whitespace-nowrap">{date}</td>
+                                  <td className="px-3 py-2 text-sm text-gray-900">{formatPaymentMethod(pm.type)}</td>
+                                  <td className="px-3 py-2 text-sm text-gray-900 text-right whitespace-nowrap">{value}</td>
+                                  <td className="px-3 py-2 text-xs text-gray-600">
+                                    {extras.length ? (
+                                      <div className="space-y-0.5">
+                                        {extras.map((t, i) => (
+                                          <div key={i}>{t}</div>
+                                        ))}
+                                      </div>
+                                    ) : (
+                                      <span className="text-gray-400">-</span>
+                                    )}
+                                  </td>
+                                </tr>
+                              )
+                            })}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  )}
+
                   {/* Comissão */}
                   {selectedSale.commission && (
                     <div className="border border-gray-300 p-4 rounded-lg">
@@ -3505,7 +3726,7 @@ export default function SalesPage() {
                       setShowDetailsModal(false)
                       setSelectedSale(null)
                     }}
-                    className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300"
+                    className="px-3 py-1.5 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 text-sm"
                   >
                     Fechar
                   </button>
@@ -3713,19 +3934,19 @@ export default function SalesPage() {
                   </div>
                 </div>
 
-                <div className="flex justify-end space-x-3 mt-6 pt-4 border-t">
+                <div className="flex justify-end space-x-2 mt-4 pt-2 border-t">
                   <button
                     onClick={() => {
                       setShowContractModal(false)
                       setSelectedSale(null)
                     }}
-                    className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
+                    className="px-3 py-1.5 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 text-sm"
                   >
                     Fechar
                   </button>
                   <button
                     onClick={handleGeneratePDF}
-                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                    className="px-3 py-1.5 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-sm"
                   >
                     Gerar PDF
                   </button>
@@ -4625,7 +4846,7 @@ export default function SalesPage() {
                     <button type="button" onClick={() => { setShowCreateVehicleModal(false); setCreatingVehicleForPaymentIndex(null); resetVehicleForm(); }} disabled={creatingVehicle} className="px-3 py-1.5 text-sm border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 disabled:opacity-50">
                       Cancelar
                     </button>
-                    <button type="submit" disabled={creatingVehicle} className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 disabled:opacity-50 flex items-center text-sm">
+                    <button type="submit" disabled={creatingVehicle} className="px-3 py-1.5 bg-primary-600 text-white rounded-md hover:bg-primary-700 disabled:opacity-50 flex items-center text-sm">
                       {creatingVehicle ? (
                         <><svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" /><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" /></svg>Salvando...</>
                       ) : (
@@ -4875,7 +5096,7 @@ export default function SalesPage() {
                                       setAvalistaSearch((prev) => ({ ...prev, [financiamentoProprioIndex]: customer.name }))
                                       setShowAvalistaDropdown((prev) => ({ ...prev, [financiamentoProprioIndex]: false }))
                                     }}
-                                    className="w-full text-left px-4 py-2 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none text-gray-900"
+                                    className="w-full text-left px-3 py-1.5 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none text-gray-900 text-sm"
                                   >
                                     <div className="font-medium">{customer.name}</div>
                                     <div className="text-xs text-gray-500">{customer.cpf || customer.phone}</div>
@@ -4930,7 +5151,7 @@ export default function SalesPage() {
                                       setAvalistaAdicionalSearch((prev) => ({ ...prev, [financiamentoProprioIndex]: customer.name }))
                                       setShowAvalistaAdicionalDropdown((prev) => ({ ...prev, [financiamentoProprioIndex]: false }))
                                     }}
-                                    className="w-full text-left px-4 py-2 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none text-gray-900"
+                                    className="w-full text-left px-3 py-1.5 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none text-gray-900 text-sm"
                                   >
                                     <div className="font-medium">{customer.name}</div>
                                     <div className="text-xs text-gray-500">{customer.cpf || customer.phone}</div>
@@ -4967,6 +5188,260 @@ export default function SalesPage() {
                   className="px-3 py-1.5 text-xs border border-gray-300 rounded text-gray-700 hover:bg-gray-50"
                 >
                   Fechar
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Modal Inclusão de Financiamento (Banco/Financeira) */}
+        {showFinanciamentoModal && financiamentoIndex !== null && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[75] p-4">
+            <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] flex flex-col">
+              <div className="p-4 border-b border-gray-200 flex justify-between items-center">
+                <h2 className="text-lg font-bold">Inclusão de Financiamento</h2>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowFinanciamentoModal(false)
+                    setFinanciamentoIndex(null)
+                  }}
+                  className="text-gray-500 hover:text-gray-700"
+                >
+                  <FiX className="w-5 h-5" />
+                </button>
+              </div>
+              <div className="flex-1 overflow-y-auto p-4 space-y-3">
+                <div>
+                  <label className="block text-xs font-medium text-gray-700 mb-0.5">Banco/Financeira *</label>
+                  <input
+                    list="banks-list"
+                    required
+                    value={paymentMethods[financiamentoIndex]?.financingBank || ''}
+                    onChange={(e) => updatePaymentMethod(financiamentoIndex, 'financingBank', e.target.value)}
+                    className="w-full px-2 py-1 text-xs border border-gray-300 rounded text-gray-900"
+                    placeholder="Digite ou selecione o banco/financeira"
+                  />
+                  <datalist id="banks-list">
+                    {banks.map(b => <option key={b.value} value={b.label} />)}
+                  </datalist>
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-0.5">Data primeiro vencimento *</label>
+                    <input
+                      type="date"
+                      required
+                      value={paymentMethods[financiamentoIndex]?.date || formData.date || ''}
+                      onChange={(e) => updatePaymentMethod(financiamentoIndex, 'date', e.target.value)}
+                      className="w-full px-2 py-1 text-xs border border-gray-300 rounded text-gray-900"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-0.5">Quantidade de parcelas *</label>
+                    <select
+                      required
+                      value={paymentMethods[financiamentoIndex]?.quantidadeParcelas || ''}
+                      onChange={(e) => setQuantidadeParcelasFinanciamento(financiamentoIndex, e.target.value)}
+                      className="w-full px-2 py-1 text-xs border border-gray-300 rounded text-gray-900"
+                    >
+                      <option value="">Selecione</option>
+                      {Array.from({ length: 60 }, (_, i) => i + 1).map(num => (
+                        <option key={num} value={num.toString()}>{num}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-0.5">Valor financiado *</label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      required
+                      value={paymentMethods[financiamentoIndex]?.valorFinanciado || ''}
+                      onChange={(e) => updatePaymentMethod(financiamentoIndex, 'valorFinanciado', e.target.value)}
+                      className="w-full px-2 py-1 text-xs border border-gray-300 rounded text-gray-900"
+                      placeholder="0,00"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-0.5">Valor da parcela</label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      value={paymentMethods[financiamentoIndex]?.valorParcela || ''}
+                      onChange={(e) => updatePaymentMethod(financiamentoIndex, 'valorParcela', e.target.value)}
+                      className="w-full px-2 py-1 text-xs border border-gray-300 rounded text-gray-900"
+                      placeholder="0,00"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-xs font-medium text-gray-700 mb-0.5">Descrição</label>
+                  <input
+                    type="text"
+                    value={paymentMethods[financiamentoIndex]?.descricao || ''}
+                    onChange={(e) => updatePaymentMethod(financiamentoIndex, 'descricao', e.target.value)}
+                    className="w-full px-2 py-1 text-xs border border-gray-300 rounded text-gray-900"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-medium text-gray-700 mb-0.5">Tipo de retorno (número)</label>
+                  <select
+                    value={paymentMethods[financiamentoIndex]?.tipoRetorno || ''}
+                    onChange={(e) => updatePaymentMethod(financiamentoIndex, 'tipoRetorno', e.target.value)}
+                    className="w-full px-2 py-1 text-xs border border-gray-300 rounded text-gray-900"
+                  >
+                    <option value="">Selecione</option>
+                    {Array.from({ length: 60 }, (_, i) => i + 1).map((num) => (
+                      <option key={num} value={num.toString()}>{num}</option>
+                    ))}
+                  </select>
+                </div>
+                <div className="grid grid-cols-3 gap-2">
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-0.5">Retorno</label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      value={paymentMethods[financiamentoIndex]?.retorno || ''}
+                      onChange={(e) => updatePaymentMethod(financiamentoIndex, 'retorno', e.target.value)}
+                      className="w-full px-2 py-1 text-xs border border-gray-300 rounded text-gray-900"
+                      placeholder="0,00"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-0.5">TAC</label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      value={paymentMethods[financiamentoIndex]?.tac || ''}
+                      onChange={(e) => updatePaymentMethod(financiamentoIndex, 'tac', e.target.value)}
+                      className="w-full px-2 py-1 text-xs border border-gray-300 rounded text-gray-900"
+                      placeholder="0,00"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-0.5">Plus</label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      value={paymentMethods[financiamentoIndex]?.plus || ''}
+                      onChange={(e) => updatePaymentMethod(financiamentoIndex, 'plus', e.target.value)}
+                      className="w-full px-2 py-1 text-xs border border-gray-300 rounded text-gray-900"
+                      placeholder="0,00"
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-0.5">TIF</label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      value={paymentMethods[financiamentoIndex]?.tif || ''}
+                      onChange={(e) => updatePaymentMethod(financiamentoIndex, 'tif', e.target.value)}
+                      className="w-full px-2 py-1 text-xs border border-gray-300 rounded text-gray-900"
+                      placeholder="0,00"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-0.5">Taxa de intermediação de financiamento</label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      value={paymentMethods[financiamentoIndex]?.taxaIntermediacao || ''}
+                      onChange={(e) => updatePaymentMethod(financiamentoIndex, 'taxaIntermediacao', e.target.value)}
+                      className="w-full px-2 py-1 text-xs border border-gray-300 rounded text-gray-900"
+                      placeholder="0,00"
+                    />
+                  </div>
+                </div>
+                {(() => {
+                  const pm = paymentMethods[financiamentoIndex]
+                  const qty = pm?.quantidadeParcelas || ''
+                  const n = parseInt(qty || '0', 10) || 0
+                  if (n <= 0) return null
+                  const parcelas = computeParcelasRows(pm || {} as SalePaymentMethod, formData.date)
+                  if (!parcelas.length) return null
+                  return (
+                    <div>
+                      <div className="flex justify-between items-center">
+                        <h4 className="text-xs font-semibold text-gray-900">Parcelas</h4>
+                        <button
+                          type="button"
+                          onClick={() => setQuantidadeParcelasFinanciamento(financiamentoIndex, pm?.quantidadeParcelas || '')}
+                          className="text-xs text-primary-600 hover:text-primary-800"
+                        >
+                          Recalcular datas
+                        </button>
+                      </div>
+                      <div className="space-y-2 mt-2">
+                        {parcelas.map((p, idx) => (
+                          <div key={idx} className="grid grid-cols-[auto_1fr_1fr_1fr] gap-2 items-center border border-gray-200 rounded p-2 bg-gray-50/50">
+                            <span className="text-xs font-medium text-gray-700 whitespace-nowrap">Parcela {idx + 1} *</span>
+                            <div>
+                              <input
+                                type="date"
+                                required
+                                value={p.data}
+                                onChange={(e) => updateParcela(financiamentoIndex, idx, 'data', e.target.value)}
+                                className="w-full px-2 py-1 text-xs border border-gray-300 rounded text-gray-900 bg-white"
+                              />
+                            </div>
+                            <div>
+                              <input
+                                type="number"
+                                step="0.01"
+                                required
+                                value={p.valor}
+                                onChange={(e) => updateParcela(financiamentoIndex, idx, 'valor', e.target.value)}
+                                className="w-full px-2 py-1 text-xs border border-gray-300 rounded text-gray-900 bg-white"
+                                placeholder="0,00"
+                              />
+                            </div>
+                            <div>
+                              <input
+                                type="text"
+                                value={p.numeroDocumento}
+                                onChange={(e) => updateParcela(financiamentoIndex, idx, 'numeroDocumento', e.target.value)}
+                                className="w-full px-2 py-1 text-xs border border-gray-300 rounded text-gray-900 bg-white"
+                                placeholder="Nº documento"
+                              />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )
+                })()}
+              </div>
+              <div className="p-4 border-t border-gray-200 flex justify-end gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowFinanciamentoModal(false)
+                    setFinanciamentoIndex(null)
+                  }}
+                  className="px-3 py-1.5 text-xs border border-gray-300 rounded text-gray-700 hover:bg-gray-50"
+                >
+                  Fechar
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    // Valor principal fica igual ao valor financiado se disponível
+                    const pm = paymentMethods[financiamentoIndex]
+                    if (pm && pm.valorFinanciado) {
+                      updatePaymentMethod(financiamentoIndex, 'value', pm.valorFinanciado)
+                    }
+                    setShowFinanciamentoModal(false)
+                    setFinanciamentoIndex(null)
+                  }}
+                  className="px-3 py-1.5 text-xs bg-primary-600 text-white rounded hover:bg-primary-700"
+                >
+                  Salvar
                 </button>
               </div>
             </div>

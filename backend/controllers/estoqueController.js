@@ -18,43 +18,75 @@ function calculateTotalSize(photos) {
   return photos.reduce((total, photo) => total + calculateBase64Size(photo), 0);
 }
 
-// Função para obter tamanho total usado
+// Função para obter tamanho total usado (mais eficiente usando aggregate)
 async function getTotalUsedSize(excludeId = null) {
-  const items = await prisma.estoque.findMany({
-    where: excludeId ? { id: { not: excludeId } } : {},
-    select: { totalSize: true }
+  const where = excludeId ? { id: { not: excludeId } } : {};
+  const result = await prisma.estoque.aggregate({
+    _sum: {
+      totalSize: true
+    },
+    where
   });
-  return items.reduce((total, item) => total + (item.totalSize || 0), 0);
+  return result._sum?.totalSize || 0;
 }
 
 class EstoqueController {
   async list(req, res) {
     try {
-      const { search } = req.query;
-      
+      const { search, page = '1', perPage = '50' } = req.query;
+
       const where = {};
       if (search) {
         where.OR = [
-          { brand: { contains: search, mode: 'insensitive' } },
-          { model: { contains: search, mode: 'insensitive' } }
+          { brand: { contains: String(search), mode: 'insensitive' } },
+          { model: { contains: String(search), mode: 'insensitive' } }
         ];
       }
 
+      const pageNum = Math.max(1, parseInt(page, 10) || 1);
+      const take = Math.min(200, Math.max(1, parseInt(perPage, 10) || 50));
+      const skip = (pageNum - 1) * take;
+
+      // Select apenas os campos necessários para a listagem (evitar fotos/JSON grandes)
       const items = await prisma.estoque.findMany({
         where,
-        orderBy: { createdAt: 'desc' }
+        orderBy: { createdAt: 'desc' },
+        take,
+        skip,
+        select: {
+          id: true,
+          brand: true,
+          model: true,
+          year: true,
+          plate: true,
+          km: true,
+          color: true,
+          value: true,
+          promotionValue: true,
+          discount: true,
+          createdAt: true,
+          totalSize: true
+        }
       });
 
-      // Calcular tamanho total usado
+      // Calcular tamanho total usado com aggregate (mais eficiente)
       const totalUsed = await getTotalUsedSize();
       const totalUsedGB = (totalUsed / (1024 * 1024 * 1024)).toFixed(2);
       const maxGB = (MAX_STORAGE_SIZE / (1024 * 1024 * 1024)).toFixed(2);
       const availableGB = ((MAX_STORAGE_SIZE - totalUsed) / (1024 * 1024 * 1024)).toFixed(2);
 
+      // Contagem total para paginação
+      const totalCount = await prisma.estoque.count({ where });
+
       res.json({
         items,
+        pagination: {
+          page: pageNum,
+          perPage: take,
+          total: totalCount
+        },
         storage: {
-          totalUsed: totalUsed,
+          totalUsed,
           totalUsedGB: parseFloat(totalUsedGB),
           maxSize: MAX_STORAGE_SIZE,
           maxGB: parseFloat(maxGB),
@@ -476,20 +508,33 @@ class EstoqueController {
           data: saleData
         });
 
-        // Criar transações financeiras para cada forma de pagamento
+        // Criar transações financeiras para cada forma de pagamento (receber = entrada / venda)
         if (paymentMethods && paymentMethods.length > 0) {
-          const transactions = paymentMethods.map((pm) => ({
-            type: 'receita',
-            description: `Venda - ${pm.type} - ${estoqueItem.brand} ${estoqueItem.model}`,
-            amount: parseFloat(pm.value) || 0,
-            dueDate: pm.date ? new Date(pm.date) : new Date(),
-            status: 'pendente',
-            saleId: sale.id
-          }));
+          const due = (pm) => (pm.date ? new Date(pm.date) : new Date());
+          const transactions = paymentMethods
+            .filter((pm) => (parseFloat(pm.value) || 0) > 0)
+            .map((pm) => {
+              const value = parseFloat(pm.value) || 0;
+              const d = due(pm);
+              return {
+                operacao: 'receber',
+                type: 'receber',
+                description: `Venda - ${pm.type} - ${estoqueItem.brand} ${estoqueItem.model}`,
+                valorTitulo: value,
+                amount: value,
+                dataVencimento: d,
+                dueDate: d,
+                status: 'pendente',
+                saleId: sale.id,
+                customerId: parseInt(customerId),
+              };
+            });
 
-          await prisma.financialTransaction.createMany({
-            data: transactions
-          });
+          if (transactions.length) {
+            await prisma.financialTransaction.createMany({
+              data: transactions,
+            });
+          }
         }
 
         // Remover do estoque

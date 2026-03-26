@@ -1024,7 +1024,7 @@ export default function VehicleFormModal({
                       value={opcionaisSearch}
                       onChange={(e) => setOpcionaisSearch(e.target.value)}
                       placeholder="Buscar..."
-                      className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-lg mb-2"
+                      className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-lg mb-2 text-gray-900 placeholder:text-gray-500"
                     />
                     <div className="border border-gray-300 rounded-lg max-h-48 overflow-y-auto p-2 space-y-1">
                       {filteredOpcionais.slice(0, 80).map((o) => (
@@ -1032,7 +1032,7 @@ export default function VehicleFormModal({
                           key={o}
                           type="button"
                           onClick={() => addOpcional(o)}
-                          className="w-full text-left px-2 py-1.5 text-xs hover:bg-gray-100 rounded"
+                          className="w-full text-left px-2 py-1.5 text-xs hover:bg-gray-100 rounded text-gray-900"
                         >
                           {o}
                         </button>
@@ -1043,14 +1043,21 @@ export default function VehicleFormModal({
                     <div className="text-xs text-gray-500 mb-2">Selecionados ({formData.opcionais.length})</div>
                     <div className="border border-gray-300 rounded-lg max-h-48 overflow-y-auto p-2 space-y-1">
                       {formData.opcionais.map((o) => (
-                        <button
+                        <div
                           key={o}
-                          type="button"
-                          onClick={() => removeOpcional(o)}
-                          className="w-full text-left px-2 py-1.5 text-xs hover:bg-red-50 text-red-700 rounded"
+                          className="w-full flex items-center justify-between gap-2 px-2 py-1.5 text-xs rounded hover:bg-red-50"
                         >
-                          {o}
-                        </button>
+                          <span className="text-gray-900">{o}</span>
+                          <button
+                            type="button"
+                            onClick={() => removeOpcional(o)}
+                            className="shrink-0 h-6 w-6 inline-flex items-center justify-center rounded hover:bg-red-100 text-red-700"
+                            aria-label={`Remover opcional: ${o}`}
+                            title="Remover"
+                          >
+                            ×
+                          </button>
+                        </div>
                       ))}
                     </div>
                   </div>

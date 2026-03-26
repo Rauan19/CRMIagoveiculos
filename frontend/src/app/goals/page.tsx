@@ -1,11 +1,11 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import Layout from '@/components/Layout'
 import api from '@/services/api'
 import Toast from '@/components/Toast'
 import ConfirmModal from '@/components/ConfirmModal'
-import { FiTarget, FiEdit, FiTrash2, FiPlus, FiTrendingUp, FiFilter, FiSearch, FiX } from 'react-icons/fi'
+import { FiTarget, FiEdit, FiTrash2, FiPlus, FiTrendingUp, FiFilter, FiSearch, FiX, FiDownload, FiPrinter } from 'react-icons/fi'
 
 interface Goal {
   id: number
@@ -42,6 +42,8 @@ export default function GoalsPage() {
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' | 'info' } | null>(null)
   const [showConfirmModal, setShowConfirmModal] = useState(false)
   const [confirmDeleteId, setConfirmDeleteId] = useState<number | null>(null)
+  const [page, setPage] = useState(1)
+  const [pageSize, setPageSize] = useState(40)
   
   // Filtros
   const [filters, setFilters] = useState({
@@ -114,6 +116,40 @@ export default function GoalsPage() {
   useEffect(() => {
     applyFilters()
   }, [filters.search])
+
+  useEffect(() => {
+    setPage(1)
+  }, [filters.userId, filters.type, filters.period, filters.status, filters.search, pageSize])
+
+  const totalResults = goals.length
+  const totalPages = Math.max(1, Math.ceil(totalResults / pageSize))
+  const safePage = Math.min(page, totalPages)
+  const startIndex = totalResults === 0 ? 0 : (safePage - 1) * pageSize
+  const endIndexExclusive = Math.min(startIndex + pageSize, totalResults)
+  const pageGoals = goals.slice(startIndex, endIndexExclusive)
+
+  const pagesToShow = useMemo(() => {
+    const total = totalPages
+    const current = safePage
+    if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1)
+    const pages = new Set<number>()
+    pages.add(1)
+    pages.add(total)
+    pages.add(current)
+    pages.add(current - 1)
+    pages.add(current + 1)
+    pages.add(current - 2)
+    pages.add(current + 2)
+    const arr = Array.from(pages).filter((p) => p >= 1 && p <= total).sort((a, b) => a - b)
+    const out: Array<number> = []
+    for (let i = 0; i < arr.length; i++) {
+      const p = arr[i]
+      const prev = arr[i - 1]
+      if (i > 0 && prev != null && p - prev > 1) out.push(-1)
+      out.push(p)
+    }
+    return out
+  }, [safePage, totalPages])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -275,88 +311,227 @@ export default function GoalsPage() {
 
   const stats = getStats()
 
+  const handlePrint = () => {
+    try {
+      window.print()
+    } catch (error) {
+      console.error('Erro ao imprimir metas:', error)
+      setToast({ message: 'Erro ao enviar para impressão.', type: 'error' })
+    }
+  }
+
+  const handleExportPdf = () => {
+    try {
+      const rowsToExport = goals
+      if (!rowsToExport.length) {
+        setToast({ message: 'Não há metas para exportar.', type: 'info' })
+        return
+      }
+
+      const today = new Date().toISOString().split('T')[0]
+
+      const headerHtml = `
+        <tr>
+          <th>Vendedor</th>
+          <th>Email</th>
+          <th>Tipo</th>
+          <th>Meta</th>
+          <th>Atual</th>
+          <th>Progresso (%)</th>
+          <th>Período</th>
+          <th>Data Início</th>
+          <th>Data Fim</th>
+        </tr>
+      `
+
+      const rowsHtml = rowsToExport
+        .map((goal) => {
+          const progress = getProgress(goal).toFixed(1)
+          const start = goal.startDate ? new Date(goal.startDate).toLocaleDateString('pt-BR') : ''
+          const end = goal.endDate ? new Date(goal.endDate).toLocaleDateString('pt-BR') : ''
+          return `
+            <tr>
+              <td>${goal.user?.name || ''}</td>
+              <td>${goal.user?.email || ''}</td>
+              <td>${getTypeLabel(goal.type)}</td>
+              <td>${formatValue(goal, goal.targetValue)}</td>
+              <td>${formatValue(goal, goal.currentValue)}</td>
+              <td>${progress}%</td>
+              <td>${getPeriodLabel(goal.period)}</td>
+              <td>${start}</td>
+              <td>${end}</td>
+            </tr>
+          `
+        })
+        .join('')
+
+      const html = `
+        <!DOCTYPE html>
+        <html lang="pt-BR">
+          <head>
+            <meta charSet="utf-8" />
+            <title>Metas - ${today}</title>
+            <style>
+              body {
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+                padding: 16px;
+                color: #111827;
+              }
+              h1 {
+                font-size: 18px;
+                margin-bottom: 8px;
+              }
+              p {
+                font-size: 12px;
+                margin-top: 0;
+                margin-bottom: 16px;
+                color: #4b5563;
+              }
+              table {
+                width: 100%;
+                border-collapse: collapse;
+                font-size: 11px;
+              }
+              th, td {
+                border: 1px solid #e5e7eb;
+                padding: 4px 6px;
+                text-align: left;
+              }
+              th {
+                background: #f3f4f6;
+                font-weight: 600;
+              }
+            </style>
+          </head>
+          <body>
+            <h1>Metas</h1>
+            <p>Exportado em ${new Date().toLocaleString('pt-BR')}</p>
+            <table>
+              <thead>
+                ${headerHtml}
+              </thead>
+              <tbody>
+                ${rowsHtml}
+              </tbody>
+            </table>
+          </body>
+        </html>
+      `
+
+      const win = window.open('', '_blank')
+      if (!win) {
+        setToast({ message: 'Não foi possível abrir a janela para exportar.', type: 'error' })
+        return
+      }
+      win.document.open()
+      win.document.write(html)
+      win.document.close()
+      win.focus()
+      win.print()
+    } catch (error) {
+      console.error('Erro ao exportar metas em PDF:', error)
+      setToast({ message: 'Erro ao exportar metas em PDF.', type: 'error' })
+    }
+  }
+
   return (
     <Layout>
-      <div className="space-y-6 h-full flex flex-col">
-        <div className="flex justify-between items-center">
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900">Metas</h1>
-            <p className="text-gray-600 mt-1">Gerencie metas de vendas, receita e lucro</p>
+      <div className="space-y-1 h-full flex flex-col text-xs">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+          <div className="flex-1">
+            <h1 className="text-lg font-bold text-gray-900">Metas</h1>
+            <p className="text-xs text-gray-600 mt-0.5">Gerencie metas de vendas, receita e lucro</p>
           </div>
-          <button
-            onClick={openModal}
-            className="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors flex items-center gap-2"
-          >
-            <FiPlus />
-            Nova Meta
-          </button>
+          <div className="flex flex-wrap items-center justify-start md:justify-end gap-2">
+            <button
+              onClick={handleExportPdf}
+              className="px-1 py-0.5 bg-primary-50 text-primary-700 border border-primary-600 rounded-sm hover:bg-primary-100 transition-colors flex items-center gap-1 text-[11px]"
+            >
+              <FiDownload className="w-4 h-4" />
+              Exportar PDF
+            </button>
+            <button
+              onClick={openModal}
+              className="bg-primary-600 text-white px-1.5 py-0.5 rounded-sm hover:bg-primary-700 transition-colors flex items-center gap-1 text-[11px]"
+            >
+              <FiPlus />
+              Nova Meta
+            </button>
+            <button
+              onClick={handlePrint}
+              className="px-1.5 py-0.5 bg-primary-600 text-white rounded-sm hover:bg-primary-700 transition-colors flex items-center gap-1 text-[11px]"
+            >
+              <FiPrinter className="w-4 h-4" />
+              Imprimir
+            </button>
+          </div>
         </div>
 
         {/* Cards de Estatísticas */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3">
-          <div className="bg-white p-3 rounded-lg border border-gray-200 shadow-sm">
-            <div className="text-xs text-gray-600 mb-1">Total de Metas</div>
-            <div className="text-xl font-bold text-gray-900">{stats.totalGoals}</div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-1">
+          <div className="bg-white p-0.5 rounded border border-gray-200 shadow-sm">
+            <div className="text-[10px] text-gray-600 mb-0.5">Total de Metas</div>
+            <div className="text-xs font-bold text-gray-900">{stats.totalGoals}</div>
           </div>
-          <div className="bg-white p-3 rounded-lg border border-gray-200 shadow-sm">
-            <div className="text-xs text-gray-600 mb-1">Metas Concluídas</div>
-            <div className="text-xl font-bold text-green-600">{stats.completedGoals}</div>
+          <div className="bg-white p-0.5 rounded border border-gray-200 shadow-sm">
+            <div className="text-[10px] text-gray-600 mb-0.5">Metas Concluídas</div>
+            <div className="text-xs font-bold text-green-600">{stats.completedGoals}</div>
           </div>
-          <div className="bg-white p-3 rounded-lg border border-gray-200 shadow-sm">
-            <div className="text-xs text-gray-600 mb-1">Meta Total</div>
-            <div className="text-lg font-bold text-gray-900">
+          <div className="bg-white p-0.5 rounded border border-gray-200 shadow-sm">
+            <div className="text-[10px] text-gray-600 mb-0.5">Meta Total</div>
+            <div className="text-xs font-bold text-gray-900">
               {stats.totalTarget.toLocaleString('pt-BR')}
             </div>
           </div>
-          <div className="bg-white p-3 rounded-lg border border-gray-200 shadow-sm">
-            <div className="text-xs text-gray-600 mb-1">Alcance Total</div>
-            <div className="text-lg font-bold text-blue-600">
+          <div className="bg-white p-0.5 rounded border border-gray-200 shadow-sm">
+            <div className="text-[10px] text-gray-600 mb-0.5">Alcance Total</div>
+            <div className="text-xs font-bold text-blue-600">
               {stats.totalCurrent.toLocaleString('pt-BR')}
             </div>
           </div>
-          <div className="bg-white p-3 rounded-lg border border-gray-200 shadow-sm">
-            <div className="text-xs text-gray-600 mb-1">Progresso Médio</div>
-            <div className="text-xl font-bold text-primary-600">{stats.avgProgress.toFixed(1)}%</div>
+          <div className="bg-white p-0.5 rounded border border-gray-200 shadow-sm">
+            <div className="text-[10px] text-gray-600 mb-0.5">Progresso Médio</div>
+            <div className="text-xs font-bold text-primary-600">{stats.avgProgress.toFixed(1)}%</div>
           </div>
         </div>
 
         {/* Filtros */}
-        <div className="bg-white p-3 rounded-lg border border-gray-200 shadow-sm">
-          <div className="flex items-center justify-between mb-3">
-            <h2 className="text-base font-bold text-gray-900 flex items-center gap-2">
+        <div className="bg-white p-0.5 rounded border border-gray-200 shadow-sm">
+          <div className="flex items-center justify-between mb-2">
+            <h2 className="text-xs font-bold text-gray-900 flex items-center gap-1">
               <FiFilter className="text-gray-600" />
               Filtros
             </h2>
             {(filters.userId || filters.type || filters.period || filters.status || filters.search) && (
               <button
                 onClick={resetFilters}
-                className="text-sm text-gray-600 hover:text-gray-900 flex items-center gap-1"
+                className="text-[10px] text-gray-600 hover:text-gray-900 flex items-center gap-0.5"
               >
                 <FiX />
                 Limpar filtros
               </button>
             )}
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-1">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Buscar</label>
+              <label className="block text-[10px] font-medium text-gray-700 mb-0.5">Buscar</label>
               <div className="relative">
-                <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                 <input
                   type="text"
                   value={filters.search}
                   onChange={(e) => setFilters({ ...filters, search: e.target.value })}
                   placeholder="Nome ou email..."
-                  className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                      className="w-full pl-7 pr-2 py-0.5 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500 text-xs text-gray-900"
                 />
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Vendedor</label>
+              <label className="block text-[10px] font-medium text-gray-700 mb-0.5">Vendedor</label>
               <select
                 value={filters.userId}
                 onChange={(e) => setFilters({ ...filters, userId: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                className="w-full px-1.5 py-0.5 text-xs border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500 text-gray-900"
               >
                 <option value="">Todos</option>
                 {users.map((user) => (
@@ -367,11 +542,11 @@ export default function GoalsPage() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Tipo</label>
+              <label className="block text-[10px] font-medium text-gray-700 mb-0.5">Tipo</label>
               <select
                 value={filters.type}
                 onChange={(e) => setFilters({ ...filters, type: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                className="w-full px-1.5 py-0.5 text-xs border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500 text-gray-900"
               >
                 <option value="">Todos</option>
                 <option value="sales">Vendas</option>
@@ -380,11 +555,11 @@ export default function GoalsPage() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Período</label>
+              <label className="block text-[10px] font-medium text-gray-700 mb-0.5">Período</label>
               <select
                 value={filters.period}
                 onChange={(e) => setFilters({ ...filters, period: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                className="w-full px-1.5 py-0.5 text-xs border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500 text-gray-900"
               >
                 <option value="">Todos</option>
                 <option value="monthly">Mensal</option>
@@ -393,11 +568,11 @@ export default function GoalsPage() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+              <label className="block text-[10px] font-medium text-gray-700 mb-0.5">Status</label>
               <select
                 value={filters.status}
                 onChange={(e) => setFilters({ ...filters, status: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                className="w-full px-1.5 py-0.5 text-xs border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500 text-gray-900"
               >
                 <option value="">Todos</option>
                 <option value="active">Ativa</option>
@@ -411,64 +586,64 @@ export default function GoalsPage() {
         {loading ? (
           <div className="text-center py-12 text-gray-700">Carregando...</div>
         ) : (
-          <div className="bg-white shadow rounded-lg overflow-hidden border border-gray-200 max-h-[calc(100vh-220px)] flex flex-col">
+        <div className="bg-white shadow rounded overflow-hidden border border-gray-200 max-h-[calc(100vh-220px)] flex flex-col text-xs">
             <div className="overflow-x-auto overflow-y-auto flex-1 min-h-0">
-              <table className="min-w-full divide-y divide-gray-200">
+              <table className="min-w-full divide-y divide-gray-200 text-xs">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-3 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Vendedor
                     </th>
-                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-3 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Tipo
                     </th>
-                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-3 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Meta
                     </th>
-                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-3 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Atual
                     </th>
-                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-3 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Progresso
                     </th>
-                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-3 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Período
                     </th>
-                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-3 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Ações
                     </th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {goals.length === 0 ? (
-                    <tr>
-                      <td colSpan={7} className="px-4 py-3 text-center text-gray-500">
+                  {totalResults === 0 ? (
+                      <tr>
+                      <td colSpan={7} className="px-3 py-2 text-center text-gray-500">
                         Nenhuma meta cadastrada
                       </td>
                     </tr>
                   ) : (
-                    goals.map((goal) => {
+                    pageGoals.map((goal) => {
                       const progress = getProgress(goal)
                       return (
                         <tr key={goal.id} className="hover:bg-gray-50">
-                          <td className="px-4 py-3 whitespace-nowrap">
-                            <div className="text-sm font-medium text-gray-900">
+                          <td className="px-1.5 py-0.5 whitespace-nowrap">
+                            <div className="font-medium text-gray-900">
                               {goal.user?.name || 'N/A'}
                             </div>
                           </td>
-                          <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-900">
+                          <td className="px-1.5 py-0.5 whitespace-nowrap text-gray-900">
                             {getTypeLabel(goal.type)}
                           </td>
-                          <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-900">
+                          <td className="px-1.5 py-0.5 whitespace-nowrap text-gray-900">
                             {formatValue(goal, goal.targetValue)}
                           </td>
-                          <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-900">
+                          <td className="px-1.5 py-0.5 whitespace-nowrap text-gray-900">
                             {formatValue(goal, goal.currentValue)}
                           </td>
-                          <td className="px-4 py-3 whitespace-nowrap">
-                            <div className="w-full bg-gray-200 rounded-full h-2">
+                          <td className="px-1.5 py-0.5 whitespace-nowrap">
+                            <div className="w-full bg-gray-200 rounded-full h-1.5">
                               <div
-                                className={`h-2 rounded-full ${
+                                className={`h-1.5 rounded-full ${
                                   progress >= 100
                                     ? 'bg-green-600'
                                     : progress >= 75
@@ -480,18 +655,18 @@ export default function GoalsPage() {
                                 style={{ width: `${progress}%` }}
                               ></div>
                             </div>
-                            <div className="text-xs text-gray-500 mt-1">{progress.toFixed(1)}%</div>
+                            <div className="text-[10px] text-gray-500 mt-0.5">{progress.toFixed(1)}%</div>
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <td className="px-1.5 py-0.5 whitespace-nowrap text-gray-500">
                             <div>{getPeriodLabel(goal.period)}</div>
                             {goal.startDate && goal.endDate && (
-                              <div className="text-xs">
+                              <div className="text-[10px]">
                                 {new Date(goal.startDate).toLocaleDateString('pt-BR')} até{' '}
                                 {new Date(goal.endDate).toLocaleDateString('pt-BR')}
                               </div>
                             )}
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                          <td className="px-1.5 py-0.5 whitespace-nowrap font-medium space-x-1">
                             <button
                               onClick={() => handleEdit(goal)}
                               className="text-primary-600 hover:text-primary-900"
@@ -516,6 +691,86 @@ export default function GoalsPage() {
                   )}
                 </tbody>
               </table>
+            </div>
+          </div>
+        )}
+
+        {!loading && totalResults > 0 && (
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-3">
+            <div className="text-xs text-gray-600">
+              Mostrando <span className="font-medium text-gray-900">{startIndex + 1}</span>–<span className="font-medium text-gray-900">{endIndexExclusive}</span> de{' '}
+              <span className="font-medium text-gray-900">{totalResults}</span>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <select
+                value={pageSize}
+                onChange={(e) => setPageSize(parseInt(e.target.value))}
+                className="px-2 py-1.5 border border-gray-300 rounded-lg text-sm text-gray-900 bg-white"
+                aria-label="Itens por página"
+                title="Itens por página"
+              >
+                <option value={20}>20</option>
+                <option value={40}>40</option>
+                <option value={80}>80</option>
+                <option value={120}>120</option>
+              </select>
+
+              <button
+                type="button"
+                onClick={() => setPage(1)}
+                disabled={safePage <= 1}
+                className="px-2 py-1.5 border border-gray-300 rounded-md text-sm text-gray-700 disabled:opacity-50"
+              >
+                Primeira
+              </button>
+              <button
+                type="button"
+                onClick={() => setPage((p) => Math.max(1, p - 1))}
+                disabled={safePage <= 1}
+                className="px-2 py-1.5 border border-gray-300 rounded-md text-sm text-gray-700 disabled:opacity-50"
+              >
+                Anterior
+              </button>
+
+              <div className="flex items-center gap-1">
+                {pagesToShow.map((p, idx) =>
+                  p === -1 ? (
+                    <span key={`e-${idx}`} className="px-2 text-sm text-gray-500">
+                      …
+                    </span>
+                  ) : (
+                    <button
+                      key={p}
+                      type="button"
+                      onClick={() => setPage(p)}
+                      className={`h-8 min-w-8 px-2 rounded-md text-sm border ${
+                        p === safePage ? 'bg-primary-600 text-white border-primary-600' : 'border-gray-300 text-gray-700 hover:bg-gray-50'
+                      }`}
+                      aria-current={p === safePage ? 'page' : undefined}
+                    >
+                      {p}
+                    </button>
+                  )
+                )}
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                disabled={safePage >= totalPages}
+                className="px-2 py-1.5 border border-gray-300 rounded-md text-sm text-gray-700 disabled:opacity-50"
+              >
+                Próxima
+              </button>
+              <button
+                type="button"
+                onClick={() => setPage(totalPages)}
+                disabled={safePage >= totalPages}
+                className="px-2 py-1.5 border border-gray-300 rounded-md text-sm text-gray-700 disabled:opacity-50"
+              >
+                Última
+              </button>
             </div>
           </div>
         )}

@@ -1,9 +1,39 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, type CSSProperties } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useAuthStore } from '@/store/authStore'
+
+const LOGO_SRC = '/logo/loiago.jpeg'
+
+/** Máscara por luminância: pixels escuros (fundo preto do JPEG) somem; cores do logo permanecem. */
+const logoKnockoutMask: CSSProperties = {
+  WebkitMaskImage: `url(${LOGO_SRC})`,
+  WebkitMaskSize: 'contain',
+  WebkitMaskRepeat: 'no-repeat',
+  WebkitMaskPosition: 'center',
+  maskImage: `url(${LOGO_SRC})`,
+  maskSize: 'contain',
+  maskRepeat: 'no-repeat',
+  maskPosition: 'center',
+  maskMode: 'luminance',
+}
+
+function LoginBrandLogo({ className, imgClassName }: { className?: string; imgClassName?: string }) {
+  return (
+    <div
+      className={`flex items-center justify-center rounded-2xl bg-white ring-1 ring-slate-200/70 shadow-sm ${className ?? ''}`}
+    >
+      <img
+        src={LOGO_SRC}
+        alt="Iago Veículos"
+        className={imgClassName}
+        style={logoKnockoutMask}
+      />
+    </div>
+  )
+}
 
 export default function LoginPage() {
   const router = useRouter()
@@ -15,13 +45,10 @@ export default function LoginPage() {
   const [mounted, setMounted] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
 
-  // Verificar se já está autenticado ao carregar a página
   useEffect(() => {
-    // Aguardar um pouco para o Zustand restaurar do localStorage
     const timer = setTimeout(() => {
       checkAuth()
     }, 100)
-    
     return () => clearTimeout(timer)
   }, [checkAuth])
 
@@ -51,134 +78,139 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex relative overflow-hidden bg-black">
-      {/* Lado esquerdo - Logo com fundo animado */}
-      <div className="hidden lg:flex lg:w-1/2 bg-black items-center justify-center p-12 relative overflow-hidden">
-        {/* Partículas animadas de fundo */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-20 left-20 w-72 h-72 bg-primary-600 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
-          <div className="absolute top-40 right-20 w-72 h-72 bg-purple-600 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
-          <div className="absolute bottom-20 left-40 w-72 h-72 bg-pink-600 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
-        </div>
-        
-        <div className={`max-w-md text-center relative z-10 transform transition-all duration-1000 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <div
-            className="w-full h-48 bg-contain bg-center bg-no-repeat mx-auto mb-8 transform transition-all duration-1000 hover:scale-105"
-            style={{
-              backgroundImage: 'url(/logo/loiago.jpeg)',
-              animation: mounted ? 'fadeInUp 0.8s ease-out' : 'none'
-            }}
+    <div className="min-h-screen flex flex-col lg:flex-row relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-slate-100">
+      {/* Decoração suave */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+        <div className="absolute -top-20 right-0 lg:right-[10%] w-[min(420px,90vw)] h-[min(420px,90vw)] rounded-full bg-primary-100/50 blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-[min(360px,80vw)] h-[min(360px,80vw)] rounded-full bg-slate-200/35 blur-3xl" />
+        <div className="absolute top-1/2 left-1/3 w-px h-40 bg-gradient-to-b from-transparent via-slate-200/80 to-transparent hidden lg:block" />
+      </div>
+
+      {/* Painel marca — desktop */}
+      <div
+        className={`hidden lg:flex lg:w-[42%] xl:w-1/2 relative items-center justify-center p-10 xl:p-14 border-r border-slate-200/80 bg-gradient-to-b from-white/90 to-slate-50/90 backdrop-blur-sm transition-all duration-700 ${
+          mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+        }`}
+      >
+        <div className="max-w-sm text-center relative z-10">
+          <LoginBrandLogo
+            className="mx-auto mb-8 w-full max-w-xs px-4 py-3 xl:max-w-sm xl:px-5 xl:py-4"
+            imgClassName="h-40 xl:h-48 w-auto max-w-full object-contain"
           />
-          <p className="text-xl text-gray-300 font-light tracking-wide transform transition-all duration-1000 delay-300" style={{ animation: mounted ? 'fadeInUp 0.8s ease-out 0.2s both' : 'none' }}>
-            Sistema de gerenciamento da Iago Veiculos
+          <h1 className="text-2xl font-semibold text-slate-800 tracking-tight">
+            Iago Veículos
+          </h1>
+          <p className="mt-2 text-slate-600 text-sm leading-relaxed">
+            Sistema de gerenciamento — organize vendas, estoque e financeiro em um só lugar.
           </p>
-          <p className="text-sm text-gray-400 mt-4 transform transition-all duration-1000 delay-500" style={{ animation: mounted ? 'fadeInUp 0.8s ease-out 0.4s both' : 'none' }}>
-            Gerencie seu negócio de forma inteligente
+          <p className="mt-6 text-xs text-slate-400 uppercase tracking-widest">
+            Acesso seguro
           </p>
         </div>
       </div>
 
-      {/* Lado direito - Formulário */}
-      <div className="flex-1 flex items-center justify-center bg-black py-8 sm:py-12 px-4 sm:px-6 lg:px-8 relative">
-        {/* Logo visível em telas pequenas */}
-        <div className="absolute top-0 left-0 right-0 bg-black py-6 lg:hidden">
-          <div className="text-center transform transition-all duration-1000" style={{ animation: mounted ? 'fadeInDown 0.8s ease-out' : 'none' }}>
-            <div
-              className="w-32 h-20 bg-contain bg-center bg-no-repeat mx-auto mb-4 transform hover:scale-105 transition-transform duration-300"
-              style={{
-                backgroundImage: 'url(/logo/loiago.jpeg)',
-              }}
-            />
-            <p className="text-sm text-gray-300">
-              Sistema de gerenciamento da Iago Veiculos
-            </p>
-          </div>
+      {/* Formulário */}
+      <div className="flex-1 flex flex-col items-center justify-center px-4 py-10 sm:px-6 sm:py-12 lg:px-10 relative z-10">
+        {/* Logo mobile */}
+        <div
+          className={`lg:hidden w-full max-w-md mb-8 text-center transition-all duration-500 ${
+            mounted ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
+          }`}
+        >
+          <LoginBrandLogo
+            className="mx-auto mb-3 max-w-[200px] px-3 py-2 sm:max-w-[220px]"
+            imgClassName="h-20 sm:h-24 w-auto max-w-full object-contain"
+          />
+          <p className="text-sm text-slate-600 font-medium">Iago Veículos</p>
         </div>
-        
-        <div className={`max-w-md w-full space-y-6 sm:space-y-8 relative z-10 mt-40 sm:mt-0 transform transition-all duration-1000 ${mounted ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`} style={{ animation: mounted ? 'fadeInRight 0.8s ease-out 0.3s both' : 'none' }}>
 
-          <div className="space-y-2">
-            <h2 className="text-4xl font-extrabold text-white tracking-tight">
-              Bem-vindo de volta
-            </h2>
-            <p className="text-sm text-gray-300">
-              Faça login em sua conta para continuar
-            </p>
-          </div>
-
-          <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-            {error && (
-              <div className="rounded-lg bg-red-900 border border-red-700 p-4 animate-shake transform transition-all duration-300">
-                <div className="text-sm text-red-200 font-medium">{error}</div>
-              </div>
-            )}
-            
-            <div className="space-y-4">
-              <div className="transform transition-all duration-300 hover:scale-[1.01]">
-                <label htmlFor="email" className="block text-xs font-semibold text-gray-300 mb-1">
-                  Email
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="appearance-none relative block w-full px-3 py-2 text-sm border-2 border-gray-300 bg-white placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 focus:z-10 transition-all duration-300 hover:border-gray-400 shadow-sm"
-                  placeholder="seu@email.com"
-                />
-              </div>
-              <div className="transform transition-all duration-300 hover:scale-[1.01]">
-                <label htmlFor="password" className="block text-xs font-semibold text-gray-300 mb-1">
-                  Senha
-                </label>
-                <div className="relative">
-                  <input
-                    id="password"
-                    name="password"
-                    type={showPassword ? 'text' : 'password'}
-                    autoComplete="current-password"
-                    required
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="appearance-none relative block w-full px-3 py-2 pr-10 text-sm border-2 border-gray-300 bg-white placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-300 hover:border-gray-400 shadow-sm"
-                    placeholder="••••••••"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword((prev) => !prev)}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 z-10 p-1.5 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-inset transition-colors"
-                    tabIndex={-1}
-                    aria-label={showPassword ? 'Ocultar senha' : 'Mostrar senha'}
-                  >
-                    {showPassword ? (
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
-                      </svg>
-                    ) : (
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                      </svg>
-                    )}
-                  </button>
-                </div>
-              </div>
+        <div
+          className={`w-full max-w-md transition-all duration-500 delay-75 ${
+            mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
+          }`}
+        >
+          <div className="rounded-2xl bg-white/90 backdrop-blur-sm shadow-xl shadow-slate-200/60 border border-slate-200/80 p-8 sm:p-10">
+            <div className="space-y-1 mb-8">
+              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
+                Bem-vindo de volta
+              </h2>
+              <p className="text-sm text-slate-600">
+                Entre com seu e-mail e senha para continuar
+              </p>
             </div>
 
-            <div>
+            <form className="space-y-5" onSubmit={handleSubmit}>
+              {error && (
+                <div className="rounded-xl bg-red-50 border border-red-200/80 px-4 py-3 text-sm text-red-800 animate-shake">
+                  {error}
+                </div>
+              )}
+
+              <div className="space-y-4">
+                <div>
+                  <label htmlFor="email" className="block text-xs font-semibold text-slate-700 mb-1.5">
+                    E-mail
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="block w-full px-3.5 py-2.5 text-sm border border-slate-200 rounded-xl bg-slate-50/80 text-slate-900 placeholder-slate-400 shadow-sm transition focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-400 focus:bg-white hover:border-slate-300"
+                    placeholder="seu@email.com"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="password" className="block text-xs font-semibold text-slate-700 mb-1.5">
+                    Senha
+                  </label>
+                  <div className="relative">
+                    <input
+                      id="password"
+                      name="password"
+                      type={showPassword ? 'text' : 'password'}
+                      autoComplete="current-password"
+                      required
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="block w-full px-3.5 py-2.5 pr-11 text-sm border border-slate-200 rounded-xl bg-slate-50/80 text-slate-900 placeholder-slate-400 shadow-sm transition focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-400 focus:bg-white hover:border-slate-300"
+                      placeholder="••••••••"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword((prev) => !prev)}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-lg text-slate-500 hover:text-slate-700 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-primary-500/40"
+                      tabIndex={-1}
+                      aria-label={showPassword ? 'Ocultar senha' : 'Mostrar senha'}
+                    >
+                      {showPassword ? (
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+                        </svg>
+                      ) : (
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                      )}
+                    </button>
+                  </div>
+                </div>
+              </div>
+
               <button
                 type="submit"
                 disabled={loading}
-                className="group relative w-full flex justify-center py-2.5 px-4 border border-transparent text-sm font-semibold rounded-lg text-white bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-[1.01] active:scale-[0.99] shadow-md hover:shadow-lg"
+                className="w-full flex justify-center items-center py-3 px-4 text-sm font-semibold rounded-xl text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-md shadow-primary-600/20 transition hover:shadow-lg hover:shadow-primary-600/25"
               >
                 {loading ? (
-                  <span className="flex items-center">
-                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  <span className="flex items-center gap-2">
+                    <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                     </svg>
                     Entrando...
                   </span>
@@ -186,15 +218,13 @@ export default function LoginPage() {
                   'Entrar'
                 )}
               </button>
-            </div>
-          </form>
-          
-          <div className="text-center">
-            <p className="text-sm text-gray-300">
+            </form>
+
+            <p className="mt-8 text-center text-sm text-slate-600">
               Não tem uma conta?{' '}
               <Link
                 href="/register"
-                className="font-semibold text-primary-400 hover:text-primary-300 transition-colors duration-200 hover:underline"
+                className="font-semibold text-primary-600 hover:text-primary-700 transition-colors"
               >
                 Criar conta
               </Link>
@@ -204,74 +234,22 @@ export default function LoginPage() {
       </div>
 
       <style jsx>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        @keyframes fadeInDown {
-          from {
-            opacity: 0;
-            transform: translateY(-30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        @keyframes fadeInRight {
-          from {
-            opacity: 0;
-            transform: translateX(-30px);
-          }
-          to {
-            opacity: 1;
+        @keyframes shake {
+          0%,
+          100% {
             transform: translateX(0);
           }
-        }
-        
-        @keyframes blob {
-          0% {
-            transform: translate(0px, 0px) scale(1);
+          20%,
+          60% {
+            transform: translateX(-4px);
           }
-          33% {
-            transform: translate(30px, -50px) scale(1.1);
-          }
-          66% {
-            transform: translate(-20px, 20px) scale(0.9);
-          }
-          100% {
-            transform: translate(0px, 0px) scale(1);
+          40%,
+          80% {
+            transform: translateX(4px);
           }
         }
-        
-        @keyframes shake {
-          0%, 100% { transform: translateX(0); }
-          10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-          20%, 40%, 60%, 80% { transform: translateX(5px); }
-        }
-        
-        .animate-blob {
-          animation: blob 7s infinite;
-        }
-        
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-        
-        .animation-delay-4000 {
-          animation-delay: 4s;
-        }
-        
         .animate-shake {
-          animation: shake 0.5s;
+          animation: shake 0.45s ease-out;
         }
       `}</style>
     </div>

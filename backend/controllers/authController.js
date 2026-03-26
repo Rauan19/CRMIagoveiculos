@@ -84,20 +84,48 @@ class AuthController {
       if (receivesCommission !== undefined) createData.receivesCommission = receivesCommission === true || receivesCommission === 'true'
       if (documents) createData.documents = documents
 
-      const user = await prisma.user.create({
+      const created = await prisma.user.create({
         data: createData,
+      });
+
+      // Buscar usuário completo (sem senha) para retorno consistente
+      const user = await prisma.user.findUnique({
+        where: { id: created.id },
         select: {
           id: true,
           name: true,
           email: true,
           role: true,
-          createdAt: true
+          phone: true,
+          avatar: true,
+          admissionDate: true,
+          dismissalDate: true,
+          cpf: true,
+          rg: true,
+          sexo: true,
+          birthDate: true,
+          ctps: true,
+          cnh: true,
+          cep: true,
+          street: true,
+          number: true,
+          complement: true,
+          neighborhood: true,
+          state: true,
+          city: true,
+          cargo: true,
+          beneficios: true,
+          salary: true,
+          receivesCommission: true,
+          documents: true,
+          createdAt: true,
+          updatedAt: true
         }
       });
 
-      res.status(201).json({ 
+      res.status(201).json({
         message: 'Usuário criado com sucesso',
-        user 
+        user
       });
     } catch (error) {
       console.error('Erro no registro:', error);

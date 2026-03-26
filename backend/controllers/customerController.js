@@ -238,8 +238,19 @@ class CustomerController {
     try {
       const birthdayScheduler = require('../services/birthdayScheduler');
       const days = parseInt(req.query.days) || 30;
+      const offset = parseInt(req.query.offset) || 0;
+      const limit = parseInt(req.query.limit) || 0; // 0 = no limit
+
       const upcoming = await birthdayScheduler.getUpcomingBirthdays(days);
-      res.json(upcoming);
+      const total = upcoming.length;
+      let items = upcoming;
+      if (limit > 0) {
+        items = upcoming.slice(offset, offset + limit);
+      } else if (offset > 0) {
+        items = upcoming.slice(offset);
+      }
+
+      res.json({ items, total });
     } catch (error) {
       console.error('Erro ao buscar próximos aniversários:', error);
       res.status(500).json({ error: 'Erro ao buscar próximos aniversários' });

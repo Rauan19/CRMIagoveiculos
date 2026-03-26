@@ -285,7 +285,9 @@ class FinancialController {
           ...where, 
           OR: [
             { operacao: 'receber' },
-            { type: 'receber' }
+            { type: 'receber' },
+            // Legado: venda pela tela de estoque gravava apenas type "receita"
+            { type: 'receita' },
           ]
         },
         select: { valorTitulo: true, amount: true, status: true }

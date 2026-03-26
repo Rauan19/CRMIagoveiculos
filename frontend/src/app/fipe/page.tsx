@@ -221,33 +221,33 @@ export default function FipePage() {
 
   return (
     <Layout>
-      <div className="space-y-6 h-full flex flex-col">
+      <div className="space-y-2 h-full flex flex-col text-xs">
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Consulta FIPE</h1>
-            <p className="text-gray-600 mt-1">Consulte o valor da tabela FIPE de veículos</p>
+            <h1 className="text-lg font-bold text-gray-900">Consulta FIPE</h1>
+            <p className="text-[11px] text-gray-600 mt-0.5">Consulte o valor da tabela FIPE de veículos</p>
           </div>
         </div>
 
         {/* Formulário de busca */}
-        <div className="bg-white shadow rounded-lg p-6">
-          <form onSubmit={handleSearch} className="space-y-4">
+        <div className="bg-white shadow rounded-lg p-2">
+          <form onSubmit={handleSearch} className="space-y-2">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Tipo de Veículo *</label>
+              <label className="block text-[11px] font-medium text-gray-700 mb-0.5">Tipo de Veículo *</label>
               <select
                 value={vehicleType}
                 onChange={(e) => setVehicleType(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900 bg-white"
+                className="w-full px-2 py-1 text-xs border border-gray-300 rounded focus:ring-primary-500 focus:border-primary-500 text-gray-900 bg-white"
               >
                 <option value="carros">Carros</option>
                 <option value="motos">Motos</option>
                 <option value="caminhoes">Caminhões</option>
               </select>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
               {/* Select de Marca */}
               <div className="relative">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-[11px] font-medium text-gray-700 mb-0.5">
                   Marca *
                 </label>
                 <div className="relative">
@@ -261,24 +261,24 @@ export default function FipePage() {
                     }}
                     onFocus={() => setShowBrandDropdown(true)}
                     placeholder="Digite para buscar..."
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900 bg-white"
+                    className="w-full px-2 py-1 text-xs border border-gray-300 rounded focus:ring-primary-500 focus:border-primary-500 text-gray-900 bg-white"
                   />
                   {loadingBrands && (
-                    <div className="absolute right-3 top-2.5">
-                      <svg className="animate-spin h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <div className="absolute right-2 top-1">
+                      <svg className="animate-spin h-4 w-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                       </svg>
                     </div>
                   )}
                   {showBrandDropdown && filteredBrands.length > 0 && (
-                    <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                    <div className="absolute z-10 w-full mt-0.5 bg-white border border-gray-300 rounded shadow-lg max-h-48 overflow-y-auto text-xs">
                       {filteredBrands.map((brand) => (
                         <button
                           key={brand.codigo}
                           type="button"
                           onClick={() => handleBrandSelect(brand)}
-                          className="w-full text-left px-4 py-2 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none text-gray-900"
+                          className="w-full text-left px-2 py-1 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none text-gray-900"
                         >
                           {brand.nome}
                         </button>
@@ -290,7 +290,7 @@ export default function FipePage() {
 
               {/* Select de Modelo */}
               <div className="relative">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-[11px] font-medium text-gray-700 mb-0.5">
                   Modelo *
                 </label>
                 <div className="relative">
@@ -305,24 +305,24 @@ export default function FipePage() {
                     onFocus={() => selectedBrand && setShowModelDropdown(true)}
                     placeholder={selectedBrand ? "Digite para buscar..." : "Selecione uma marca primeiro"}
                     disabled={!selectedBrand || loadingModels}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900 bg-white disabled:bg-gray-100 disabled:cursor-not-allowed disabled:text-gray-500"
+                    className="w-full px-2 py-1 text-xs border border-gray-300 rounded focus:ring-primary-500 focus:border-primary-500 text-gray-900 bg-white disabled:bg-gray-100 disabled:cursor-not-allowed disabled:text-gray-500"
                   />
                   {loadingModels && (
-                    <div className="absolute right-3 top-2.5">
-                      <svg className="animate-spin h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <div className="absolute right-2 top-1">
+                      <svg className="animate-spin h-4 w-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                       </svg>
                     </div>
                   )}
                   {showModelDropdown && filteredModels.length > 0 && selectedBrand && (
-                    <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                    <div className="absolute z-10 w-full mt-0.5 bg-white border border-gray-300 rounded shadow-lg max-h-48 overflow-y-auto text-xs">
                       {filteredModels.map((model) => (
                         <button
                           key={model.codigo}
                           type="button"
                           onClick={() => handleModelSelect(model)}
-                          className="w-full text-left px-4 py-2 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none text-gray-900"
+                          className="w-full text-left px-2 py-1 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none text-gray-900"
                         >
                           {model.nome}
                         </button>
@@ -334,7 +334,7 @@ export default function FipePage() {
 
               {/* Select de Ano */}
               <div className="relative">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-[11px] font-medium text-gray-700 mb-0.5">
                   Ano *
                 </label>
                 <div className="relative">
@@ -349,18 +349,18 @@ export default function FipePage() {
                     onFocus={() => selectedModel && setShowYearDropdown(true)}
                     placeholder={selectedModel ? "Digite para buscar..." : "Selecione um modelo primeiro"}
                     disabled={!selectedModel || loadingYears}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900 bg-white disabled:bg-gray-100 disabled:cursor-not-allowed disabled:text-gray-500"
+                    className="w-full px-2 py-1 text-xs border border-gray-300 rounded focus:ring-primary-500 focus:border-primary-500 text-gray-900 bg-white disabled:bg-gray-100 disabled:cursor-not-allowed disabled:text-gray-500"
                   />
                   {loadingYears && (
-                    <div className="absolute right-3 top-2.5">
-                      <svg className="animate-spin h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <div className="absolute right-2 top-1">
+                      <svg className="animate-spin h-4 w-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                       </svg>
                     </div>
                   )}
                   {showYearDropdown && filteredYears.length > 0 && selectedModel && (
-                    <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                    <div className="absolute z-10 w-full mt-0.5 bg-white border border-gray-300 rounded shadow-lg max-h-48 overflow-y-auto text-xs">
                       {filteredYears.map((year) => {
                         // Formatar nome do ano (ex: "2024/2024" -> "2024")
                         const yearDisplay = year.nome.split('/')[0]?.split('-')[0] || year.nome
@@ -369,7 +369,7 @@ export default function FipePage() {
                             key={year.codigo}
                             type="button"
                             onClick={() => handleYearSelect(year)}
-                            className="w-full text-left px-4 py-2 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none text-gray-900"
+                            className="w-full text-left px-2 py-1 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none text-gray-900"
                           >
                             {yearDisplay}
                           </button>
@@ -381,15 +381,15 @@ export default function FipePage() {
               </div>
             </div>
 
-            <div className="flex space-x-3">
+            <div className="flex gap-2">
               <button
                 type="submit"
                 disabled={loadingFipe || !selectedBrand || !selectedModel || !selectedYear}
-                className="px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+                className="px-3 py-1.5 text-xs bg-primary-600 text-white rounded hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1"
               >
                 {loadingFipe ? (
                   <>
-                    <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <svg className="animate-spin h-3.5 w-3.5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
@@ -397,7 +397,7 @@ export default function FipePage() {
                   </>
                 ) : (
                   <>
-                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                     Consultar FIPE
@@ -409,7 +409,7 @@ export default function FipePage() {
                 <button
                   type="button"
                   onClick={handleClear}
-                  className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50"
+                  className="px-3 py-1.5 text-xs border border-gray-300 text-gray-700 rounded hover:bg-gray-50"
                 >
                   Limpar
                 </button>
@@ -420,43 +420,43 @@ export default function FipePage() {
 
         {/* Resultado da busca */}
         {fipeData && (
-          <div className="bg-white shadow rounded-lg p-6">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">Resultado da Consulta</h2>
+          <div className="bg-white shadow rounded-lg p-2">
+            <h2 className="text-sm font-bold text-gray-900 mb-2">Resultado da Consulta</h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-primary-50 rounded-lg p-4">
-                <div className="text-sm text-gray-600 mb-1">Valor FIPE</div>
-                <div className="text-3xl font-bold text-primary-600">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+              <div className="bg-primary-50 rounded p-2">
+                <div className="text-[10px] text-gray-600 mb-0.5">Valor FIPE</div>
+                <div className="text-xl font-bold text-primary-600">
                   R$ {fipeData.valor.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </div>
               </div>
 
-              <div className="space-y-3">
+              <div className="space-y-1.5">
                 <div>
-                  <div className="text-sm text-gray-600">Veículo</div>
-                  <div className="text-lg font-semibold text-gray-900">
+                  <div className="text-[10px] text-gray-600">Veículo</div>
+                  <div className="text-sm font-semibold text-gray-900">
                     {fipeData.marca} {fipeData.modelo}
                   </div>
                 </div>
 
                 <div>
-                  <div className="text-sm text-gray-600">Ano/Modelo</div>
-                  <div className="text-lg text-gray-900">{fipeData.anoModelo}</div>
+                  <div className="text-[10px] text-gray-600">Ano/Modelo</div>
+                  <div className="text-sm text-gray-900">{fipeData.anoModelo}</div>
                 </div>
 
                 <div>
-                  <div className="text-sm text-gray-600">Combustível</div>
-                  <div className="text-lg text-gray-900">{fipeData.combustivel}</div>
+                  <div className="text-[10px] text-gray-600">Combustível</div>
+                  <div className="text-sm text-gray-900">{fipeData.combustivel}</div>
                 </div>
 
                 <div>
-                  <div className="text-sm text-gray-600">Código FIPE</div>
-                  <div className="text-lg text-gray-900 font-mono">{fipeData.codigoFipe}</div>
+                  <div className="text-[10px] text-gray-600">Código FIPE</div>
+                  <div className="text-sm text-gray-900 font-mono">{fipeData.codigoFipe}</div>
                 </div>
 
                 <div>
-                  <div className="text-sm text-gray-600">Mês de Referência</div>
-                  <div className="text-lg text-gray-900">{fipeData.mesReferencia}</div>
+                  <div className="text-[10px] text-gray-600">Mês de Referência</div>
+                  <div className="text-sm text-gray-900">{fipeData.mesReferencia}</div>
                 </div>
               </div>
             </div>
@@ -464,14 +464,14 @@ export default function FipePage() {
         )}
 
         {/* Instruções */}
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-          <div className="flex items-start">
-            <svg className="w-5 h-5 text-blue-600 mr-3 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+        <div className="bg-blue-50 border border-blue-200 rounded p-2">
+          <div className="flex items-start gap-2">
+            <svg className="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
             </svg>
-            <div className="flex-1">
-              <h3 className="text-sm font-medium text-blue-900 mb-1">Como usar</h3>
-              <ul className="text-sm text-blue-800 space-y-1">
+            <div className="flex-1 min-w-0">
+              <h3 className="text-[11px] font-medium text-blue-900 mb-0.5">Como usar</h3>
+              <ul className="text-[11px] text-blue-800 space-y-0.5">
                 <li>1. Selecione a marca digitando para buscar</li>
                 <li>2. Após selecionar a marca, os modelos serão carregados automaticamente</li>
                 <li>3. Selecione o modelo digitando para buscar</li>

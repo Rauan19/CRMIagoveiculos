@@ -26,6 +26,8 @@ const sinalNegocioRoutes = require('./routes/sinalNegocioRoutes');
 const pendenciaRoutes = require('./routes/pendenciaRoutes');
 const financingRoutes = require('./routes/financingRoutes');
 const locationRoutes = require('./routes/locationRoutes');
+const commissionRoutes = require('./routes/commissionRoutes');
+const quitacaoRoutes = require('./routes/quitacaoRoutes');
 
 // Importar scheduler de aniversários
 const birthdayScheduler = require('./services/birthdayScheduler');
@@ -88,6 +90,8 @@ app.use('/api/sinal-negocio', sinalNegocioRoutes);
 app.use('/api/pendencias', pendenciaRoutes);
 app.use('/api/financings', financingRoutes);
 app.use('/api/locations', locationRoutes);
+app.use('/api/commissions', commissionRoutes);
+app.use('/api/quitacoes', quitacaoRoutes);
 
 // Rota 404
 app.use((req, res) => {

@@ -1007,24 +1007,24 @@ export default function AnnouncementsPage() {
 
   return (
     <Layout>
-      <div className="px-4 py-6 sm:px-0">
+      <div className="px-3 py-4 sm:px-0">
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Gerador de Anúncios</h1>
-          <p className="text-gray-600">Crie anúncios visuais profissionais para seus veículos</p>
+          <h1 className="text-xl font-bold text-gray-900 mb-1">Gerador de Anúncios</h1>
+          <p className="text-sm text-gray-600">Crie anúncios visuais profissionais para seus veículos</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {/* Painel Esquerdo - Formulário */}
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-semibold mb-4">Informações do Veículo</h2>
+          <div className="bg-white rounded-lg shadow-md p-4">
+            <h2 className="text-lg font-semibold mb-3">Informações do Veículo</h2>
 
             {/* Seleção de veículo do estoque */}
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-xs font-medium text-gray-700 mb-1">
                 Selecionar do Estoque (opcional)
               </label>
               <select
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+                className="w-full px-2 py-1.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 text-sm"
                 value={selectedItem?.id || ''}
                 onChange={(e) => {
                   const item = estoqueItems.find(i => i.id === parseInt(e.target.value))
@@ -1040,27 +1040,27 @@ export default function AnnouncementsPage() {
               </select>
             </div>
 
-            <div className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-3">
+              <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-xs font-medium text-gray-700 mb-1">
                     Marca *
                   </label>
                   <input
                     type="text"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    className="w-full px-2 py-1.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 text-sm"
                     value={formData.brand}
                     onChange={(e) => setFormData({ ...formData, brand: e.target.value })}
                     placeholder="Ex: Honda"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-xs font-medium text-gray-700 mb-1">
                     Modelo *
                   </label>
                   <input
                     type="text"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    className="w-full px-2 py-1.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 text-sm"
                     value={formData.model}
                     onChange={(e) => setFormData({ ...formData, model: e.target.value })}
                     placeholder="Ex: Civic"
@@ -1068,28 +1068,28 @@ export default function AnnouncementsPage() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-xs font-medium text-gray-700 mb-1">
                     Ano
                   </label>
                   <input
                     type="text"
                     inputMode="text"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 text-gray-900"
+                    className="w-full px-2 py-1.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 text-sm"
                     value={formData.year}
                     onChange={(e) => setFormData({ ...formData, year: e.target.value })}
                     placeholder="Ex: 2024"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-xs font-medium text-gray-700 mb-1">
                     Ano do Modelo
                   </label>
                   <input
                     type="text"
                     inputMode="text"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 text-gray-900"
+                    className="w-full px-2 py-1.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 text-sm"
                     value={formData.modelYear}
                     onChange={(e) => setFormData({ ...formData, modelYear: e.target.value })}
                     placeholder="Ex: 2025"
@@ -1097,7 +1097,7 @@ export default function AnnouncementsPage() {
                 </div>
               </div>
               
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Valor (R$)
@@ -1105,7 +1105,7 @@ export default function AnnouncementsPage() {
                   <input
                     type="number"
                     step="0.01"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    className="w-full px-2 py-1.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 text-sm"
                     value={formData.value}
                     onChange={(e) => setFormData({ ...formData, value: e.target.value })}
                     placeholder="Ex: 50000"
@@ -1118,7 +1118,7 @@ export default function AnnouncementsPage() {
                   <input
                     type="number"
                     step="0.01"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    className="w-full px-2 py-1.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 text-sm"
                     value={formData.promotionValue}
                     onChange={(e) => setFormData({ ...formData, promotionValue: e.target.value })}
                     placeholder="Ex: 45000 (deixe vazio se não houver promoção)"
@@ -1132,14 +1132,14 @@ export default function AnnouncementsPage() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Quilometragem
                   </label>
                   <input
                     type="number"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    className="w-full px-2 py-1.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 text-sm"
                     value={formData.km}
                     onChange={(e) => setFormData({ ...formData, km: e.target.value })}
                     placeholder="Ex: 50000"
@@ -1151,7 +1151,7 @@ export default function AnnouncementsPage() {
                   </label>
                   <input
                     type="text"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    className="w-full px-2 py-1.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 text-sm"
                     value={formData.color}
                     onChange={(e) => setFormData({ ...formData, color: e.target.value })}
                     placeholder="Ex: Branco"
@@ -1165,7 +1165,7 @@ export default function AnnouncementsPage() {
                 </label>
                 <input
                   type="text"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  className="w-full px-2 py-1.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 text-sm"
                   value={formData.plate}
                   onChange={(e) => setFormData({ ...formData, plate: e.target.value.toUpperCase() })}
                   placeholder="Ex: ABC-1234"
@@ -1178,7 +1178,7 @@ export default function AnnouncementsPage() {
                 </label>
                 <input
                   type="text"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  className="w-full px-2 py-1.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 text-sm"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: formatPhone(e.target.value) })}
                   placeholder="Ex: (11) 99999-9999"
@@ -1190,7 +1190,7 @@ export default function AnnouncementsPage() {
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Foto do Veículo
                 </label>
-                <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
+                <div className="border-2 border-dashed border-gray-300 rounded-lg p-3 text-center">
                   <input
                     ref={fileInputRef}
                     type="file"
@@ -1201,14 +1201,14 @@ export default function AnnouncementsPage() {
                   />
                   <label
                     htmlFor="image-upload"
-                    className="cursor-pointer flex flex-col items-center"
+                    className="cursor-pointer flex flex-col items-center text-sm"
                   >
                     {uploadedImage ? (
                       <div className="relative">
                         <img
                           src={uploadedImage}
                           alt="Preview"
-                          className="max-h-48 rounded-lg mb-2"
+                          className="max-h-40 rounded-lg mb-2"
                         />
                         <button
                           type="button"
@@ -1226,7 +1226,7 @@ export default function AnnouncementsPage() {
                       </div>
                     ) : (
                       <>
-                        <FiUpload className="text-gray-400 mb-2" size={32} />
+                        <FiUpload className="text-gray-400 mb-2" size={28} />
                         <span className="text-sm text-gray-600">
                           Clique para fazer upload
                         </span>
@@ -1237,19 +1237,19 @@ export default function AnnouncementsPage() {
               </div>
 
               {/* Botões */}
-              <div className="flex gap-3 pt-4">
+              <div className="flex gap-3 pt-3">
                 <button
                   onClick={handleGenerate}
-                  className="flex-1 bg-primary-600 text-white px-4 py-2 rounded-md hover:bg-primary-700 flex items-center justify-center gap-2"
+                  className="flex-1 bg-primary-600 text-white px-3 py-1.5 rounded-md hover:bg-primary-700 flex items-center justify-center gap-2 text-sm"
                 >
-                  <FiRefreshCw size={18} />
+                  <FiRefreshCw size={16} />
                   Gerar Anúncio
                 </button>
                 <button
                   onClick={handleDownload}
-                  className="flex-1 bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 flex items-center justify-center gap-2"
+                  className="flex-1 bg-green-600 text-white px-3 py-1.5 rounded-md hover:bg-green-700 flex items-center justify-center gap-2 text-sm"
                 >
-                  <FiDownload size={18} />
+                  <FiDownload size={16} />
                   Download
                 </button>
               </div>
@@ -1257,21 +1257,21 @@ export default function AnnouncementsPage() {
           </div>
 
           {/* Painel Direito - Preview */}
-          <div className="bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-xl font-semibold mb-4 text-gray-800">Preview do Anúncio</h2>
-            <div className="border-2 border-gray-200 rounded-xl p-4 bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto shadow-inner">
-              <div className="flex justify-center items-center min-h-[400px]">
+          <div className="bg-white rounded-lg shadow-lg p-4">
+            <h2 className="text-lg font-semibold mb-3 text-gray-800">Preview do Anúncio</h2>
+            <div className="border-2 border-gray-200 rounded-xl p-3 bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto shadow-inner">
+              <div className="flex justify-center items-center min-h-[300px]">
                 <canvas
                   ref={canvasRef}
-                  className="max-w-full h-auto rounded-lg shadow-2xl border-2 border-white"
+                  className="max-w-full h-auto rounded-md shadow-2xl border-2 border-white"
                   style={{ 
-                    maxHeight: '600px',
-                    boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)'
+                    maxHeight: '500px',
+                    boxShadow: '0 16px 40px rgba(0, 0, 0, 0.25)'
                   }}
                 />
               </div>
             </div>
-            <p className="text-sm text-gray-500 mt-3 text-center">
+            <p className="text-sm text-gray-500 mt-2 text-center">
               <span className="font-medium">Tamanho:</span> 1200x800px (ideal para redes sociais)
             </p>
           </div>

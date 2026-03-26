@@ -9,8 +9,6 @@ import {
   FiUsers, 
   FiTruck, 
   FiDollarSign, 
-  FiFileText, 
-  FiCreditCard,
   FiBarChart2,
   FiSearch,
   FiMap,
@@ -21,13 +19,18 @@ import {
   FiChevronLeft,
   FiChevronRight,
   FiAlertCircle,
-  FiList,
   FiShoppingCart,
   FiCheckCircle,
   FiPackage,
   FiRadio,
-  FiSend,
-  FiZap
+  FiZap,
+  FiPieChart,
+  FiPercent,
+  FiRefreshCw,
+  FiAward,
+  FiClipboard,
+  FiNavigation,
+  FiFileMinus
 } from 'react-icons/fi'
 
 interface LayoutProps {
@@ -65,6 +68,7 @@ export default function Layout({ children }: LayoutProps) {
     { name: 'Aniversários', href: '/birthdays', icon: FiGift },
     { name: 'Funcionários', href: '/users', icon: FiUserCheck },
     { name: 'Veículos', href: '/vehicles', icon: FiTruck },
+    { name: 'Quitações', href: '/quitacao/admin', icon: FiFileMinus },
     { name: 'Localização de veículos', href: '/locations', icon: FiMap },
     { name: 'Veículos à venda', href: '/veiculos-a-venda', icon: FiShoppingCart },
     { name: 'Veículos vendidos', href: '/veiculos-vendidos', icon: FiCheckCircle },
@@ -72,15 +76,16 @@ export default function Layout({ children }: LayoutProps) {
     { name: 'Estoque/Site', href: '/estoque', icon: FiPackage },
     { name: 'Metas', href: '/goals', icon: FiTarget },
     { name: 'Anúncios', href: '/announcements', icon: FiRadio },
-    { name: 'Financeiro', href: '/financial', icon: FiCreditCard },
-      { name: 'Financiamentos', href: '/financings', icon: FiCreditCard },
-      { name: 'Comissões', href: '/commissions', icon: FiList },
-    { name: 'Lançamentos', href: '/lancamentos', icon: FiList },
+    { name: 'Financeiro', href: '/financial', icon: FiPieChart },
+    { name: 'Financiamentos', href: '/financings', icon: FiPercent },
+    { name: 'Refinanciamento', href: '/refinanciamento', icon: FiRefreshCw },
+    { name: 'Comissões', href: '/commissions', icon: FiAward },
+    { name: 'Lançamentos', href: '/lancamentos', icon: FiClipboard },
     { name: 'Relatórios', href: '/reports', icon: FiBarChart2 },
     { name: 'Pendências', href: '/pendencias', icon: FiAlertCircle },
     { name: 'Sinal de negócio', href: '/sinal-negocio', icon: FiZap },
     { name: 'Consulta FIPE', href: '/fipe', icon: FiSearch },
-    { name: 'Despachantes', href: '/despachantes', icon: FiSend },
+    { name: 'Despachantes', href: '/despachantes', icon: FiNavigation },
   ], [])
 
   const handleLogout = useCallback(() => {
@@ -134,7 +139,7 @@ export default function Layout({ children }: LayoutProps) {
   if (isChecking) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-600"></div>
       </div>
     )
   }
@@ -149,7 +154,7 @@ export default function Layout({ children }: LayoutProps) {
       {/* Top nav progress */}
       {navLoading && (
         <div className="fixed left-0 right-0 top-0 h-1 z-50">
-          <div className="h-1 bg-primary-600 animate-progress" />
+          <div className="h-1 bg-primary-500 animate-progress" />
         </div>
       )}
 
@@ -162,17 +167,39 @@ export default function Layout({ children }: LayoutProps) {
         .animate-progress {
           animation: progress 0.7s linear infinite;
         }
+        /* Scroll da lista do menu */
+        .sidebar-nav-scroll {
+          scrollbar-width: thin;
+          scrollbar-color: #4b5563 transparent;
+        }
+        .sidebar-nav-scroll::-webkit-scrollbar {
+          width: 8px;
+        }
+        .sidebar-nav-scroll::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .sidebar-nav-scroll::-webkit-scrollbar-thumb {
+          background: #4b5563;
+          border-radius: 9999px;
+        }
+        .sidebar-nav-scroll::-webkit-scrollbar-thumb:hover {
+          background: #6b7280;
+        }
       `}</style>
-      {/* Sidebar */}
-      <div className={`
-        fixed inset-y-0 left-0 z-50 bg-gray-900 transform transition-all duration-200 ease-out
-        lg:translate-x-0 lg:static lg:inset-0
+      {/* Sidebar: mobile (drawer) + desktop (fixa à esquerda) */}
+      <div
+        className={`
+        fixed inset-y-0 left-0 z-50 flex flex-col
+        bg-gradient-to-b from-gray-900 via-gray-900 to-gray-950 border-r border-gray-800
+        transform transition-[transform,width] duration-200 ease-out
+        w-64 ${sidebarCollapsed ? 'lg:w-16' : 'lg:w-64'}
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
-        w-64 ${sidebarCollapsed ? 'lg:w-[4.5rem]' : ''}
-      `}>
-        <div className="flex flex-col h-full">
+        lg:translate-x-0
+      `}
+      >
+        <div className="flex flex-col h-full min-h-0">
           {/* Menu items */}
-          <nav className="flex-1 px-2 lg:px-2 py-4 space-y-1 overflow-y-auto min-h-0">
+          <nav className="flex-1 px-2 py-4 space-y-1 overflow-y-auto min-h-0 sidebar-nav-scroll">
             {navigation.map((item) => {
               const isActive = pathname === item.href
               const Icon = item.icon
@@ -182,18 +209,15 @@ export default function Layout({ children }: LayoutProps) {
                   href={item.href}
                   prefetch={true}
                   onClick={handleSidebarClose}
-                  title={sidebarCollapsed ? item.name : undefined}
+                  title={item.name}
                   className={`
-                    flex items-center rounded-lg transition-colors duration-150
-                    ${sidebarCollapsed ? 'justify-center px-0 py-2.5' : 'px-3 py-2.5'}
-                    ${isActive
-                      ? 'bg-primary-600 text-white'
-                      : 'text-gray-300 hover:bg-gray-800 hover:text-white'
-                    }
+                    flex items-center gap-3 rounded-lg transition-colors duration-150 px-3 py-2.5
+                    ${sidebarCollapsed ? 'lg:justify-center lg:px-2' : ''}
+                    ${isActive ? 'bg-gray-700 text-white shadow-sm' : 'text-gray-300 hover:bg-gray-800 hover:text-white'}
                   `}
                 >
-                  <span className={sidebarCollapsed ? 'text-xl' : 'mr-3 text-xl flex-shrink-0'} aria-hidden>•</span>
-                  {!sidebarCollapsed && <span className="text-sm font-medium truncate">{item.name}</span>}
+                  <Icon className="w-5 h-5 flex-shrink-0 opacity-90" aria-hidden />
+                  <span className={`text-sm font-medium truncate ${sidebarCollapsed ? 'lg:hidden' : ''}`}>{item.name}</span>
                 </Link>
               )
             })}
@@ -219,47 +243,28 @@ export default function Layout({ children }: LayoutProps) {
 
           {/* User info e logout no final da sidebar */}
           <div className={`border-t border-gray-800 ${sidebarCollapsed ? 'p-2' : 'p-4'}`}>
-            <div className={`flex items-center ${sidebarCollapsed ? 'justify-center' : 'gap-3'} mb-2`}>
-              <div className="flex-shrink-0">
-                <div className={`rounded-full bg-gray-700 flex items-center justify-center overflow-hidden border border-gray-600 ${sidebarCollapsed ? 'w-9 h-9' : 'w-10 h-10'}`}>
-                  { (user as any)?.avatar ? (
-                    (user as any).avatar.startsWith('data:image') ? (
-                      <img src={(user as any).avatar} alt={user?.name} className="w-full h-full object-cover" />
-                    ) : (
-                      <span className="text-xl">{(user as any).avatar}</span>
-                    )
-                  ) : (
-                    <FiUser className={`text-gray-400 ${sidebarCollapsed ? 'w-5 h-5' : 'w-6 h-6'}`} />
-                  )}
-                </div>
-              </div>
-              {!sidebarCollapsed && (
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-white truncate">{user?.name}</p>
-                  <p className="text-xs text-gray-400 truncate capitalize">{user?.role}</p>
-                </div>
-              )}
+            <div className={`mb-2 min-w-0 ${sidebarCollapsed ? 'lg:hidden' : ''}`}>
+              <p className="text-sm font-medium text-white truncate">{user?.name}</p>
+              <p className="text-xs text-gray-400 truncate capitalize">{user?.role}</p>
             </div>
-            {!sidebarCollapsed && (
-              <>
-                <Link
-                  href="/my-account"
-                  onClick={handleSidebarClose}
-                  className="w-full mb-2 px-4 py-2 text-sm font-medium text-gray-300 bg-gray-800 rounded-lg hover:bg-gray-700 hover:text-white transition-colors flex items-center justify-center gap-2"
-                >
-                  <FiUser className="w-4 h-4" />
-                  Minha Conta
-                </Link>
-                <button
-                  onClick={handleLogout}
-                  className="w-full px-4 py-2 text-sm font-medium text-gray-300 bg-gray-800 rounded-lg hover:bg-gray-700 hover:text-white transition-colors"
-                >
-                  Sair
-                </button>
-              </>
-            )}
+            <div className={sidebarCollapsed ? 'lg:hidden' : ''}>
+              <Link
+                href="/my-account"
+                onClick={handleSidebarClose}
+                className="w-full mb-2 px-4 py-2 text-sm font-medium text-gray-200 bg-gray-800 rounded-lg hover:bg-gray-700 hover:text-white transition-colors flex items-center justify-center gap-2"
+              >
+                <FiUser className="w-4 h-4" />
+                Minha Conta
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="w-full px-4 py-2 text-sm font-medium text-gray-200 bg-gray-800 rounded-lg hover:bg-gray-700 hover:text-white transition-colors"
+              >
+                Sair
+              </button>
+            </div>
             {sidebarCollapsed && (
-              <div className="flex flex-col gap-1">
+              <div className="hidden lg:flex flex-col gap-1">
                 <Link
                   href="/my-account"
                   onClick={handleSidebarClose}
@@ -291,12 +296,16 @@ export default function Layout({ children }: LayoutProps) {
         />
       )}
 
-      {/* Main content */}
-      <div className="flex-1 flex flex-col lg:ml-0 min-w-0 h-screen overflow-hidden">
+      {/* Main content — margem esquerda no desktop conforme largura da sidebar */}
+      <div
+        className={`flex-1 flex flex-col min-w-0 h-screen overflow-hidden transition-[margin] duration-200 ease-out ${
+          sidebarCollapsed ? 'lg:ml-16' : 'lg:ml-64'
+        }`}
+      >
         {/* Botão menu mobile (só quando sem header) */}
         <button
           onClick={handleSidebarToggle}
-          className="lg:hidden fixed top-3 left-3 z-30 p-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 shadow transition-colors"
+          className="lg:hidden fixed top-3 left-3 z-30 p-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 border border-gray-700 shadow-md transition-colors"
           title="Abrir menu"
           aria-label="Abrir menu"
         >

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import Layout from '@/components/Layout'
 import api from '@/services/api'
 import Toast from '@/components/Toast'
@@ -34,6 +34,8 @@ export default function PromotionsPage() {
   const [showConfirmModal, setShowConfirmModal] = useState(false)
   const [confirmDeleteId, setConfirmDeleteId] = useState<number | null>(null)
   const [statusFilter, setStatusFilter] = useState<string>('ativa')
+  const [page, setPage] = useState(1)
+  const [pageSize, setPageSize] = useState(40)
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -48,6 +50,40 @@ export default function PromotionsPage() {
   useEffect(() => {
     loadPromotions()
   }, [statusFilter])
+
+  useEffect(() => {
+    setPage(1)
+  }, [statusFilter, promotions.length, pageSize])
+
+  const totalResults = promotions.length
+  const totalPages = Math.max(1, Math.ceil(totalResults / pageSize))
+  const safePage = Math.min(page, totalPages)
+  const startIndex = totalResults === 0 ? 0 : (safePage - 1) * pageSize
+  const endIndexExclusive = Math.min(startIndex + pageSize, totalResults)
+  const pagePromotions = promotions.slice(startIndex, endIndexExclusive)
+
+  const pagesToShow = useMemo(() => {
+    const total = totalPages
+    const current = safePage
+    if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1)
+    const pages = new Set<number>()
+    pages.add(1)
+    pages.add(total)
+    pages.add(current)
+    pages.add(current - 1)
+    pages.add(current + 1)
+    pages.add(current - 2)
+    pages.add(current + 2)
+    const arr = Array.from(pages).filter((p) => p >= 1 && p <= total).sort((a, b) => a - b)
+    const out: Array<number> = []
+    for (let i = 0; i < arr.length; i++) {
+      const p = arr[i]
+      const prev = arr[i - 1]
+      if (i > 0 && prev != null && p - prev > 1) out.push(-1)
+      out.push(p)
+    }
+    return out
+  }, [safePage, totalPages])
 
   const loadPromotions = async () => {
     try {
@@ -265,14 +301,14 @@ export default function PromotionsPage() {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {promotions.length === 0 ? (
+                  {totalResults === 0 ? (
                     <tr>
                       <td colSpan={6} className="px-6 py-4 text-center text-gray-500">
                         Nenhuma promoção encontrada
                       </td>
                     </tr>
                   ) : (
-                    promotions.map((promotion) => (
+                    pagePromotions.map((promotion) => (
                       <tr key={promotion.id} className="hover:bg-gray-50">
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="text-sm font-medium text-gray-900">{promotion.name}</div>
@@ -325,6 +361,86 @@ export default function PromotionsPage() {
                   )}
                 </tbody>
               </table>
+            </div>
+          </div>
+        )}
+
+        {!loading && totalResults > 0 && (
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-3">
+            <div className="text-xs text-gray-600">
+              Mostrando <span className="font-medium text-gray-900">{startIndex + 1}</span>–<span className="font-medium text-gray-900">{endIndexExclusive}</span> de{' '}
+              <span className="font-medium text-gray-900">{totalResults}</span>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <select
+                value={pageSize}
+                onChange={(e) => setPageSize(parseInt(e.target.value))}
+                className="px-2 py-1.5 border border-gray-300 rounded-lg text-sm text-gray-900 bg-white"
+                aria-label="Itens por página"
+                title="Itens por página"
+              >
+                <option value={20}>20</option>
+                <option value={40}>40</option>
+                <option value={80}>80</option>
+                <option value={120}>120</option>
+              </select>
+
+              <button
+                type="button"
+                onClick={() => setPage(1)}
+                disabled={safePage <= 1}
+                className="px-2 py-1.5 border border-gray-300 rounded-md text-sm text-gray-700 disabled:opacity-50"
+              >
+                Primeira
+              </button>
+              <button
+                type="button"
+                onClick={() => setPage((p) => Math.max(1, p - 1))}
+                disabled={safePage <= 1}
+                className="px-2 py-1.5 border border-gray-300 rounded-md text-sm text-gray-700 disabled:opacity-50"
+              >
+                Anterior
+              </button>
+
+              <div className="flex items-center gap-1">
+                {pagesToShow.map((p, idx) =>
+                  p === -1 ? (
+                    <span key={`e-${idx}`} className="px-2 text-sm text-gray-500">
+                      …
+                    </span>
+                  ) : (
+                    <button
+                      key={p}
+                      type="button"
+                      onClick={() => setPage(p)}
+                      className={`h-8 min-w-8 px-2 rounded-md text-sm border ${
+                        p === safePage ? 'bg-primary-600 text-white border-primary-600' : 'border-gray-300 text-gray-700 hover:bg-gray-50'
+                      }`}
+                      aria-current={p === safePage ? 'page' : undefined}
+                    >
+                      {p}
+                    </button>
+                  )
+                )}
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                disabled={safePage >= totalPages}
+                className="px-2 py-1.5 border border-gray-300 rounded-md text-sm text-gray-700 disabled:opacity-50"
+              >
+                Próxima
+              </button>
+              <button
+                type="button"
+                onClick={() => setPage(totalPages)}
+                disabled={safePage >= totalPages}
+                className="px-2 py-1.5 border border-gray-300 rounded-md text-sm text-gray-700 disabled:opacity-50"
+              >
+                Última
+              </button>
             </div>
           </div>
         )}

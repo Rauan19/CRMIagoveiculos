@@ -51,8 +51,9 @@ class BirthdayScheduler {
   async checkAndSendBirthdayEmails() {
     try {
       const today = new Date();
-      const todayMonth = today.getMonth() + 1; // getMonth() retorna 0-11
-      const todayDay = today.getDate();
+      // usar UTC para comparar apenas mês/dia (evita problemas com timezone)
+      const todayMonth = today.getUTCMonth() + 1; // getUTCMonth() retorna 0-11
+      const todayDay = today.getUTCDate();
 
       // Buscar clientes com aniversário hoje
       const customers = await prisma.customer.findMany({
@@ -66,12 +67,12 @@ class BirthdayScheduler {
         },
       });
 
-      // Filtrar clientes que fazem aniversário hoje
+      // Filtrar clientes que fazem aniversário hoje usando partes UTC (mês/dia)
       const birthdayCustomers = customers.filter(customer => {
         if (!customer.birthDate) return false;
         const birthDate = new Date(customer.birthDate);
-        const birthMonth = birthDate.getMonth() + 1;
-        const birthDay = birthDate.getDate();
+        const birthMonth = birthDate.getUTCMonth() + 1;
+        const birthDay = birthDate.getUTCDate();
         return birthMonth === todayMonth && birthDay === todayDay;
       });
 
@@ -132,15 +133,19 @@ class BirthdayScheduler {
       const upcoming = customers
         .map(customer => {
           const birthDate = new Date(customer.birthDate);
+          // usar UTC para extrair dia/mês e criar próxima data no calendário local
+          const birthMonth = birthDate.getUTCMonth();
+          const birthDay = birthDate.getUTCDate();
           const thisYear = today.getFullYear();
-          const nextBirthday = new Date(thisYear, birthDate.getMonth(), birthDate.getDate());
+          let nextBirthday = new Date(thisYear, birthMonth, birthDay);
 
-          // Se o aniversário já passou este ano, pegar do próximo ano
-          if (nextBirthday < today) {
+          // Comparar apenas pela data (início do dia) para evitar problemas de horário
+          const startOfToday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+          if (nextBirthday < startOfToday) {
             nextBirthday.setFullYear(thisYear + 1);
           }
 
-          const daysUntilBirthday = Math.ceil((nextBirthday - today) / (1000 * 60 * 60 * 24));
+          const daysUntilBirthday = Math.floor((nextBirthday.getTime() - startOfToday.getTime()) / (1000 * 60 * 60 * 24));
 
           if (daysUntilBirthday <= days) {
             return {

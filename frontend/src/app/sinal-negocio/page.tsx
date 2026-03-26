@@ -9,7 +9,7 @@ import ConfirmModal from '@/components/ConfirmModal'
 import CustomerFormModal, { type CustomerFormModalCustomer } from '@/components/CustomerFormModal'
 import VehicleFormModal from '@/components/VehicleFormModal'
 import { formatCPF, formatCNPJ } from '@/utils/formatters'
-import { FiDollarSign, FiPlus, FiEdit2, FiTrash2, FiFilter, FiX, FiUserPlus, FiEye, FiSearch } from 'react-icons/fi'
+import { FiZap, FiPlus, FiEdit2, FiTrash2, FiFilter, FiX, FiUserPlus, FiEye, FiSearch, FiPrinter, FiDownload } from 'react-icons/fi'
 
 interface Customer {
   id: number
@@ -106,15 +106,23 @@ function SinalNegocioPageContent() {
   const [showConfirmModal, setShowConfirmModal] = useState(false)
   const [confirmDeleteId, setConfirmDeleteId] = useState<number | null>(null)
   const [filterSellerId, setFilterSellerId] = useState('')
+  const [filterStatus, setFilterStatus] = useState('')
+  const [filterDataDe, setFilterDataDe] = useState('')
+  const [filterDataAte, setFilterDataAte] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
   const [searchQuery, setSearchQuery] = useState('')
+  const [showExportMenu, setShowExportMenu] = useState(false)
+  const exportMenuRef = useRef<HTMLDivElement>(null)
   const [clientSearch, setClientSearch] = useState('')
   const [clientDropdown, setClientDropdown] = useState(false)
+  const [vehicleSearch, setVehicleSearch] = useState('')
+  const [vehicleDropdown, setVehicleDropdown] = useState(false)
   const [showCustomerModal, setShowCustomerModal] = useState(false)
   const [showVehicleModal, setShowVehicleModal] = useState(false)
   const [showDetailsModal, setShowDetailsModal] = useState(false)
   const [selectedSinal, setSelectedSinal] = useState<SinalNegocio | null>(null)
   const clientSearchRef = useRef<HTMLDivElement>(null)
+  const vehicleSearchRef = useRef<HTMLDivElement>(null)
 
   const formatDoc = (doc: string | undefined) => {
     if (!doc) return '-'
@@ -142,6 +150,7 @@ function SinalNegocioPageContent() {
     try {
       const params = new URLSearchParams()
       if (filterSellerId) params.append('sellerId', filterSellerId)
+      if (filterStatus) params.append('status', filterStatus)
       if (searchQuery.trim()) params.append('search', searchQuery.trim())
       const [sinaisRes, customersRes, vehiclesRes, sellersRes] = await Promise.all([
         api.get(`/sinal-negocio?${params.toString()}`),
@@ -162,7 +171,17 @@ function SinalNegocioPageContent() {
 
   useEffect(() => {
     loadData()
-  }, [filterSellerId, searchQuery])
+  }, [filterSellerId, filterStatus, searchQuery])
+
+  const filteredSinais = (() => {
+    if (!filterDataDe && !filterDataAte) return sinais
+    return sinais.filter((s) => {
+      const dataCriacao = s.data ? s.data.split('T')[0] : ''
+      if (filterDataDe && dataCriacao < filterDataDe) return false
+      if (filterDataAte && dataCriacao > filterDataAte) return false
+      return true
+    })
+  })()
 
   useEffect(() => {
     if (!searchParams) return
@@ -192,7 +211,11 @@ function SinalNegocioPageContent() {
           setClientSearch(newC.name)
         }
       }
-      if (newVehicleId) setFormData((prev) => ({ ...prev, vehicleId: newVehicleId }))
+      if (newVehicleId) {
+        setFormData((prev) => ({ ...prev, vehicleId: newVehicleId }))
+        const newV = (vehiclesRes.data || []).find((v: Vehicle) => v.id === parseInt(newVehicleId))
+        if (newV) setVehicleSearch(`${newV.brand} ${newV.model} ${newV.year}${newV.plate ? ` – ${newV.plate}` : ''}`)
+      }
       setShowModal(true)
       router.replace('/sinal-negocio')
     }
@@ -208,10 +231,25 @@ function SinalNegocioPageContent() {
       )
     : []
 
+  const vehicleLabel = (v: Vehicle) => `${v.brand} ${v.model} ${v.year}${v.plate ? ` – ${v.plate}` : ''}`
+  const filteredVehicles = vehicleSearch.length >= 2
+    ? vehicles.filter(
+        (v) =>
+          vehicleLabel(v).toLowerCase().includes(vehicleSearch.toLowerCase()) ||
+          (v.plate && v.plate.toLowerCase().includes(vehicleSearch.toLowerCase()))
+      )
+    : []
+
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (clientSearchRef.current && !clientSearchRef.current.contains(e.target as Node)) {
         setClientDropdown(false)
+      }
+      if (vehicleSearchRef.current && !vehicleSearchRef.current.contains(e.target as Node)) {
+        setVehicleDropdown(false)
+      }
+      if (exportMenuRef.current && !exportMenuRef.current.contains(e.target as Node)) {
+        setShowExportMenu(false)
       }
     }
     document.addEventListener('mousedown', handleClickOutside)
@@ -220,6 +258,9 @@ function SinalNegocioPageContent() {
 
   const selectedCustomer = formData.customerId
     ? customers.find((c) => c.id === parseInt(formData.customerId))
+    : null
+  const selectedVehicle = formData.vehicleId
+    ? vehicles.find((v) => v.id === parseInt(formData.vehicleId))
     : null
 
   const resetForm = () => {
@@ -236,6 +277,7 @@ function SinalNegocioPageContent() {
       observacoes: '',
     })
     setClientSearch('')
+    setVehicleSearch('')
     setEditing(null)
   }
 
@@ -291,6 +333,7 @@ function SinalNegocioPageContent() {
       observacoes: s.observacoes || '',
     })
     setClientSearch(s.customer?.name || '')
+    setVehicleSearch(s.vehicle ? `${s.vehicle.brand} ${s.vehicle.model} ${s.vehicle.year}${s.vehicle.plate ? ` – ${s.vehicle.plate}` : ''}` : '')
     setShowModal(true)
   }
 
@@ -311,6 +354,149 @@ function SinalNegocioPageContent() {
   const formatMoney = (v: number) => `R$ ${formatBrl(v)}`
   const formatDate = (d: string) => (d ? new Date(d).toLocaleDateString('pt-BR') : '-')
 
+  const handlePrint = () => {
+    try {
+      window.print()
+    } catch {
+      setToast({ message: 'Erro ao enviar para impressão.', type: 'error' })
+    }
+  }
+
+  const buildPrintHtml = (lista: SinalNegocio[]) => {
+    const headers = ['Data criação', 'Data validade', 'Veículo', 'Valor sinal', 'Valor veíc.', 'Em aberto', 'Cliente', 'CPF', 'Vendedor', 'Status']
+    const rows = lista.map((s) => [
+      formatDate(s.data),
+      s.dataValidade ? formatDate(s.dataValidade) : '-',
+      s.vehicle ? `${s.vehicle.brand} ${s.vehicle.model} ${s.vehicle.year}` : '-',
+      formatMoney(s.valor),
+      s.valorVeiculo != null ? formatMoney(s.valorVeiculo) : '-',
+      s.valorEmAberto != null ? formatMoney(s.valorEmAberto) : '-',
+      s.customer?.name ?? '-',
+      formatDoc(s.customer?.cpf),
+      s.seller?.name ?? '-',
+      statusOptions.find((o) => o.value === s.status)?.label ?? s.status,
+    ])
+    const thead = `<tr>${headers.map((h) => `<th>${h}</th>`).join('')}</tr>`
+    const tbody = rows.map((r) => `<tr>${r.map((c) => `<td>${c}</td>`).join('')}</tr>`).join('')
+    return `
+      <!DOCTYPE html>
+      <html lang="pt-BR">
+        <head>
+          <meta charset="utf-8" />
+          <title>Sinais de negócio - ${new Date().toLocaleDateString('pt-BR')}</title>
+          <style>
+            body { font-family: system-ui, sans-serif; padding: 16px; color: #111827; }
+            h1 { font-size: 18px; margin-bottom: 8px; }
+            p { font-size: 12px; color: #4b5563; margin: 0 0 16px; }
+            table { width: 100%; border-collapse: collapse; font-size: 11px; }
+            th, td { border: 1px solid #e5e7eb; padding: 4px 6px; text-align: left; }
+            th { background: #f3f4f6; font-weight: 600; }
+          </style>
+        </head>
+        <body>
+          <h1>Sinais de negócio</h1>
+          <p>Exportado em ${new Date().toLocaleString('pt-BR')} – ${lista.length} registro(s)</p>
+          <table>
+            <thead>${thead}</thead>
+            <tbody>${tbody}</tbody>
+          </table>
+        </body>
+      </html>
+    `
+  }
+
+  const handleExportPdf = () => {
+    try {
+      if (!filteredSinais.length) {
+        setToast({ message: 'Não há sinais para exportar.', type: 'info' })
+        return
+      }
+      const win = window.open('', '_blank')
+      if (!win) {
+        setToast({ message: 'Não foi possível abrir a janela para exportar.', type: 'error' })
+        return
+      }
+      win.document.open()
+      win.document.write(buildPrintHtml(filteredSinais))
+      win.document.close()
+      win.focus()
+      win.print()
+      setShowExportMenu(false)
+    } catch {
+      setToast({ message: 'Erro ao exportar PDF.', type: 'error' })
+    }
+  }
+
+  const handleExportCsv = () => {
+    try {
+      if (!filteredSinais.length) {
+        setToast({ message: 'Não há sinais para exportar.', type: 'info' })
+        return
+      }
+      const headers = ['Data criação', 'Data validade', 'Veículo', 'Valor sinal', 'Valor veíc.', 'Em aberto', 'Cliente', 'CPF', 'Vendedor', 'Status']
+      const rows = filteredSinais.map((s) => [
+        formatDate(s.data),
+        s.dataValidade ? formatDate(s.dataValidade) : '',
+        s.vehicle ? `${s.vehicle.brand} ${s.vehicle.model} ${s.vehicle.year}` : '',
+        formatBrl(s.valor),
+        s.valorVeiculo != null ? formatBrl(s.valorVeiculo) : '',
+        s.valorEmAberto != null ? formatBrl(s.valorEmAberto) : '',
+        s.customer?.name ?? '',
+        (s.customer?.cpf || '').replace(/\D/g, ''),
+        s.seller?.name ?? '',
+        statusOptions.find((o) => o.value === s.status)?.label ?? s.status,
+      ])
+      const escape = (v: string) => (/[",\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v)
+      const csv = [headers.map(escape).join(','), ...rows.map((r) => r.map((x) => escape(String(x))).join(','))].join('\n')
+      const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8' })
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = `sinais-negocio-${new Date().toISOString().split('T')[0]}.csv`
+      a.click()
+      URL.revokeObjectURL(url)
+      setShowExportMenu(false)
+      setToast({ message: 'CSV exportado com sucesso.', type: 'success' })
+    } catch {
+      setToast({ message: 'Erro ao exportar CSV.', type: 'error' })
+    }
+  }
+
+  const handleExportExcel = () => {
+    try {
+      if (!filteredSinais.length) {
+        setToast({ message: 'Não há sinais para exportar.', type: 'info' })
+        return
+      }
+      const headers = ['Data criação', 'Data validade', 'Veículo', 'Valor sinal', 'Valor veíc.', 'Em aberto', 'Cliente', 'CPF', 'Vendedor', 'Status']
+      const rows = filteredSinais.map((s) => [
+        formatDate(s.data),
+        s.dataValidade ? formatDate(s.dataValidade) : '',
+        s.vehicle ? `${s.vehicle.brand} ${s.vehicle.model} ${s.vehicle.year}` : '',
+        formatBrl(s.valor),
+        s.valorVeiculo != null ? formatBrl(s.valorVeiculo) : '',
+        s.valorEmAberto != null ? formatBrl(s.valorEmAberto) : '',
+        s.customer?.name ?? '',
+        (s.customer?.cpf || '').replace(/\D/g, ''),
+        s.seller?.name ?? '',
+        statusOptions.find((o) => o.value === s.status)?.label ?? s.status,
+      ])
+      const escape = (v: string) => (/[";\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v)
+      const csv = [headers.map(escape).join(';'), ...rows.map((r) => r.map((x) => escape(String(x))).join(';'))].join('\n')
+      const blob = new Blob(['\uFEFF' + csv], { type: 'application/vnd.ms-excel;charset=utf-8' })
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = `sinais-negocio-${new Date().toISOString().split('T')[0]}.xls`
+      a.click()
+      URL.revokeObjectURL(url)
+      setShowExportMenu(false)
+      setToast({ message: 'Planilha exportada com sucesso.', type: 'success' })
+    } catch {
+      setToast({ message: 'Erro ao exportar planilha.', type: 'error' })
+    }
+  }
+
   const defaultDataValidade = () => {
     const d = new Date()
     d.setDate(d.getDate() + 7)
@@ -323,40 +509,79 @@ function SinalNegocioPageContent() {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div>
             <h1 className="text-xl font-bold text-gray-900 flex items-center gap-2">
-              <FiDollarSign className="text-primary-600" />
+              <FiZap className="text-primary-600" />
               Sinal de negócio
             </h1>
             <p className="text-sm text-gray-500 mt-0.5">Registro de sinais (entrada/reserva) de clientes</p>
           </div>
-          <button
-            onClick={() => {
-              resetForm()
-              setFormData((prev) => ({
-                ...prev,
-                dataValidade: prev.dataValidade || defaultDataValidade(),
-              }))
-              setShowModal(true)
-            }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 text-sm font-medium"
-          >
-            <FiPlus className="w-4 h-4" />
-            Novo sinal
-          </button>
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              onClick={handlePrint}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 text-sm font-medium border border-gray-300"
+            >
+              <FiPrinter className="w-4 h-4" />
+              Imprimir
+            </button>
+            <div className="relative" ref={exportMenuRef}>
+              <button
+                onClick={() => setShowExportMenu((v) => !v)}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary-50 text-primary-700 border border-primary-600 rounded-lg hover:bg-primary-100 text-sm font-medium"
+              >
+                <FiDownload className="w-4 h-4" />
+                Exportar
+              </button>
+              {showExportMenu && (
+                <div className="absolute right-0 top-full mt-1 py-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-[160px]">
+                  <button type="button" onClick={handleExportPdf} className="w-full text-left px-3 py-2 text-sm text-gray-900 hover:bg-gray-100">
+                    PDF
+                  </button>
+                  <button type="button" onClick={handleExportCsv} className="w-full text-left px-3 py-2 text-sm text-gray-900 hover:bg-gray-100">
+                    CSV
+                  </button>
+                  <button type="button" onClick={handleExportExcel} className="w-full text-left px-3 py-2 text-sm text-gray-900 hover:bg-gray-100">
+                    Excel
+                  </button>
+                </div>
+              )}
+            </div>
+            <button
+              onClick={() => {
+                resetForm()
+                setFormData((prev) => ({
+                  ...prev,
+                  dataValidade: prev.dataValidade || defaultDataValidade(),
+                }))
+                setShowModal(true)
+              }}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 text-sm font-medium"
+            >
+              <FiPlus className="w-4 h-4" />
+              Novo sinal
+            </button>
+          </div>
         </div>
 
         <div className="bg-white rounded-lg shadow border border-gray-200 p-3">
           <div className="flex flex-wrap items-center gap-2 mb-3">
-            <div className="relative flex-1 min-w-[160px] max-w-xs">
-              <FiSearch className="absolute left-2 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
+            <div className="relative flex-1 min-w-[180px] max-w-sm">
+              <FiSearch className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
               <input
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Buscar por cliente, veículo, CPF, vendedor..."
+                onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), setSearchQuery(searchTerm))}
+                placeholder="Cliente, veículo, CPF, vendedor..."
                 className="w-full pl-8 pr-2 py-1.5 text-sm border border-gray-300 rounded focus:ring-1 focus:ring-primary-500 focus:border-primary-500 text-gray-900"
               />
             </div>
-            <FiFilter className="text-gray-500 text-sm shrink-0" />
+            <button
+              type="button"
+              onClick={() => setSearchQuery(searchTerm)}
+              className="px-3 py-1.5 text-sm font-medium text-white bg-primary-600 rounded hover:bg-primary-700"
+            >
+              Buscar
+            </button>
+            <FiFilter className="text-gray-500 text-sm shrink-0 hidden sm:block" />
             <select
               value={filterSellerId}
               onChange={(e) => setFilterSellerId(e.target.value)}
@@ -367,6 +592,33 @@ function SinalNegocioPageContent() {
                 <option key={s.id} value={s.id}>{s.name}</option>
               ))}
             </select>
+            <select
+              value={filterStatus}
+              onChange={(e) => setFilterStatus(e.target.value)}
+              className="px-2 py-1.5 text-sm border border-gray-300 rounded focus:ring-1 focus:ring-primary-500 focus:border-primary-500 text-gray-900 min-w-[120px]"
+            >
+              <option value="">Status: Todos</option>
+              {statusOptions.map((o) => (
+                <option key={o.value} value={o.value}>{o.label}</option>
+              ))}
+            </select>
+            <div className="flex items-center gap-1">
+              <input
+                type="date"
+                value={filterDataDe}
+                onChange={(e) => setFilterDataDe(e.target.value)}
+                className="px-2 py-1.5 text-sm border border-gray-300 rounded focus:ring-1 focus:ring-primary-500 focus:border-primary-500 text-gray-900 w-[130px]"
+                title="Data criação de"
+              />
+              <span className="text-gray-400 text-xs">até</span>
+              <input
+                type="date"
+                value={filterDataAte}
+                onChange={(e) => setFilterDataAte(e.target.value)}
+                className="px-2 py-1.5 text-sm border border-gray-300 rounded focus:ring-1 focus:ring-primary-500 focus:border-primary-500 text-gray-900 w-[130px]"
+                title="Data criação até"
+              />
+            </div>
           </div>
 
           {loading ? (
@@ -391,14 +643,14 @@ function SinalNegocioPageContent() {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {sinais.length === 0 ? (
+                  {filteredSinais.length === 0 ? (
                     <tr>
                       <td colSpan={11} className="px-1.5 py-6 text-center text-gray-500">
                         Nenhum sinal cadastrado.
                       </td>
                     </tr>
                   ) : (
-                    sinais.map((s) => (
+                    filteredSinais.map((s) => (
                       <tr key={s.id} className="hover:bg-gray-50">
                         <td className="px-1.5 py-1 text-gray-700 whitespace-nowrap">{formatDate(s.data)}</td>
                         <td className="px-1.5 py-1 text-gray-700 whitespace-nowrap">{s.dataValidade ? formatDate(s.dataValidade) : '-'}</td>
@@ -464,22 +716,21 @@ function SinalNegocioPageContent() {
                 </button>
               </div>
               <form onSubmit={handleSubmit} className="p-4 space-y-4">
-                <div>
+                <div ref={vehicleSearchRef} className="relative">
                   <label className="block text-sm font-medium text-gray-700 mb-1">Veículo *</label>
                   <div className="flex gap-2">
-                    <select
-                      value={formData.vehicleId}
-                      onChange={(e) => setFormData({ ...formData, vehicleId: e.target.value })}
-                      required
+                    <input
+                      type="text"
+                      value={vehicleSearch}
+                      onChange={(e) => {
+                        setVehicleSearch(e.target.value)
+                        setVehicleDropdown(true)
+                        if (!e.target.value) setFormData((p) => ({ ...p, vehicleId: '' }))
+                      }}
+                      onFocus={() => vehicleSearch.length >= 2 && setVehicleDropdown(true)}
+                      placeholder="Digite ao menos 2 caracteres para buscar (marca, modelo, placa)"
                       className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-primary-500 focus:border-primary-500 text-gray-900"
-                    >
-                      <option value="">Selecione o veículo</option>
-                      {vehicles.map((v) => (
-                        <option key={v.id} value={v.id}>
-                          {v.brand} {v.model} {v.year} {v.plate ? `– ${v.plate}` : ''}
-                        </option>
-                      ))}
-                    </select>
+                    />
                     <button
                       type="button"
                       onClick={() => setShowVehicleModal(true)}
@@ -489,6 +740,33 @@ function SinalNegocioPageContent() {
                       Criar novo veículo
                     </button>
                   </div>
+                  {vehicleSearch.length > 0 && vehicleSearch.length < 2 && (
+                    <p className="text-xs text-gray-500 mt-1">Digite ao menos 2 caracteres para buscar o veículo.</p>
+                  )}
+                  {selectedVehicle && (
+                    <p className="text-xs text-green-600 mt-1">Veículo selecionado: {vehicleLabel(selectedVehicle)}</p>
+                  )}
+                  {vehicleDropdown && vehicleSearch.length >= 2 && (
+                    <ul className="absolute z-10 mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-lg max-h-48 overflow-y-auto text-gray-900">
+                      {filteredVehicles.length === 0 ? (
+                        <li className="px-3 py-2 text-sm text-gray-500">Nenhum veículo encontrado</li>
+                      ) : (
+                        filteredVehicles.slice(0, 10).map((v) => (
+                          <li
+                            key={v.id}
+                            className="px-3 py-2 text-sm text-gray-900 cursor-pointer hover:bg-gray-100 border-b border-gray-100 last:border-0"
+                            onClick={() => {
+                              setFormData((p) => ({ ...p, vehicleId: String(v.id) }))
+                              setVehicleSearch(vehicleLabel(v))
+                              setVehicleDropdown(false)
+                            }}
+                          >
+                            {vehicleLabel(v)}
+                          </li>
+                        ))
+                      )}
+                    </ul>
+                  )}
                 </div>
 
                 <div ref={clientSearchRef} className="relative">
@@ -692,6 +970,7 @@ function SinalNegocioPageContent() {
             return [...prev, { id: vehicle.id, brand: vehicle.brand, model: vehicle.model, year: vehicle.year, plate: vehicle.plate, status: vehicle.status, price: vehicle.price }]
           })
           setFormData((prev) => ({ ...prev, vehicleId: String(vehicle.id) }))
+          setVehicleSearch(`${vehicle.brand} ${vehicle.model} ${vehicle.year}${vehicle.plate ? ` – ${vehicle.plate}` : ''}`)
         }}
       />
 

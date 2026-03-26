@@ -47,9 +47,28 @@ function calculateTotalSize(photos: string[]): number {
   return photos.reduce((total, photo) => total + calculateBase64Size(photo), 0)
 }
 
+// Parse seguro do campo photos vindo da API
+function parsePhotos(p: any): string[] {
+  if (!p) return []
+  if (Array.isArray(p)) return p
+  if (typeof p === 'string') {
+    const s = p.trim()
+    if (!s || s === '[]' || s === 'null') return []
+    try {
+      const parsed = JSON.parse(s)
+      if (Array.isArray(parsed)) return parsed
+    } catch {}
+    return [p]
+  }
+  return []
+}
+
 export default function EstoquePage() {
   const [items, setItems] = useState<Estoque[]>([])
   const [storageInfo, setStorageInfo] = useState<StorageInfo | null>(null)
+  const [page, setPage] = useState(1)
+  const [perPage, setPerPage] = useState(50)
+  const [totalItems, setTotalItems] = useState(0)
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [deleting, setDeleting] = useState<number | null>(null)
@@ -59,6 +78,7 @@ export default function EstoquePage() {
   const [viewingPhotos, setViewingPhotos] = useState<string[]>([])
   const [showPhotoModal, setShowPhotoModal] = useState(false)
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0)
+  const [loadingPhotosFor, setLoadingPhotosFor] = useState<number | null>(null)
   const [showConfirmModal, setShowConfirmModal] = useState(false)
   const [confirmDeleteId, setConfirmDeleteId] = useState<number | null>(null)
   const [formData, setFormData] = useState({
@@ -92,8 +112,9 @@ export default function EstoquePage() {
   const [loadingYears, setLoadingYears] = useState(false)
   
   useEffect(() => {
-    loadData()
+    loadData(page, perPage)
     loadFipeBrands()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   // Quando trocar o tipo de veículo, recarregar marcas
@@ -135,15 +156,20 @@ export default function EstoquePage() {
     setCurrentPhotosSize(totalSize)
   }, [formData.photos])
 
-  const loadData = async () => {
+  const loadData = async (pageNum = page, perPageNum = perPage) => {
     setLoading(true)
     try {
-      const [estoqueRes, storageRes] = await Promise.all([
-        api.get('/estoque'),
-        api.get('/estoque/storage'),
-      ])
-      setItems(estoqueRes.data.items || [])
-      setStorageInfo(estoqueRes.data.storage || storageRes.data)
+      const res = await api.get(`/estoque?page=${pageNum}&perPage=${perPageNum}`)
+      const data = res.data || {}
+      setItems(data.items || [])
+      setStorageInfo(data.storage || null)
+      if (data.pagination) {
+        setPage(data.pagination.page || pageNum)
+        setPerPage(data.pagination.perPage || perPageNum)
+        setTotalItems(data.pagination.total || 0)
+      } else {
+        setTotalItems(0)
+      }
     } catch (error) {
       console.error('Erro ao carregar dados:', error)
       setToast({ message: 'Erro ao carregar dados.', type: 'error' })
@@ -370,7 +396,8 @@ export default function EstoquePage() {
       setShowModal(false)
       setEditingItem(null)
       resetForm()
-      await loadData()
+      // after create/update reload first page to show new item
+      await loadData(1, perPage)
     } catch (error: any) {
       console.error('Erro ao salvar veículo:', error)
       const msg = error.response?.data?.error || error.message || 'Erro ao salvar veículo'
@@ -421,7 +448,11 @@ export default function EstoquePage() {
     try {
       await api.delete(`/estoque/${confirmDeleteId}`)
       setToast({ message: 'Veículo removido do estoque com sucesso!', type: 'success' })
-      await loadData()
+      // after delete, load same page or previous if current became empty
+      const newTotal = Math.max(0, totalItems - 1)
+      const lastPage = Math.max(1, Math.ceil(newTotal / perPage))
+      const nextPage = page > lastPage ? lastPage : page
+      await loadData(nextPage, perPage)
     } catch (error: any) {
       console.error('Erro ao excluir veículo:', error)
       setToast({ message: error.response?.data?.error || 'Erro ao excluir veículo', type: 'error' })
@@ -434,6 +465,32 @@ export default function EstoquePage() {
   const handleDeleteCancel = () => {
     setShowConfirmModal(false)
     setConfirmDeleteId(null)
+  }
+
+  const handleOpenPhotos = async (item: Estoque) => {
+    // tentar usar o campo já presente
+    const local = parsePhotos((item as any).photos)
+    if (local.length > 0) {
+      setViewingPhotos(local)
+      setCurrentPhotoIndex(0)
+      setShowPhotoModal(true)
+      return
+    }
+
+    try {
+      setLoadingPhotosFor(item.id)
+      const res = await api.get(`/estoque/${item.id}`)
+      const data = res.data || {}
+      const fetched = parsePhotos(data.photos)
+      setViewingPhotos(fetched)
+      setCurrentPhotoIndex(0)
+      setShowPhotoModal(true)
+    } catch (error) {
+      console.error('Erro ao carregar fotos:', error)
+      setToast({ message: 'Erro ao carregar fotos do veículo.', type: 'error' })
+    } finally {
+      setLoadingPhotosFor(null)
+    }
   }
 
   const resetForm = () => {
@@ -477,10 +534,10 @@ export default function EstoquePage() {
   return (
     <Layout>
       <div className="space-y-6">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Estoque</h1>
-            <p className="text-sm text-gray-600 mt-1">
+            <h1 className="text-xl font-bold text-gray-900">Estoque</h1>
+            <p className="text-sm text-gray-600 mt-0.5">
               Gerencie itens do estoque com valores, descontos e imagens. Limite de armazenamento: 10GB
             </p>
           </div>
@@ -524,44 +581,43 @@ export default function EstoquePage() {
         ) : (
           <div className="bg-white shadow rounded-lg overflow-hidden max-h-[calc(100vh-320px)] flex flex-col">
             <div className="overflow-x-auto overflow-y-auto flex-1 min-h-0">
-              <table className="min-w-full divide-y divide-gray-200">
+              <table className="min-w-full divide-y divide-gray-200 text-sm">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Veículo
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Placa / Cor
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Valor
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Desconto
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Valor Final
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Fotos
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Ações
-                    </th>
+                    <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Veículo</th>
+                    <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Placa / Cor</th>
+                    <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Valor</th>
+                    <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Desconto</th>
+                    <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Valor Final</th>
+                    <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fotos</th>
+                    <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {items.length === 0 ? (
                     <tr>
-                      <td colSpan={7} className="px-6 py-4 text-center text-gray-500">
+                      <td colSpan={7} className="px-3 py-3 text-center text-gray-500">
                         Nenhum veículo no estoque. Clique em "Adicionar Veículo" para começar.
                       </td>
                     </tr>
                   ) : (
                     items.map((item) => {
-                      const photos = item.photos 
-                        ? (typeof item.photos === 'string' ? JSON.parse(item.photos) : item.photos)
-                        : []
+                      const parsePhotos = (p: any) => {
+                        if (!p) return []
+                        if (Array.isArray(p)) return p
+                        if (typeof p === 'string') {
+                          const s = p.trim()
+                          if (!s || s === '[]' || s === 'null') return []
+                          try {
+                            const parsed = JSON.parse(s)
+                            if (Array.isArray(parsed)) return parsed
+                          } catch {}
+                          // fallback: single base64/string stored directly
+                          return [p]
+                        }
+                        return []
+                      }
+                      const photos = parsePhotos(item.photos)
                       // Se houver promotionValue, usar ele como valor final
                       // Caso contrário, calcular com desconto se houver
                       const finalValue = item.promotionValue 
@@ -572,11 +628,11 @@ export default function EstoquePage() {
 
                       return (
                         <tr key={item.id} className="hover:bg-gray-50">
-                          <td className="px-6 py-4 whitespace-nowrap">
+                          <td className="px-3 py-2 whitespace-nowrap">
                             <div className="text-sm font-medium text-gray-900">{item.brand} {item.model}</div>
                             <div className="text-xs text-gray-500">{item.year}</div>
                           </td>
-                          <td className="px-6 py-4">
+                          <td className="px-3 py-2">
                             <div className="text-sm text-gray-500">
                               {item.plate ? `Placa: ${item.plate}` : '-'}
                             </div>
@@ -584,21 +640,17 @@ export default function EstoquePage() {
                               <div className="text-xs text-gray-400">{item.color}</div>
                             )}
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                          <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-900">
                             {item.value ? `R$ ${item.value.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` : '-'}
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                          <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-900">
                             {item.discount ? `${item.discount}%` : '-'}
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-green-600">
+                          <td className="px-3 py-2 whitespace-nowrap text-sm font-medium text-green-600">
                             {item.promotionValue && item.value ? (
                               <div>
-                                <div className="text-gray-500 line-through text-xs">
-                                  De R$ {item.value.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-                                </div>
-                                <div className="text-green-600">
-                                  Por R$ {item.promotionValue.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-                                </div>
+                                <div className="text-gray-500 line-through text-xs">De R$ {item.value.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>
+                                <div className="text-green-600">Por R$ {item.promotionValue.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>
                               </div>
                             ) : finalValue ? (
                               `R$ ${finalValue.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`
@@ -606,36 +658,24 @@ export default function EstoquePage() {
                               '-'
                             )}
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            {photos.length > 0 ? (
-                              <button
-                                onClick={() => {
-                                  setViewingPhotos(photos)
-                                  setCurrentPhotoIndex(0)
-                                  setShowPhotoModal(true)
-                                }}
-                                className="hover:underline cursor-pointer"
-                              >
-                                <span className="text-gray-900">{photos.length} foto(s)</span>
-                                {' '}
-                                <span className="text-primary-600 hover:text-primary-800">- Ver</span>
-                              </button>
-                            ) : (
-                              <span className="text-gray-400">-</span>
-                            )}
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                          <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-500">
                             <button
-                              onClick={() => handleEdit(item)}
-                              className="text-primary-600 hover:text-primary-900"
+                              onClick={() => handleOpenPhotos(item)}
+                              aria-label={`Ver fotos`}
+                              className="inline-flex items-center gap-2 px-2 py-1 bg-primary-600 text-white rounded text-xs hover:bg-primary-700"
                             >
-                              Editar
+                              {loadingPhotosFor === item.id ? (
+                                <svg className="animate-spin -ml-1 mr-1 h-3 w-3 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"></circle>
+                                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                                </svg>
+                              ) : null}
+                              <span className="font-medium">Ver fotos</span>
                             </button>
-                            <button
-                              onClick={() => handleDeleteClick(item.id)}
-                              disabled={deleting === item.id}
-                              className="text-red-600 hover:text-red-900 disabled:opacity-50 disabled:cursor-not-allowed"
-                            >
+                          </td>
+                          <td className="px-3 py-2 whitespace-nowrap text-sm font-medium space-x-3">
+                            <button onClick={() => handleEdit(item)} className="text-primary-600 hover:text-primary-900">Editar</button>
+                            <button onClick={() => handleDeleteClick(item.id)} disabled={deleting === item.id} className="text-red-600 hover:text-red-900 disabled:opacity-50 disabled:cursor-not-allowed">
                               {deleting === item.id ? 'Excluindo...' : 'Excluir'}
                             </button>
                           </td>
@@ -645,6 +685,64 @@ export default function EstoquePage() {
                   )}
                 </tbody>
               </table>
+            </div>
+            {/* Paginação */}
+            <div className="p-2 border-t bg-white flex items-center justify-between">
+              <div className="text-xs text-gray-600">
+                Total: {totalItems} — Página {page} de {Math.max(1, Math.ceil(totalItems / perPage))}
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => {
+                    if (loading) return
+                    if (page > 1) {
+                      const np = page - 1
+                      setPage(np)
+                      setItems([])
+                      setLoading(true)
+                      loadData(np, perPage)
+                    }
+                  }}
+                  disabled={loading || page <= 1}
+                  className="px-2 py-1 text-xs border rounded text-primary-600 hover:text-primary-800 disabled:opacity-50"
+                >
+                  Anterior
+                </button>
+                <button
+                  onClick={() => {
+                    if (loading) return
+                    const totalPages = Math.max(1, Math.ceil(totalItems / perPage))
+                    if (page < totalPages) {
+                      const np = page + 1
+                      setPage(np)
+                      setItems([])
+                      setLoading(true)
+                      loadData(np, perPage)
+                    }
+                  }}
+                  disabled={loading || page >= Math.max(1, Math.ceil(totalItems / perPage))}
+                  className="px-2 py-1 text-xs border rounded text-primary-600 hover:text-primary-800 disabled:opacity-50"
+                >
+                  Próximo
+                </button>
+                <select
+                  value={perPage}
+                  onChange={(e) => {
+                    if (loading) return
+                    const p = Number(e.target.value) || 50
+                    setPerPage(p)
+                    setPage(1)
+                    setItems([])
+                    setLoading(true)
+                    loadData(1, p)
+                  }}
+                  className="px-2 py-1 text-xs border rounded"
+                >
+                  <option value={25}>25</option>
+                  <option value={50}>50</option>
+                  <option value={100}>100</option>
+                </select>
+              </div>
             </div>
           </div>
         )}
@@ -1001,42 +1099,42 @@ export default function EstoquePage() {
       </div>
       {/* Modal de Visualização de Fotos */}
       {showPhotoModal && viewingPhotos.length > 0 && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] flex flex-col">
-            <div className="flex items-center justify-between p-4 border-b">
-              <h2 className="text-xl font-bold text-gray-900">
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-2">
+          <div className="bg-white rounded-lg max-w-4xl w-full max-h-[85vh] flex flex-col">
+            <div className="flex items-center justify-between p-2 border-b">
+              <h2 className="text-lg font-semibold text-gray-900">
                 Fotos do Veículo ({currentPhotoIndex + 1}/{viewingPhotos.length})
               </h2>
               <button
                 onClick={() => setShowPhotoModal(false)}
-                className="text-gray-500 hover:text-gray-700"
+                className="text-gray-400 hover:text-gray-700 p-1"
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
             </div>
-            <div className="flex-1 flex items-center justify-center p-4 relative">
+            <div className="flex-1 flex items-center justify-center p-2 relative">
               <img
                 src={viewingPhotos[currentPhotoIndex]}
                 alt={`Foto ${currentPhotoIndex + 1}`}
-                className="max-w-full max-h-[70vh] object-contain rounded-lg"
+                className="max-w-full max-h-[60vh] object-contain rounded-md"
               />
               {viewingPhotos.length > 1 && (
                 <>
                   <button
                     onClick={() => setCurrentPhotoIndex((prev) => (prev > 0 ? prev - 1 : viewingPhotos.length - 1))}
-                    className="absolute left-4 bg-black bg-opacity-50 hover:bg-opacity-75 text-white p-2 rounded-full"
+                    className="absolute left-3 bg-black bg-opacity-50 hover:bg-opacity-75 text-white p-1 rounded-full"
                   >
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                     </svg>
                   </button>
                   <button
                     onClick={() => setCurrentPhotoIndex((prev) => (prev < viewingPhotos.length - 1 ? prev + 1 : 0))}
-                    className="absolute right-4 bg-black bg-opacity-50 hover:bg-opacity-75 text-white p-2 rounded-full"
+                    className="absolute right-3 bg-black bg-opacity-50 hover:bg-opacity-75 text-white p-1 rounded-full"
                   >
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </button>
@@ -1044,13 +1142,13 @@ export default function EstoquePage() {
               )}
             </div>
             {viewingPhotos.length > 1 && (
-              <div className="p-4 border-t bg-gray-50">
-                <div className="flex gap-2 justify-center overflow-x-auto">
+              <div className="p-2 border-t bg-gray-50">
+                <div className="flex gap-1 justify-center overflow-x-auto">
                   {viewingPhotos.map((photo, index) => (
                     <button
                       key={index}
                       onClick={() => setCurrentPhotoIndex(index)}
-                      className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 ${
+                      className={`flex-shrink-0 w-16 h-16 rounded-md overflow-hidden border-2 ${
                         index === currentPhotoIndex ? 'border-primary-600' : 'border-gray-300'
                       }`}
                     >

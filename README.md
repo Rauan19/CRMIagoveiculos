@@ -59,7 +59,7 @@ Sistema completo de gestão (CRM) para loja de veículos, desenvolvido com Node.
 ### Backend
 - Node.js + Express.js
 - Prisma ORM
-- SQLite (desenvolvimento) / PostgreSQL (produção)
+- PostgreSQL (Docker) + Prisma
 - JWT + Refresh Token
 - RBAC (Admin, Vendedor, Gerente)
 
@@ -76,8 +76,30 @@ Sistema completo de gestão (CRM) para loja de veículos, desenvolvido com Node.
 ### Pré-requisitos
 - Node.js 18+ 
 - npm ou yarn
+- Docker Desktop (para subir o PostgreSQL local)
 
 ### Backend
+
+### Banco de dados (PostgreSQL via Docker)
+
+Na raiz do projeto existe um `docker-compose.yml` com o serviço `db` (PostgreSQL).
+
+1. Suba o banco (cria o container e inicia):
+```bash
+cd backend
+npm run db:up
+```
+
+Comandos úteis (a partir de `backend/`):
+- **Start**: `npm run db:start`
+- **Stop**: `npm run db:stop`
+- **Pause**: `npm run db:pause`
+- **Unpause**: `npm run db:unpause`
+- **Logs**: `npm run db:logs`
+- **Down**: `npm run db:down`
+- **Deletar (remove volumes/dados)**: `npm run db:delete`
+
+### API (Backend)
 
 1. Entre na pasta do backend:
 ```bash
@@ -107,18 +129,26 @@ npx prisma generate
 
 3. Configure o arquivo `.env` (copie do `.env.example`):
 ```bash
+# copie de: backend/.env.example
 PORT=3001
+DATABASE_URL="postgresql://crmiago:crmiago@localhost:5433/crmiago?schema=public"
+
+# (demais variáveis do seu projeto)
 JWT_SECRET=seu_jwt_secret_super_seguro_aqui
 JWT_REFRESH_SECRET=seu_refresh_secret_super_seguro_aqui
 JWT_EXPIRES_IN=15m
 JWT_REFRESH_EXPIRES_IN=7d
-DATABASE_URL="file:./dev.db"
 ```
 
 4. Configure o Prisma:
 ```bash
 npx prisma generate
-npx prisma migrate dev --name init
+npx prisma migrate dev
+```
+
+Opcional (seed):
+```bash
+npm run seed
 ```
 
 5. Inicie o servidor:

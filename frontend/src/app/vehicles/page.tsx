@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState, useEffect, Suspense } from 'react'
+import { useMemo, useRef, useState, useEffect, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import Layout from '@/components/Layout'
 import api from '@/services/api'
@@ -18,6 +18,7 @@ import {
 } from '@/utils/vehicleOptions'
 import { FiFileText, FiUpload, FiX, FiDownload, FiTrash2, FiMoreVertical, FiEdit, FiEye, FiImage, FiPlus, FiCopy, FiShare2, FiMail, FiMessageCircle, FiSearch, FiFilter, FiRotateCcw } from 'react-icons/fi'
 import Toast from '@/components/Toast'
+import { downloadVehicleNfPdf } from '@/utils/nfPdf'
 
 interface Customer {
   id: number
@@ -171,6 +172,8 @@ function VehiclesPageContent() {
   const [filterSaleStatus, setFilterSaleStatus] = useState<string>('') // Status da venda
   const [sortBy, setSortBy] = useState<string>('createdAt') // Campo para ordenação
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc') // Ordem da ordenação
+  const [page, setPage] = useState(1)
+  const [pageSize, setPageSize] = useState(40)
   const [saving, setSaving] = useState(false)
   const [uploadingDoc, setUploadingDoc] = useState(false)
   const [deleting, setDeleting] = useState<number | null>(null)
@@ -270,6 +273,40 @@ function VehiclesPageContent() {
     vendedor: '',
     observacoes: '',
   })
+
+  useEffect(() => {
+    setPage(1)
+  }, [searchTerm, filterStatus, filterBrand, filterYear, filterType, filterCondition, filterSaleStatus, sortBy, sortOrder, pageSize])
+
+  const totalResults = filteredVehicles.length
+  const totalPages = Math.max(1, Math.ceil(totalResults / pageSize))
+  const safePage = Math.min(page, totalPages)
+  const startIndex = totalResults === 0 ? 0 : (safePage - 1) * pageSize
+  const endIndexExclusive = Math.min(startIndex + pageSize, totalResults)
+  const pageVehicles = filteredVehicles.slice(startIndex, endIndexExclusive)
+
+  const pagesToShow = useMemo(() => {
+    const total = totalPages
+    const current = safePage
+    if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1)
+    const pages = new Set<number>()
+    pages.add(1)
+    pages.add(total)
+    pages.add(current)
+    pages.add(current - 1)
+    pages.add(current + 1)
+    pages.add(current - 2)
+    pages.add(current + 2)
+    const arr = Array.from(pages).filter((p) => p >= 1 && p <= total).sort((a, b) => a - b)
+    const out: Array<number> = []
+    for (let i = 0; i < arr.length; i++) {
+      const p = arr[i]
+      const prev = arr[i - 1]
+      if (i > 0 && prev != null && p - prev > 1) out.push(-1)
+      out.push(p)
+    }
+    return out
+  }, [safePage, totalPages])
   const [fichaCadastralActiveStep, setFichaCadastralActiveStep] = useState(1)
   const [fornecedorSearch, setFornecedorSearch] = useState('')
   const [showFornecedorDropdown, setShowFornecedorDropdown] = useState(false)
@@ -341,8 +378,29 @@ function VehiclesPageContent() {
   }>>([{ data: '', descricao: '', valor: '' }])
   const [editingVehicle, setEditingVehicle] = useState<Vehicle | null>(null)
   const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null)
-  const [showConfirmModal, setShowConfirmModal] = useState(false)
-  const [confirmDeleteId, setConfirmDeleteId] = useState<number | null>(null)
+  type ConfirmAction =
+    | { type: 'deleteVehicle'; vehicleId: number }
+    | { type: 'deleteDocument'; vehicleId: number }
+    | { type: 'estornarVenda'; vehicleId: number; saleId: number }
+    | { type: 'estornarCompra'; vehicleId: number; cost: number; label: string }
+
+  const [confirmModal, setConfirmModal] = useState<{
+    isOpen: boolean
+    title: string
+    message: string
+    confirmText: string
+    cancelText: string
+    confirmColor: 'red' | 'blue' | 'green' | 'yellow'
+    action: ConfirmAction | null
+  }>({
+    isOpen: false,
+    title: '',
+    message: '',
+    confirmText: 'Confirmar',
+    cancelText: 'Cancelar',
+    confirmColor: 'red',
+    action: null,
+  })
   const [openMenuId, setOpenMenuId] = useState<number | null>(null)
   const [menuPosition, setMenuPosition] = useState<boolean>(false)
   const menuRefs = useRef<{ [key: number]: HTMLDivElement | null }>({})
@@ -872,7 +930,7 @@ function VehiclesPageContent() {
     try {
       const yearVal = formData.year || formData.anoModelo || formData.anoFabricacao || ''
       if (!formData.brand || !formData.model || !yearVal) {
-        alert('Preencha Marca, Modelo e Ano.')
+        setToast({ message: 'Preencha Marca, Modelo e Ano.', type: 'error' })
         setSaving(false)
         return
       }
@@ -970,7 +1028,7 @@ function VehiclesPageContent() {
       }
     } catch (error) {
       console.error('Erro ao salvar veículo:', error)
-      alert('Erro ao salvar veículo')
+      setToast({ message: 'Erro ao salvar veículo', type: 'error' })
     } finally {
       setSaving(false)
       setUploadingDoc(false)
@@ -984,7 +1042,7 @@ function VehiclesPageContent() {
       setShowDetailsModal(true)
     } catch (error) {
       console.error('Erro ao buscar detalhes do veículo:', error)
-      alert('Erro ao buscar detalhes do veículo')
+      setToast({ message: 'Erro ao buscar detalhes do veículo', type: 'error' })
     }
   }
 
@@ -1132,7 +1190,7 @@ function VehiclesPageContent() {
       window.URL.revokeObjectURL(url)
     } catch (error) {
       console.error('Erro ao baixar documento:', error)
-      alert('Erro ao baixar documento do veículo')
+      setToast({ message: 'Erro ao baixar documento do veículo', type: 'error' })
     }
   }
 
@@ -1155,7 +1213,7 @@ function VehiclesPageContent() {
       file.name.toLowerCase().endsWith('.pdf')
 
     if (!isPdf) {
-      alert('Envie apenas arquivo PDF.')
+      setToast({ message: 'Envie apenas arquivo PDF.', type: 'error' })
       return
     }
 
@@ -1163,16 +1221,15 @@ function VehiclesPageContent() {
   }
 
   const handleDeleteDocument = async (vehicleId: number) => {
-    if (!confirm('Remover o documento PDF deste veículo?')) return
-    try {
-      await api.delete(`/vehicles/${vehicleId}/document`)
-      await loadData()
-      setEditingVehicle((prev) => (prev && prev.id === vehicleId ? { ...prev, hasDocument: false, documentName: null } : prev))
-      alert('Documento removido com sucesso')
-    } catch (error) {
-      console.error('Erro ao remover documento:', error)
-      alert('Erro ao remover documento do veículo')
-    }
+    setConfirmModal({
+      isOpen: true,
+      title: 'Remover documento',
+      message: 'Remover o documento PDF deste veículo?',
+      confirmText: 'Sim, Remover',
+      cancelText: 'Cancelar',
+      confirmColor: 'red',
+      action: { type: 'deleteDocument', vehicleId },
+    })
   }
 
   const handleEdit = (vehicle: Vehicle) => {
@@ -1247,29 +1304,76 @@ function VehiclesPageContent() {
   }
 
   const handleDeleteClick = (id: number) => {
-    setConfirmDeleteId(id)
-    setShowConfirmModal(true)
+    setConfirmModal({
+      isOpen: true,
+      title: 'Confirmar Exclusão',
+      message: 'Tem certeza que deseja excluir este veículo?',
+      confirmText: 'Sim, Excluir',
+      cancelText: 'Cancelar',
+      confirmColor: 'red',
+      action: { type: 'deleteVehicle', vehicleId: id },
+    })
   }
 
-  const handleDeleteConfirm = async () => {
-    if (!confirmDeleteId) return
-    setShowConfirmModal(false)
-    setDeleting(confirmDeleteId)
+  const handleConfirmAction = async () => {
+    const action = confirmModal.action
+    if (!action) {
+      setConfirmModal((prev) => ({ ...prev, isOpen: false, action: null }))
+      return
+    }
+
+    // Fechar antes de executar para evitar double-click
+    setConfirmModal((prev) => ({ ...prev, isOpen: false }))
+
     try {
-      await api.delete(`/vehicles/${confirmDeleteId}`)
-      loadData()
-    } catch (error) {
-      console.error('Erro ao excluir veículo:', error)
-      alert('Erro ao excluir veículo')
+      if (action.type === 'deleteVehicle') {
+        setDeleting(action.vehicleId)
+        await api.delete(`/vehicles/${action.vehicleId}`)
+        await loadData()
+        setToast({ message: 'Veículo excluído com sucesso!', type: 'success' })
+        return
+      }
+
+      if (action.type === 'deleteDocument') {
+        await api.delete(`/vehicles/${action.vehicleId}/document`)
+        await loadData()
+        setEditingVehicle((prev) =>
+          prev && prev.id === action.vehicleId ? { ...prev, hasDocument: false, documentName: null } : prev
+        )
+        setToast({ message: 'Documento removido com sucesso', type: 'success' })
+        return
+      }
+
+      if (action.type === 'estornarVenda') {
+        await api.delete(`/sales/${action.saleId}`)
+        setToast({ message: 'Venda estornada com sucesso! Veículo voltou para disponível.', type: 'success' })
+        await loadData()
+        return
+      }
+
+      if (action.type === 'estornarCompra') {
+        await api.post('/financial/transactions', {
+          type: 'receber',
+          description: `Estorno de compra - Veículo: ${action.label}`,
+          amount: action.cost,
+          status: 'pendente',
+        })
+        await api.put(`/vehicles/${action.vehicleId}`, { cost: null })
+        setToast({ message: 'Compra estornada com sucesso! Transação de reembolso criada.', type: 'success' })
+        await loadData()
+        return
+      }
+    } catch (error: any) {
+      console.error('Erro ao confirmar ação:', error)
+      setToast({ message: error.response?.data?.error || 'Erro ao processar ação', type: 'error' })
     } finally {
       setDeleting(null)
-      setConfirmDeleteId(null)
+      setConfirmModal((prev) => ({ ...prev, action: null }))
     }
   }
 
-  const handleDeleteCancel = () => {
-    setShowConfirmModal(false)
-    setConfirmDeleteId(null)
+  const handleConfirmCancel = () => {
+    setConfirmModal((prev) => ({ ...prev, isOpen: false, action: null }))
   }
 
   const handleEstornarVenda = async (vehicle: Vehicle) => {
@@ -1292,20 +1396,15 @@ function VehiclesPageContent() {
       return
     }
 
-    if (!confirm(`Tem certeza que deseja estornar a venda do veículo ${vehicle.brand} ${vehicle.model} ${vehicle.year}?`)) {
-      return
-    }
-
-    try {
-      // Deletar a venda (o backend já atualiza o status do veículo para disponível)
-      await api.delete(`/sales/${saleId}`)
-
-      setToast({ message: 'Venda estornada com sucesso! Veículo voltou para disponível.', type: 'success' })
-      await loadData()
-    } catch (error: any) {
-      console.error('Erro ao estornar venda:', error)
-      setToast({ message: error.response?.data?.error || 'Erro ao estornar venda', type: 'error' })
-    }
+    setConfirmModal({
+      isOpen: true,
+      title: 'Confirmar Estorno',
+      message: `Tem certeza que deseja estornar a venda do veículo ${vehicle.brand} ${vehicle.model} ${vehicle.year}?`,
+      confirmText: 'Sim, Estornar',
+      cancelText: 'Cancelar',
+      confirmColor: 'yellow',
+      action: { type: 'estornarVenda', vehicleId: vehicle.id, saleId },
+    })
   }
 
   const handleEstornarCompra = async (vehicle: Vehicle) => {
@@ -1314,30 +1413,16 @@ function VehiclesPageContent() {
       return
     }
 
-    if (!confirm(`Tem certeza que deseja estornar a compra do veículo ${vehicle.brand} ${vehicle.model} ${vehicle.year}? O valor de R$ ${vehicle.cost.toLocaleString('pt-BR', { minimumFractionDigits: 2 })} será removido.`)) {
-      return
-    }
-
-    try {
-      // Criar transação financeira de entrada (reembolso)
-      await api.post('/financial/transactions', {
-        type: 'receber',
-        description: `Estorno de compra - Veículo: ${vehicle.brand} ${vehicle.model} ${vehicle.year}${vehicle.plate ? ` - ${vehicle.plate}` : ''}`,
-        amount: vehicle.cost,
-        status: 'pendente'
-      })
-
-      // Remover o custo do veículo
-      await api.put(`/vehicles/${vehicle.id}`, {
-        cost: null
-      })
-
-      setToast({ message: 'Compra estornada com sucesso! Transação de reembolso criada.', type: 'success' })
-      await loadData()
-    } catch (error: any) {
-      console.error('Erro ao estornar compra:', error)
-      setToast({ message: error.response?.data?.error || 'Erro ao estornar compra', type: 'error' })
-    }
+    const label = `${vehicle.brand} ${vehicle.model} ${vehicle.year}${vehicle.plate ? ` - ${vehicle.plate}` : ''}`
+    setConfirmModal({
+      isOpen: true,
+      title: 'Confirmar Estorno',
+      message: `Tem certeza que deseja estornar a compra do veículo ${vehicle.brand} ${vehicle.model} ${vehicle.year}? O valor de R$ ${vehicle.cost.toLocaleString('pt-BR', { minimumFractionDigits: 2 })} será removido.`,
+      confirmText: 'Sim, Estornar',
+      cancelText: 'Cancelar',
+      confirmColor: 'yellow',
+      action: { type: 'estornarCompra', vehicleId: vehicle.id, cost: vehicle.cost, label },
+    })
   }
 
   const handleIncluirFichaCadastral = async (vehicle: Vehicle) => {
@@ -2551,14 +2636,14 @@ function VehiclesPageContent() {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {filteredVehicles.length === 0 ? (
+                  {totalResults === 0 ? (
                     <tr>
                       <td colSpan={11} className="px-2 py-3 text-center text-gray-500">
                         {vehicles.length === 0 ? 'Nenhum veículo cadastrado' : 'Nenhum veículo encontrado com os filtros aplicados'}
                       </td>
                     </tr>
                   ) : (
-                    filteredVehicles.map((vehicle) => (
+                    pageVehicles.map((vehicle) => (
                       <tr key={vehicle.id} className="hover:bg-gray-50">
                         <td className="px-2 py-2 whitespace-nowrap">
                           <div className="font-medium text-gray-900">{vehicle.brand} {vehicle.model}</div>
@@ -2611,6 +2696,86 @@ function VehiclesPageContent() {
               </table>
             </div>
           </div>
+
+          {totalResults > 0 && (
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-3">
+              <div className="text-xs text-gray-600">
+                Mostrando <span className="font-medium text-gray-900">{startIndex + 1}</span>–<span className="font-medium text-gray-900">{endIndexExclusive}</span> de{' '}
+                <span className="font-medium text-gray-900">{totalResults}</span>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <select
+                  value={pageSize}
+                  onChange={(e) => setPageSize(parseInt(e.target.value))}
+                  className="px-2 py-1.5 border border-gray-300 rounded-lg text-sm text-gray-900 bg-white"
+                  aria-label="Itens por página"
+                  title="Itens por página"
+                >
+                  <option value={20}>20</option>
+                  <option value={40}>40</option>
+                  <option value={80}>80</option>
+                  <option value={120}>120</option>
+                </select>
+
+                <button
+                  type="button"
+                  onClick={() => setPage(1)}
+                  disabled={safePage <= 1}
+                  className="px-2 py-1.5 border border-gray-300 rounded-md text-sm text-gray-700 disabled:opacity-50"
+                >
+                  Primeira
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  disabled={safePage <= 1}
+                  className="px-2 py-1.5 border border-gray-300 rounded-md text-sm text-gray-700 disabled:opacity-50"
+                >
+                  Anterior
+                </button>
+
+                <div className="flex items-center gap-1">
+                  {pagesToShow.map((p, idx) =>
+                    p === -1 ? (
+                      <span key={`e-${idx}`} className="px-2 text-sm text-gray-500">
+                        …
+                      </span>
+                    ) : (
+                      <button
+                        key={p}
+                        type="button"
+                        onClick={() => setPage(p)}
+                        className={`h-8 min-w-8 px-2 rounded-md text-sm border ${
+                          p === safePage ? 'bg-primary-600 text-white border-primary-600' : 'border-gray-300 text-gray-700 hover:bg-gray-50'
+                        }`}
+                        aria-current={p === safePage ? 'page' : undefined}
+                      >
+                        {p}
+                      </button>
+                    )
+                  )}
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                  disabled={safePage >= totalPages}
+                  className="px-2 py-1.5 border border-gray-300 rounded-md text-sm text-gray-700 disabled:opacity-50"
+                >
+                  Próxima
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPage(totalPages)}
+                  disabled={safePage >= totalPages}
+                  className="px-2 py-1.5 border border-gray-300 rounded-md text-sm text-gray-700 disabled:opacity-50"
+                >
+                  Última
+                </button>
+              </div>
+            </div>
+          )}
           </>
         )}
 
@@ -3073,10 +3238,21 @@ function VehiclesPageContent() {
                       <p className="text-xs text-gray-600">Selecione na caixa da esquerda e clique para adicionar. Clique na direita para remover.</p>
                       <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <input type="text" value={opcionaisSearch} onChange={(e) => setOpcionaisSearch(e.target.value)} placeholder="Buscar..." className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-lg mb-2" />
+                          <input
+                            type="text"
+                            value={opcionaisSearch}
+                            onChange={(e) => setOpcionaisSearch(e.target.value)}
+                            placeholder="Buscar..."
+                            className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-lg mb-2 text-gray-900 placeholder:text-gray-500"
+                          />
                           <div className="border border-gray-300 rounded-lg max-h-48 overflow-y-auto p-2 space-y-1">
                             {filteredOpcionais.slice(0, 80).map((o) => (
-                              <button key={o} type="button" onClick={() => addOpcional(o)} className="w-full text-left px-2 py-1.5 text-xs hover:bg-gray-100 rounded">
+                              <button
+                                key={o}
+                                type="button"
+                                onClick={() => addOpcional(o)}
+                                className="w-full text-left px-2 py-1.5 text-xs hover:bg-gray-100 rounded text-gray-900"
+                              >
                                 {o}
                               </button>
                             ))}
@@ -3086,9 +3262,18 @@ function VehiclesPageContent() {
                           <div className="text-xs text-gray-500 mb-2">Selecionados ({formData.opcionais.length})</div>
                           <div className="border border-gray-300 rounded-lg max-h-48 overflow-y-auto p-2 space-y-1">
                             {formData.opcionais.map((o) => (
-                              <button key={o} type="button" onClick={() => removeOpcional(o)} className="w-full text-left px-2 py-1.5 text-xs hover:bg-red-50 text-red-700 rounded">
-                                {o}
-                              </button>
+                              <div key={o} className="w-full flex items-center justify-between gap-2 px-2 py-1.5 text-xs rounded hover:bg-red-50">
+                                <span className="text-gray-900">{o}</span>
+                                <button
+                                  type="button"
+                                  onClick={() => removeOpcional(o)}
+                                  className="shrink-0 h-6 w-6 inline-flex items-center justify-center rounded hover:bg-red-100 text-red-700"
+                                  aria-label={`Remover opcional: ${o}`}
+                                  title="Remover"
+                                >
+                                  ×
+                                </button>
+                              </div>
                             ))}
                           </div>
                         </div>
@@ -3282,15 +3467,35 @@ function VehiclesPageContent() {
             <div className="p-6">
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-xl font-bold text-gray-900">Detalhes do Veículo #{selectedVehicle.id}</h2>
-                <button
-                  onClick={() => {
-                    setShowDetailsModal(false)
-                    setSelectedVehicle(null)
-                  }}
-                  className="text-gray-400 hover:text-gray-600"
-                >
-                  ✕
-                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      try {
+                        await downloadVehicleNfPdf(selectedVehicle)
+                      } catch (e) {
+                        console.error('Erro ao gerar NF (PDF) do veículo:', e)
+                        setToast({ message: 'Erro ao gerar NF (PDF)', type: 'error' })
+                      }
+                    }}
+                    className="inline-flex items-center gap-2 px-3 py-1.5 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 text-sm"
+                    title="Baixar NF (PDF)"
+                  >
+                    <FiDownload className="w-4 h-4" />
+                    Baixar NF
+                  </button>
+                  <button
+                    onClick={() => {
+                      setShowDetailsModal(false)
+                      setSelectedVehicle(null)
+                    }}
+                    className="text-gray-400 hover:text-gray-600"
+                    aria-label="Fechar"
+                    title="Fechar"
+                  >
+                    ✕
+                  </button>
+                </div>
               </div>
 
               <div className="space-y-4">
@@ -9460,14 +9665,14 @@ function VehiclesPageContent() {
       )}
 
       <ConfirmModal
-        isOpen={showConfirmModal}
-        title="Confirmar Exclusão"
-        message="Tem certeza que deseja excluir este veículo?"
-        onConfirm={handleDeleteConfirm}
-        onCancel={handleDeleteCancel}
-        confirmText="Sim, Excluir"
-        cancelText="Cancelar"
-        confirmColor="red"
+        isOpen={confirmModal.isOpen}
+        title={confirmModal.title}
+        message={confirmModal.message}
+        onConfirm={handleConfirmAction}
+        onCancel={handleConfirmCancel}
+        confirmText={confirmModal.confirmText}
+        cancelText={confirmModal.cancelText}
+        confirmColor={confirmModal.confirmColor}
       />
     </Layout>
   )

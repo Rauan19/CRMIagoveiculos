@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import Layout from '@/components/Layout'
 import api from '@/services/api'
 import Toast from '@/components/Toast'
@@ -101,6 +101,8 @@ export default function FinancialPage() {
   })
   const [activeTab, setActiveTab] = useState<'entradas' | 'saidas' | 'todos'>('todos')
   const [showFilters, setShowFilters] = useState(false)
+  const [page, setPage] = useState(1)
+  const [pageSize, setPageSize] = useState(40)
   const [formData, setFormData] = useState({
     operacao: 'pagar' as 'receber' | 'pagar' | 'transferencia',
     posicaoEstoque: '',
@@ -165,14 +167,18 @@ export default function FinancialPage() {
         api.get(`/financial/dashboard?${filters.startDate || filters.endDate ? params.toString() : ''}`),
       ])
 
-      // Marcar transações vencidas
+      // Marcar transações vencidas; legado: saída de estoque gravava type "receita" (tratar como receber)
       const now = new Date()
       const transactionsWithStatus = transactionsRes.data.map((t: any) => {
-        const dataVenc = t.dataVencimento || t.dueDate
-        if (t.status === 'pendente' && dataVenc && new Date(dataVenc) < now) {
-          return { ...t, status: 'vencido' }
+        let row = t
+        if (!t.operacao && t.type === 'receita') {
+          row = { ...t, operacao: 'receber', type: 'receber' }
         }
-        return t
+        const dataVenc = row.dataVencimento || row.dueDate
+        if (row.status === 'pendente' && dataVenc && new Date(dataVenc) < now) {
+          return { ...row, status: 'vencido' }
+        }
+        return row
       })
 
       setTransactions(transactionsWithStatus)
@@ -425,25 +431,63 @@ export default function FinancialPage() {
   const despesas = transactions.filter((t) => (t.operacao || t.type) === 'pagar')
   const transferencias = transactions.filter((t) => (t.operacao || t.type) === 'transferencia')
 
+  const activeTransactions = useMemo(() => {
+    return activeTab === 'entradas' ? receitas : activeTab === 'saidas' ? despesas : transactions
+  }, [activeTab, receitas, despesas, transactions])
+
+  useEffect(() => {
+    setPage(1)
+  }, [activeTab, pageSize, transactions.length, receitas.length, despesas.length])
+
+  const totalResults = activeTransactions.length
+  const totalPages = Math.max(1, Math.ceil(totalResults / pageSize))
+  const safePage = Math.min(page, totalPages)
+  const startIndex = totalResults === 0 ? 0 : (safePage - 1) * pageSize
+  const endIndexExclusive = Math.min(startIndex + pageSize, totalResults)
+  const pageTransactions = activeTransactions.slice(startIndex, endIndexExclusive)
+
+  const pagesToShow = useMemo(() => {
+    const total = totalPages
+    const current = safePage
+    if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1)
+    const pages = new Set<number>()
+    pages.add(1)
+    pages.add(total)
+    pages.add(current)
+    pages.add(current - 1)
+    pages.add(current + 1)
+    pages.add(current - 2)
+    pages.add(current + 2)
+    const arr = Array.from(pages).filter((p) => p >= 1 && p <= total).sort((a, b) => a - b)
+    const out: Array<number> = []
+    for (let i = 0; i < arr.length; i++) {
+      const p = arr[i]
+      const prev = arr[i - 1]
+      if (i > 0 && prev != null && p - prev > 1) out.push(-1)
+      out.push(p)
+    }
+    return out
+  }, [safePage, totalPages])
+
   return (
     <Layout>
-      <div className="space-y-6 h-full flex flex-col">
+      <div className="space-y-4 h-full flex flex-col">
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Financeiro</h1>
-            <p className="text-gray-600 mt-1">Gestão de entradas e saídas</p>
+            <h1 className="text-xl font-bold text-gray-900">Financeiro</h1>
+            <p className="text-sm text-gray-600 mt-0.5">Gestão de entradas e saídas</p>
           </div>
           <div className="flex gap-2">
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors flex items-center gap-2"
+              className="bg-gray-100 text-gray-700 px-3 py-1.5 rounded-md hover:bg-gray-200 transition-colors flex items-center gap-2 text-sm"
             >
               <FiFilter />
               Filtros
             </button>
             <button
               onClick={openModal}
-              className="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors flex items-center gap-2"
+              className="bg-primary-600 text-white px-3 py-1.5 rounded-md hover:bg-primary-700 transition-colors flex items-center gap-2 text-sm"
             >
               <FiPlus />
               Nova Movimentação
@@ -453,74 +497,74 @@ export default function FinancialPage() {
 
         {/* Dashboard Stats */}
         {dashboardStats && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="bg-white rounded-xl shadow-md border border-gray-100 p-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+            <div className="bg-white rounded-xl shadow-md border border-gray-100 p-3">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-gray-500">Entradas</p>
-                  <p className="mt-2 text-2xl font-bold text-green-600">
+                  <p className="text-xs font-medium text-gray-500">Entradas</p>
+                  <p className="mt-1 text-lg font-bold text-green-600">
                     R$ {dashboardStats.receber.total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                   </p>
-                  <p className="mt-1 text-xs text-gray-500">
+                  <p className="mt-0.5 text-xs text-gray-500">
                     {dashboardStats.receber.pendente > 0
                       ? `R$ ${dashboardStats.receber.pendente.toLocaleString('pt-BR', { minimumFractionDigits: 2 })} pendente`
                       : 'Tudo recebido'}
                   </p>
                 </div>
-                <div className="p-3 bg-green-50 rounded-xl">
-                  <FiTrendingUp className="h-6 w-6 text-green-600" />
+                <div className="p-2 bg-green-50 rounded-lg">
+                  <FiTrendingUp className="h-5 w-5 text-green-600" />
                 </div>
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-md border border-gray-100 p-6">
+            <div className="bg-white rounded-xl shadow-md border border-gray-100 p-3">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-gray-500">Saídas</p>
-                  <p className="mt-2 text-2xl font-bold text-red-600">
+                  <p className="text-xs font-medium text-gray-500">Saídas</p>
+                  <p className="mt-1 text-lg font-bold text-red-600">
                     R$ {dashboardStats.pagar.total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                   </p>
-                  <p className="mt-1 text-xs text-gray-500">
+                  <p className="mt-0.5 text-xs text-gray-500">
                     {dashboardStats.pagar.pendente > 0
                       ? `R$ ${dashboardStats.pagar.pendente.toLocaleString('pt-BR', { minimumFractionDigits: 2 })} pendente`
                       : 'Tudo pago'}
                   </p>
                 </div>
-                <div className="p-3 bg-red-50 rounded-xl">
-                  <FiTrendingDown className="h-6 w-6 text-red-600" />
+                <div className="p-2 bg-red-50 rounded-lg">
+                  <FiTrendingDown className="h-5 w-5 text-red-600" />
                 </div>
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-md border border-gray-100 p-6">
+            <div className="bg-white rounded-xl shadow-md border border-gray-100 p-3">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-gray-500">Recebido</p>
-                  <p className="mt-2 text-2xl font-bold text-green-600">
+                  <p className="text-xs font-medium text-gray-500">Recebido</p>
+                  <p className="mt-1 text-lg font-bold text-green-600">
                     R$ {dashboardStats.receber.recebido.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                   </p>
                 </div>
-                <div className="p-3 bg-green-50 rounded-xl">
-                  <FiCheck className="h-6 w-6 text-green-600" />
+                <div className="p-2 bg-green-50 rounded-lg">
+                  <FiCheck className="h-5 w-5 text-green-600" />
                 </div>
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-md border border-gray-100 p-6">
+            <div className="bg-white rounded-xl shadow-md border border-gray-100 p-3">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-gray-500">Saldo</p>
+                  <p className="text-xs font-medium text-gray-500">Saldo</p>
                   <p
-                    className={`mt-2 text-2xl font-bold ${
+                    className={`mt-1 text-lg font-bold ${
                       dashboardStats.saldo >= 0 ? 'text-green-600' : 'text-red-600'
                     }`}
                   >
                     R$ {dashboardStats.saldo.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                   </p>
-                  <p className="mt-1 text-xs text-gray-500">Recebido - Pago</p>
+                  <p className="mt-0.5 text-xs text-gray-500">Recebido - Pago</p>
                 </div>
-                <div className="p-3 bg-blue-50 rounded-xl">
-                  <FiDollarSign className="h-6 w-6 text-blue-600" />
+                <div className="p-2 bg-blue-50 rounded-lg">
+                  <FiDollarSign className="h-5 w-5 text-blue-600" />
                 </div>
               </div>
             </div>
@@ -529,14 +573,14 @@ export default function FinancialPage() {
 
         {/* Filtros */}
         {showFilters && (
-          <div className="bg-white rounded-lg shadow p-4">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="bg-white rounded-lg shadow p-3">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-2">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Tipo</label>
+                <label className="block text-xs font-medium text-gray-700 mb-1">Tipo</label>
                 <select
                   value={filters.operacao}
                   onChange={(e) => setFilters({ ...filters, operacao: e.target.value as '' | 'receber' | 'pagar' })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                  className="w-full px-2 py-1 text-sm border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500 text-gray-900"
                 >
                   <option value="">Todos</option>
                   <option value="receber">Entradas</option>
@@ -545,7 +589,7 @@ export default function FinancialPage() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Mês Referência</label>
+                <label className="block text-xs font-medium text-gray-700 mb-1">Mês Referência</label>
                 <input
                   type="month"
                   value={filters.mesReferencia}
@@ -554,17 +598,17 @@ export default function FinancialPage() {
                     const formatted = value ? `${value.split('-')[1]}/${value.split('-')[0]}` : ''
                     setFilters({ ...filters, mesReferencia: formatted })
                   }}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                  className="w-full px-2 py-1 text-sm border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500 text-gray-900"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                <label className="block text-xs font-medium text-gray-700 mb-1">Status</label>
                 <select
                   value={filters.status}
                   onChange={(e) =>
                     setFilters({ ...filters, status: e.target.value as '' | 'pendente' | 'pago' | 'vencido' })
                   }
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                  className="w-full px-2 py-1 text-sm border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500 text-gray-900"
                 >
                   <option value="">Todos</option>
                   <option value="pendente">Pendente</option>
@@ -573,28 +617,28 @@ export default function FinancialPage() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Data Início</label>
+                <label className="block text-xs font-medium text-gray-700 mb-1">Data Início</label>
                 <input
                   type="date"
                   value={filters.startDate}
                   onChange={(e) => setFilters({ ...filters, startDate: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                  className="w-full px-2 py-1 text-sm border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500 text-gray-900"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Data Fim</label>
+                <label className="block text-xs font-medium text-gray-700 mb-1">Data Fim</label>
                 <input
                   type="date"
                   value={filters.endDate}
                   onChange={(e) => setFilters({ ...filters, endDate: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 text-gray-900"
+                  className="w-full px-2 py-1 text-sm border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500 text-gray-900"
                 />
               </div>
             </div>
-            <div className="mt-4 flex justify-end">
+            <div className="mt-3 flex justify-end">
               <button
                 onClick={clearFilters}
-                className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+                className="px-3 py-1 text-gray-700 hover:bg-gray-100 rounded-md transition-colors text-sm"
               >
                 Limpar Filtros
               </button>
@@ -641,12 +685,97 @@ export default function FinancialPage() {
           <div className="text-center py-12 text-gray-700">Carregando...</div>
         ) : (
           <div className="bg-white shadow rounded-lg overflow-hidden border border-gray-200 max-h-[calc(100vh-420px)] flex flex-col">
-            <div className="bg-gray-50 px-6 py-3 border-b border-gray-200">
-              <h3 className="font-bold text-lg text-gray-900">
-                {activeTab === 'entradas' && `Entradas (${receitas.length})`}
-                {activeTab === 'saidas' && `Saídas (${despesas.length})`}
-                {activeTab === 'todos' && `Todas as Transações (${transactions.length})`}
-              </h3>
+            <div className="bg-gray-50 px-6 py-3 border-b border-gray-200 flex flex-col gap-2">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <h3 className="font-bold text-lg text-gray-900">
+                  {activeTab === 'entradas' && `Entradas (${receitas.length})`}
+                  {activeTab === 'saidas' && `Saídas (${despesas.length})`}
+                  {activeTab === 'todos' && `Todas as Transações (${transactions.length})`}
+                </h3>
+                {totalResults > 0 && (
+                  <div className="text-xs text-gray-600">
+                    Mostrando <span className="font-medium text-gray-900">{startIndex + 1}</span>–<span className="font-medium text-gray-900">{endIndexExclusive}</span> de{' '}
+                    <span className="font-medium text-gray-900">{totalResults}</span>
+                  </div>
+                )}
+              </div>
+
+              {totalResults > 0 && (
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <div className="flex items-center gap-2">
+                    <select
+                      value={pageSize}
+                      onChange={(e) => setPageSize(parseInt(e.target.value))}
+                      className="px-2 py-1.5 border border-gray-300 rounded-lg text-sm text-gray-900 bg-white"
+                      aria-label="Itens por página"
+                      title="Itens por página"
+                    >
+                      <option value={20}>20</option>
+                      <option value={40}>40</option>
+                      <option value={80}>80</option>
+                      <option value={120}>120</option>
+                    </select>
+
+                    <button
+                      type="button"
+                      onClick={() => setPage(1)}
+                      disabled={safePage <= 1}
+                      className="px-2 py-1.5 border border-gray-300 rounded-md text-sm text-gray-700 disabled:opacity-50"
+                    >
+                      Primeira
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setPage((p) => Math.max(1, p - 1))}
+                      disabled={safePage <= 1}
+                      className="px-2 py-1.5 border border-gray-300 rounded-md text-sm text-gray-700 disabled:opacity-50"
+                    >
+                      Anterior
+                    </button>
+                  </div>
+
+                  <div className="flex items-center gap-1">
+                    {pagesToShow.map((p, idx) =>
+                      p === -1 ? (
+                        <span key={`e-${idx}`} className="px-2 text-sm text-gray-500">
+                          …
+                        </span>
+                      ) : (
+                        <button
+                          key={p}
+                          type="button"
+                          onClick={() => setPage(p)}
+                          className={`h-8 min-w-8 px-2 rounded-md text-sm border ${
+                            p === safePage ? 'bg-primary-600 text-white border-primary-600' : 'border-gray-300 text-gray-700 hover:bg-gray-50'
+                          }`}
+                          aria-current={p === safePage ? 'page' : undefined}
+                        >
+                          {p}
+                        </button>
+                      )
+                    )}
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                      disabled={safePage >= totalPages}
+                      className="px-2 py-1.5 border border-gray-300 rounded-md text-sm text-gray-700 disabled:opacity-50"
+                    >
+                      Próxima
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setPage(totalPages)}
+                      disabled={safePage >= totalPages}
+                      className="px-2 py-1.5 border border-gray-300 rounded-md text-sm text-gray-700 disabled:opacity-50"
+                    >
+                      Última
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
             <div className="overflow-x-auto overflow-y-auto flex-1 min-h-0">
               <table className="min-w-full divide-y divide-gray-200">
@@ -673,27 +802,19 @@ export default function FinancialPage() {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {(() => {
-                    const filteredTransactions =
-                      activeTab === 'entradas'
-                        ? receitas
-                        : activeTab === 'saidas'
-                        ? despesas
-                        : transactions
-
-                    return filteredTransactions.length === 0 ? (
-                      <tr>
-                        <td colSpan={6} className="px-6 py-4 text-center text-gray-500">
-                          Nenhuma transação encontrada
-                        </td>
-                      </tr>
-                    ) : (
-                      filteredTransactions.map((transaction) => {
-                        const operacao = transaction.operacao || transaction.type || 'pagar'
-                        const valor = transaction.valorTitulo || transaction.amount || 0
-                        const dataVenc = transaction.dataVencimento || transaction.dueDate
-                        return (
-                        <tr key={transaction.id} className="hover:bg-gray-50">
+                  {activeTransactions.length === 0 ? (
+                    <tr>
+                      <td colSpan={6} className="px-6 py-4 text-center text-gray-500">
+                        Nenhuma transação encontrada
+                      </td>
+                    </tr>
+                  ) : (
+                    pageTransactions.map((transaction) => {
+                      const operacao = transaction.operacao || transaction.type || 'pagar'
+                      const valor = transaction.valorTitulo || transaction.amount || 0
+                      const dataVenc = transaction.dataVencimento || transaction.dueDate
+                      return (
+                      <tr key={transaction.id} className="hover:bg-gray-50">
                           <td className="px-6 py-4 whitespace-nowrap">
                             <span
                               className={`px-2 py-1 text-xs font-semibold rounded-full ${
@@ -770,10 +891,9 @@ export default function FinancialPage() {
                             </button>
                           </td>
                         </tr>
-                        )
-                      })
-                    )
-                  })()}
+                      )
+                    })
+                  )}
                 </tbody>
               </table>
             </div>

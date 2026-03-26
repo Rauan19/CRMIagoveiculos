@@ -233,24 +233,24 @@ export default function DashboardPage() {
 
   return (
     <Layout>
-      <div className="bg-gray-50 p-4 lg:p-6 space-y-6">
+      <div className="bg-gray-50 p-2 lg:p-3 space-y-3">
         {/* Cabeçalho */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
-            <p className="text-sm text-gray-600 mt-1">Visão geral do negócio</p>
+            <h1 className="text-xl font-bold text-gray-900">Início</h1>
+            <p className="text-xs text-gray-600 mt-0.5">Visão geral do negócio</p>
           </div>
           
           {/* Filtros de Período */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
             <div className="flex items-center gap-2">
               <FiCalendar className="text-gray-600" />
-              <div className="flex gap-2 bg-white rounded-lg border border-gray-200 p-1">
+              <div className="flex gap-1 bg-white rounded-md border border-gray-200 p-1">
                 {(['day', 'week', 'month', 'year', 'all'] as PeriodType[]).map((p) => (
                   <button
                     key={p}
                     onClick={() => handlePeriodChange(p)}
-                    className={`px-3 py-1.5 text-xs font-medium rounded transition-colors ${
+                    className={`px-2 py-1 text-xs font-medium rounded transition-colors ${
                       period === p && !useCustomDate
                         ? 'bg-primary-600 text-white'
                         : useCustomDate
@@ -290,7 +290,7 @@ export default function DashboardPage() {
               </button>
 
               {showCalendar && useCustomDate && (
-                <div className="absolute right-0 top-full mt-2 bg-white rounded-lg shadow-lg border border-gray-200 p-4 z-50 w-80 calendar-container">
+                <div className="absolute right-0 top-full mt-2 bg-white rounded-md shadow-lg border border-gray-200 p-3 z-50 w-72 calendar-container">
                   <div className="flex items-center justify-between mb-4">
                     <button
                       onClick={() => navigateMonth('prev')}
@@ -313,7 +313,7 @@ export default function DashboardPage() {
                     </button>
                   </div>
 
-                  <div className="grid grid-cols-7 gap-1 mb-2">
+                  <div className="grid grid-cols-7 gap-1 mb-1">
                     {weekDays.map((day) => (
                       <div key={day} className="text-center text-xs font-semibold text-gray-600 py-1">
                         {day}
@@ -335,7 +335,7 @@ export default function DashboardPage() {
                         <button
                           key={day}
                           onClick={() => handleDateSelect(day)}
-                          className={`aspect-square text-sm rounded transition-colors ${
+                          className={`aspect-square text-xs rounded transition-colors ${
                             isSelected
                               ? 'bg-primary-600 text-white font-semibold'
                               : inRange
@@ -351,25 +351,25 @@ export default function DashboardPage() {
                     })}
                   </div>
 
-                  {(startDate || endDate) && (
-                    <div className="mt-4 pt-4 border-t border-gray-200 flex gap-2">
-                      <button
-                        onClick={() => {
-                          setStartDate('')
-                          setEndDate('')
-                        }}
-                        className="flex-1 px-3 py-2 text-xs font-medium text-gray-700 bg-gray-100 rounded hover:bg-gray-200"
-                      >
-                        Limpar
-                      </button>
-                      <button
-                        onClick={() => setShowCalendar(false)}
-                        className="flex-1 px-3 py-2 text-xs font-medium text-white bg-primary-600 rounded hover:bg-primary-700"
-                      >
-                        Aplicar
-                      </button>
-                    </div>
-                  )}
+                    {(startDate || endDate) && (
+                      <div className="mt-2 pt-2 border-t border-gray-200 flex gap-2">
+                        <button
+                          onClick={() => {
+                            setStartDate('')
+                            setEndDate('')
+                          }}
+                          className="flex-1 px-2 py-1 text-xs font-medium text-gray-700 bg-gray-100 rounded hover:bg-gray-200"
+                        >
+                          Limpar
+                        </button>
+                        <button
+                          onClick={() => setShowCalendar(false)}
+                          className="flex-1 px-2 py-1 text-xs font-medium text-white bg-primary-600 rounded hover:bg-primary-700"
+                        >
+                          Aplicar
+                        </button>
+                      </div>
+                    )}
                 </div>
               )}
             </div>
@@ -384,155 +384,155 @@ export default function DashboardPage() {
             </div>
           </div>
         ) : stats ? (
-          <div className="space-y-6">
+          <div className="space-y-4">
             {/* Cards Principais */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
               {/* Aniversariantes do Mês */}
-              <div className="bg-white rounded-lg shadow-md border border-gray-200 p-4 hover:shadow-lg transition-shadow">
+              <div className="bg-white rounded-md shadow-sm border border-gray-200 p-2 hover:shadow transition-shadow">
                 <div className="flex items-center justify-between">
                   <div className="flex-1">
-                    <p className="text-xs text-gray-500 mb-1">Aniversariantes do Mês</p>
-                    <p className="text-2xl font-bold text-gray-900">
+                    <p className="text-xs text-gray-500 mb-0.5">Aniversariantes do Mês</p>
+                    <p className="text-xl font-bold text-gray-900">
                       {stats.customers.birthdayThisMonth || 0}
                     </p>
                   </div>
-                  <div className="p-3 bg-pink-50 rounded-lg">
-                    <FiGift className="h-6 w-6 text-pink-600" />
+                  <div className="p-2 bg-pink-50 rounded-md">
+                    <FiGift className="h-5 w-5 text-pink-600" />
                   </div>
                 </div>
               </div>
 
               {/* Total de Clientes */}
-              <div className="bg-white rounded-lg shadow-md border border-gray-200 p-4 hover:shadow-lg transition-shadow">
+              <div className="bg-white rounded-md shadow-sm border border-gray-200 p-2 hover:shadow transition-shadow">
                 <div className="flex items-center justify-between">
                   <div className="flex-1">
-                    <p className="text-xs text-gray-500 mb-1">Clientes Cadastrados</p>
-                    <p className="text-2xl font-bold text-gray-900">
+                    <p className="text-xs text-gray-500 mb-0.5">Clientes Cadastrados</p>
+                    <p className="text-xl font-bold text-gray-900">
                       {stats.customers.total}
                     </p>
                   </div>
-                  <div className="p-3 bg-blue-50 rounded-lg">
-                    <FiUsers className="h-6 w-6 text-blue-600" />
+                  <div className="p-2 bg-blue-50 rounded-md">
+                    <FiUsers className="h-5 w-5 text-blue-600" />
                   </div>
                 </div>
               </div>
 
               {/* Veículos no Estoque */}
-              <div className="bg-white rounded-lg shadow-md border border-gray-200 p-4 hover:shadow-lg transition-shadow">
+              <div className="bg-white rounded-md shadow-sm border border-gray-200 p-2 hover:shadow transition-shadow">
                 <div className="flex items-center justify-between">
                   <div className="flex-1">
-                    <p className="text-xs text-gray-500 mb-1">Veículos no Estoque</p>
-                    <p className="text-2xl font-bold text-gray-900">
+                    <p className="text-xs text-gray-500 mb-0.5">Veículos no Estoque</p>
+                    <p className="text-xl font-bold text-gray-900">
                       {stats.vehicles.totalInStock || stats.vehicles.disponivel}
                     </p>
-                    <p className="text-xs text-gray-600 mt-1">
+                    <p className="text-xs text-gray-600 mt-0.5">
                       Veículos: {stats.vehicles.disponivel || 0} • Estoque: {stats.vehicles.estoque || 0}
                     </p>
                     <p className="text-xs text-gray-600">
                       Próprios/Consignados: {stats.vehicles.proprios || 0}/{stats.vehicles.consignados || 0}
                     </p>
                   </div>
-                  <div className="p-3 bg-green-50 rounded-lg">
-                    <FiTruck className="h-6 w-6 text-green-600" />
+                  <div className="p-2 bg-green-50 rounded-md">
+                    <FiTruck className="h-5 w-5 text-green-600" />
                   </div>
                 </div>
               </div>
 
               {/* Média de Dias do Estoque */}
-              <div className="bg-white rounded-lg shadow-md border border-gray-200 p-4 hover:shadow-lg transition-shadow">
+              <div className="bg-white rounded-md shadow-sm border border-gray-200 p-2 hover:shadow transition-shadow">
                 <div className="flex items-center justify-between">
                   <div className="flex-1">
-                    <p className="text-xs text-gray-500 mb-1">Média de Dias do Estoque</p>
-                    <p className="text-2xl font-bold text-gray-900">
+                    <p className="text-xs text-gray-500 mb-0.5">Média de Dias do Estoque</p>
+                    <p className="text-xl font-bold text-gray-900">
                       {stats.vehicles.averageDaysInStock || 0}
                     </p>
                   </div>
-                  <div className="p-3 bg-orange-50 rounded-lg">
-                    <FiClock className="h-6 w-6 text-orange-600" />
+                  <div className="p-2 bg-orange-50 rounded-md">
+                    <FiClock className="h-5 w-5 text-orange-600" />
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Segunda Linha de Cards */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
               {/* Vendas Mês Atual */}
-              <div className="bg-white rounded-lg shadow-md border border-gray-200 p-4 hover:shadow-lg transition-shadow">
+              <div className="bg-white rounded-md shadow-sm border border-gray-200 p-2 hover:shadow transition-shadow">
                 <div className="flex items-center justify-between">
                   <div className="flex-1">
-                    <p className="text-xs text-gray-500 mb-1">Vendas Mês Atual</p>
-                    <p className="text-2xl font-bold text-gray-900">
+                    <p className="text-xs text-gray-500 mb-0.5">Vendas Mês Atual</p>
+                    <p className="text-xl font-bold text-gray-900">
                       {stats.sales.currentMonth || 0}
                     </p>
                     {stats.sales.previousMonth !== undefined && (
-                      <p className="text-xs text-gray-600 mt-1">
+                      <p className="text-xs text-gray-600 mt-0.5">
                         Mês anterior: {stats.sales.previousMonth || 0}
                       </p>
                     )}
                   </div>
-                  <div className="p-3 bg-purple-50 rounded-lg">
-                    <FiShoppingCart className="h-6 w-6 text-purple-600" />
+                  <div className="p-2 bg-purple-50 rounded-md">
+                    <FiShoppingCart className="h-5 w-5 text-purple-600" />
                   </div>
                 </div>
               </div>
 
               {/* Avaliações Pendentes */}
-              <div className="bg-white rounded-lg shadow-md border border-gray-200 p-4 hover:shadow-lg transition-shadow">
+              <div className="bg-white rounded-md shadow-sm border border-gray-200 p-2 hover:shadow transition-shadow">
                 <div className="flex items-center justify-between">
                   <div className="flex-1">
-                    <p className="text-xs text-gray-500 mb-1">Avaliações Pendentes</p>
-                    <p className="text-2xl font-bold text-gray-900">
+                    <p className="text-xs text-gray-500 mb-0.5">Avaliações Pendentes</p>
+                    <p className="text-xl font-bold text-gray-900">
                       {stats.tradeIns?.pending || 0}
                     </p>
                   </div>
-                  <div className="p-3 bg-yellow-50 rounded-lg">
-                    <FiCheckCircle className="h-6 w-6 text-yellow-600" />
+                  <div className="p-2 bg-yellow-50 rounded-md">
+                    <FiCheckCircle className="h-5 w-5 text-yellow-600" />
                   </div>
                 </div>
               </div>
 
               {/* Total de Vendas (período selecionado) */}
-              <div className="bg-white rounded-lg shadow-md border border-gray-200 p-4 hover:shadow-lg transition-shadow">
+              <div className="bg-white rounded-md shadow-sm border border-gray-200 p-2 hover:shadow transition-shadow">
                 <div className="flex items-center justify-between">
                   <div className="flex-1">
-                    <p className="text-xs text-gray-500 mb-1">Vendas (Período)</p>
-                    <p className="text-2xl font-bold text-gray-900">
+                    <p className="text-xs text-gray-500 mb-0.5">Vendas (Período)</p>
+                    <p className="text-xl font-bold text-gray-900">
                       {stats.sales.total}
                     </p>
                   </div>
-                  <div className="p-3 bg-indigo-50 rounded-lg">
-                    <FiShoppingCart className="h-6 w-6 text-indigo-600" />
+                  <div className="p-2 bg-indigo-50 rounded-md">
+                    <FiShoppingCart className="h-5 w-5 text-indigo-600" />
                   </div>
                 </div>
               </div>
 
               {/* Lucro Total */}
-              <div className="bg-white rounded-lg shadow-md border border-gray-200 p-4 hover:shadow-lg transition-shadow">
+              <div className="bg-white rounded-md shadow-sm border border-gray-200 p-2 hover:shadow transition-shadow">
                 <div className="flex items-center justify-between">
                   <div className="flex-1">
-                    <p className="text-xs text-gray-500 mb-1">Lucro</p>
-                    <p className={`text-xl font-bold ${(stats.sales.profit || 0) >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                    <p className="text-xs text-gray-500 mb-0.5">Lucro</p>
+                    <p className={`text-lg font-bold ${(stats.sales.profit || 0) >= 0 ? 'text-green-600' : 'text-red-600'}`}>
                       {formatCurrency(stats.sales.profit || 0)}
                     </p>
                   </div>
-                  <div className={`p-3 rounded-lg ${(stats.sales.profit || 0) >= 0 ? 'bg-green-50' : 'bg-red-50'}`}>
-                    <FiTrendingUp className={`h-6 w-6 ${(stats.sales.profit || 0) >= 0 ? 'text-green-600' : 'text-red-600'}`} />
+                  <div className={`p-2 rounded-md ${(stats.sales.profit || 0) >= 0 ? 'bg-green-50' : 'bg-red-50'}`}>
+                    <FiTrendingUp className={`h-5 w-5 ${(stats.sales.profit || 0) >= 0 ? 'text-green-600' : 'text-red-600'}`} />
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Gráficos */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               {/* Gráfico de Receita e Lucro */}
-              <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6">
+              <div className="bg-white rounded-lg shadow-md border border-gray-200 p-4">
                 <div className="mb-4">
                   <h2 className="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
                     <FiTrendingUp className="text-primary-600" />
                     Receita e Lucro ao Longo do Tempo
                   </h2>
                   {stats.chartData && stats.chartData.length > 0 && (
-                    <div className="flex gap-4 text-sm">
+                    <div className="flex gap-3 text-sm">
                       <div className="flex items-center gap-2">
                         <div className="w-3 h-3 rounded-full bg-blue-500"></div>
                         <span className="text-gray-600">Média Receita:</span>
@@ -551,7 +551,7 @@ export default function DashboardPage() {
                   )}
                 </div>
                 {stats.chartData && stats.chartData.length > 0 ? (
-                  <ResponsiveContainer width="100%" height={350}>
+                  <ResponsiveContainer width="100%" height={240}>
                     <LineChart data={stats.chartData} margin={{ top: 10, right: 20, left: 0, bottom: 5 }}>
                       <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" vertical={false} />
                       <XAxis 
@@ -644,7 +644,7 @@ export default function DashboardPage() {
                   )}
                 </div>
                 {stats.chartData && stats.chartData.length > 0 ? (
-                  <ResponsiveContainer width="100%" height={350}>
+                  <ResponsiveContainer width="100%" height={240}>
                     <BarChart data={stats.chartData} margin={{ top: 10, right: 20, left: 0, bottom: 5 }}>
                       <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" vertical={false} />
                       <XAxis 

@@ -217,7 +217,8 @@ class SaleController {
           codigoAutorizacao: pm.codigoAutorizacao || null,
           recebimentoLoja: pm.recebimentoLoja || null,
           nomeConsorcio: pm.nomeConsorcio || null,
-          bancoFinanceira: pm.bancoFinanceira || null,
+          // Alguns frontends enviam "financingBank" / outros "bancoFinanceira" — persistimos em bancoFinanceira
+          bancoFinanceira: pm.bancoFinanceira || pm.financingBank || null,
           agencia: pm.agencia || null,
           conta: pm.conta || null,
           numeroCheque: pm.numeroCheque || null,
@@ -238,21 +239,71 @@ class SaleController {
         await prisma.salePaymentMethod.createMany({
           data: paymentMethodsData
         });
+
+        // Criar lançamentos financeiros (receber) a partir das formas de pagamento
+        try {
+          const txData = paymentMethodsData
+            .filter((pm) => (pm.value || 0) > 0)
+            .map((pm) => ({
+              operacao: 'receber',
+              description: `Recebimento venda #${sale.id} - ${sale.vehicle?.brand || ''} ${sale.vehicle?.model || ''}`.trim(),
+              dataVencimento: pm.date,
+              valorTitulo: pm.value,
+              status: 'pendente',
+              saleId: sale.id,
+              customerId: sale.customerId,
+              // compat legado
+              type: 'receber',
+              amount: pm.value,
+              dueDate: pm.date,
+            }))
+
+          if (txData.length) {
+            await prisma.financialTransaction.createMany({ data: txData })
+          }
+        } catch (e) {
+          console.warn('Não foi possível criar lançamentos financeiros da venda:', e)
+        }
       } else if (paymentMethod) {
         // Criar registro único de forma de pagamento a partir dos campos simples
         try {
+          const paymentDate = new Date()
+          const paymentValue = finalSalePrice || 0
           await prisma.salePaymentMethod.create({
             data: {
               saleId: sale.id,
-              date: new Date(),
+              date: paymentDate,
               type: paymentMethod,
-              value: finalSalePrice || 0,
+              value: paymentValue,
               valorFinanciado: financedValue ? parseFloat(financedValue) : null,
               quantidadeParcelas: paymentInstallments ? parseInt(paymentInstallments) : null,
               valorParcela: paymentInstallmentValue ? parseFloat(paymentInstallmentValue) : null,
-              financiamentoBanco: financingBank || null
+              bancoFinanceira: financingBank || null
             }
           });
+
+          // Lançamento financeiro (receber) do pagamento simples
+          if (paymentValue > 0) {
+            try {
+              await prisma.financialTransaction.create({
+                data: {
+                  operacao: 'receber',
+                  description: `Recebimento venda #${sale.id}` ,
+                  dataVencimento: paymentDate,
+                  valorTitulo: paymentValue,
+                  status: 'pendente',
+                  saleId: sale.id,
+                  customerId: sale.customerId,
+                  // compat legado
+                  type: 'receber',
+                  amount: paymentValue,
+                  dueDate: paymentDate,
+                }
+              })
+            } catch (e) {
+              console.warn('Não foi possível criar lançamento financeiro único da venda:', e)
+            }
+          }
         } catch (e) {
           console.warn('Não foi possível criar salePaymentMethod único:', e);
         }

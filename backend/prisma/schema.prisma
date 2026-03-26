@@ -537,6 +537,7 @@ model ParcelaQuitacao {
   valorParcela        Float     // Valor de cada parcela
   primeiroVcto        DateTime  // Data do primeiro vencimento
   observacoesInternas String?   // Observações internas
+  valorPago           Float?    @default(0) // Total já pago (controle)
   createdAt           DateTime  @default(now())
   updatedAt           DateTime  @updatedAt
   vehicle             Vehicle   @relation(fields: [vehicleId], references: [id], onDelete: Cascade)

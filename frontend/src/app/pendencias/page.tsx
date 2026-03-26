@@ -94,6 +94,8 @@ export default function PendenciasPage() {
   const [searchTerm, setSearchTerm] = useState('')
   const [exportOpen, setExportOpen] = useState(false)
   const exportRef = useRef<HTMLDivElement>(null)
+  const [page, setPage] = useState(1)
+  const [pageSize, setPageSize] = useState(40)
 
   const loadPendencias = async () => {
     setLoading(true)
@@ -266,7 +268,41 @@ export default function PendenciasPage() {
       )
     }
     return list
-  }, [pendencias, filterResponsavelId, filterStatus, searchTerm])
+  }, [pendencias, filterResponsavelId, filterStatus, filterMarcador, searchTerm])
+
+  useEffect(() => {
+    setPage(1)
+  }, [filterResponsavelId, filterStatus, filterMarcador, searchTerm, pageSize])
+
+  const totalResults = filteredPendencias.length
+  const totalPages = Math.max(1, Math.ceil(totalResults / pageSize))
+  const safePage = Math.min(page, totalPages)
+  const startIndex = totalResults === 0 ? 0 : (safePage - 1) * pageSize
+  const endIndexExclusive = Math.min(startIndex + pageSize, totalResults)
+  const pagePendencias = filteredPendencias.slice(startIndex, endIndexExclusive)
+
+  const pagesToShow = useMemo(() => {
+    const total = totalPages
+    const current = safePage
+    if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1)
+    const pages = new Set<number>()
+    pages.add(1)
+    pages.add(total)
+    pages.add(current)
+    pages.add(current - 1)
+    pages.add(current + 1)
+    pages.add(current - 2)
+    pages.add(current + 2)
+    const arr = Array.from(pages).filter((p) => p >= 1 && p <= total).sort((a, b) => a - b)
+    const out: Array<number> = []
+    for (let i = 0; i < arr.length; i++) {
+      const p = arr[i]
+      const prev = arr[i - 1]
+      if (i > 0 && prev != null && p - prev > 1) out.push(-1)
+      out.push(p)
+    }
+    return out
+  }, [safePage, totalPages])
 
   const exportAsText = () => {
     const lines = [
@@ -483,6 +519,7 @@ export default function PendenciasPage() {
             <div className="animate-spin rounded-full h-8 w-8 border-2 border-primary-600 border-t-transparent" />
           </div>
         ) : (
+          <>
           <div className="bg-white rounded-lg shadow border border-gray-200 overflow-hidden">
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200 text-xs">
@@ -500,7 +537,7 @@ export default function PendenciasPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">
-                  {filteredPendencias.length === 0 ? (
+                  {totalResults === 0 ? (
                     <tr>
                       <td colSpan={9} className="px-2 py-4 text-center text-xs text-gray-500">
                         {pendencias.length === 0
@@ -509,7 +546,7 @@ export default function PendenciasPage() {
                       </td>
                     </tr>
                   ) : (
-                    filteredPendencias.map((p) => (
+                    pagePendencias.map((p) => (
                       <tr key={p.id} className="hover:bg-gray-50">
                         <td className="px-2 py-1.5 text-gray-900 whitespace-nowrap">{formatDate(p.createdAt)}</td>
                         <td className="px-2 py-1.5 text-gray-900 max-w-[160px] truncate">{p.descricao}</td>
@@ -558,6 +595,87 @@ export default function PendenciasPage() {
               </table>
             </div>
           </div>
+
+          {totalResults > 0 && (
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-3">
+              <div className="text-xs text-gray-600">
+                Mostrando <span className="font-medium text-gray-900">{startIndex + 1}</span>–<span className="font-medium text-gray-900">{endIndexExclusive}</span> de{' '}
+                <span className="font-medium text-gray-900">{totalResults}</span>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <select
+                  value={pageSize}
+                  onChange={(e) => setPageSize(parseInt(e.target.value))}
+                  className="px-2 py-1.5 border border-gray-300 rounded-lg text-sm text-gray-900 bg-white"
+                  aria-label="Itens por página"
+                  title="Itens por página"
+                >
+                  <option value={20}>20</option>
+                  <option value={40}>40</option>
+                  <option value={80}>80</option>
+                  <option value={120}>120</option>
+                </select>
+
+                <button
+                  type="button"
+                  onClick={() => setPage(1)}
+                  disabled={safePage <= 1}
+                  className="px-2 py-1.5 border border-gray-300 rounded-md text-sm text-gray-700 disabled:opacity-50"
+                >
+                  Primeira
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  disabled={safePage <= 1}
+                  className="px-2 py-1.5 border border-gray-300 rounded-md text-sm text-gray-700 disabled:opacity-50"
+                >
+                  Anterior
+                </button>
+
+                <div className="flex items-center gap-1">
+                  {pagesToShow.map((p, idx) =>
+                    p === -1 ? (
+                      <span key={`e-${idx}`} className="px-2 text-sm text-gray-500">
+                        …
+                      </span>
+                    ) : (
+                      <button
+                        key={p}
+                        type="button"
+                        onClick={() => setPage(p)}
+                        className={`h-8 min-w-8 px-2 rounded-md text-sm border ${
+                          p === safePage ? 'bg-primary-600 text-white border-primary-600' : 'border-gray-300 text-gray-700 hover:bg-gray-50'
+                        }`}
+                        aria-current={p === safePage ? 'page' : undefined}
+                      >
+                        {p}
+                      </button>
+                    )
+                  )}
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                  disabled={safePage >= totalPages}
+                  className="px-2 py-1.5 border border-gray-300 rounded-md text-sm text-gray-700 disabled:opacity-50"
+                >
+                  Próxima
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPage(totalPages)}
+                  disabled={safePage >= totalPages}
+                  className="px-2 py-1.5 border border-gray-300 rounded-md text-sm text-gray-700 disabled:opacity-50"
+                >
+                  Última
+                </button>
+              </div>
+            </div>
+          )}
+          </>
         )}
       </div>
 
@@ -736,17 +854,35 @@ export default function PendenciasPage() {
                   <FiX className="w-5 h-5" />
                 </button>
               </div>
-              <div className="p-4 space-y-3 text-sm">
-                <p><span className="font-medium text-gray-700">Data:</span> {formatDate(viewPendencia.createdAt)}</p>
-                <p><span className="font-medium text-gray-700">Descrição:</span> {viewPendencia.descricao}</p>
-                <p><span className="font-medium text-gray-700">Veículo:</span> {vehicleLabel(viewPendencia.vehicle)}</p>
-                <p><span className="font-medium text-gray-700">Responsável:</span> {viewPendencia.responsavel?.name ?? '-'}</p>
-                <p><span className="font-medium text-gray-700">Usuário:</span> {viewPendencia.responsavel?.name ?? '-'}</p>
-                <p><span className="font-medium text-gray-700">Status:</span> {statusLabel(viewPendencia.status)}</p>
-                <p><span className="font-medium text-gray-700">Marcador:</span> {viewPendencia.marcador || '-'}</p>
-                <p><span className="font-medium text-gray-700">Data limite:</span> {formatDate(viewPendencia.dataLimite)}</p>
+              <div className="p-4 space-y-3 text-sm text-gray-900">
+                <p className="text-gray-900">
+                  <span className="font-medium text-gray-900">Data:</span> {formatDate(viewPendencia.createdAt)}
+                </p>
+                <p className="text-gray-900">
+                  <span className="font-medium text-gray-900">Descrição:</span> {viewPendencia.descricao}
+                </p>
+                <p className="text-gray-900">
+                  <span className="font-medium text-gray-900">Veículo:</span> {vehicleLabel(viewPendencia.vehicle)}
+                </p>
+                <p className="text-gray-900">
+                  <span className="font-medium text-gray-900">Responsável:</span> {viewPendencia.responsavel?.name ?? '-'}
+                </p>
+                <p className="text-gray-900">
+                  <span className="font-medium text-gray-900">Usuário:</span> {viewPendencia.responsavel?.name ?? '-'}
+                </p>
+                <p className="text-gray-900">
+                  <span className="font-medium text-gray-900">Status:</span> {statusLabel(viewPendencia.status)}
+                </p>
+                <p className="text-gray-900">
+                  <span className="font-medium text-gray-900">Marcador:</span> {viewPendencia.marcador || '-'}
+                </p>
+                <p className="text-gray-900">
+                  <span className="font-medium text-gray-900">Data limite:</span> {formatDate(viewPendencia.dataLimite)}
+                </p>
                 {viewPendencia.emailPara && (
-                  <p><span className="font-medium text-gray-700">Email para:</span> {viewPendencia.emailPara}</p>
+                  <p className="text-gray-900">
+                    <span className="font-medium text-gray-900">Email para:</span> {viewPendencia.emailPara}
+                  </p>
                 )}
               </div>
               <div className="p-4 border-t border-gray-200 flex justify-end">

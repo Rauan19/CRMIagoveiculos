@@ -6,7 +6,7 @@ interface ConfirmModalProps {
   onCancel: () => void
   confirmText?: string
   cancelText?: string
-  confirmColor?: 'red' | 'blue' | 'green'
+  confirmColor?: 'red' | 'blue' | 'green' | 'yellow'
 }
 
 export default function ConfirmModal({
@@ -21,10 +21,11 @@ export default function ConfirmModal({
 }: ConfirmModalProps) {
   if (!isOpen) return null
 
-  const confirmButtonColors = {
+  const confirmButtonColors: Record<string, string> = {
     red: 'bg-red-600 hover:bg-red-700 text-white',
-    blue: 'bg-primary-600 hover:bg-primary-700 text-white',
-    green: 'bg-green-600 hover:bg-green-700 text-white'
+    blue: 'bg-primary-50 hover:bg-primary-100 text-primary-700 border border-primary-600',
+    green: 'bg-green-600 hover:bg-green-700 text-white',
+    yellow: 'bg-yellow-50 hover:bg-yellow-100 text-primary-700 border border-yellow-300',
   }
 
   return (

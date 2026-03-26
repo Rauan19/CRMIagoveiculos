@@ -184,7 +184,29 @@ class UserController {
           email: true,
           role: true,
           phone: true,
-          avatar: true
+          avatar: true,
+          admissionDate: true,
+          dismissalDate: true,
+          cpf: true,
+          rg: true,
+          sexo: true,
+          birthDate: true,
+          ctps: true,
+          cnh: true,
+          cep: true,
+          street: true,
+          number: true,
+          complement: true,
+          neighborhood: true,
+          state: true,
+          city: true,
+          cargo: true,
+          beneficios: true,
+          salary: true,
+          receivesCommission: true,
+          documents: true,
+          updatedAt: true,
+          createdAt: true
         }
       });
 
