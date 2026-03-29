@@ -15,8 +15,22 @@
     "db:logs": "docker compose -f ../docker-compose.yml logs -f --tail=200 db",
     "db:down": "docker compose -f ../docker-compose.yml down",
     "db:delete": "docker compose -f ../docker-compose.yml down -v",
+    "db:migrate": "prisma migrate deploy",
     "seed": "node prisma/seed.js",
-    "generate": "prisma generate"
+    "generate": "prisma generate",
+    "import:clientes-vendedor": "node scripts/importListagemClientesPorVendedor.js",
+    "import:rm:vendidos-cliente": "node scripts/importRevendaMaisVendidosComCliente.js",
+    "import:rm:vendidos-dados-venda": "node scripts/importRevendaMaisVendidosDadosVenda.js",
+    "import:rm:estoque": "node scripts/importRevendaMaisEstoqueGerencial.js",
+    "import:rm:batch": "node scripts/importRevendaMaisBatch.js",
+    "import:rm:batch:list": "node scripts/importRevendaMaisBatch.js --list-only",
+    "import:rm:recover": "npm run db:migrate && node scripts/ensureRevendaMaisImportUser.js && node scripts/importRevendaMaisBatch.js --dir ./services/recupererdoantigo",
+    "import:rm:recover:dry": "npm run db:migrate && node scripts/ensureRevendaMaisImportUser.js && node scripts/importRevendaMaisBatch.js --dry-run --dir ./services/recupererdoantigo",
+    "import:rm:estoque-doc": "node scripts/importRevendaMaisEstoqueDocumentacao.js",
+    "import:rm:aniversariantes": "node scripts/importRevendaMaisAniversariantes.js",
+    "import:rm:canal": "node scripts/importRevendaMaisCanalVenda.js",
+    "import:rm:fipe": "node scripts/importRevendaMaisEnriquecerFipe.js",
+    "import:rm:valor-minimo": "node scripts/importRevendaMaisEnriquecerValorMinimo.js"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
@@ -32,6 +46,7 @@
     "prisma": "^5.22.0"
   },
   "devDependencies": {
+    "fast-xml-parser": "^5.5.9",
     "nodemon": "^3.1.4"
   }
 }

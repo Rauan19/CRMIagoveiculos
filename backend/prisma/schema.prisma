@@ -192,6 +192,8 @@ model Vehicle {
   despachantes        Despachante[] // Controles de despachante
   locations           Location[] // Localizações do veículo
   sinaisNegocio       SinalNegocio[] // Sinais de negócio (reserva) vinculados ao veículo
+  // Migração Revenda Mais — código interno do relatório (estoque/venda); idempotência de import
+  revendaMaisCodigo   String?   @unique
 }
 
 model SinalNegocio {

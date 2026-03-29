@@ -1,0 +1,2533 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?mso-application progid="Excel.Sheet"?>
+
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" xmlns:html="http://www.w3.org/TR/REC-html40">
+	<DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+		<Author/>
+		<Title>Lista Gerencial de Estoque com Documentação</Title>
+		<Description/>
+		<Subject/>
+	</DocumentProperties>
+	<Styles>
+		<Style ss:ID="HyperlinkId" ss:Name="Hyperlink">
+			<Font ss:Color="#0000ff"/>
+		</Style>
+		<Style ss:ID="1">
+			<NumberFormat ss:Format="yyyy-M-d HH:mm:ss AM/PM"/>
+		</Style>
+		<Style ss:ID="34">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="36">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="40">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="42">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="44">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="58">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top"/>
+				<Border ss:Position="Left"/>
+				<Border ss:Position="Right"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="serif" ss:Size="10.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="57">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top"/>
+				<Border ss:Position="Left"/>
+				<Border ss:Position="Right"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="28">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#ffffff"/>
+			<Interior ss:Color="#000000" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="20">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top"/>
+				<Border ss:Position="Left"/>
+				<Border ss:Position="Right"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="11.0" ss:Bold="1" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="22">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top"/>
+				<Border ss:Position="Left"/>
+				<Border ss:Position="Right"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="11.0" ss:Bold="1" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="25">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#ffffff"/>
+			<Interior ss:Color="#000000" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="29">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#ffffff"/>
+			<Interior ss:Color="#000000" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="54">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="60">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top"/>
+				<Border ss:Position="Left"/>
+				<Border ss:Position="Right"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="33">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="35">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="39">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="41">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="43">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="24">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top"/>
+				<Border ss:Position="Left"/>
+				<Border ss:Position="Right"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="0.799" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="37">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="47">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="23">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top"/>
+				<Border ss:Position="Left"/>
+				<Border ss:Position="Right"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="45">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+			<NumberFormat ss:Format="R$ ###,##0.00"/>
+		</Style>
+		<Style ss:ID="49">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="32">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="38">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="48">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="46">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+			<NumberFormat ss:Format="R$ ###,##0.00"/>
+		</Style>
+		<Style ss:ID="50">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="26">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#ffffff"/>
+			<Interior ss:Color="#000000" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="51">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="55">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top"/>
+				<Border ss:Position="Left"/>
+				<Border ss:Position="Right"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="56">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top"/>
+				<Border ss:Position="Left"/>
+				<Border ss:Position="Right"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="20.0" ss:Bold="1" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="30">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#ffffff"/>
+			<Interior ss:Color="#000000" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="27">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#ffffff"/>
+			<Interior ss:Color="#000000" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="52">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="31">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#ffffff"/>
+			<Interior ss:Color="#000000" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="53">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="21">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top"/>
+				<Border ss:Position="Left"/>
+				<Border ss:Position="Right"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="59">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top"/>
+				<Border ss:Position="Left"/>
+				<Border ss:Position="Right"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+	</Styles>
+	<Names>
+		<NamedRange ss:Name="__bookmark_2" ss:RefersTo="Lista Gerencial de Estoque com !R3C1:R49C26"/>
+		<NamedRange ss:Name="__bookmark_1" ss:RefersTo="Lista Gerencial de Estoque com !R3C1:R49C27"/>
+	</Names>
+
+<Worksheet ss:Name="Lista Gerencial de Estoque com ">
+	<ss:Table>
+		<ss:Column ss:Width="34.432" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="25.6" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="35.072" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="42.112" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="42.24" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="26.88" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="0.512" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="7.68" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="49.152" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="12.032" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="32.512" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="9.728" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="8.96" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="0.896" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="16.256" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="32.128" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="36.608" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="19.584" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="56.192" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="62.976" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="21.248" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="46.464" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="9.856" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="70.144" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="77.312" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="49.152" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="1.664" ss:AutoFitWidth="0"/>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="20" ss:MergeAcross="6">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="22" ss:MergeAcross="19">
+				<Data ss:Type="String">LISTA GERENCIAL DE ESTOQUE COM DOCUMENTAÇÃO</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="21" ss:MergeAcross="6">
+				<Data ss:Type="String">28 de mar de 2026 16:14</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="23" ss:MergeAcross="19">
+				<Data ss:Type="String">Usuário: isaac oliveira dos santos junior</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="25"/>
+			<Cell ss:Index="2" ss:StyleID="29">
+				<Data ss:Type="String">Pos.</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">Modelo</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="29">
+				<Data ss:Type="String">Ano</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="29">
+				<Data ss:Type="String">Cor</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="29" ss:MergeAcross="2">
+				<Data ss:Type="String">Placa</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="29">
+				<Data ss:Type="String">Renavam</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="29" ss:MergeAcross="3">
+				<Data ss:Type="String">Situação</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="29" ss:MergeAcross="2">
+				<Data ss:Type="String">Tipo</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="29" ss:MergeAcross="1">
+				<Data ss:Type="String">IPVA</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="31">
+				<Data ss:Type="String">Vlr. Oferta</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="29" ss:MergeAcross="1">
+				<Data ss:Type="String">Recibo</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="29" ss:MergeAcross="1">
+				<Data ss:Type="String">Venc. IPVA</Data>
+			</Cell>
+			<Cell ss:Index="24" ss:StyleID="29">
+				<Data ss:Type="String">Lic+Seg</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="29">
+				<Data ss:Type="String">Vendedor</Data>
+			</Cell>
+			<Cell ss:Index="26" ss:StyleID="29">
+				<Data ss:Type="String">Localização</Data>
+			</Cell>
+			<Cell ss:Index="27" ss:StyleID="24" ss:MergeDown="46"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">313CDI SPRINTERM</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2007/2007</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">PRATA</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">JPY9E12</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">00925423777</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">CONSIG.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48"/>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">BIZ 125</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2024/2024</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">VERMELHO</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">222222</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">CONSIG.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48"/>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">CB250F TWISTER CBS</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2022/2022</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">AZUL</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">RPJ3D08</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">01323072443</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">CONSIG.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48"/>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">CB300F TWISTER ABS</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2024/2024</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">VERMELHO</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">SJS1F79</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">01378063586</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">PRÓPRIO</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48"/>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">CELTA 1.0L LT</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2013/2014</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">PRATA</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">KKD9I16</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">00540745456</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">CONSIG.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48"/>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">CG 160 FAN</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2023/2023</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">PRETO</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">RPU7H09</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">PRÓPRIO</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String">0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">CG 160 FAN</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2024/2024</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">PRETO</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">SWX2H38</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">01394042385</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">PRÓPRIO</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String">0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">CG 160 TITAN EX</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2015/2016</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">VERMELHO</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">PJO0I47</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">01067484113</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">PRÓPRIO</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48"/>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">CORSA WIND</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">1995/1996</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">BRANCO</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">JLA2E77</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">00646448153</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">PRÓPRIO</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String">0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">FAZER 250</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2025/2025</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">AZUL</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">UGC2J70</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">01459222625</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">CONSIG.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48"/>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">FIORINO HD WK E</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2019/2020</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">BRANCO</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">FXL3J72</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">01222146379</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">CONSIG.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48"/>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">FOCUS 2L FC FLEX</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2012/2013</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">PRETO</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">IUD2H19</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">00526583797</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">CONSIG.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48"/>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">FOSION PU 1.3L</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2015/2016</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">BRANCO</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">PJL8H45</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">01060870166</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">CONSIG.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48"/>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">GOL 1.0</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2005/2005</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">PRATA</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">JPS6J66</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">00851443290</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">PRÓPRIO</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String">0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48">
+				<Data ss:Type="String">JOSE GENIVALDO ...</Data>
+			</Cell>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">GOLF 1.6 SPORTLINE</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2009/2010</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">BRANCO</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">MFZ5I35</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">00149928025</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">PRÓPRIO</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">43900.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String">0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">GOL MPI</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2022/2023</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">BRANCO</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">RZT1C25</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">01330447899</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">CONSIG.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">54900.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48">
+				<Data ss:Type="String">JOSE GENIVALDO ...</Data>
+			</Cell>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">HILUX 4CDL DX</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2004/2004</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">BRANCO</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">JQR0628</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">00838536786</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">PRÓPRIO</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String">0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">KA FLEX</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2009/2009</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">PRETO</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">JSC5363</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">00128440708</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">PRÓPRIO</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">13900.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String">0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">KA SE 1.0 HA C</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2020/2020</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">CINZA</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">RFA2E39</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">01228387785</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">CONSIG.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48"/>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">KA SE PLUS AT1.5HAC</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2019/2020</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">BRANCO</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">BDT3C46</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">01209282850</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">PRÓPRIO</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48"/>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">LOGAN ZEN10MT</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2020/2021</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">BRANCO</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">QXO1D83</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">01222821130</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">CONSIG.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48"/>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">NXR 160 BROS</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2018/2018</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">PRETO</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">PKX4390</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">01146872124</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">PRÓPRIO</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String">0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48">
+				<Data ss:Type="String">IONAR DOS SANTO...</Data>
+			</Cell>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">NXR160 BROS ESDD</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2021/2022</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">PRETO</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">RDL2F52</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">01277889977</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">CONSIG.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48"/>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">NXR160 BROS ESDD</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2022/2023</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">VERMELHO</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">RPP1D55</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">01338879615</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">CONSIG.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48"/>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">ONIX 1.0MT LT</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2016/2016</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">BRANCO</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">PJZ0D96</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">01090506322</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">CONSIG.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48"/>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">ONIX 10MT LT2</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2020/2021</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">BRANCO</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">RFS8G42</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">01241662867</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">PRÓPRIO</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String">0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">ONIX 1.4AT LTZ</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2017/2018</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">PRATA</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">PKX5B56</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">01144964188</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">CONSIG.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48"/>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">PARATI (GERACAO4)(TOTALFLEX) 1.6MI 4P</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">1983/1983</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">CINZA</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">JLK9269</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">00221779191</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">PRÓPRIO</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String">0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48">
+				<Data ss:Type="String">JOSE GENIVALDO ...</Data>
+			</Cell>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">POP 110I</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2024/2024</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">VERMELHO</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">SJZ5F56</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">01392913737</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">CONSIG.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48"/>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">POP 110I</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2023/2024</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">VERMELHO</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">SJQ7J26</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">01373785397</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">CONSIG.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48"/>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">POP 110I ES</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2025/2026</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">BRANCO</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">THA7F34</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">01452228407</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">PRÓPRIO</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">14500.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String">0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">POP 110I ES</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2024/2025</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">VERMELHO</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">SKE8D06</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">PRÓPRIO</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">13900.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String">0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">PULSE DRIVE AT</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2023/2023</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">PRATA</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">SJK3H53</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">01357479317</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">CONSIG.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48"/>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">SPIN 1.8L AT LT ADV</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2014/2015</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">BRANCO</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">OZK8C68</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">CONSIG.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48"/>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">STRADA HD WK CC E</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2017/2018</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">PRATA</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">QND9F23</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">01132010397</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">CONSIG.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48"/>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">SYMBOL EX1616V</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2011/2011</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">PRATA</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">NYZ5B29</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">00335604137</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">CONSIG.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48"/>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">TIGGO 2.0</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2011/2012</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">PRETO</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">NZV1E94</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">00466168420</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">CONSIG.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48"/>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">TORO RANCH AT9 4X4</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2024/2025</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">CINZA</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">SKD0E36</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">CADASTRADO</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">CONSIG.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="50" ss:MergeAcross="1"/>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1"/>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="50"/>
+			<Cell ss:Index="25" ss:StyleID="48"/>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">TORO VOLCANO AT D4</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2018/2018</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">BRANCO</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">PKV9A24</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">PRÓPRIO</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">89900.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48"/>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">X60 1.8L VVT</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2013/2014</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">BRANCO</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">OUY8488</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">00992105170</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">PRÓPRIO</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String">0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">XRE 300</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2022/2023</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">VERMELHO</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">RPR0J83</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">01342565875</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">PRÓPRIO</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">32900.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String">0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">XRE 300 ABS</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2023/2023</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">VERMELHO</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">RPS1J09</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">01344872643</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">CONSIG.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48"/>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">XRE 300 SAHARA</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2025/2026</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">CINZA</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">THH5H79</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">PRÓPRIO</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">38900.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String">0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="32"/>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">XRE 300 SAHARA RAL</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36">
+				<Data ss:Type="String">2025/2025</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="36">
+				<Data ss:Type="String">VERMELHO</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="40" ss:MergeAcross="2">
+				<Data ss:Type="String">SKQ3C86</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="42">
+				<Data ss:Type="String">01426780041</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="44" ss:MergeAcross="3">
+				<Data ss:Type="String">ESTOQUE</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="36" ss:MergeAcross="2">
+				<Data ss:Type="String">CONSIG.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="46" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="38" ss:MergeAcross="1">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="42" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="46">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="48"/>
+			<Cell ss:Index="26" ss:StyleID="42"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="52" ss:MergeAcross="15">
+				<Data ss:Type="String">Total: 44</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="53" ss:MergeAcross="1"/>
+			<Cell ss:Index="19" ss:StyleID="53"/>
+			<Cell ss:Index="20" ss:StyleID="53" ss:MergeAcross="1"/>
+			<Cell ss:Index="22" ss:StyleID="53" ss:MergeAcross="1"/>
+			<Cell ss:Index="24" ss:StyleID="53"/>
+			<Cell ss:Index="25" ss:StyleID="53"/>
+			<Cell ss:Index="26" ss:StyleID="54"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="55"/>
+			<Cell ss:Index="25" ss:StyleID="55"/>
+			<Cell ss:Index="26" ss:StyleID="57"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="58" ss:MergeAcross="21"/>
+			<Cell ss:Index="23" ss:StyleID="58" ss:MergeAcross="3"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="59" ss:MergeAcross="9"/>
+			<Cell ss:Index="11" ss:StyleID="60">
+				<Data ss:Type="String">Página:</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="60">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="60" ss:MergeAcross="1">
+				<Data ss:Type="String">/</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="60">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="59" ss:MergeAcross="4"/>
+			<Cell ss:Index="21" ss:StyleID="59" ss:MergeAcross="6"/>
+		</Row>
+	</ss:Table>
+	<WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+		<PageSetup>
+			<PageMargins x:Bottom="0.25" x:Left="0.099999994" x:Right="0.099999994" x:Top="0.25"/>
+			<Layout x:Orientation="Landscape"/>
+		</PageSetup>
+		<Print>
+			<PaperSizeIndex>9</PaperSizeIndex>
+		</Print>
+	</WorksheetOptions>
+</Worksheet>
+</Workbook>

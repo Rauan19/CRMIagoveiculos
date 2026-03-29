@@ -1,0 +1,5 @@
+# Coloque aqui os .XLS exportados do Revenda Mais (não versionar dados reais)
+*.XLS
+*.xls
+*.xlsx
+*.pdf

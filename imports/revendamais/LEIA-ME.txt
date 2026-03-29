@@ -1,0 +1,18 @@
+Os arquivos .XLS do Revenda Mais podem ficar aqui OU em:
+
+  backend/services/recupererdoantigo/
+
+(este último é o padrão do comando `npm run import:rm:recover`).
+
+Recuperação completa (pasta backend/):
+
+  npm run import:rm:recover:dry    → simula
+  npm run import:rm:recover        → grava no PostgreSQL
+
+Listar planilhas e fases sem importar:
+
+  npm run import:rm:batch:list -- --dir ./services/recupererdoantigo
+
+Campo novo no banco: Vehicle.revendaMaisCodigo (código do relatório, idempotência).
+
+Ver também: backend/services/recupererdoantigo/LEIA-ME.txt

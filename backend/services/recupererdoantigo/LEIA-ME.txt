@@ -1,0 +1,29 @@
+Coloque aqui os .XLS exportados do Revenda Mais (como já estão).
+
+Recuperação no banco (na pasta backend/):
+
+  Após criar o Postgres do zero (ex.: npm run db:delete e db:up), o npm run import:rm:recover
+  roda migrate, cria um User vendedor fallback se a tabela User estiver vazia, e só então importa.
+
+  0) Só migração (se rodar import:rm:batch manualmente sem recover):
+     npm run db:migrate
+
+  Usuário fallback (banco zerado): email import.revendamais@local.crm — senha em IMPORT_SYSTEM_USER_PASSWORD
+  ou padrão TrocarDepois123. Cadastre vendedores reais depois e ajuste vendas se precisar.
+
+  1) Simular (não grava):
+     npm run import:rm:recover:dry
+
+  2) Gravar de verdade:
+     npm run import:rm:recover
+
+  3) Só listar o que será feito:
+     npm run import:rm:batch:list -- --dir ./services/recupererdoantigo
+
+Ordem automática: clientes → vendidos (com cliente → dados venda) → estoque → estoque com doc → FIPE → valor mínimo → canal de venda → aniversariantes.
+
+Defina no .env se precisar: IMPORT_DEFAULT_SELLER_ID
+
+Arquivos que o lote NÃO importa (resumo / sem linha útil): Vendas Mensais, Comparativo, Impostos, Estoque por Marcas, Contas Entrada (vazio), Retorno Financiamento .XLS.
+
+Migração Prisma: campo Vehicle.revendaMaisCodigo (código do relatório) para idempotência.
