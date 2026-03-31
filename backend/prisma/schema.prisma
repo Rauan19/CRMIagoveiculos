@@ -192,6 +192,12 @@ model Vehicle {
   despachantes        Despachante[] // Controles de despachante
   locations           Location[] // Localizações do veículo
   sinaisNegocio       SinalNegocio[] // Sinais de negócio (reserva) vinculados ao veículo
+  // Importações Revenda Mais (detalhes extras)
+  notasRm             VehicleNota[]
+  impostosRm          SaleImposto[]
+  chequesRm           SaleCheque[]
+  trocasRm            SaleTroca[]
+  devolucoesRm        VehicleDevolucao[]
   // Migração Revenda Mais — código interno do relatório (estoque/venda); idempotência de import
   revendaMaisCodigo   String?   @unique
 }
@@ -279,6 +285,10 @@ model Sale {
   promotion               Promotion?             @relation(fields: [promotionId], references: [id], onDelete: SetNull)
   transactions            FinancialTransaction[]
   paymentMethods          SalePaymentMethod[]    // Múltiplas formas de pagamento
+  // Importações Revenda Mais (detalhes extras)
+  impostosRm              SaleImposto[]
+  chequesRm               SaleCheque[]
+  trocasRm                SaleTroca[]
 }
 
 model SalePaymentMethod {
@@ -350,6 +360,7 @@ model CategoriaFinanceira {
 model FinancialTransaction {
   id                    Int       @id @default(autoincrement())
   operacao              String?   // "pagar", "receber" ou "transferencia"
+  revendaMaisId         String?   // ID do título/lançamento no Revenda Mais (quando existir)
   posicaoEstoque        Int?      // Posição estoque
   solicitadoPor         String?   // Solicitado por
   autorizadoPor          String?   // Autorizado por
@@ -383,6 +394,12 @@ model FinancialTransaction {
   type                  String?   // DEPRECATED: usar operacao
   amount                Float?    // DEPRECATED: usar valorTitulo
   dueDate               DateTime? // DEPRECATED: usar dataVencimento
+  // Importação (idempotência)
+  importSourceFile      String?
+  importRowHash         String?   @unique
+
+  @@index([operacao, revendaMaisId])
+  @@unique([operacao, revendaMaisId], name: "operacao_revendaMaisId")
 }
 
 model Promotion {
@@ -606,4 +623,121 @@ model Location {
   updatedAt      DateTime  @updatedAt
 
   vehicle        Vehicle?  @relation(fields: [vehicleId], references: [id], onDelete: SetNull)
+}
+
+// Importação Revenda Mais — Relação de Notas (NFe/Nota por veículo)
+model VehicleNota {
+  id               Int      @id @default(autoincrement())
+  vehicleId         Int?
+  // Código do relatório (quando existir). Para notas, costuma ser o mesmo cod do estoque/venda.
+  revendaMaisCodigo String?
+  plateOrChassi     String?
+  nota              String?
+  dtNota            DateTime?
+  cfop              String?
+  ncm               String?
+  cst               String?
+  icms              Float?
+  nomeDest          String?
+  filial            String?
+  valorEntrada      Float?
+  valorSaida        Float?
+  sourceFile        String
+  rowHash           String   @unique
+  createdAt         DateTime @default(now())
+
+  vehicle           Vehicle? @relation(fields: [vehicleId], references: [id], onDelete: SetNull)
+  @@index([vehicleId])
+  @@index([revendaMaisCodigo])
+}
+
+// Importação Revenda Mais — impostos calculados por venda
+model SaleImposto {
+  id               Int      @id @default(autoincrement())
+  saleId            Int?
+  vehicleId         Int?
+  revendaMaisCodigo String?
+  dtVenda           DateTime?
+  cfop              String?
+  valorCompra       Float?
+  valorVenda        Float?
+  icms              Float?
+  pis               Float?
+  cofins            Float?
+  irpj              Float?
+  csll              Float?
+  localizacao       String?
+  sourceFile        String
+  rowHash           String   @unique
+  createdAt         DateTime @default(now())
+
+  sale              Sale?    @relation(fields: [saleId], references: [id], onDelete: SetNull)
+  vehicle           Vehicle? @relation(fields: [vehicleId], references: [id], onDelete: SetNull)
+  @@index([saleId])
+  @@index([vehicleId])
+  @@index([revendaMaisCodigo])
+}
+
+// Importação Revenda Mais — vendas com cheque (detalhe de pagamento)
+model SaleCheque {
+  id               Int      @id @default(autoincrement())
+  saleId            Int?
+  vehicleId         Int?
+  revendaMaisCodigo String?
+  dataVenda         DateTime?
+  valor             Float?
+  vendedor          String?
+  fornecedor        String?
+  filial            String?
+  localizacao       String?
+  sourceFile        String
+  rowHash           String   @unique
+  createdAt         DateTime @default(now())
+
+  sale              Sale?    @relation(fields: [saleId], references: [id], onDelete: SetNull)
+  vehicle           Vehicle? @relation(fields: [vehicleId], references: [id], onDelete: SetNull)
+  @@index([saleId])
+  @@index([vehicleId])
+  @@index([revendaMaisCodigo])
+}
+
+// Importação Revenda Mais — vendas com veículo na troca (resumo)
+model SaleTroca {
+  id               Int      @id @default(autoincrement())
+  saleId            Int?
+  vehicleId         Int?
+  revendaMaisCodigo String?
+  dtVenda           DateTime?
+  valorVenda        Float?
+  veiculoTrocaRaw   String?
+  valorTroca        Float?
+  outrasFormas      Float?
+  valorLiquido      Float?
+  fornecedor        String?
+  sourceFile        String
+  rowHash           String   @unique
+  createdAt         DateTime @default(now())
+
+  sale              Sale?    @relation(fields: [saleId], references: [id], onDelete: SetNull)
+  vehicle           Vehicle? @relation(fields: [vehicleId], references: [id], onDelete: SetNull)
+  @@index([saleId])
+  @@index([vehicleId])
+  @@index([revendaMaisCodigo])
+}
+
+// Importação Revenda Mais — veículos devolvidos (mudança de status / histórico)
+model VehicleDevolucao {
+  id               Int      @id @default(autoincrement())
+  vehicleId         Int?
+  revendaMaisCodigo String?
+  dataCompra        DateTime?
+  dataDevolucao     DateTime?
+  localizacao       String?
+  sourceFile        String
+  rowHash           String   @unique
+  createdAt         DateTime @default(now())
+
+  vehicle           Vehicle? @relation(fields: [vehicleId], references: [id], onDelete: SetNull)
+  @@index([vehicleId])
+  @@index([revendaMaisCodigo])
 }

@@ -11,10 +11,23 @@
  */
 require('dotenv').config()
 const path = require('path')
+const bcrypt = require('bcryptjs')
 const { PrismaClient } = require('@prisma/client')
 const { parseSpreadsheetPath, findRowIndex } = require('./lib/revendamaisXml')
 
 const prisma = new PrismaClient()
+
+const IMPORT_MERGE = String(process.env.IMPORT_MERGE || '').trim() === '1'
+const IMPORT_FIX_SELLER = String(process.env.IMPORT_FIX_SELLER || '').trim() === '1'
+
+function isBlank(v) {
+  return v === undefined || v === null || String(v).trim() === ''
+}
+
+function isMissingText(v) {
+  const t = String(v || '').trim()
+  return t === '' || t === '—' || t === '-'
+}
 
 function normName(s) {
   return String(s || '')
@@ -64,12 +77,141 @@ function findSellerId(vendedorName, users, fallbackId) {
   return hit ? hit.id : fallbackId
 }
 
+function slugifyEmailPart(s) {
+  return String(s || '')
+    .trim()
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '.')
+    .replace(/^\.+|\.+$/g, '')
+    .slice(0, 40)
+}
+
+function smallHash(s) {
+  const str = String(s || '')
+  let h = 0
+  for (let i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) >>> 0
+  return h.toString(16)
+}
+
+async function ensureSellerUserId(tx, vendedorName, fallbackId) {
+  const n = normName(vendedorName)
+  if (!n) return fallbackId
+
+  const existing = await tx.user.findFirst({
+    where: { name: { equals: vendedorName.trim(), mode: 'insensitive' } },
+    select: { id: true },
+  })
+  if (existing) return existing.id
+
+  const base = slugifyEmailPart(vendedorName)
+  const hash = smallHash(vendedorName)
+  const emailBase = `import.vendedor+${base || 'sem-nome'}-${hash}`
+  const passwordPlain = 'TrocarDepois123'
+  const password = bcrypt.hashSync(passwordPlain, 10)
+
+  // Tenta alguns emails para evitar colisão de unique
+  for (let i = 0; i < 5; i++) {
+    const email = `${emailBase}${i ? `.${i}` : ''}@local.crm`
+    try {
+      const u = await tx.user.create({
+        data: {
+          name: vendedorName.trim(),
+          email,
+          password,
+          role: 'vendedor',
+          receivesCommission: true,
+        },
+        select: { id: true },
+      })
+      return u.id
+    } catch (e) {
+      const msg = String(e?.message || e)
+      if (msg.toLowerCase().includes('unique') || msg.toLowerCase().includes('uniq')) continue
+      throw e
+    }
+  }
+
+  return fallbackId
+}
+
 async function processFile(absPath, dryRun, users, defaultSellerId) {
   const rows = parseSpreadsheetPath(absPath)
-  const headerIdx = findRowIndex(
-    rows,
-    (v) => v[1] === 'Código' && v[3] === 'Dt. Venda' && v[4] === 'Marca'
-  )
+  const normCells = (v) => v.map((x) => String(x || '').trim())
+  const idxOf = (cells, label) => cells.findIndex((c) => c === label)
+
+  let layout = 'default'
+  let headerIdx = findRowIndex(rows, (v) => v[1] === 'Código' && v[3] === 'Dt. Venda' && v[4] === 'Marca')
+  let cols = null
+
+  if (headerIdx !== -1) {
+    const c = normCells(rows[headerIdx])
+    cols = {
+      codigo: idxOf(c, 'Código'),
+      dtVenda: idxOf(c, 'Dt. Venda'),
+      marca: idxOf(c, 'Marca'),
+      modelo: idxOf(c, 'Modelo'),
+      ano: idxOf(c, 'Ano'),
+      cor: idxOf(c, 'Cor'),
+      placa: idxOf(c, 'Placa'),
+      cliente: idxOf(c, 'Cliente'),
+      celular: idxOf(c, 'Celular'),
+      vendedor: idxOf(c, 'Vendedor'),
+      fornecedor: idxOf(c, 'Fornecedor'),
+      compra: idxOf(c, 'Compra'),
+      venda: idxOf(c, 'Venda'),
+      lucro: idxOf(c, 'Lucro'),
+    }
+  }
+
+  if (headerIdx === -1) {
+    // Layout "completo" (compacto): Código | Dt. Venda | Modelo | Ano | Placa | Cliente | Celular
+    headerIdx = findRowIndex(rows, (v) => {
+      const c = normCells(v)
+      return c.includes('Código') && c.includes('Dt. Venda') && c.includes('Modelo') && c.includes('Cliente')
+    })
+    if (headerIdx !== -1) {
+      layout = 'compacto'
+      const c = normCells(rows[headerIdx])
+      cols = {
+        codigo: idxOf(c, 'Código'),
+        dtVenda: idxOf(c, 'Dt. Venda'),
+        modelo: idxOf(c, 'Modelo'),
+        ano: idxOf(c, 'Ano'),
+        placa: idxOf(c, 'Placa'),
+        cliente: idxOf(c, 'Cliente'),
+        celular: idxOf(c, 'Celular'),
+      }
+    }
+  }
+  if (headerIdx === -1) {
+    // "Relação de Vendidos com Cliente": Cod | Cliente | Modelo | Ano | Cor | Placa/Chassi | ... | Dt Venda | ... | Vl Entrada | Vl Saída
+    headerIdx = findRowIndex(
+      rows,
+      (v) =>
+        String(v[0] || '').trim() === 'Cod' &&
+        String(v[1] || '').trim() === 'Cliente' &&
+        String(v[2] || '').trim() === 'Modelo' &&
+        String(v[8] || '').trim().toLowerCase().includes('dt') &&
+        String(v[8] || '').trim().toLowerCase().includes('venda')
+    )
+    if (headerIdx !== -1) {
+      layout = 'relacao'
+      const c = normCells(rows[headerIdx])
+      cols = {
+        codigo: idxOf(c, 'Cod'),
+        cliente: idxOf(c, 'Cliente'),
+        modelo: idxOf(c, 'Modelo'),
+        ano: idxOf(c, 'Ano'),
+        cor: idxOf(c, 'Cor'),
+        placa: idxOf(c, 'Placa/Chassi'),
+        dtVenda: idxOf(c, 'Dt Venda'),
+        vlEntrada: idxOf(c, 'Vl Entrada'),
+        vlSaida: idxOf(c, 'Vl Saída'),
+      }
+    }
+  }
   if (headerIdx === -1) {
     console.warn('[SKIP] Cabeçalho não reconhecido (esperado colunas Código, Dt. Venda, Marca):', absPath)
     return { skippedFile: 1, imported: 0, skippedRow: 0, errors: 0 }
@@ -79,7 +221,12 @@ async function processFile(absPath, dryRun, users, defaultSellerId) {
 
   for (let i = headerIdx + 1; i < rows.length; i++) {
     const v = rows[i]
-    const codigo = String(v[1] || '').trim()
+    const codigo =
+      layout === 'default'
+        ? String(v[cols?.codigo] || v[1] || '').trim()
+        : layout === 'compacto'
+          ? String(v[cols?.codigo] || '').trim()
+          : String(v[cols?.codigo] || '').trim()
     if (!/^\d+$/.test(codigo)) {
       stats.skippedRow++
       continue
@@ -90,16 +237,34 @@ async function processFile(absPath, dryRun, users, defaultSellerId) {
       where: {
         OR: [{ revendaMaisCodigo: codigo }, { notes: { contains: tag } }],
       },
-      select: { id: true },
+      select: {
+        id: true,
+        customerId: true,
+        brand: true,
+        model: true,
+        year: true,
+        color: true,
+        plate: true,
+        notes: true,
+      },
     })
     if (existingV) {
-      stats.skippedRow++
-      continue
+      if (!IMPORT_MERGE) {
+        stats.skippedRow++
+        continue
+      }
     }
 
-    const cliente = String(v[27] || '').trim()
-    const vendedor = String(v[29] || '').trim()
-    const fornecedor = String(v[30] || '').trim()
+    const cliente =
+      layout === 'default'
+        ? String(v[cols?.cliente] || v[27] || '').trim()
+        : layout === 'compacto'
+          ? String(v[cols?.cliente] || '').trim()
+          : String(v[cols?.cliente] || '').trim()
+    const vendedor =
+      layout === 'default' ? String(v[cols?.vendedor] || v[29] || '').trim() : ''
+    const fornecedor =
+      layout === 'default' ? String(v[cols?.fornecedor] || v[30] || '').trim() : ''
     if (!cliente) {
       stats.skippedRow++
       continue
@@ -112,17 +277,55 @@ async function processFile(absPath, dryRun, users, defaultSellerId) {
       continue
     }
 
-    const brand = String(v[4] || '').trim() || '—'
-    const model = String(v[5] || '').trim() || '—'
-    const year = parseAno(v[6])
-    const color = String(v[7] || '').trim() || null
-    const plateRaw = String(v[10] || '').trim()
+    let brand = '—'
+    let model = '—'
+    let year = new Date().getFullYear()
+    let color = null
+    let plateRaw = ''
+    let saleDate = new Date()
+    let salePrice = null
+    let purchasePrice = null
+    let profit = null
+
+    if (layout === 'default') {
+      brand = String(v[cols?.marca] || v[4] || '').trim() || '—'
+      model = String(v[cols?.modelo] || v[5] || '').trim() || '—'
+      year = parseAno(v[cols?.ano] ?? v[6])
+      color = String(v[cols?.cor] || v[7] || '').trim() || null
+      plateRaw = String(v[cols?.placa] || v[10] || '').trim()
+      saleDate = parseSaleDate(v[cols?.dtVenda] ?? v[3])
+      salePrice = parseMoney(v[cols?.venda] ?? v[23])
+      purchasePrice = parseMoney(v[cols?.compra] ?? v[15])
+      const lucroRaw = v[cols?.lucro] ?? v[26]
+      profit = lucroRaw !== undefined && lucroRaw !== '' ? parseFloat(String(lucroRaw)) : null
+    } else if (layout === 'compacto') {
+      // Código | Dt. Venda | Modelo | Ano | Placa | Cliente | Celular
+      const fullModel = String(v[cols?.modelo] || '').trim() || '—'
+      const parts = fullModel.split(/\s+/).filter(Boolean)
+      brand = parts[0] || fullModel
+      model = parts.length > 1 ? parts.slice(1).join(' ') : '—'
+      year = parseAno(v[cols?.ano])
+      plateRaw = String(v[cols?.placa] || '').trim()
+      saleDate = parseSaleDate(v[cols?.dtVenda])
+    } else {
+      // Relacao: Cod | Cliente | Modelo | Ano | Cor | Placa/Chassi | ... | Dt Venda | ... | Vl Entrada | Vl Saída
+      const fullModel = String(v[cols?.modelo] || '').trim() || '—'
+      const parts = fullModel.split(/\s+/).filter(Boolean)
+      brand = parts[0] || fullModel
+      model = parts.length > 1 ? parts.slice(1).join(' ') : '—'
+      year = parseAno(v[cols?.ano])
+      color = String(v[cols?.cor] || '').trim() || null
+      plateRaw = String(v[cols?.placa] || '').trim()
+      saleDate = parseSaleDate(v[cols?.dtVenda])
+      purchasePrice = parseMoney(v[cols?.vlEntrada])
+      salePrice = parseMoney(v[cols?.vlSaida])
+      profit =
+        salePrice != null && purchasePrice != null && Number.isFinite(salePrice) && Number.isFinite(purchasePrice)
+          ? salePrice - purchasePrice
+          : null
+    }
+
     const plate = plateRaw && plateRaw !== '-' ? plateRaw.slice(0, 20) : null
-    const saleDate = parseSaleDate(v[3])
-    const salePrice = parseMoney(v[23])
-    const purchasePrice = parseMoney(v[15])
-    const lucroRaw = v[26]
-    const profit = lucroRaw !== undefined && lucroRaw !== '' ? parseFloat(String(lucroRaw)) : null
 
     const notesParts = [`Import Revenda Mais`, tag]
     if (fornecedor) notesParts.push(`Fornecedor: ${fornecedor}`)
@@ -134,51 +337,176 @@ async function processFile(absPath, dryRun, users, defaultSellerId) {
 
     try {
       await prisma.$transaction(async (tx) => {
+        const sellerIdTx =
+          layout === 'default' && vendedor
+            ? await ensureSellerUserId(tx, vendedor, sellerId)
+            : sellerId
+
         const phone = '—'
-        let customer = await tx.customer.findFirst({
-          where: {
-            name: { equals: cliente, mode: 'insensitive' },
-            phone,
-          },
-        })
+        let customer =
+          existingV?.customerId != null
+            ? await tx.customer.findUnique({ where: { id: existingV.customerId } })
+            : null
+
         if (!customer) {
+          const inputPhone =
+            layout === 'compacto'
+              ? String(v[cols?.celular] || '').trim()
+              : layout === 'default'
+                ? String(v[cols?.celular] || '').trim()
+                : ''
+          const phoneToUse = inputPhone && inputPhone !== '-' ? inputPhone.slice(0, 30) : phone
+          customer = await tx.customer.findFirst({
+            where: {
+              name: { equals: cliente, mode: 'insensitive' },
+              phone: phoneToUse,
+            },
+          })
+        }
+
+        if (!customer) {
+          const inputPhone =
+            layout === 'compacto'
+              ? String(v[cols?.celular] || '').trim()
+              : layout === 'default'
+                ? String(v[cols?.celular] || '').trim()
+                : ''
+          const phoneToUse = inputPhone && inputPhone !== '-' ? inputPhone.slice(0, 30) : phone
           customer = await tx.customer.create({
             data: {
               name: cliente,
-              phone,
+              phone: phoneToUse,
               marcador: vendedor ? `Vendedor: ${vendedor}` : null,
               status: 'novo',
             },
           })
         }
 
-        const vehicle = await tx.vehicle.create({
+        if (!existingV) {
+          const vehicle = await tx.vehicle.create({
+            data: {
+              brand,
+              model,
+              year,
+              color,
+              plate,
+              customerId: customer.id,
+              status: 'vendido',
+              revendaMaisCodigo: codigo,
+              notes: `${tag} | ${path.basename(absPath)}`,
+            },
+          })
+
+          await tx.sale.create({
+            data: {
+              customerId: customer.id,
+              vehicleId: vehicle.id,
+              sellerId: sellerIdTx,
+              salePrice: salePrice != null ? salePrice : null,
+              purchasePrice: purchasePrice != null ? purchasePrice : null,
+              profit: profit != null && Number.isFinite(profit) ? profit : null,
+              status: 'concluida',
+              date: saleDate,
+              notes: notesParts.join(' | '),
+            },
+          })
+          return
+        }
+
+        const mergedNotes = existingV.notes?.includes(tag)
+          ? existingV.notes
+          : `${tag} | ${path.basename(absPath)} | ${existingV.notes || ''}`.trim()
+
+        await tx.vehicle.update({
+          where: { id: existingV.id },
           data: {
-            brand,
-            model,
-            year,
-            color,
-            plate,
-            customerId: customer.id,
             status: 'vendido',
+            customerId: existingV.customerId || customer.id,
             revendaMaisCodigo: codigo,
-            notes: `${tag} | ${path.basename(absPath)}`,
+            brand: isMissingText(existingV.brand) ? brand : undefined,
+            model: isMissingText(existingV.model) ? model : undefined,
+            year: isBlank(existingV.year) ? year : undefined,
+            color: isBlank(existingV.color) ? color : undefined,
+            plate: isBlank(existingV.plate) ? plate : undefined,
+            notes: mergedNotes,
           },
         })
 
-        await tx.sale.create({
-          data: {
-            customerId: customer.id,
-            vehicleId: vehicle.id,
-            sellerId,
-            salePrice: salePrice != null ? salePrice : null,
-            purchasePrice: purchasePrice != null ? purchasePrice : null,
-            profit: profit != null && Number.isFinite(profit) ? profit : null,
-            status: 'concluida',
-            date: saleDate,
-            notes: notesParts.join(' | '),
+        const existingSale = await tx.sale.findUnique({
+          where: { vehicleId: existingV.id },
+          select: {
+            id: true,
+            salePrice: true,
+            purchasePrice: true,
+            profit: true,
+            date: true,
+            sellerId: true,
+            notes: true,
+            customerId: true,
           },
         })
+
+        if (!existingSale) {
+          await tx.sale.create({
+            data: {
+              customerId: existingV.customerId || customer.id,
+              vehicleId: existingV.id,
+              sellerId: sellerIdTx,
+              salePrice: salePrice != null ? salePrice : null,
+              purchasePrice: purchasePrice != null ? purchasePrice : null,
+              profit: profit != null && Number.isFinite(profit) ? profit : null,
+              status: 'concluida',
+              date: saleDate,
+              notes: notesParts.join(' | '),
+            },
+          })
+        } else {
+          const nextNotes = existingSale.notes?.includes(tag)
+            ? existingSale.notes
+            : `${notesParts.join(' | ')} | ${existingSale.notes || ''}`.trim()
+
+          // Corrige vendedor legado: se estava no usuário fallback e agora temos vendedor real, atualizar.
+          let sellerUpdate = undefined
+          if (IMPORT_FIX_SELLER && vendedor) {
+            const fallbackId = await tx.user
+              .findFirst({
+                where: {
+                  OR: [
+                    { email: 'import.revendamais@local.crm' },
+                    { name: { equals: 'Importação Revenda Mais', mode: 'insensitive' } },
+                  ],
+                },
+                select: { id: true },
+              })
+              .then((x) => x?.id || null)
+            if (fallbackId && existingSale.sellerId === fallbackId && sellerIdTx !== fallbackId) {
+              sellerUpdate = sellerIdTx
+            }
+          }
+
+          await tx.sale.update({
+            where: { id: existingSale.id },
+            data: {
+              customerId: existingSale.customerId || (existingV.customerId || customer.id),
+              sellerId: (sellerUpdate ?? existingSale.sellerId) || sellerIdTx,
+              salePrice: existingSale.salePrice == null ? (salePrice != null ? salePrice : null) : undefined,
+              purchasePrice:
+                existingSale.purchasePrice == null
+                  ? purchasePrice != null
+                    ? purchasePrice
+                    : null
+                  : undefined,
+              profit:
+                existingSale.profit == null
+                  ? profit != null && Number.isFinite(profit)
+                    ? profit
+                    : null
+                  : undefined,
+              date: existingSale.date ? undefined : saleDate,
+              notes: nextNotes,
+            },
+          })
+        }
       })
       stats.imported++
     } catch (e) {

@@ -14,6 +14,17 @@ const { parseSpreadsheetPath, findRowIndex } = require('./lib/revendamaisXml')
 
 const prisma = new PrismaClient()
 
+const IMPORT_MERGE = String(process.env.IMPORT_MERGE || '').trim() === '1'
+
+function isBlank(v) {
+  return v === undefined || v === null || String(v).trim() === ''
+}
+
+function isMissingText(v) {
+  const t = String(v || '').trim()
+  return t === '' || t === '—' || t === '-'
+}
+
 function parseAno(s) {
   const parts = String(s || '')
     .split('/')
@@ -78,11 +89,22 @@ async function processFile(absPath, dryRun, fallbackSellerId) {
       where: {
         OR: [{ revendaMaisCodigo: codigo }, { notes: { contains: tag } }],
       },
-      select: { id: true },
+      select: {
+        id: true,
+        customerId: true,
+        brand: true,
+        model: true,
+        year: true,
+        color: true,
+        plate: true,
+        notes: true,
+      },
     })
     if (existingV) {
-      stats.skippedRow++
-      continue
+      if (!IMPORT_MERGE) {
+        stats.skippedRow++
+        continue
+      }
     }
 
     const cliente = String(v[29] || '').trim()
@@ -122,12 +144,20 @@ async function processFile(absPath, dryRun, fallbackSellerId) {
     try {
       await prisma.$transaction(async (tx) => {
         const phone = '—'
-        let customer = await tx.customer.findFirst({
-          where: {
-            name: { equals: cliente, mode: 'insensitive' },
-            phone,
-          },
-        })
+        let customer =
+          existingV?.customerId != null
+            ? await tx.customer.findUnique({ where: { id: existingV.customerId } })
+            : null
+
+        if (!customer) {
+          customer = await tx.customer.findFirst({
+            where: {
+              name: { equals: cliente, mode: 'insensitive' },
+              phone,
+            },
+          })
+        }
+
         if (!customer) {
           customer = await tx.customer.create({
             data: {
@@ -139,35 +169,125 @@ async function processFile(absPath, dryRun, fallbackSellerId) {
               status: 'novo',
             },
           })
+        } else {
+          // Enriquecimento leve: só preenche se ainda não houver
+          await tx.customer.update({
+            where: { id: customer.id },
+            data: {
+              sexo: customer.sexo ? undefined : sexo || null,
+              city: customer.city ? undefined : cidade || null,
+            },
+          })
         }
 
-        const vehicle = await tx.vehicle.create({
+        const brand80 = brand.slice(0, 80)
+        const model120 = model.slice(0, 120)
+
+        if (!existingV) {
+          const vehicle = await tx.vehicle.create({
+            data: {
+              brand: brand80,
+              model: model120,
+              year,
+              color,
+              plate,
+              customerId: customer.id,
+              status: 'vendido',
+              revendaMaisCodigo: codigo,
+              notes: `${tag} | ${path.basename(absPath)}`,
+            },
+          })
+
+          await tx.sale.create({
+            data: {
+              customerId: customer.id,
+              vehicleId: vehicle.id,
+              sellerId: fallbackSellerId,
+              salePrice: salePrice != null ? salePrice : null,
+              purchasePrice: purchasePrice != null ? purchasePrice : null,
+              profit: profit != null && Number.isFinite(profit) ? profit : null,
+              status: 'concluida',
+              date: saleDate,
+              notes: notesParts.join(' | '),
+            },
+          })
+          return
+        }
+
+        const mergedNotes = existingV.notes?.includes(tag)
+          ? existingV.notes
+          : `${tag} | ${path.basename(absPath)} | ${existingV.notes || ''}`.trim()
+
+        await tx.vehicle.update({
+          where: { id: existingV.id },
           data: {
-            brand: brand.slice(0, 80),
-            model: model.slice(0, 120),
-            year,
-            color,
-            plate,
-            customerId: customer.id,
             status: 'vendido',
+            customerId: existingV.customerId || customer.id,
             revendaMaisCodigo: codigo,
-            notes: `${tag} | ${path.basename(absPath)}`,
+            brand: isMissingText(existingV.brand) ? brand80 : undefined,
+            model: isMissingText(existingV.model) ? model120 : undefined,
+            year: isBlank(existingV.year) ? year : undefined,
+            color: isBlank(existingV.color) ? color : undefined,
+            plate: isBlank(existingV.plate) ? plate : undefined,
+            notes: mergedNotes,
           },
         })
 
-        await tx.sale.create({
-          data: {
-            customerId: customer.id,
-            vehicleId: vehicle.id,
-            sellerId: fallbackSellerId,
-            salePrice: salePrice != null ? salePrice : null,
-            purchasePrice: purchasePrice != null ? purchasePrice : null,
-            profit: profit != null && Number.isFinite(profit) ? profit : null,
-            status: 'concluida',
-            date: saleDate,
-            notes: notesParts.join(' | '),
+        const existingSale = await tx.sale.findUnique({
+          where: { vehicleId: existingV.id },
+          select: {
+            id: true,
+            salePrice: true,
+            purchasePrice: true,
+            profit: true,
+            date: true,
+            sellerId: true,
+            notes: true,
+            customerId: true,
           },
         })
+
+        if (!existingSale) {
+          await tx.sale.create({
+            data: {
+              customerId: existingV.customerId || customer.id,
+              vehicleId: existingV.id,
+              sellerId: fallbackSellerId,
+              salePrice: salePrice != null ? salePrice : null,
+              purchasePrice: purchasePrice != null ? purchasePrice : null,
+              profit: profit != null && Number.isFinite(profit) ? profit : null,
+              status: 'concluida',
+              date: saleDate,
+              notes: notesParts.join(' | '),
+            },
+          })
+        } else {
+          const nextNotes = existingSale.notes?.includes(tag)
+            ? existingSale.notes
+            : `${notesParts.join(' | ')} | ${existingSale.notes || ''}`.trim()
+          await tx.sale.update({
+            where: { id: existingSale.id },
+            data: {
+              customerId: existingSale.customerId || (existingV.customerId || customer.id),
+              sellerId: existingSale.sellerId || fallbackSellerId,
+              salePrice: existingSale.salePrice == null ? (salePrice != null ? salePrice : null) : undefined,
+              purchasePrice:
+                existingSale.purchasePrice == null
+                  ? purchasePrice != null
+                    ? purchasePrice
+                    : null
+                  : undefined,
+              profit:
+                existingSale.profit == null
+                  ? profit != null && Number.isFinite(profit)
+                    ? profit
+                    : null
+                  : undefined,
+              date: existingSale.date ? undefined : saleDate,
+              notes: nextNotes,
+            },
+          })
+        }
       })
       stats.imported++
     } catch (e) {

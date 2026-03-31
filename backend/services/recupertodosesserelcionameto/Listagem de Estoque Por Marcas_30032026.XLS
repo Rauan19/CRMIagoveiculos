@@ -1,0 +1,4649 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?mso-application progid="Excel.Sheet"?>
+
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" xmlns:html="http://www.w3.org/TR/REC-html40">
+	<DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+		<Author/>
+		<Title>Listagem de Estoque Por Marcas</Title>
+		<Description/>
+		<Subject/>
+	</DocumentProperties>
+	<Styles>
+		<Style ss:ID="HyperlinkId" ss:Name="Hyperlink">
+			<Font ss:Color="#0000ff"/>
+		</Style>
+		<Style ss:ID="1">
+			<NumberFormat ss:Format="yyyy-M-d HH:mm:ss AM/PM"/>
+		</Style>
+		<Style ss:ID="38">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="42">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="29">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Bold="1" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="25">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Center"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#ffffff"/>
+			<Interior ss:Color="#000000" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="30">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Bold="1" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="26">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Center"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#ffffff"/>
+			<Interior ss:Color="#000000" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="22">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top"/>
+				<Border ss:Position="Left"/>
+				<Border ss:Position="Right"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="37">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="41">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="35">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="43">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="23">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top"/>
+				<Border ss:Position="Left"/>
+				<Border ss:Position="Right"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="39">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Color="#000000"/>
+			<NumberFormat ss:Format="R$ ###,##0.00"/>
+		</Style>
+		<Style ss:ID="45">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="36">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="44">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="40">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Color="#000000"/>
+			<NumberFormat ss:Format="R$ ###,##0.00"/>
+		</Style>
+		<Style ss:ID="46">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="27">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Bold="1" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="33">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Bold="1" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="47">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Bold="1" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="31">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Bold="1" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="28">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Bold="1" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="34">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Bold="1" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="48">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Bold="1" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="32">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Bold="1" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="20">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top"/>
+				<Border ss:Position="Left"/>
+				<Border ss:Position="Right"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="10.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="21">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top"/>
+				<Border ss:Position="Left"/>
+				<Border ss:Position="Right"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="24">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top"/>
+				<Border ss:Position="Left"/>
+				<Border ss:Position="Right"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="49">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top"/>
+				<Border ss:Position="Left"/>
+				<Border ss:Position="Right"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="10.0" ss:Color="#000000"/>
+		</Style>
+	</Styles>
+	<Names>
+		<NamedRange ss:Name="__bookmark_1" ss:RefersTo="Listagem de Estoque Por Marcas!R1C1:R85C23"/>
+	</Names>
+
+<Worksheet ss:Name="Listagem de Estoque Por Marcas">
+	<ss:Table>
+		<ss:Column ss:Width="61.568" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="61.568" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="30.848" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="30.848" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="30.848" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="20.48" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="20.608" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="20.48" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="20.608" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="30.72" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="41.088" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="41.088" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="41.088" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="41.088" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="8.32" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="16.384" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="30.848" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="61.568" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="51.328" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="41.088" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="41.088" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="41.088" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="41.088" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="1.664" ss:AutoFitWidth="0"/>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="21"/>
+			<Cell ss:Index="2" ss:StyleID="21"/>
+			<Cell ss:Index="3" ss:StyleID="22"/>
+			<Cell ss:Index="4" ss:StyleID="22"/>
+			<Cell ss:Index="5" ss:StyleID="22"/>
+			<Cell ss:Index="6" ss:StyleID="22"/>
+			<Cell ss:Index="7" ss:StyleID="21"/>
+			<Cell ss:Index="8" ss:StyleID="22"/>
+			<Cell ss:Index="9" ss:StyleID="22"/>
+			<Cell ss:Index="10" ss:StyleID="22"/>
+			<Cell ss:Index="11" ss:StyleID="23"/>
+			<Cell ss:Index="12" ss:StyleID="23"/>
+			<Cell ss:Index="13" ss:StyleID="23"/>
+			<Cell ss:Index="14" ss:StyleID="23"/>
+			<Cell ss:Index="15" ss:StyleID="22"/>
+			<Cell ss:Index="16" ss:StyleID="22"/>
+			<Cell ss:Index="17" ss:StyleID="21"/>
+			<Cell ss:Index="18" ss:StyleID="21"/>
+			<Cell ss:Index="19" ss:StyleID="24"/>
+			<Cell ss:Index="20" ss:StyleID="21"/>
+			<Cell ss:Index="21" ss:StyleID="23"/>
+			<Cell ss:Index="22" ss:StyleID="23"/>
+			<Cell ss:Index="23" ss:StyleID="21"/>
+			<Cell ss:Index="24" ss:StyleID="20" ss:MergeDown="84"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="26" ss:MergeAcross="22">
+				<Data ss:Type="String">MARCA: CAOA CHERY</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="28">
+				<Data ss:Type="String">Modelo</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="28">
+				<Data ss:Type="String">Modelo Denatran</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="30">
+				<Data ss:Type="String">Ano</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="30">
+				<Data ss:Type="String">Cor</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="30">
+				<Data ss:Type="String">Placa</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="30">
+				<Data ss:Type="String">KM</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="28">
+				<Data ss:Type="String">Comb.</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="30">
+				<Data ss:Type="String">Cambio</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="30">
+				<Data ss:Type="String">HP/CV</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="30">
+				<Data ss:Type="String">Situação</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="32">
+				<Data ss:Type="String">Vlr. Web</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="32">
+				<Data ss:Type="String">Vlr. Final</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="32">
+				<Data ss:Type="String">Vlr. Oferta</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="32">
+				<Data ss:Type="String">Promoção Web</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="30">
+				<Data ss:Type="String">Dias</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="30">
+				<Data ss:Type="String">Pos.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="28">
+				<Data ss:Type="String">Tipo</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="28">
+				<Data ss:Type="String">Opcionais</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="34">
+				<Data ss:Type="String">Desc. rápido</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="28">
+				<Data ss:Type="String">Marcador</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="32">
+				<Data ss:Type="String">Fipe Entrada</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="32">
+				<Data ss:Type="String">Fipe Atual</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="28">
+				<Data ss:Type="String">Localização</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">TIGGO 2.0</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">CHERY TIGGO 2.0</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2011/2012</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Preto</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">NZV-1E94</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">11.111</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Gasolina</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">135</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">12</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Consignado</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="46"/>
+			<Cell ss:Index="22" ss:StyleID="46"/>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="21"/>
+			<Cell ss:Index="2" ss:StyleID="21"/>
+			<Cell ss:Index="3" ss:StyleID="22"/>
+			<Cell ss:Index="4" ss:StyleID="22"/>
+			<Cell ss:Index="5" ss:StyleID="22"/>
+			<Cell ss:Index="6" ss:StyleID="22"/>
+			<Cell ss:Index="7" ss:StyleID="21"/>
+			<Cell ss:Index="8" ss:StyleID="22"/>
+			<Cell ss:Index="9" ss:StyleID="22"/>
+			<Cell ss:Index="10" ss:StyleID="22"/>
+			<Cell ss:Index="11" ss:StyleID="23"/>
+			<Cell ss:Index="12" ss:StyleID="23"/>
+			<Cell ss:Index="13" ss:StyleID="23"/>
+			<Cell ss:Index="14" ss:StyleID="23"/>
+			<Cell ss:Index="15" ss:StyleID="22"/>
+			<Cell ss:Index="16" ss:StyleID="22"/>
+			<Cell ss:Index="17" ss:StyleID="21"/>
+			<Cell ss:Index="18" ss:StyleID="21"/>
+			<Cell ss:Index="19" ss:StyleID="24"/>
+			<Cell ss:Index="20" ss:StyleID="21"/>
+			<Cell ss:Index="21" ss:StyleID="23"/>
+			<Cell ss:Index="22" ss:StyleID="23"/>
+			<Cell ss:Index="23" ss:StyleID="21"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="26" ss:MergeAcross="22">
+				<Data ss:Type="String">MARCA: CHEVROLET</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="28">
+				<Data ss:Type="String">Modelo</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="28">
+				<Data ss:Type="String">Modelo Denatran</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="30">
+				<Data ss:Type="String">Ano</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="30">
+				<Data ss:Type="String">Cor</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="30">
+				<Data ss:Type="String">Placa</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="30">
+				<Data ss:Type="String">KM</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="28">
+				<Data ss:Type="String">Comb.</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="30">
+				<Data ss:Type="String">Cambio</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="30">
+				<Data ss:Type="String">HP/CV</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="30">
+				<Data ss:Type="String">Situação</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="32">
+				<Data ss:Type="String">Vlr. Web</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="32">
+				<Data ss:Type="String">Vlr. Final</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="32">
+				<Data ss:Type="String">Vlr. Oferta</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="32">
+				<Data ss:Type="String">Promoção Web</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="30">
+				<Data ss:Type="String">Dias</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="30">
+				<Data ss:Type="String">Pos.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="28">
+				<Data ss:Type="String">Tipo</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="28">
+				<Data ss:Type="String">Opcionais</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="34">
+				<Data ss:Type="String">Desc. rápido</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="28">
+				<Data ss:Type="String">Marcador</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="32">
+				<Data ss:Type="String">Fipe Entrada</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="32">
+				<Data ss:Type="String">Fipe Atual</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="28">
+				<Data ss:Type="String">Localização</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">CELTA 1.0L LT</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">CELTA 1.0L LT</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2013/2014</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Prata</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">KKD-9I16</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">201.000</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Flex</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">78</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">68</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Consignado</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="40">
+				<Data ss:Type="Number">32761.0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="40">
+				<Data ss:Type="Number">33018.0</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">CORSA WIND</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36"/>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">1995/1996</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Branco</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">JLA-2E77</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">111.111</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Gasolina</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">50</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">15</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Próprio</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="40">
+				<Data ss:Type="Number">10057.0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="40">
+				<Data ss:Type="Number">10057.0</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">ONIX 1.0MT LT</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">ONIX 1.0MT LT</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2016/2016</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Branco</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">PJZ-0D96</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">99.160</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Flex</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">80</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">18</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Consignado</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="40">
+				<Data ss:Type="Number">44689.0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="40">
+				<Data ss:Type="Number">44689.0</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">ONIX 10MT LT2</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36"/>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2020/2021</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Branco</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">RFS-8G42</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">11.111</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Flex</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">82</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">14</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Próprio</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="40">
+				<Data ss:Type="Number">60552.0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="40">
+				<Data ss:Type="Number">60552.0</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">ONIX 1.4AT LTZ</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">ONIX 1.4AT LTZ</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2017/2018</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Prata</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">PKX-5B56</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">111</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Flex</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">106</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">69000.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">37</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Consignado</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="40">
+				<Data ss:Type="Number">59478.0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="40">
+				<Data ss:Type="Number">59180.0</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">SPIN 1.8L AT LT ADV</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">SPIN 1.8L AT LT ADV</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2014/2015</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Branco</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">OZK-8C68</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">11.111</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Flex</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Automático</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">108</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">12</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Consignado</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="40">
+				<Data ss:Type="Number">46809.0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="40">
+				<Data ss:Type="Number">46809.0</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="21"/>
+			<Cell ss:Index="2" ss:StyleID="21"/>
+			<Cell ss:Index="3" ss:StyleID="22"/>
+			<Cell ss:Index="4" ss:StyleID="22"/>
+			<Cell ss:Index="5" ss:StyleID="22"/>
+			<Cell ss:Index="6" ss:StyleID="22"/>
+			<Cell ss:Index="7" ss:StyleID="21"/>
+			<Cell ss:Index="8" ss:StyleID="22"/>
+			<Cell ss:Index="9" ss:StyleID="22"/>
+			<Cell ss:Index="10" ss:StyleID="22"/>
+			<Cell ss:Index="11" ss:StyleID="23"/>
+			<Cell ss:Index="12" ss:StyleID="23"/>
+			<Cell ss:Index="13" ss:StyleID="23"/>
+			<Cell ss:Index="14" ss:StyleID="23"/>
+			<Cell ss:Index="15" ss:StyleID="22"/>
+			<Cell ss:Index="16" ss:StyleID="22"/>
+			<Cell ss:Index="17" ss:StyleID="21"/>
+			<Cell ss:Index="18" ss:StyleID="21"/>
+			<Cell ss:Index="19" ss:StyleID="24"/>
+			<Cell ss:Index="20" ss:StyleID="21"/>
+			<Cell ss:Index="21" ss:StyleID="23"/>
+			<Cell ss:Index="22" ss:StyleID="23"/>
+			<Cell ss:Index="23" ss:StyleID="21"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="26" ss:MergeAcross="22">
+				<Data ss:Type="String">MARCA: FIAT</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="28">
+				<Data ss:Type="String">Modelo</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="28">
+				<Data ss:Type="String">Modelo Denatran</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="30">
+				<Data ss:Type="String">Ano</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="30">
+				<Data ss:Type="String">Cor</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="30">
+				<Data ss:Type="String">Placa</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="30">
+				<Data ss:Type="String">KM</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="28">
+				<Data ss:Type="String">Comb.</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="30">
+				<Data ss:Type="String">Cambio</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="30">
+				<Data ss:Type="String">HP/CV</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="30">
+				<Data ss:Type="String">Situação</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="32">
+				<Data ss:Type="String">Vlr. Web</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="32">
+				<Data ss:Type="String">Vlr. Final</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="32">
+				<Data ss:Type="String">Vlr. Oferta</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="32">
+				<Data ss:Type="String">Promoção Web</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="30">
+				<Data ss:Type="String">Dias</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="30">
+				<Data ss:Type="String">Pos.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="28">
+				<Data ss:Type="String">Tipo</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="28">
+				<Data ss:Type="String">Opcionais</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="34">
+				<Data ss:Type="String">Desc. rápido</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="28">
+				<Data ss:Type="String">Marcador</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="32">
+				<Data ss:Type="String">Fipe Entrada</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="32">
+				<Data ss:Type="String">Fipe Atual</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="28">
+				<Data ss:Type="String">Localização</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">FIORINO HD WK E</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">FIORINO HD WK E</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2019/2020</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Branco</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">FXL-3J72</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">201.000</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Flex</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">88</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">4</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Consignado</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="40">
+				<Data ss:Type="Number">68689.0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="40">
+				<Data ss:Type="Number">68689.0</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">PULSE DRIVE AT</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">PULSE DRIVE AT</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2023/2023</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Prata</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">SJK-3H53</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">50.300</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Flex</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Automático</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">107</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">90</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Consignado</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="40">
+				<Data ss:Type="Number">89474.0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="40">
+				<Data ss:Type="Number">89154.0</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">STRADA HD WK CC E</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2017/2018</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Prata</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">QND-9F23</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">48.734</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Flex</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">56900.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">52900.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">398</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Consignado</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="40">
+				<Data ss:Type="Number">54309.0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="40">
+				<Data ss:Type="Number">52537.0</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">TORO RANCH AT9 4X4</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">TORO RANCH AT9 4X4</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2024/2025</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Cinza</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">SKD-0E36</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">1.111</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Diesel</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Automático</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">170</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Cadastrado</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36"/>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="46"/>
+			<Cell ss:Index="22" ss:StyleID="40">
+				<Data ss:Type="Number">172480.0</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">TORO VOLCANO AT D4</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">TORO VOLCANO AT D4</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2018/2018</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Branco</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">PKV-9A24</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">162.000</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Diesel</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Automático</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">170</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">97900.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">89900.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">38</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Próprio</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="40">
+				<Data ss:Type="Number">95978.0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="40">
+				<Data ss:Type="Number">95863.0</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="21"/>
+			<Cell ss:Index="2" ss:StyleID="21"/>
+			<Cell ss:Index="3" ss:StyleID="22"/>
+			<Cell ss:Index="4" ss:StyleID="22"/>
+			<Cell ss:Index="5" ss:StyleID="22"/>
+			<Cell ss:Index="6" ss:StyleID="22"/>
+			<Cell ss:Index="7" ss:StyleID="21"/>
+			<Cell ss:Index="8" ss:StyleID="22"/>
+			<Cell ss:Index="9" ss:StyleID="22"/>
+			<Cell ss:Index="10" ss:StyleID="22"/>
+			<Cell ss:Index="11" ss:StyleID="23"/>
+			<Cell ss:Index="12" ss:StyleID="23"/>
+			<Cell ss:Index="13" ss:StyleID="23"/>
+			<Cell ss:Index="14" ss:StyleID="23"/>
+			<Cell ss:Index="15" ss:StyleID="22"/>
+			<Cell ss:Index="16" ss:StyleID="22"/>
+			<Cell ss:Index="17" ss:StyleID="21"/>
+			<Cell ss:Index="18" ss:StyleID="21"/>
+			<Cell ss:Index="19" ss:StyleID="24"/>
+			<Cell ss:Index="20" ss:StyleID="21"/>
+			<Cell ss:Index="21" ss:StyleID="23"/>
+			<Cell ss:Index="22" ss:StyleID="23"/>
+			<Cell ss:Index="23" ss:StyleID="21"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="26" ss:MergeAcross="22">
+				<Data ss:Type="String">MARCA: FORD</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="28">
+				<Data ss:Type="String">Modelo</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="28">
+				<Data ss:Type="String">Modelo Denatran</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="30">
+				<Data ss:Type="String">Ano</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="30">
+				<Data ss:Type="String">Cor</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="30">
+				<Data ss:Type="String">Placa</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="30">
+				<Data ss:Type="String">KM</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="28">
+				<Data ss:Type="String">Comb.</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="30">
+				<Data ss:Type="String">Cambio</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="30">
+				<Data ss:Type="String">HP/CV</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="30">
+				<Data ss:Type="String">Situação</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="32">
+				<Data ss:Type="String">Vlr. Web</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="32">
+				<Data ss:Type="String">Vlr. Final</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="32">
+				<Data ss:Type="String">Vlr. Oferta</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="32">
+				<Data ss:Type="String">Promoção Web</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="30">
+				<Data ss:Type="String">Dias</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="30">
+				<Data ss:Type="String">Pos.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="28">
+				<Data ss:Type="String">Tipo</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="28">
+				<Data ss:Type="String">Opcionais</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="34">
+				<Data ss:Type="String">Desc. rápido</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="28">
+				<Data ss:Type="String">Marcador</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="32">
+				<Data ss:Type="String">Fipe Entrada</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="32">
+				<Data ss:Type="String">Fipe Atual</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="28">
+				<Data ss:Type="String">Localização</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">FOCUS 2L FC FLEX</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">FORD FOCUS 2L FC FLEX</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2012/2013</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Preto</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">IUD-2H19</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">199.000</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Flex</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Automático</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">148</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">105</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Consignado</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="40">
+				<Data ss:Type="Number">41254.0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="40">
+				<Data ss:Type="Number">41121.0</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">KA FLEX</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36"/>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2009/2009</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Preto</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">JSC-5363</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">106.000</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Flex</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">73</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">13900.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">13900.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">13900.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">20</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Próprio</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="40">
+				<Data ss:Type="Number">18644.0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="40">
+				<Data ss:Type="Number">18644.0</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">KA SE 1.0 HA C</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">KA SE 1.0 HA C</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2020/2020</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Cinza</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">RFA-2E39</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">167.000</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Flex</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">85</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">26</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Consignado</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="40">
+				<Data ss:Type="Number">48550.0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="40">
+				<Data ss:Type="Number">48550.0</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">KA SE PLUS AT1.5HAC</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">KA SE PLUS AT1.5HAC</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2019/2020</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Branco</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">BDT-3C46</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">11.111</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Flex</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Automático</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">136</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">58900.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">25</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Próprio</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="40">
+				<Data ss:Type="Number">57522.0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="40">
+				<Data ss:Type="Number">57522.0</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="21"/>
+			<Cell ss:Index="2" ss:StyleID="21"/>
+			<Cell ss:Index="3" ss:StyleID="22"/>
+			<Cell ss:Index="4" ss:StyleID="22"/>
+			<Cell ss:Index="5" ss:StyleID="22"/>
+			<Cell ss:Index="6" ss:StyleID="22"/>
+			<Cell ss:Index="7" ss:StyleID="21"/>
+			<Cell ss:Index="8" ss:StyleID="22"/>
+			<Cell ss:Index="9" ss:StyleID="22"/>
+			<Cell ss:Index="10" ss:StyleID="22"/>
+			<Cell ss:Index="11" ss:StyleID="23"/>
+			<Cell ss:Index="12" ss:StyleID="23"/>
+			<Cell ss:Index="13" ss:StyleID="23"/>
+			<Cell ss:Index="14" ss:StyleID="23"/>
+			<Cell ss:Index="15" ss:StyleID="22"/>
+			<Cell ss:Index="16" ss:StyleID="22"/>
+			<Cell ss:Index="17" ss:StyleID="21"/>
+			<Cell ss:Index="18" ss:StyleID="21"/>
+			<Cell ss:Index="19" ss:StyleID="24"/>
+			<Cell ss:Index="20" ss:StyleID="21"/>
+			<Cell ss:Index="21" ss:StyleID="23"/>
+			<Cell ss:Index="22" ss:StyleID="23"/>
+			<Cell ss:Index="23" ss:StyleID="21"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="26" ss:MergeAcross="22">
+				<Data ss:Type="String">MARCA: HONDA</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="28">
+				<Data ss:Type="String">Modelo</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="28">
+				<Data ss:Type="String">Modelo Denatran</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="30">
+				<Data ss:Type="String">Ano</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="30">
+				<Data ss:Type="String">Cor</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="30">
+				<Data ss:Type="String">Placa</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="30">
+				<Data ss:Type="String">KM</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="28">
+				<Data ss:Type="String">Comb.</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="30">
+				<Data ss:Type="String">Cambio</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="30">
+				<Data ss:Type="String">HP/CV</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="30">
+				<Data ss:Type="String">Situação</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="32">
+				<Data ss:Type="String">Vlr. Web</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="32">
+				<Data ss:Type="String">Vlr. Final</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="32">
+				<Data ss:Type="String">Vlr. Oferta</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="32">
+				<Data ss:Type="String">Promoção Web</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="30">
+				<Data ss:Type="String">Dias</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="30">
+				<Data ss:Type="String">Pos.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="28">
+				<Data ss:Type="String">Tipo</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="28">
+				<Data ss:Type="String">Opcionais</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="34">
+				<Data ss:Type="String">Desc. rápido</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="28">
+				<Data ss:Type="String">Marcador</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="32">
+				<Data ss:Type="String">Fipe Entrada</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="32">
+				<Data ss:Type="String">Fipe Atual</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="28">
+				<Data ss:Type="String">Localização</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">BIZ 125</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2024/2024</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Vermelho</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">222-2222</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">1.111</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Flex</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">17900.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">32</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Consignado</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="46"/>
+			<Cell ss:Index="22" ss:StyleID="46"/>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">CB250F TWISTER CBS</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">CB250F TWISTER CBS</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2022/2022</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Azul</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">RPJ-3D08</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">5.555</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Flex</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">0</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">22900.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">66</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Consignado</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="46"/>
+			<Cell ss:Index="22" ss:StyleID="46"/>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">CB300F TWISTER ABS</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">CB300F TWISTER ABS</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2024/2024</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Vermelho</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">SJS-1F79</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">6.248</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Flex</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">23</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Próprio</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="46"/>
+			<Cell ss:Index="22" ss:StyleID="46"/>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">CG 125 FAN</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">CG 125 FAN</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2006/2006</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Preto</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">JQJ-6173</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">1.111</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Gasolina</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">0</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Pré-Venda</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">7900.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">4</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Consignado</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="46"/>
+			<Cell ss:Index="22" ss:StyleID="46"/>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">CG 160 FAN</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36"/>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2024/2024</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Preto</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">SWX-2H38</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">28.000</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Flex</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">0</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">2</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Próprio</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="46"/>
+			<Cell ss:Index="22" ss:StyleID="46"/>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">CG 160 FAN</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36"/>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2023/2023</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Preto</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">RPU-7H09</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">1.111</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Flex</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">0</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">9</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Próprio</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="46"/>
+			<Cell ss:Index="22" ss:StyleID="46"/>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">CG 160 TITAN EX</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">CG 160 TITAN EX</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2015/2016</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Vermelho</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">PJO-0I47</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">128.000</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Flex</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">0</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">21</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Próprio</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="46"/>
+			<Cell ss:Index="22" ss:StyleID="46"/>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">NXR 160 BROS</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36"/>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2018/2018</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Preto</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">PKX-4390</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">63.000</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Gasolina</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">0</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">23</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Próprio</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="40">
+				<Data ss:Type="Number">15324.0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="40">
+				<Data ss:Type="Number">15324.0</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">NXR160 BROS ESDD</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">NXR160 BROS ESDD</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2022/2023</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Vermelho</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">RPP-1D55</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">9.800</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Flex</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">22900.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">12</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Consignado</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="40">
+				<Data ss:Type="Number">20318.0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="40">
+				<Data ss:Type="Number">20318.0</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">NXR160 BROS ESDD</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">NXR160 BROS ESDD</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2021/2022</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Preto</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">RDL-2F52</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">111</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Flex</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">0</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">70</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Consignado</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="46"/>
+			<Cell ss:Index="22" ss:StyleID="46"/>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">POP 110I</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">POP 110I</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2023/2024</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Vermelho</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">SJQ-7J26</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">17.216</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Gasolina</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">0</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">20</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Consignado</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="46"/>
+			<Cell ss:Index="22" ss:StyleID="46"/>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">POP 110I</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">POP 110I</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2024/2024</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Vermelho</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">SJZ-5F56</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">3.700</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Gasolina</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">12900.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">25</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Consignado</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="40">
+				<Data ss:Type="Number">12131.0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="40">
+				<Data ss:Type="Number">12131.0</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">POP 110I ES</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36"/>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2024/2025</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Vermelho</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">SKE-8D06</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">14.700</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Gasolina</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Nenhum</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">0</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">13900.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">13900.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">13900.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">11</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Próprio</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="46"/>
+			<Cell ss:Index="22" ss:StyleID="46"/>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">POP 110I ES</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36"/>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2025/2026</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Branco</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">THA-7F34</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">6.000</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Gasolina</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">000</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">14500.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">14500.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">14500.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">14</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Próprio</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="40">
+				<Data ss:Type="Number">11872.0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="40">
+				<Data ss:Type="Number">11872.0</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">XRE 300</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36"/>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2022/2023</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Vermelho</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">RPR-0J83</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">29.000</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Flex</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">0</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">32900.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">32900.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">32900.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">3</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Próprio</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="40">
+				<Data ss:Type="Number">31498.0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="40">
+				<Data ss:Type="Number">31498.0</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">XRE 300 ABS</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">XRE 300 ABS</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2023/2023</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Vermelho</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">RPS-1J09</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">24.000</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Flex</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">0</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">47</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Consignado</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="40">
+				<Data ss:Type="Number">30240.0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="40">
+				<Data ss:Type="Number">31145.0</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">XRE 300 SAHARA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36"/>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2025/2026</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Cinza</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">THH-5H79</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">1.600</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Flex</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Nenhum</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">38900.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">38900.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">38900.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">24</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Próprio</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="46"/>
+			<Cell ss:Index="22" ss:StyleID="46"/>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">XRE 300 SAHARA RAL</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">XRE 300 SAHARA RAL</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2025/2025</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Vermelho</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">SKQ-3C86</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">1.111</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Flex</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">36900.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">18</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Consignado</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="46"/>
+			<Cell ss:Index="22" ss:StyleID="46"/>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="21"/>
+			<Cell ss:Index="2" ss:StyleID="21"/>
+			<Cell ss:Index="3" ss:StyleID="22"/>
+			<Cell ss:Index="4" ss:StyleID="22"/>
+			<Cell ss:Index="5" ss:StyleID="22"/>
+			<Cell ss:Index="6" ss:StyleID="22"/>
+			<Cell ss:Index="7" ss:StyleID="21"/>
+			<Cell ss:Index="8" ss:StyleID="22"/>
+			<Cell ss:Index="9" ss:StyleID="22"/>
+			<Cell ss:Index="10" ss:StyleID="22"/>
+			<Cell ss:Index="11" ss:StyleID="23"/>
+			<Cell ss:Index="12" ss:StyleID="23"/>
+			<Cell ss:Index="13" ss:StyleID="23"/>
+			<Cell ss:Index="14" ss:StyleID="23"/>
+			<Cell ss:Index="15" ss:StyleID="22"/>
+			<Cell ss:Index="16" ss:StyleID="22"/>
+			<Cell ss:Index="17" ss:StyleID="21"/>
+			<Cell ss:Index="18" ss:StyleID="21"/>
+			<Cell ss:Index="19" ss:StyleID="24"/>
+			<Cell ss:Index="20" ss:StyleID="21"/>
+			<Cell ss:Index="21" ss:StyleID="23"/>
+			<Cell ss:Index="22" ss:StyleID="23"/>
+			<Cell ss:Index="23" ss:StyleID="21"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="26" ss:MergeAcross="22">
+				<Data ss:Type="String">MARCA: HYUNDAI</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="28">
+				<Data ss:Type="String">Modelo</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="28">
+				<Data ss:Type="String">Modelo Denatran</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="30">
+				<Data ss:Type="String">Ano</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="30">
+				<Data ss:Type="String">Cor</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="30">
+				<Data ss:Type="String">Placa</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="30">
+				<Data ss:Type="String">KM</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="28">
+				<Data ss:Type="String">Comb.</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="30">
+				<Data ss:Type="String">Cambio</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="30">
+				<Data ss:Type="String">HP/CV</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="30">
+				<Data ss:Type="String">Situação</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="32">
+				<Data ss:Type="String">Vlr. Web</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="32">
+				<Data ss:Type="String">Vlr. Final</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="32">
+				<Data ss:Type="String">Vlr. Oferta</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="32">
+				<Data ss:Type="String">Promoção Web</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="30">
+				<Data ss:Type="String">Dias</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="30">
+				<Data ss:Type="String">Pos.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="28">
+				<Data ss:Type="String">Tipo</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="28">
+				<Data ss:Type="String">Opcionais</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="34">
+				<Data ss:Type="String">Desc. rápido</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="28">
+				<Data ss:Type="String">Marcador</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="32">
+				<Data ss:Type="String">Fipe Entrada</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="32">
+				<Data ss:Type="String">Fipe Atual</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="28">
+				<Data ss:Type="String">Localização</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">HB20 1,0 TA EVOLUTI</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">HYUNDAHB2010TA PLATINU</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2022/2022</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Cinza</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">GHE-8H05</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">70.059</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Flex</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Automático</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">120</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">82900.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">81900.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Consignado</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="40">
+				<Data ss:Type="Number">74754.0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="40">
+				<Data ss:Type="Number">74754.0</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="21"/>
+			<Cell ss:Index="2" ss:StyleID="21"/>
+			<Cell ss:Index="3" ss:StyleID="22"/>
+			<Cell ss:Index="4" ss:StyleID="22"/>
+			<Cell ss:Index="5" ss:StyleID="22"/>
+			<Cell ss:Index="6" ss:StyleID="22"/>
+			<Cell ss:Index="7" ss:StyleID="21"/>
+			<Cell ss:Index="8" ss:StyleID="22"/>
+			<Cell ss:Index="9" ss:StyleID="22"/>
+			<Cell ss:Index="10" ss:StyleID="22"/>
+			<Cell ss:Index="11" ss:StyleID="23"/>
+			<Cell ss:Index="12" ss:StyleID="23"/>
+			<Cell ss:Index="13" ss:StyleID="23"/>
+			<Cell ss:Index="14" ss:StyleID="23"/>
+			<Cell ss:Index="15" ss:StyleID="22"/>
+			<Cell ss:Index="16" ss:StyleID="22"/>
+			<Cell ss:Index="17" ss:StyleID="21"/>
+			<Cell ss:Index="18" ss:StyleID="21"/>
+			<Cell ss:Index="19" ss:StyleID="24"/>
+			<Cell ss:Index="20" ss:StyleID="21"/>
+			<Cell ss:Index="21" ss:StyleID="23"/>
+			<Cell ss:Index="22" ss:StyleID="23"/>
+			<Cell ss:Index="23" ss:StyleID="21"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="26" ss:MergeAcross="22">
+				<Data ss:Type="String">MARCA: LIFAN</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="28">
+				<Data ss:Type="String">Modelo</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="28">
+				<Data ss:Type="String">Modelo Denatran</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="30">
+				<Data ss:Type="String">Ano</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="30">
+				<Data ss:Type="String">Cor</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="30">
+				<Data ss:Type="String">Placa</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="30">
+				<Data ss:Type="String">KM</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="28">
+				<Data ss:Type="String">Comb.</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="30">
+				<Data ss:Type="String">Cambio</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="30">
+				<Data ss:Type="String">HP/CV</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="30">
+				<Data ss:Type="String">Situação</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="32">
+				<Data ss:Type="String">Vlr. Web</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="32">
+				<Data ss:Type="String">Vlr. Final</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="32">
+				<Data ss:Type="String">Vlr. Oferta</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="32">
+				<Data ss:Type="String">Promoção Web</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="30">
+				<Data ss:Type="String">Dias</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="30">
+				<Data ss:Type="String">Pos.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="28">
+				<Data ss:Type="String">Tipo</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="28">
+				<Data ss:Type="String">Opcionais</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="34">
+				<Data ss:Type="String">Desc. rápido</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="28">
+				<Data ss:Type="String">Marcador</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="32">
+				<Data ss:Type="String">Fipe Entrada</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="32">
+				<Data ss:Type="String">Fipe Atual</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="28">
+				<Data ss:Type="String">Localização</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">FOSION PU 1.3L</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">LIFAN FOSION PU 1.3L</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2015/2016</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Branco</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">PJL-8H45</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">250.000</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Gasolina</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">85</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">102900.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">111</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Consignado</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="46"/>
+			<Cell ss:Index="22" ss:StyleID="46"/>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">X60 1.8L VVT</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36"/>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2013/2014</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Branco</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">OUY-8488</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">11.111</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Gasolina</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">128</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">5</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Próprio</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="40">
+				<Data ss:Type="Number">32336.0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="40">
+				<Data ss:Type="Number">32336.0</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="21"/>
+			<Cell ss:Index="2" ss:StyleID="21"/>
+			<Cell ss:Index="3" ss:StyleID="22"/>
+			<Cell ss:Index="4" ss:StyleID="22"/>
+			<Cell ss:Index="5" ss:StyleID="22"/>
+			<Cell ss:Index="6" ss:StyleID="22"/>
+			<Cell ss:Index="7" ss:StyleID="21"/>
+			<Cell ss:Index="8" ss:StyleID="22"/>
+			<Cell ss:Index="9" ss:StyleID="22"/>
+			<Cell ss:Index="10" ss:StyleID="22"/>
+			<Cell ss:Index="11" ss:StyleID="23"/>
+			<Cell ss:Index="12" ss:StyleID="23"/>
+			<Cell ss:Index="13" ss:StyleID="23"/>
+			<Cell ss:Index="14" ss:StyleID="23"/>
+			<Cell ss:Index="15" ss:StyleID="22"/>
+			<Cell ss:Index="16" ss:StyleID="22"/>
+			<Cell ss:Index="17" ss:StyleID="21"/>
+			<Cell ss:Index="18" ss:StyleID="21"/>
+			<Cell ss:Index="19" ss:StyleID="24"/>
+			<Cell ss:Index="20" ss:StyleID="21"/>
+			<Cell ss:Index="21" ss:StyleID="23"/>
+			<Cell ss:Index="22" ss:StyleID="23"/>
+			<Cell ss:Index="23" ss:StyleID="21"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="26" ss:MergeAcross="22">
+				<Data ss:Type="String">MARCA: MERCEDES-BENZ</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="28">
+				<Data ss:Type="String">Modelo</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="28">
+				<Data ss:Type="String">Modelo Denatran</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="30">
+				<Data ss:Type="String">Ano</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="30">
+				<Data ss:Type="String">Cor</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="30">
+				<Data ss:Type="String">Placa</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="30">
+				<Data ss:Type="String">KM</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="28">
+				<Data ss:Type="String">Comb.</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="30">
+				<Data ss:Type="String">Cambio</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="30">
+				<Data ss:Type="String">HP/CV</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="30">
+				<Data ss:Type="String">Situação</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="32">
+				<Data ss:Type="String">Vlr. Web</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="32">
+				<Data ss:Type="String">Vlr. Final</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="32">
+				<Data ss:Type="String">Vlr. Oferta</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="32">
+				<Data ss:Type="String">Promoção Web</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="30">
+				<Data ss:Type="String">Dias</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="30">
+				<Data ss:Type="String">Pos.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="28">
+				<Data ss:Type="String">Tipo</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="28">
+				<Data ss:Type="String">Opcionais</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="34">
+				<Data ss:Type="String">Desc. rápido</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="28">
+				<Data ss:Type="String">Marcador</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="32">
+				<Data ss:Type="String">Fipe Entrada</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="32">
+				<Data ss:Type="String">Fipe Atual</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="28">
+				<Data ss:Type="String">Localização</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">313CDI SPRINTERM</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">M.BENZ313CDI SPRINTERM</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2007/2007</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Prata</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">JPY-9E12</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">11.111</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Diesel</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">129</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">110</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Consignado</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="46"/>
+			<Cell ss:Index="22" ss:StyleID="46"/>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="21"/>
+			<Cell ss:Index="2" ss:StyleID="21"/>
+			<Cell ss:Index="3" ss:StyleID="22"/>
+			<Cell ss:Index="4" ss:StyleID="22"/>
+			<Cell ss:Index="5" ss:StyleID="22"/>
+			<Cell ss:Index="6" ss:StyleID="22"/>
+			<Cell ss:Index="7" ss:StyleID="21"/>
+			<Cell ss:Index="8" ss:StyleID="22"/>
+			<Cell ss:Index="9" ss:StyleID="22"/>
+			<Cell ss:Index="10" ss:StyleID="22"/>
+			<Cell ss:Index="11" ss:StyleID="23"/>
+			<Cell ss:Index="12" ss:StyleID="23"/>
+			<Cell ss:Index="13" ss:StyleID="23"/>
+			<Cell ss:Index="14" ss:StyleID="23"/>
+			<Cell ss:Index="15" ss:StyleID="22"/>
+			<Cell ss:Index="16" ss:StyleID="22"/>
+			<Cell ss:Index="17" ss:StyleID="21"/>
+			<Cell ss:Index="18" ss:StyleID="21"/>
+			<Cell ss:Index="19" ss:StyleID="24"/>
+			<Cell ss:Index="20" ss:StyleID="21"/>
+			<Cell ss:Index="21" ss:StyleID="23"/>
+			<Cell ss:Index="22" ss:StyleID="23"/>
+			<Cell ss:Index="23" ss:StyleID="21"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="26" ss:MergeAcross="22">
+				<Data ss:Type="String">MARCA: RENAULT</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="28">
+				<Data ss:Type="String">Modelo</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="28">
+				<Data ss:Type="String">Modelo Denatran</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="30">
+				<Data ss:Type="String">Ano</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="30">
+				<Data ss:Type="String">Cor</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="30">
+				<Data ss:Type="String">Placa</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="30">
+				<Data ss:Type="String">KM</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="28">
+				<Data ss:Type="String">Comb.</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="30">
+				<Data ss:Type="String">Cambio</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="30">
+				<Data ss:Type="String">HP/CV</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="30">
+				<Data ss:Type="String">Situação</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="32">
+				<Data ss:Type="String">Vlr. Web</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="32">
+				<Data ss:Type="String">Vlr. Final</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="32">
+				<Data ss:Type="String">Vlr. Oferta</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="32">
+				<Data ss:Type="String">Promoção Web</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="30">
+				<Data ss:Type="String">Dias</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="30">
+				<Data ss:Type="String">Pos.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="28">
+				<Data ss:Type="String">Tipo</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="28">
+				<Data ss:Type="String">Opcionais</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="34">
+				<Data ss:Type="String">Desc. rápido</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="28">
+				<Data ss:Type="String">Marcador</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="32">
+				<Data ss:Type="String">Fipe Entrada</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="32">
+				<Data ss:Type="String">Fipe Atual</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="28">
+				<Data ss:Type="String">Localização</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">LOGAN ZEN10MT</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">LOGAN ZEN10MT</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2020/2021</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Branco</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">QXO-1D83</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">1.111</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Flex</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">82</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">52900.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">81</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Consignado</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="40">
+				<Data ss:Type="Number">47327.0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="40">
+				<Data ss:Type="Number">44810.0</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">SYMBOL EX1616V</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">RENAULT SYMBOL EX1616V</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2011/2011</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Prata</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">NYZ-5B29</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">220.000</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Flex</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">115</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">31</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Consignado</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="40">
+				<Data ss:Type="Number">22646.0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="40">
+				<Data ss:Type="Number">22532.0</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="21"/>
+			<Cell ss:Index="2" ss:StyleID="21"/>
+			<Cell ss:Index="3" ss:StyleID="22"/>
+			<Cell ss:Index="4" ss:StyleID="22"/>
+			<Cell ss:Index="5" ss:StyleID="22"/>
+			<Cell ss:Index="6" ss:StyleID="22"/>
+			<Cell ss:Index="7" ss:StyleID="21"/>
+			<Cell ss:Index="8" ss:StyleID="22"/>
+			<Cell ss:Index="9" ss:StyleID="22"/>
+			<Cell ss:Index="10" ss:StyleID="22"/>
+			<Cell ss:Index="11" ss:StyleID="23"/>
+			<Cell ss:Index="12" ss:StyleID="23"/>
+			<Cell ss:Index="13" ss:StyleID="23"/>
+			<Cell ss:Index="14" ss:StyleID="23"/>
+			<Cell ss:Index="15" ss:StyleID="22"/>
+			<Cell ss:Index="16" ss:StyleID="22"/>
+			<Cell ss:Index="17" ss:StyleID="21"/>
+			<Cell ss:Index="18" ss:StyleID="21"/>
+			<Cell ss:Index="19" ss:StyleID="24"/>
+			<Cell ss:Index="20" ss:StyleID="21"/>
+			<Cell ss:Index="21" ss:StyleID="23"/>
+			<Cell ss:Index="22" ss:StyleID="23"/>
+			<Cell ss:Index="23" ss:StyleID="21"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="26" ss:MergeAcross="22">
+				<Data ss:Type="String">MARCA: TOYOTA</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="28">
+				<Data ss:Type="String">Modelo</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="28">
+				<Data ss:Type="String">Modelo Denatran</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="30">
+				<Data ss:Type="String">Ano</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="30">
+				<Data ss:Type="String">Cor</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="30">
+				<Data ss:Type="String">Placa</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="30">
+				<Data ss:Type="String">KM</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="28">
+				<Data ss:Type="String">Comb.</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="30">
+				<Data ss:Type="String">Cambio</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="30">
+				<Data ss:Type="String">HP/CV</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="30">
+				<Data ss:Type="String">Situação</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="32">
+				<Data ss:Type="String">Vlr. Web</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="32">
+				<Data ss:Type="String">Vlr. Final</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="32">
+				<Data ss:Type="String">Vlr. Oferta</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="32">
+				<Data ss:Type="String">Promoção Web</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="30">
+				<Data ss:Type="String">Dias</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="30">
+				<Data ss:Type="String">Pos.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="28">
+				<Data ss:Type="String">Tipo</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="28">
+				<Data ss:Type="String">Opcionais</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="34">
+				<Data ss:Type="String">Desc. rápido</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="28">
+				<Data ss:Type="String">Marcador</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="32">
+				<Data ss:Type="String">Fipe Entrada</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="32">
+				<Data ss:Type="String">Fipe Atual</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="28">
+				<Data ss:Type="String">Localização</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">ETIOS HB X VSC MT</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">ETIOS HB X VSC MT</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2018/2019</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Cinza</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">PLL-7J86</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">94.173</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Flex</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">98</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">60900.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">59900.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Consignado</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="40">
+				<Data ss:Type="Number">58466.0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="40">
+				<Data ss:Type="Number">58466.0</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">HILUX 4CDL DX</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36"/>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2004/2004</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Branco</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">JQR-0628</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">1.111</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Diesel</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">89</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">13</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Próprio</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="40">
+				<Data ss:Type="Number">62342.0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="40">
+				<Data ss:Type="Number">62342.0</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="21"/>
+			<Cell ss:Index="2" ss:StyleID="21"/>
+			<Cell ss:Index="3" ss:StyleID="22"/>
+			<Cell ss:Index="4" ss:StyleID="22"/>
+			<Cell ss:Index="5" ss:StyleID="22"/>
+			<Cell ss:Index="6" ss:StyleID="22"/>
+			<Cell ss:Index="7" ss:StyleID="21"/>
+			<Cell ss:Index="8" ss:StyleID="22"/>
+			<Cell ss:Index="9" ss:StyleID="22"/>
+			<Cell ss:Index="10" ss:StyleID="22"/>
+			<Cell ss:Index="11" ss:StyleID="23"/>
+			<Cell ss:Index="12" ss:StyleID="23"/>
+			<Cell ss:Index="13" ss:StyleID="23"/>
+			<Cell ss:Index="14" ss:StyleID="23"/>
+			<Cell ss:Index="15" ss:StyleID="22"/>
+			<Cell ss:Index="16" ss:StyleID="22"/>
+			<Cell ss:Index="17" ss:StyleID="21"/>
+			<Cell ss:Index="18" ss:StyleID="21"/>
+			<Cell ss:Index="19" ss:StyleID="24"/>
+			<Cell ss:Index="20" ss:StyleID="21"/>
+			<Cell ss:Index="21" ss:StyleID="23"/>
+			<Cell ss:Index="22" ss:StyleID="23"/>
+			<Cell ss:Index="23" ss:StyleID="21"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="26" ss:MergeAcross="22">
+				<Data ss:Type="String">MARCA: VOLKSWAGEN</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="28">
+				<Data ss:Type="String">Modelo</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="28">
+				<Data ss:Type="String">Modelo Denatran</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="30">
+				<Data ss:Type="String">Ano</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="30">
+				<Data ss:Type="String">Cor</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="30">
+				<Data ss:Type="String">Placa</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="30">
+				<Data ss:Type="String">KM</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="28">
+				<Data ss:Type="String">Comb.</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="30">
+				<Data ss:Type="String">Cambio</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="30">
+				<Data ss:Type="String">HP/CV</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="30">
+				<Data ss:Type="String">Situação</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="32">
+				<Data ss:Type="String">Vlr. Web</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="32">
+				<Data ss:Type="String">Vlr. Final</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="32">
+				<Data ss:Type="String">Vlr. Oferta</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="32">
+				<Data ss:Type="String">Promoção Web</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="30">
+				<Data ss:Type="String">Dias</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="30">
+				<Data ss:Type="String">Pos.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="28">
+				<Data ss:Type="String">Tipo</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="28">
+				<Data ss:Type="String">Opcionais</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="34">
+				<Data ss:Type="String">Desc. rápido</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="28">
+				<Data ss:Type="String">Marcador</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="32">
+				<Data ss:Type="String">Fipe Entrada</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="32">
+				<Data ss:Type="String">Fipe Atual</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="28">
+				<Data ss:Type="String">Localização</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">GOL 1.0</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36"/>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2005/2005</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Prata</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">JPS-6J66</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">111</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Flex</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">70</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">11</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Próprio</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="40">
+				<Data ss:Type="Number">15024.0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="40">
+				<Data ss:Type="Number">15024.0</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">GOL 1.6</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">GOL 1.6</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2011/2012</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Preto</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">NZN-4459</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">100.000</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Flex</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">104</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">42900.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Consignado</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="40">
+				<Data ss:Type="Number">30819.0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="40">
+				<Data ss:Type="Number">30819.0</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">GOLF 1.6 SPORTLINE</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36"/>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2009/2010</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Branco</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">MFZ-5I35</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">104.000</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Flex</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">104</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">43900.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">43900.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">43900.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">15</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Próprio</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="40">
+				<Data ss:Type="Number">46292.0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="40">
+				<Data ss:Type="Number">46292.0</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">GOL MPI</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">GOL MPI</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2022/2023</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Branco</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">RZT-1C25</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">58.000</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Flex</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">84</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">55900.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">54900.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">26</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Consignado</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="40">
+				<Data ss:Type="Number">54743.0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="40">
+				<Data ss:Type="Number">54743.0</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">PARATI (GERACAO4)(TOTALFLEX) 1.6MI 4P</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36"/>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">1983/1983</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Cinza</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">JLK-9269</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">111.111</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Flex</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String">0</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">14</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Próprio</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36"/>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="46"/>
+			<Cell ss:Index="22" ss:StyleID="46"/>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="21"/>
+			<Cell ss:Index="2" ss:StyleID="21"/>
+			<Cell ss:Index="3" ss:StyleID="22"/>
+			<Cell ss:Index="4" ss:StyleID="22"/>
+			<Cell ss:Index="5" ss:StyleID="22"/>
+			<Cell ss:Index="6" ss:StyleID="22"/>
+			<Cell ss:Index="7" ss:StyleID="21"/>
+			<Cell ss:Index="8" ss:StyleID="22"/>
+			<Cell ss:Index="9" ss:StyleID="22"/>
+			<Cell ss:Index="10" ss:StyleID="22"/>
+			<Cell ss:Index="11" ss:StyleID="23"/>
+			<Cell ss:Index="12" ss:StyleID="23"/>
+			<Cell ss:Index="13" ss:StyleID="23"/>
+			<Cell ss:Index="14" ss:StyleID="23"/>
+			<Cell ss:Index="15" ss:StyleID="22"/>
+			<Cell ss:Index="16" ss:StyleID="22"/>
+			<Cell ss:Index="17" ss:StyleID="21"/>
+			<Cell ss:Index="18" ss:StyleID="21"/>
+			<Cell ss:Index="19" ss:StyleID="24"/>
+			<Cell ss:Index="20" ss:StyleID="21"/>
+			<Cell ss:Index="21" ss:StyleID="23"/>
+			<Cell ss:Index="22" ss:StyleID="23"/>
+			<Cell ss:Index="23" ss:StyleID="21"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="26" ss:MergeAcross="22">
+				<Data ss:Type="String">MARCA: YAMAHA</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="28">
+				<Data ss:Type="String">Modelo</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="28">
+				<Data ss:Type="String">Modelo Denatran</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="30">
+				<Data ss:Type="String">Ano</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="30">
+				<Data ss:Type="String">Cor</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="30">
+				<Data ss:Type="String">Placa</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="30">
+				<Data ss:Type="String">KM</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="28">
+				<Data ss:Type="String">Comb.</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="30">
+				<Data ss:Type="String">Cambio</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="30">
+				<Data ss:Type="String">HP/CV</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="30">
+				<Data ss:Type="String">Situação</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="32">
+				<Data ss:Type="String">Vlr. Web</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="32">
+				<Data ss:Type="String">Vlr. Final</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="32">
+				<Data ss:Type="String">Vlr. Oferta</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="32">
+				<Data ss:Type="String">Promoção Web</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="30">
+				<Data ss:Type="String">Dias</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="30">
+				<Data ss:Type="String">Pos.</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="28">
+				<Data ss:Type="String">Tipo</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="28">
+				<Data ss:Type="String">Opcionais</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="34">
+				<Data ss:Type="String">Desc. rápido</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="28">
+				<Data ss:Type="String">Marcador</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="32">
+				<Data ss:Type="String">Fipe Entrada</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="32">
+				<Data ss:Type="String">Fipe Atual</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="28">
+				<Data ss:Type="String">Localização</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="36">
+				<Data ss:Type="String">FAZER 250</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="36">
+				<Data ss:Type="String">fazer 250</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="38">
+				<Data ss:Type="String">2025/2025</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="38">
+				<Data ss:Type="String">Azul</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="38">
+				<Data ss:Type="String">UGC-2J70</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="38">
+				<Data ss:Type="String">3.000</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="36">
+				<Data ss:Type="String">Flex</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="38">
+				<Data ss:Type="String">Manual</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="38">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="38">
+				<Data ss:Type="String">Estoque</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="40">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="42">
+				<Data ss:Type="Number">39</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="38">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="36">
+				<Data ss:Type="String">Consignado</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="36">
+				<Data ss:Type="String">ABS</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="44">
+				<Data ss:Type="String"/>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="36"/>
+			<Cell ss:Index="21" ss:StyleID="40">
+				<Data ss:Type="Number">20511.0</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="40">
+				<Data ss:Type="Number">19485.0</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="36"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="48" ss:MergeAcross="22">
+				<Data ss:Type="String">Total: 48</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="49" ss:MergeAcross="23"/>
+		</Row>
+	</ss:Table>
+	<WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+		<PageSetup>
+			<PageMargins x:Bottom="0.25" x:Left="0.099999994" x:Right="0.099999994" x:Top="0.25"/>
+			<Layout x:Orientation="Landscape"/>
+			<Header/>
+			<Footer/>
+		</PageSetup>
+		<Print>
+			<PaperSizeIndex>9</PaperSizeIndex>
+		</Print>
+	</WorksheetOptions>
+</Worksheet>
+</Workbook>

@@ -37,10 +37,19 @@ function parseMoney(raw) {
 
 async function processFile(absPath, dryRun) {
   const rows = parseSpreadsheetPath(absPath)
-  const headerIdx = findRowIndex(
-    rows,
-    (v) => v[1] === 'Código' && v[3] === 'Marca' && v[4] === 'Modelo'
-  )
+  let layout = 'default'
+  let headerIdx = findRowIndex(rows, (v) => v[1] === 'Código' && v[3] === 'Marca' && v[4] === 'Modelo')
+  if (headerIdx === -1) {
+    // "Relação de Estoque": Cod | Marca | Modelo | Ano | Cor | Placa/Chassi | ...
+    headerIdx = findRowIndex(
+      rows,
+      (v) =>
+        String(v[0] || '').trim() === 'Cod' &&
+        String(v[1] || '').trim() === 'Marca' &&
+        String(v[2] || '').trim() === 'Modelo'
+    )
+    if (headerIdx !== -1) layout = 'relacao'
+  }
   if (headerIdx === -1) {
     console.warn('[SKIP] Cabeçalho não reconhecido (Lista Gerencial de Estoque):', absPath)
     return { skippedFile: 1, imported: 0, skippedRow: 0, errors: 0 }
@@ -50,7 +59,7 @@ async function processFile(absPath, dryRun) {
 
   for (let i = headerIdx + 1; i < rows.length; i++) {
     const v = rows[i]
-    const codigo = String(v[1] || '').trim()
+    const codigo = layout === 'default' ? String(v[1] || '').trim() : String(v[0] || '').trim()
     if (!/^\d+$/.test(codigo)) {
       stats.skippedRow++
       continue
@@ -68,19 +77,19 @@ async function processFile(absPath, dryRun) {
       continue
     }
 
-    const brand = String(v[3] || '').trim() || '—'
-    const model = String(v[4] || '').trim() || '—'
-    const year = parseAno(v[5])
-    const color = String(v[6] || '').trim() || null
-    const plateRaw = String(v[7] || '').trim()
+    const brand = layout === 'default' ? String(v[3] || '').trim() || '—' : String(v[1] || '').trim() || '—'
+    const model = layout === 'default' ? String(v[4] || '').trim() || '—' : String(v[2] || '').trim() || '—'
+    const year = layout === 'default' ? parseAno(v[5]) : parseAno(v[3])
+    const color = layout === 'default' ? String(v[6] || '').trim() || null : String(v[4] || '').trim() || null
+    const plateRaw = layout === 'default' ? String(v[7] || '').trim() : String(v[5] || '').trim()
     const plate = plateRaw && plateRaw !== '-' ? plateRaw.slice(0, 20) : null
-    const km = parseKm(v[9])
-    const renavam = String(v[10] || '').trim() || null
-    const combustivel = String(v[11] || '').trim() || null
-    const cambio = String(v[12] || '').trim() || null
-    const cost = parseMoney(v[27]) ?? parseMoney(v[22])
-    const fornecedor = String(v[45] || '').trim()
-    const docNome = String(v[48] || '').trim()
+    const km = layout === 'default' ? parseKm(v[9]) : null
+    const renavam = layout === 'default' ? String(v[10] || '').trim() || null : null
+    const combustivel = layout === 'default' ? String(v[11] || '').trim() || null : null
+    const cambio = layout === 'default' ? String(v[12] || '').trim() || null : null
+    const cost = layout === 'default' ? parseMoney(v[27]) ?? parseMoney(v[22]) : parseMoney(v[8])
+    const fornecedor = layout === 'default' ? String(v[45] || '').trim() : ''
+    const docNome = layout === 'default' ? String(v[48] || '').trim() : ''
 
     const notes = [tag, path.basename(absPath)]
     if (fornecedor) notes.push(`Fornecedor: ${fornecedor}`)

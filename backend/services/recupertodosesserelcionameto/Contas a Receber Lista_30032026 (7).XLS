@@ -1,0 +1,1482 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?mso-application progid="Excel.Sheet"?>
+
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" xmlns:html="http://www.w3.org/TR/REC-html40">
+	<DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+		<Author/>
+		<Title>Contas a Receber Lista</Title>
+		<Description/>
+		<Subject/>
+	</DocumentProperties>
+	<Styles>
+		<Style ss:ID="HyperlinkId" ss:Name="Hyperlink">
+			<Font ss:Color="#0000ff"/>
+		</Style>
+		<Style ss:ID="1">
+			<NumberFormat ss:Format="yyyy-M-d HH:mm:ss AM/PM"/>
+		</Style>
+		<Style ss:ID="29">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<NumberFormat ss:Format="[$-416]dd/MM/yyyy"/>
+		</Style>
+		<Style ss:ID="31">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Color="#000000"/>
+			<NumberFormat ss:Format="[$-416]dd/MM/yyyy"/>
+		</Style>
+		<Style ss:ID="37">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<NumberFormat ss:Format="[$-416]MM/YYYY"/>
+		</Style>
+		<Style ss:ID="20">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Bold="1" ss:Color="#ffffff"/>
+			<Interior ss:Color="#000000" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="21">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Bold="1" ss:Color="#ffffff"/>
+			<Interior ss:Color="#000000" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="28">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<NumberFormat ss:Format="[$-416]dd/MM/yyyy"/>
+		</Style>
+		<Style ss:ID="30">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Color="#000000"/>
+			<NumberFormat ss:Format="[$-416]dd/MM/yyyy"/>
+		</Style>
+		<Style ss:ID="36">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<NumberFormat ss:Format="[$-416]MM/YYYY"/>
+		</Style>
+		<Style ss:ID="38">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="40">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="32">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="34">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="42">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<NumberFormat ss:Format="R$ ###,##0.00"/>
+		</Style>
+		<Style ss:ID="39">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="41">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="33">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="35">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="43">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<NumberFormat ss:Format="R$ ###,##0.00"/>
+		</Style>
+		<Style ss:ID="24">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Bold="1" ss:Color="#ffffff"/>
+			<Interior ss:Color="#000000" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="26">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Bold="1" ss:Color="#ffffff"/>
+			<Interior ss:Color="#000000" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="44">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Bold="1" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="22">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Bold="1" ss:Color="#ffffff"/>
+			<Interior ss:Color="#000000" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="46">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#000000"/>
+			<NumberFormat ss:Format="R$ ###,##0.00"/>
+		</Style>
+		<Style ss:ID="25">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Bold="1" ss:Color="#ffffff"/>
+			<Interior ss:Color="#000000" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="27">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Bold="1" ss:Color="#ffffff"/>
+			<Interior ss:Color="#000000" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="45">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Bold="1" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="23">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Bold="1" ss:Color="#ffffff"/>
+			<Interior ss:Color="#000000" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="47">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#000000"/>
+			<NumberFormat ss:Format="R$ ###,##0.00"/>
+		</Style>
+	</Styles>
+	<Names>
+		<NamedRange ss:Name="__bookmark_1" ss:RefersTo="Contas a Receber Lista!R1C1:R20C19"/>
+	</Names>
+
+<Worksheet ss:Name="Contas a Receber Lista">
+	<ss:Table>
+		<ss:Column ss:Width="45.312" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="56.704" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="56.704" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="56.704" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="56.576" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="45.44" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="28.288" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="28.416" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="28.288" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="28.416" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="82.688" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="56.704" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="56.704" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="45.312" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="54.016" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="140.672" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="66.176" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="45.44" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="56.704" ss:AutoFitWidth="0"/>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="21">
+				<Data ss:Type="String">Data</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="21">
+				<Data ss:Type="String">Dt. Emissão</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="23">
+				<Data ss:Type="String">ID</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="23">
+				<Data ss:Type="String">Bx Agrup.</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="23">
+				<Data ss:Type="String">Nº Doc</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="21">
+				<Data ss:Type="String">Mês Ref</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="25">
+				<Data ss:Type="String">DRE</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="25">
+				<Data ss:Type="String">Baixado</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="25">
+				<Data ss:Type="String">Conciliado</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="23">
+				<Data ss:Type="String">Posição</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="25">
+				<Data ss:Type="String">Categoria</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="25">
+				<Data ss:Type="String">Banco</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="25">
+				<Data ss:Type="String">Conta</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="25">
+				<Data ss:Type="String">Placa</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="27">
+				<Data ss:Type="String">Veic. Venda</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="27">
+				<Data ss:Type="String">Descrição</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="25">
+				<Data ss:Type="String">Fornecedor</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="25">
+				<Data ss:Type="String">Forma pgto</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="23">
+				<Data ss:Type="String">Valor</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29">
+				<Data ss:Type="DateTime">2025-01-03T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="DateTime">2023-09-04T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="Number">25657789</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="33">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="35"/>
+			<Cell ss:Index="6" ss:StyleID="37">
+				<Data ss:Type="DateTime">2023-09-01T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="39">
+				<Data ss:Type="String">NÃO</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="35">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="39">
+				<Data ss:Type="String">VENDA DE VEICULO</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="39">
+				<Data ss:Type="String">CONTA CAIXA</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="39">
+				<Data ss:Type="String">CAIXA DA LOJA</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="39">
+				<Data ss:Type="String">RCV-8I87</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41">
+				<Data ss:Type="Number">5335069</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="String">VENDA - NXR 160 BROS ESDD FLEXONE, VERMELHO, ano fab/mod: 2020/2021, placa: RCV8I87, renavan: 01242706116, chassi: 9C2KD0810LR078566, km: 39616</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="String">Jorge Moreira Da Paixao</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="39">
+				<Data ss:Type="String">Nota Promissória</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="43">
+				<Data ss:Type="Number">800.00</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29">
+				<Data ss:Type="DateTime">2025-01-16T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="DateTime">2023-09-26T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="Number">26014444</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="33">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="35">
+				<Data ss:Type="String">4/5</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="37">
+				<Data ss:Type="DateTime">2023-09-01T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="39">
+				<Data ss:Type="String">NÃO</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="35">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="39">
+				<Data ss:Type="String">VENDA DE VEICULO</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="39">
+				<Data ss:Type="String">CONTA CAIXA</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="39">
+				<Data ss:Type="String">CAIXA DA LOJA</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="39">
+				<Data ss:Type="String">OUZ-7G71</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41">
+				<Data ss:Type="Number">5380938</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="String">VENDA - Parcela 4 de 5 - FOCUS 1.6 SE 16V FLEX 4P POWERSHIFT, PRATA, ano fab/mod: 2013/2014, placa: ouz7g71, renavan: 00993049184, chassi: 8afvzzfhcej164847, km: 83213</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="String">Washington Paixao Barreto</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="39">
+				<Data ss:Type="String">Financiamento Próprio</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="43">
+				<Data ss:Type="Number">3000.00</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29">
+				<Data ss:Type="DateTime">2025-01-16T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="DateTime">2023-10-26T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="Number">26518108</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="33">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="35">
+				<Data ss:Type="String">3/14</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="37">
+				<Data ss:Type="DateTime">2023-10-01T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="39">
+				<Data ss:Type="String">NÃO</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="35">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="39">
+				<Data ss:Type="String">VENDA DE VEICULO</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="39">
+				<Data ss:Type="String">CONTA CAIXA</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="39">
+				<Data ss:Type="String">CAIXA DA LOJA</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="39">
+				<Data ss:Type="String">JPN-3D81</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41">
+				<Data ss:Type="Number">5430268</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="String">VENDA - Parcela 3 de 14 - GOL, PRATA, ano fab/mod: 2007/2007, placa: jpn3d81, renavan: 00919583741, chassi: 9bwca05w07p095917, km: 130000</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="String">Irismar Dias dos Santos</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="39">
+				<Data ss:Type="String">Financiamento Próprio</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="43">
+				<Data ss:Type="Number">500.00</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29">
+				<Data ss:Type="DateTime">2025-01-16T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="DateTime">2023-11-06T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="Number">26700597</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="33">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="35"/>
+			<Cell ss:Index="6" ss:StyleID="37">
+				<Data ss:Type="DateTime">2023-11-01T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="35">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="39">
+				<Data ss:Type="String">VENDA DE VEICULO</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="39">
+				<Data ss:Type="String">CONTA CAIXA</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="39">
+				<Data ss:Type="String">CAIXA DA LOJA</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="39">
+				<Data ss:Type="String">PLK-0A60</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41">
+				<Data ss:Type="Number">5475845</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="String">VENDA - NISSAN FRONTIER LEATX4, PRETO, ano fab/mod: 2018/2018, placa: plk0a60, renavan: 01168592310, chassi: 3N6BD33B4JK914464, km: 112863</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="String">Joanderson de Almeida Souza</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="39">
+				<Data ss:Type="String">Financiamento Próprio</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="43">
+				<Data ss:Type="Number">17000.00</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29">
+				<Data ss:Type="DateTime">2025-01-16T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="DateTime">2024-03-05T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="Number">28899807</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="33">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="35">
+				<Data ss:Type="String">9/10</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="37">
+				<Data ss:Type="DateTime">2024-03-01T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="39">
+				<Data ss:Type="String">NÃO</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="35">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="39">
+				<Data ss:Type="String">VENDA DE VEICULO</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="39">
+				<Data ss:Type="String">CONTA CAIXA</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="39">
+				<Data ss:Type="String">CAIXA DA LOJA</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="39">
+				<Data ss:Type="String">NTT-1475</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41">
+				<Data ss:Type="Number">5765811</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="String">VENDA - Parcela 9 de 10 - COROLLA XEI20FLEX, PRATA, ano fab/mod: 2010/2011, placa: NTT1475, renavan: 00251188574, chassi: 9BRBD48E0B2517853, km: 190000</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="String">Jaidiel de Oliveira Santos</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="39">
+				<Data ss:Type="String">Financiamento Próprio</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="43">
+				<Data ss:Type="Number">920.00</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29">
+				<Data ss:Type="DateTime">2025-01-16T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="DateTime">2024-03-05T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="Number">28899808</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="33">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="35">
+				<Data ss:Type="String">10/10</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="37">
+				<Data ss:Type="DateTime">2024-03-01T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="39">
+				<Data ss:Type="String">NÃO</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="35">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="39">
+				<Data ss:Type="String">VENDA DE VEICULO</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="39">
+				<Data ss:Type="String">CONTA CAIXA</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="39">
+				<Data ss:Type="String">CAIXA DA LOJA</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="39">
+				<Data ss:Type="String">NTT-1475</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41">
+				<Data ss:Type="Number">5765811</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="String">VENDA - Parcela 10 de 10 - COROLLA XEI20FLEX, PRATA, ano fab/mod: 2010/2011, placa: NTT1475, renavan: 00251188574, chassi: 9BRBD48E0B2517853, km: 190000</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="String">Jaidiel de Oliveira Santos</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="39">
+				<Data ss:Type="String">Financiamento Próprio</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="43">
+				<Data ss:Type="Number">920.00</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29">
+				<Data ss:Type="DateTime">2025-01-16T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="DateTime">2024-05-27T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="Number">30531680</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="33">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="35">
+				<Data ss:Type="String">8/8</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="37">
+				<Data ss:Type="DateTime">2024-05-01T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="39">
+				<Data ss:Type="String">NÃO</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="35">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="39">
+				<Data ss:Type="String">VENDA DE VEICULO</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="39">
+				<Data ss:Type="String">CONTA CAIXA</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="39">
+				<Data ss:Type="String">CAIXA DA LOJA</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="39">
+				<Data ss:Type="String">nmk-5h67</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41">
+				<Data ss:Type="Number">5985101</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="String">VENDA - Parcela 8 de 8 - FOCUS 1.6, PRATA, ano fab/mod: 2010/2011, placa: nmk5h67, renavan: 00251143600, chassi: 8AFUZZFHCBJ364462, km: 113620</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="String">Joelson Gonçalves dos Santos</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="39">
+				<Data ss:Type="String">Financiamento Próprio</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="43">
+				<Data ss:Type="Number">580.00</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29">
+				<Data ss:Type="DateTime">2025-01-16T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="DateTime">2024-09-22T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="Number">33004892</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="33">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="35"/>
+			<Cell ss:Index="6" ss:StyleID="37">
+				<Data ss:Type="DateTime">2024-09-01T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="39">
+				<Data ss:Type="String">NÃO</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="35">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="39">
+				<Data ss:Type="String">VENDA DE VEICULO</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="39">
+				<Data ss:Type="String">CONTA CAIXA</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="39">
+				<Data ss:Type="String">CAIXA DA LOJA</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="39">
+				<Data ss:Type="String">SKF-8F05</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41">
+				<Data ss:Type="Number">6282782</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="String">VENDA - BIZ 125, BRANCO, placa: SKF8F05, chassi: 9C2JC4830RR164852</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="String">LUIS FABIO DOS SANTOS SILVA</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="39">
+				<Data ss:Type="String">Financiamento Próprio</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="43">
+				<Data ss:Type="Number">18900.00</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29">
+				<Data ss:Type="DateTime">2025-01-16T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="DateTime">2024-09-23T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="Number">33016279</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="33">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="35"/>
+			<Cell ss:Index="6" ss:StyleID="37">
+				<Data ss:Type="DateTime">2024-09-01T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="39">
+				<Data ss:Type="String">NÃO</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="35">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="39">
+				<Data ss:Type="String">VENDA DE VEICULO</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="39">
+				<Data ss:Type="String">CONTA CAIXA</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="39">
+				<Data ss:Type="String">CAIXA DA LOJA</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="39">
+				<Data ss:Type="String">SKF-6A16</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41">
+				<Data ss:Type="Number">6282783</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="String">VENDA - BIZ 125, BRANCO, placa: SKF6A16, chassi: 9C2JC4830RR152263</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="String">EDNALDO RIBEIRO</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="39">
+				<Data ss:Type="String">Financiamento Próprio</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="43">
+				<Data ss:Type="Number">18000.00</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29">
+				<Data ss:Type="DateTime">2025-01-25T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="DateTime">2023-08-30T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="Number">25559409</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="33">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="35"/>
+			<Cell ss:Index="6" ss:StyleID="37">
+				<Data ss:Type="DateTime">2023-08-01T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="39">
+				<Data ss:Type="String">NÃO</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="35">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="39">
+				<Data ss:Type="String">VENDA DE VEICULO</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="39">
+				<Data ss:Type="String">CONTA CAIXA</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="39">
+				<Data ss:Type="String">CAIXA DA LOJA</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="39">
+				<Data ss:Type="String">RPY-5F45</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41">
+				<Data ss:Type="Number">5319148</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="String">VENDA - XTZ250 LANDER, VERMELHO, ano fab/mod: 2023/2023, placa: rpy5f45, renavan: , chassi: 9C6DG3320P0097950, km: 1112</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="String">Ubiratan Melo dos Santos</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="39">
+				<Data ss:Type="String">Dinheiro</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="43">
+				<Data ss:Type="Number">9000.00</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29">
+				<Data ss:Type="DateTime">2025-01-25T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="DateTime">2023-09-01T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="Number">25602537</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="33">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="35"/>
+			<Cell ss:Index="6" ss:StyleID="37">
+				<Data ss:Type="DateTime">2023-07-01T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="39">
+				<Data ss:Type="String">NÃO</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="35">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="39">
+				<Data ss:Type="String">RETORNO SOBRE FINANCIAMENTO</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="39">
+				<Data ss:Type="String">CONTA CAIXA</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="39">
+				<Data ss:Type="String">CAIXA DA LOJA</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="39">
+				<Data ss:Type="String">OLB-1984</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41">
+				<Data ss:Type="Number">5327377</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="String">RETORNO da VENDA - Valor a receber - XRE 300 ABS, PRETO, ano fab/mod: 2013/2013, placa: olb1984, renavan: , chassi: 9C2ND1110DR001197, km: 27010</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="String">Florisvaldo da conceição Souza</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="39"/>
+			<Cell ss:Index="19" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29">
+				<Data ss:Type="DateTime">2025-01-25T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="DateTime">2023-09-01T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="Number">25602539</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="33">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="35"/>
+			<Cell ss:Index="6" ss:StyleID="37">
+				<Data ss:Type="DateTime">2023-07-01T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="39">
+				<Data ss:Type="String">NÃO</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="35">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="39">
+				<Data ss:Type="String">RECEITA PLUS SOBRE FINANCIAMENTOS</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="39">
+				<Data ss:Type="String">CONTA CAIXA</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="39">
+				<Data ss:Type="String">CAIXA DA LOJA</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="39">
+				<Data ss:Type="String">OLB-1984</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41">
+				<Data ss:Type="Number">5327377</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="String">PLUS da VENDA - Valor a receber - XRE 300 ABS, PRETO, ano fab/mod: 2013/2013, placa: olb1984, renavan: , chassi: 9C2ND1110DR001197, km: 27010</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="String">Florisvaldo da conceição Souza</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="39"/>
+			<Cell ss:Index="19" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29">
+				<Data ss:Type="DateTime">2025-01-25T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="DateTime">2023-09-04T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="Number">25657788</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="33">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="35"/>
+			<Cell ss:Index="6" ss:StyleID="37">
+				<Data ss:Type="DateTime">2023-09-01T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="39">
+				<Data ss:Type="String">NÃO</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="35">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="39">
+				<Data ss:Type="String">VENDA DE VEICULO</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="39">
+				<Data ss:Type="String">CONTA CAIXA</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="39">
+				<Data ss:Type="String">CAIXA DA LOJA</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="39">
+				<Data ss:Type="String">RCV-8I87</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41">
+				<Data ss:Type="Number">5335069</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="String">VENDA - NXR 160 BROS ESDD FLEXONE, VERMELHO, ano fab/mod: 2020/2021, placa: RCV8I87, renavan: 01242706116, chassi: 9C2KD0810LR078566, km: 39616</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="String">Jorge Moreira Da Paixao</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="39">
+				<Data ss:Type="String">TED/DOC ou PIX</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="43">
+				<Data ss:Type="Number">3200.00</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29">
+				<Data ss:Type="DateTime">2025-01-25T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="DateTime">2023-09-26T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="Number">26014440</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="33">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="35"/>
+			<Cell ss:Index="6" ss:StyleID="37">
+				<Data ss:Type="DateTime">2023-09-01T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="39">
+				<Data ss:Type="String">NÃO</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="35">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="39">
+				<Data ss:Type="String">VENDA DE VEICULO</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="39">
+				<Data ss:Type="String">CONTA CAIXA</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="39">
+				<Data ss:Type="String">CAIXA DA LOJA</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="39">
+				<Data ss:Type="String">OUZ-7G71</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41">
+				<Data ss:Type="Number">5380938</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="String">VENDA - FOCUS 1.6 SE 16V FLEX 4P POWERSHIFT, PRATA, ano fab/mod: 2013/2014, placa: ouz7g71, renavan: 00993049184, chassi: 8afvzzfhcej164847, km: 83213</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="String">Washington Paixao Barreto</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="39">
+				<Data ss:Type="String">TED/DOC ou PIX</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="43">
+				<Data ss:Type="Number">25500.00</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29">
+				<Data ss:Type="DateTime">2025-01-25T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="DateTime">2023-10-26T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="Number">26518106</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="33">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="35">
+				<Data ss:Type="String">1/14</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="37">
+				<Data ss:Type="DateTime">2023-10-01T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="39">
+				<Data ss:Type="String">NÃO</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="35">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="39">
+				<Data ss:Type="String">VENDA DE VEICULO</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="39">
+				<Data ss:Type="String">CONTA CAIXA</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="39">
+				<Data ss:Type="String">CAIXA DA LOJA</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="39">
+				<Data ss:Type="String">JPN-3D81</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41">
+				<Data ss:Type="Number">5430268</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="String">VENDA - Parcela 1 de 14 - GOL, PRATA, ano fab/mod: 2007/2007, placa: jpn3d81, renavan: 00919583741, chassi: 9bwca05w07p095917, km: 130000</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="String">Irismar Dias dos Santos</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="39">
+				<Data ss:Type="String">Financiamento Próprio</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="43">
+				<Data ss:Type="Number">500.00</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29">
+				<Data ss:Type="DateTime">2025-01-27T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="DateTime">2024-10-30T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="Number">33834885</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="33">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="35"/>
+			<Cell ss:Index="6" ss:StyleID="37">
+				<Data ss:Type="DateTime">2024-10-01T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="39">
+				<Data ss:Type="String">NÃO</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="35">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="39">
+				<Data ss:Type="String">VENDA DE VEICULO</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="39">
+				<Data ss:Type="String">CONTA CAIXA</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="39">
+				<Data ss:Type="String">CAIXA DA LOJA</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="39">
+				<Data ss:Type="String">sjl-7j95</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41">
+				<Data ss:Type="Number">6424972</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="String">VENDA - CG 160 START, VERMELHO, placa: sjl7j95, chassi: 9C2KC2500PR070119</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="String">Elias dos Santos Pereira</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="39">
+				<Data ss:Type="String">Dinheiro</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="43">
+				<Data ss:Type="Number">17000.00</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29">
+				<Data ss:Type="DateTime">2025-01-27T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="DateTime">2024-11-01T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="Number">33918216</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="33">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="35"/>
+			<Cell ss:Index="6" ss:StyleID="37">
+				<Data ss:Type="DateTime">2024-11-01T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="39">
+				<Data ss:Type="String">NÃO</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="35">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="39">
+				<Data ss:Type="String">RECEITA TAC SOBRE FINANCIAMENTOS</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="39">
+				<Data ss:Type="String">CONTA CAIXA</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="39">
+				<Data ss:Type="String">CAIXA DA LOJA</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="39">
+				<Data ss:Type="String">pkd-2j94</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41">
+				<Data ss:Type="Number">6411272</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="String">TAC da VENDA - Valor a receber - HR-V EX CVT, CINZA, placa: pkd2j94, chassi: 93hrv2850hz204028</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="String">MARCIO DE SOUZA NASCIMENTO</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="39"/>
+			<Cell ss:Index="19" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29">
+				<Data ss:Type="DateTime">2025-01-27T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="DateTime">2024-11-01T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="Number">33918218</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="33">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="35"/>
+			<Cell ss:Index="6" ss:StyleID="37">
+				<Data ss:Type="DateTime">2024-11-01T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="39">
+				<Data ss:Type="String">SIM</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="39">
+				<Data ss:Type="String">NÃO</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="35">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="39">
+				<Data ss:Type="String">VENDA DE VEICULO</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="39">
+				<Data ss:Type="String">CONTA CAIXA</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="39">
+				<Data ss:Type="String">CAIXA DA LOJA</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="39">
+				<Data ss:Type="String">pkd-2j94</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41">
+				<Data ss:Type="Number">6411272</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="String">VENDA - HR-V EX CVT, CINZA, placa: pkd2j94, chassi: 93hrv2850hz204028</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="String">MARCIO DE SOUZA NASCIMENTO</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="39">
+				<Data ss:Type="String">TED/DOC ou PIX</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="43">
+				<Data ss:Type="Number">45000.00</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="45" ss:MergeAcross="17">
+				<Data ss:Type="String">Total:</Data>
+			</Cell>
+			<Cell ss:Index="19" ss:StyleID="47">
+				<Data ss:Type="Number">160820.0</Data>
+			</Cell>
+		</Row>
+	</ss:Table>
+	<WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+		<PageSetup>
+			<PageMargins x:Bottom="0.25" x:Left="0.099999994" x:Right="0.099999994" x:Top="0.25"/>
+			<Layout x:Orientation="Landscape"/>
+			<Header x:Data="&amp;L&amp;&#34;Arial,Bold&#34;&amp;11&amp;K000000IAGO VEICULOS&amp;&#34;Arial&#34;&amp;8&amp;K00000030 de mar de 2026 20:13&amp;C&amp;&#34;Arial,Bold&#34;&amp;11&amp;K000000CONTAS A RECEBER LISTA&amp;&#34;Arial,Bold&#34;&amp;11&amp;K00000030/03/2024 à 30/03/2025&amp;&#34;Arial&#34;&amp;8&amp;K000000Usuário:  isaac oliveira dos santos junior"/>
+			<Footer/>
+		</PageSetup>
+		<Print>
+			<PaperSizeIndex>9</PaperSizeIndex>
+		</Print>
+	</WorksheetOptions>
+</Worksheet>
+</Workbook>

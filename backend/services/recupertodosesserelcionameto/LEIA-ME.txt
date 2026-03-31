@@ -1,0 +1,41 @@
+Recuperação (recupertodosesserelcionameto)
+========================================
+
+Esta pasta contém exportações .XLS do Revenda Mais (muitas vezes repetidas por período/ano).
+O objetivo é importar no CRM sem duplicar registros, enriquecendo dados já existentes.
+
+Como rodar
+----------
+
+1) (Recomendado) Ver o que será executado (classificação):
+
+  npm run import:rm:relacionamento:list
+
+2) (Opcional) Simular importação (não grava no banco):
+
+  npm run import:rm:relacionamento:dry
+
+3) Importar de verdade (roda migrate antes):
+
+  npm run import:rm:recover:relacionamento
+
+Idempotência / Merge
+-------------------
+
+- O processo usa o código do Revenda Mais como chave (`Vehicle.revendaMaisCodigo` / tag `RMV:<codigo>`).
+- Por padrão o orquestrador define `IMPORT_MERGE=1`:
+  - Se o veículo/venda já existir, ele tenta **preencher campos vazios** (sem sobrescrever valores já preenchidos).
+  - Isso permite rodar vários arquivos com nomes repetidos (ex.: vários períodos) sem conflito.
+
+Vendedor padrão
+---------------
+
+Alguns relatórios exigem vendedor para criar `Sale`.
+Defina `IMPORT_DEFAULT_SELLER_ID` (id do User) se necessário.
+
+Observações
+-----------
+
+- Nem todos os relatórios financeiros (contas a receber/pagar, saldo, comissões, etc.) são importados neste lote.
+  Eles ficam marcados como "Ignorados" (sem importador) no `--list-only`.
+

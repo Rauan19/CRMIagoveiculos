@@ -130,6 +130,7 @@ class VehicleController {
         where,
         select: {
           id: true,
+          revendaMaisCodigo: true,
           brand: true,
           model: true,
           year: true,
@@ -158,6 +159,9 @@ class VehicleController {
           precoPromocional: true,
           canalEntrada: true,
           marcador1: true,
+          situacaoRecibo: true,
+          documentoCRV: true,
+          blindado: true,
           customer: { select: { id: true, name: true, phone: true } },
           sale: { select: { id: true, date: true, status: true } }
         },

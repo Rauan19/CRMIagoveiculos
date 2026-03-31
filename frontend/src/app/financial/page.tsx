@@ -20,6 +20,7 @@ interface FinancialTransaction {
   id: number
   operacao?: 'receber' | 'pagar' | 'transferencia'
   type?: 'receber' | 'pagar' // Legado
+  revendaMaisId?: string | null
   posicaoEstoque?: number
   solicitadoPor?: string
   autorizadoPor?: string
@@ -59,6 +60,7 @@ interface FinancialTransaction {
   contaOrigem?: string
   contaDestino?: string
   valorTransferencia?: number
+  importSourceFile?: string | null
   createdAt: string
 }
 
@@ -797,6 +799,9 @@ export default function FinancialPage() {
                       Status
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Pago em
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Ações
                     </th>
                   </tr>
@@ -804,7 +809,7 @@ export default function FinancialPage() {
                 <tbody className="bg-white divide-y divide-gray-200">
                   {activeTransactions.length === 0 ? (
                     <tr>
-                      <td colSpan={6} className="px-6 py-4 text-center text-gray-500">
+                      <td colSpan={7} className="px-6 py-4 text-center text-gray-500">
                         Nenhuma transação encontrada
                       </td>
                     </tr>
@@ -813,6 +818,7 @@ export default function FinancialPage() {
                       const operacao = transaction.operacao || transaction.type || 'pagar'
                       const valor = transaction.valorTitulo || transaction.amount || 0
                       const dataVenc = transaction.dataVencimento || transaction.dueDate
+                      const paidDate = transaction.paidDate
                       return (
                       <tr key={transaction.id} className="hover:bg-gray-50">
                           <td className="px-6 py-4 whitespace-nowrap">
@@ -839,6 +845,12 @@ export default function FinancialPage() {
                             {transaction.numeroDocumento && (
                               <div className="text-xs text-gray-500">Doc: {transaction.numeroDocumento}</div>
                             )}
+                            {transaction.revendaMaisId && (
+                              <div className="text-xs text-gray-500">RM ID: {transaction.revendaMaisId}</div>
+                            )}
+                            {transaction.importSourceFile && (
+                              <div className="text-xs text-gray-400">Fonte: {transaction.importSourceFile}</div>
+                            )}
                           </td>
                           <td
                             className={`px-6 py-4 whitespace-nowrap text-sm font-medium ${
@@ -861,6 +873,9 @@ export default function FinancialPage() {
                             >
                               {getStatusLabel(transaction.status)}
                             </span>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            {paidDate ? new Date(paidDate).toLocaleDateString('pt-BR') : '-'}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
                             {transaction.status !== 'pago' && (

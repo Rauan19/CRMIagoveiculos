@@ -9,6 +9,7 @@ import Toast from '@/components/Toast'
 
 interface Vehicle {
   id: number
+  revendaMaisCodigo?: string | null
   brand: string
   model: string
   year: number
@@ -27,6 +28,9 @@ interface Vehicle {
   anoModelo?: number | null
   canalEntrada?: string | null
   marcador1?: string | null
+  situacaoRecibo?: string | null
+  documentoCRV?: string | null
+  blindado?: string | null
   createdAt?: string
 }
 
@@ -366,7 +370,7 @@ export default function VeiculosAVendaPage() {
                       const margemVal = margem(v)
                       return (
                         <tr key={v.id} className="hover:bg-gray-50">
-                          <td className="px-3 py-2 text-sm text-gray-900 font-mono whitespace-nowrap">{v.id}</td>
+                          <td className="px-3 py-2 text-sm text-gray-900 font-mono whitespace-nowrap">{v.revendaMaisCodigo || v.id}</td>
                           <td className="px-3 py-2 text-sm text-gray-900">{v.posicao ?? startIndex + index + 1}</td>
                           <td className="px-3 py-2 text-sm text-gray-900 whitespace-nowrap">
                             {(v.brand || '').toUpperCase()} {v.model} {v.year}
@@ -400,7 +404,7 @@ export default function VeiculosAVendaPage() {
                               '-'
                             )}
                           </td>
-                          <td className="px-3 py-2 text-sm text-gray-500"></td>
+                          <td className="px-3 py-2 text-sm text-gray-500">{v.blindado || ''}</td>
                           <td className="px-3 py-2 text-sm text-gray-600">{v.marcador1 || ''}</td>
                           <td className="px-3 py-2 text-sm">
                             <Link

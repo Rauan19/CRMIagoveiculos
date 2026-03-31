@@ -1,0 +1,777 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?mso-application progid="Excel.Sheet"?>
+
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" xmlns:html="http://www.w3.org/TR/REC-html40">
+	<DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+		<Author/>
+		<Title>Lista Gerencial de Veículos Devolvidos</Title>
+		<Description/>
+		<Subject/>
+	</DocumentProperties>
+	<Styles>
+		<Style ss:ID="HyperlinkId" ss:Name="Hyperlink">
+			<Font ss:Color="#0000ff"/>
+		</Style>
+		<Style ss:ID="1">
+			<NumberFormat ss:Format="yyyy-M-d HH:mm:ss AM/PM"/>
+		</Style>
+		<Style ss:ID="30">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="32">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="36">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="38">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+			<NumberFormat ss:Format="[$-416]dd/MM/yyyy"/>
+		</Style>
+		<Style ss:ID="40">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="46">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top"/>
+				<Border ss:Position="Left"/>
+				<Border ss:Position="Right"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="27">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#ffffff"/>
+			<Interior ss:Color="#000000" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="20">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top"/>
+				<Border ss:Position="Left"/>
+				<Border ss:Position="Right"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="11.0" ss:Bold="1" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="22">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top"/>
+				<Border ss:Position="Left"/>
+				<Border ss:Position="Right"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="11.0" ss:Bold="1" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="28">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#ffffff"/>
+			<Interior ss:Color="#000000" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="44">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="48">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top"/>
+				<Border ss:Position="Left"/>
+				<Border ss:Position="Right"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="29">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="31">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="35">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="37">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+			<NumberFormat ss:Format="[$-416]dd/MM/yyyy"/>
+		</Style>
+		<Style ss:ID="39">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="24">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top"/>
+				<Border ss:Position="Left"/>
+				<Border ss:Position="Right"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="0.799" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="33">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="23">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top"/>
+				<Border ss:Position="Left"/>
+				<Border ss:Position="Right"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="34">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="25">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#ffffff"/>
+			<Interior ss:Color="#000000" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="41">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="45">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top"/>
+				<Border ss:Position="Left"/>
+				<Border ss:Position="Right"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="20.0" ss:Bold="1" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="26">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#ffffff"/>
+			<Interior ss:Color="#000000" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="42">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="43">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="21">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top"/>
+				<Border ss:Position="Left"/>
+				<Border ss:Position="Right"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="47">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top"/>
+				<Border ss:Position="Left"/>
+				<Border ss:Position="Right"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Color="#000000"/>
+			<Interior ss:Color="#ffffff" ss:Pattern="Solid"/>
+		</Style>
+	</Styles>
+	<Names>
+		<NamedRange ss:Name="__bookmark_2" ss:RefersTo="Lista Gerencial de Veículos Dev!R3C1:R17C16"/>
+		<NamedRange ss:Name="__bookmark_1" ss:RefersTo="Lista Gerencial de Veículos Dev!R3C1:R17C17"/>
+	</Names>
+
+<Worksheet ss:Name="Lista Gerencial de Veículos Dev">
+	<ss:Table>
+		<ss:Column ss:Width="46.208" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="34.304" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="126.336" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="68.864" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="32.512" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="8.064" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="1.664" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="9.856" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="16.256" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="85.504" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="121.984" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="47.744" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="47.232" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="56.576" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="56.576" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="66.048" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="1.664" ss:AutoFitWidth="0"/>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="20" ss:MergeAcross="2">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="22" ss:MergeAcross="13">
+				<Data ss:Type="String">LISTA GERENCIAL DE VEÍCULOS DEVOLVIDOS: 30/03/2025 à 30/03/2026</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="21" ss:MergeAcross="2">
+				<Data ss:Type="String">30 de mar de 2026 21:45</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="23" ss:MergeAcross="13">
+				<Data ss:Type="String">Usuário: isaac oliveira dos santos junior</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="26">
+				<Data ss:Type="String">Código</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="28">
+				<Data ss:Type="String">Pos.</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="28" ss:MergeAcross="3">
+				<Data ss:Type="String">Modelo</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="28" ss:MergeAcross="3">
+				<Data ss:Type="String">Ano</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="28" ss:MergeAcross="1">
+				<Data ss:Type="String">Cor</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="28">
+				<Data ss:Type="String">Placa</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="28">
+				<Data ss:Type="String">Data Compra</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="28">
+				<Data ss:Type="String">Data devolução</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="28">
+				<Data ss:Type="String">Localização</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="24" ss:MergeDown="14"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="30">
+				<Data ss:Type="Number">7010581</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="32">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="34" ss:MergeAcross="3">
+				<Data ss:Type="String">415CDISPRINTERM</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="32" ss:MergeAcross="3">
+				<Data ss:Type="String">2014/2014</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="32" ss:MergeAcross="1">
+				<Data ss:Type="String">PRATA</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="36">
+				<Data ss:Type="String">PJA1E41</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="38">
+				<Data ss:Type="DateTime">2025-05-28T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="40"/>
+			<Cell ss:Index="16" ss:StyleID="40"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="30">
+				<Data ss:Type="Number">7210307</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="32">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="34" ss:MergeAcross="3">
+				<Data ss:Type="String">FOCUS SE 1.6 HC</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="32" ss:MergeAcross="3">
+				<Data ss:Type="String">2016/2016</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="32" ss:MergeAcross="1">
+				<Data ss:Type="String">BRANCO</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="36">
+				<Data ss:Type="String">PJX1J82</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="38">
+				<Data ss:Type="DateTime">2025-08-05T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="40"/>
+			<Cell ss:Index="16" ss:StyleID="40"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="30">
+				<Data ss:Type="Number">6337848</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="32">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="34" ss:MergeAcross="3">
+				<Data ss:Type="String">GOL 1.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="32" ss:MergeAcross="3">
+				<Data ss:Type="String">2011/2011</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="32" ss:MergeAcross="1">
+				<Data ss:Type="String">PRETO</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="36">
+				<Data ss:Type="String">NYN3545</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="38">
+				<Data ss:Type="DateTime">2024-09-30T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="40"/>
+			<Cell ss:Index="16" ss:StyleID="40"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="30">
+				<Data ss:Type="Number">7226843</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="32">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="34" ss:MergeAcross="3">
+				<Data ss:Type="String">GOL 1.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="32" ss:MergeAcross="3">
+				<Data ss:Type="String">2009/2010</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="32" ss:MergeAcross="1">
+				<Data ss:Type="String">VERMELHO</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="36">
+				<Data ss:Type="String">MOC8F32</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="38">
+				<Data ss:Type="DateTime">2025-08-11T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="40"/>
+			<Cell ss:Index="16" ss:StyleID="40"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="30">
+				<Data ss:Type="Number">7323864</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="32">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="34" ss:MergeAcross="3">
+				<Data ss:Type="String">NXR 160 BROS ABS</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="32" ss:MergeAcross="3">
+				<Data ss:Type="String">2025/2025</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="32" ss:MergeAcross="1">
+				<Data ss:Type="String">CINZA</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="36">
+				<Data ss:Type="String">SKQ8H06</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="38">
+				<Data ss:Type="DateTime">2025-09-10T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="40"/>
+			<Cell ss:Index="16" ss:StyleID="40"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="30">
+				<Data ss:Type="Number">6734446</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="32">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="34" ss:MergeAcross="3">
+				<Data ss:Type="String">OROCH DYN 16 SCE</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="32" ss:MergeAcross="3">
+				<Data ss:Type="String">2017/2017</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="32" ss:MergeAcross="1">
+				<Data ss:Type="String">BRANCO</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="36">
+				<Data ss:Type="String">PKM0J94</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="38">
+				<Data ss:Type="DateTime">2025-02-19T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="40"/>
+			<Cell ss:Index="16" ss:StyleID="40"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="30">
+				<Data ss:Type="Number">7160679</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="32">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="34" ss:MergeAcross="3">
+				<Data ss:Type="String">PALIO FIRE ECONOMY</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="32" ss:MergeAcross="3">
+				<Data ss:Type="String">2010/2011</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="32" ss:MergeAcross="1">
+				<Data ss:Type="String">CINZA</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="36">
+				<Data ss:Type="String">NTW1049</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="38">
+				<Data ss:Type="DateTime">2025-07-19T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="40"/>
+			<Cell ss:Index="16" ss:StyleID="40"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="30">
+				<Data ss:Type="Number">6810359</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="32">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="34" ss:MergeAcross="3">
+				<Data ss:Type="String">POP 110I</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="32" ss:MergeAcross="3">
+				<Data ss:Type="String">2019/2019</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="32" ss:MergeAcross="1">
+				<Data ss:Type="String">BRANCO</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="36">
+				<Data ss:Type="String">RCP7J41</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="38">
+				<Data ss:Type="DateTime">2025-03-19T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="40"/>
+			<Cell ss:Index="16" ss:StyleID="40"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="30">
+				<Data ss:Type="Number">7519474</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="32">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="34" ss:MergeAcross="3">
+				<Data ss:Type="String">S10 LTZ DD4A</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="32" ss:MergeAcross="3">
+				<Data ss:Type="String">2019/2020</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="32" ss:MergeAcross="1">
+				<Data ss:Type="String">BRANCO</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="36">
+				<Data ss:Type="String">PLR1I24</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="38">
+				<Data ss:Type="DateTime">2025-11-10T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="40"/>
+			<Cell ss:Index="16" ss:StyleID="40"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="30">
+				<Data ss:Type="Number">6691831</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="32">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="34" ss:MergeAcross="3">
+				<Data ss:Type="String">SAVEIRO 1.6 CE TROOPER</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="32" ss:MergeAcross="3">
+				<Data ss:Type="String">2009/2010</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="32" ss:MergeAcross="1">
+				<Data ss:Type="String">PRETO</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="36">
+				<Data ss:Type="String">ELS9172</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="38">
+				<Data ss:Type="DateTime">2025-02-04T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="40"/>
+			<Cell ss:Index="16" ss:StyleID="40"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="30">
+				<Data ss:Type="Number">7663127</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="32">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="34" ss:MergeAcross="3">
+				<Data ss:Type="String">STRADA ADVENTURE CD</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="32" ss:MergeAcross="3">
+				<Data ss:Type="String">2017/2018</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="32" ss:MergeAcross="1">
+				<Data ss:Type="String">BRANCO</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="36">
+				<Data ss:Type="String">QMT6A94</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="38">
+				<Data ss:Type="DateTime">2025-12-26T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="40"/>
+			<Cell ss:Index="16" ss:StyleID="40"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="30">
+				<Data ss:Type="Number">6782301</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="32">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="34" ss:MergeAcross="3">
+				<Data ss:Type="String">T CROSS CL TSI</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="32" ss:MergeAcross="3">
+				<Data ss:Type="String">2022/2023</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="32" ss:MergeAcross="1">
+				<Data ss:Type="String">PRETO</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="36">
+				<Data ss:Type="String">ENZ3A46</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="38">
+				<Data ss:Type="DateTime">2025-03-10T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="40"/>
+			<Cell ss:Index="16" ss:StyleID="40"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="42" ss:MergeAcross="13">
+				<Data ss:Type="String">Total: 12</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="43"/>
+			<Cell ss:Index="16" ss:StyleID="44"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="45" ss:MergeAcross="14"/>
+			<Cell ss:Index="16" ss:StyleID="46"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="47" ss:MergeAcross="3"/>
+			<Cell ss:Index="5" ss:StyleID="48">
+				<Data ss:Type="String">Página:</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="48" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="48">
+				<Data ss:Type="String">/</Data>
+			</Cell>
+			<Cell ss:Index="9" ss:StyleID="48">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="47" ss:MergeAcross="1"/>
+			<Cell ss:Index="12" ss:StyleID="47" ss:MergeAcross="5"/>
+		</Row>
+	</ss:Table>
+	<WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+		<PageSetup>
+			<PageMargins x:Bottom="0.25" x:Left="0.099999994" x:Right="0.099999994" x:Top="0.25"/>
+			<Layout x:Orientation="Landscape"/>
+		</PageSetup>
+		<Print>
+			<PaperSizeIndex>9</PaperSizeIndex>
+		</Print>
+	</WorksheetOptions>
+</Worksheet>
+</Workbook>

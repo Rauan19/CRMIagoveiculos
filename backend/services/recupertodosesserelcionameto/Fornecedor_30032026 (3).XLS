@@ -1,0 +1,4499 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?mso-application progid="Excel.Sheet"?>
+
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" xmlns:html="http://www.w3.org/TR/REC-html40">
+	<DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+		<Author/>
+		<Title>Contas à pagar por Categoria/Fornecedor</Title>
+		<Description/>
+		<Subject/>
+	</DocumentProperties>
+	<Styles>
+		<Style ss:ID="HyperlinkId" ss:Name="Hyperlink">
+			<Font ss:Color="#0000ff"/>
+		</Style>
+		<Style ss:ID="1">
+			<NumberFormat ss:Format="yyyy-M-d HH:mm:ss AM/PM"/>
+		</Style>
+		<Style ss:ID="26">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="28">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="30">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<NumberFormat ss:Format="R$###,##0.00"/>
+		</Style>
+		<Style ss:ID="27">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="35">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="29">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="31">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<NumberFormat ss:Format="R$###,##0.00"/>
+		</Style>
+		<Style ss:ID="32">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="36">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="20">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Bold="1" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="22">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="24">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="33">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#000000"/>
+			<NumberFormat ss:Format="R$ ###,##0.00"/>
+		</Style>
+		<Style ss:ID="21">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Bold="1" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="23">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="25">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="34">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#000000"/>
+			<NumberFormat ss:Format="R$ ###,##0.00"/>
+		</Style>
+	</Styles>
+	<Names>
+		<NamedRange ss:Name="__bookmark_1" ss:RefersTo="Contas à pagar por Categoria_Fo!R1C1:R225C7"/>
+	</Names>
+
+<Worksheet ss:Name="Contas à pagar por Categoria_Fo">
+	<ss:Table>
+		<ss:Column ss:Width="188.928" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="62.976" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="62.976" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="62.976" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="62.976" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="63.104" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="62.976" ss:AutoFitWidth="0"/>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="21" ss:MergeAcross="6">
+				<Data ss:Type="String">Categoria: VEÍCULOS - COMPRA SAÍDA</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="23">
+				<Data ss:Type="String">Forncedor</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="25">
+				<Data ss:Type="String">Residencial</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="25">
+				<Data ss:Type="String">Celular</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="25">
+				<Data ss:Type="String">Multas</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="25">
+				<Data ss:Type="String">Juros</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="25">
+				<Data ss:Type="String">Descontos</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="25">
+				<Data ss:Type="String">Valor</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">abraao bruno borges mendes</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">26000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">22000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Nadson manoel vilas boas oliveira</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">103000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">belisco</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">150000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">DANILO Tavares Moreira da costa</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">29000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">83500.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">17500.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Nadson manoel vilas boas oliveira</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">86000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Marconi Barreto Rocha</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">15000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">DANILO Tavares Moreira da costa</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">16000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Jonas Costa SILVEIRA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75983729977</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">15000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Jonas Costa SILVEIRA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75983729977</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">15000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">5000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">17500.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">27000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">STEVENS DE SOUZA BORGES</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">71 982247157</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">44000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Carlos  Jose Moura Brandao</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">71 992262893</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">45000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">JULINEI CARDOSO PIMENTEL</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">26000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">JULINEI CARDOSO PIMENTEL</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">13800.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">marinaldo lopes rodrigues junior</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">50000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">TADEUS DA ROCHA SILVA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">46000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">TIAGO DOS SANTOS PEREIRA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">26000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">EDASIO GOMES RABELO</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">27500.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">17000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">DANILO Tavares Moreira da costa</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">14000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">EDIELSON RIBEIRO GOMES</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">48000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">NELSON BORGES DA SILVEIRA FILHO</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">16000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">JULINEI CARDOSO PIMENTEL</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">34000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">5000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">DANILO Tavares Moreira da costa</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">40000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Jadson De Souza Ribeiro</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">26000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">21000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">RODRIGO SANTANA DOS SANTOS</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75 982116654</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">9300.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">JOSE FLAVIO DAMACENA DE BRITO</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">15000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">REIZINHO VEÍCULOS</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">15500.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Nadson manoel vilas boas oliveira</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">61000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">12000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">RODRIGO SANTANA DOS SANTOS</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75 982116654</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">17200.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">15000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">JOAO PEDRO FIGUEIREDO QUEIROZ DE JESUS</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75 981846801</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">39367.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">RODRIGO SANTANA DOS SANTOS</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75 982116654</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">11000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">DANILO Tavares Moreira da costa</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">15000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">43000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">25000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">JORGE BATISTA FILHO</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">12000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">IAGO VEICULOS LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">4900.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">13000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">YURI QUEIROZ RIBEIRO</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75 988456312</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">33000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">JULINEI CARDOSO PIMENTEL</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">20000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">32000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Localiza</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">78800.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">15000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">7000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">42000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">50000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">IGOR ALMEIDA SOARES NOIA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75 981731566</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">9500.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">16000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">ICARO DE JESUS BARBOSA SOUZA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">11000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">29000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">RODRIGO SANTANA DOS SANTOS</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75 982116654</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">9800.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">IAGO VEICULOS LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">5000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Natan de Jesus Anunciação</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75 998446890</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">11500.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Nadson manoel vilas boas oliveira</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">130000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">DANILO Tavares Moreira da costa</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">82000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">UELITON CERQUEIRA SAMPAIO</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">18000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">LINALDO ALVES DA CONCEICAO</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">38000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">20000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">42000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">11000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">RODRIGO MATOS SANTANA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">47988576736</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">28000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">IAGO VEICULOS LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">6000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">ERLON DE JESUS SILVA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">16000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">LUIZ ANTONIO VASCONCELOS DIAS</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75981435353</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">23000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">TIAGO VILA VERDE DA SILVA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">21000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">11200.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Ester da Silva Melo Barbosa</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">71994123996</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">57000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">11000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">29000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">10900.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">12100.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">12000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">22900.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Nadson manoel vilas boas oliveira</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">24000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">ANDRE DOS SANTOS NASCIMENTO</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75991277871</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">11500.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">40000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">8700.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">DAISE SANTOS DA CONCEIÇÃO</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75983684412</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">10000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">RODRIGO QUEIROZ DOS SANTOS</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75982245822</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">17500.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">100000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">21000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">DANILO Tavares Moreira da costa</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">21000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Marcos Vinicius Oliveira Brito</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">11000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">40000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">127000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">GUILHERME DA SILVA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75999674890</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">13000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">16800.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">38000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">16800.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">FELIPE DE JESUS OLIVEIRA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75992653806</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">6800.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Aldacir De Souza Murici</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75981241899</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">18000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">João Victor Machado Dos Santos</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">7599301997</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">11700.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Laercio Andrade Nascimento</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">120000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Carlos Andre Lemos Cunha</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75981328407</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">47000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">ANDRE DOS SANTOS NASCIMENTO</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75991277871</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">25000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">58000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">7050.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">9500.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">7500.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Bruno Santos Barros</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75998668519</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">60000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">JONAS NUNES PEREIRA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75991791030</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">17000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">12500.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">10200.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Manoel Cruz De souza</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">39800.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Bruno Santos Barros</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75998668519</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">42000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Ana Verena Conceição</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75982298642</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">6220.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Mailson Soares Mascarenhas</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">39000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">20000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">JOSE PAULO RODRIGUES PIMENTEL</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75982065448</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">5100.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">32000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">14000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">16800.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">DANILO Tavares Moreira da costa</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">15000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">7800.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">32000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">6500.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">FELIPE SILVA DE JESUS</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75 982568939</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">19000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">12000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">16800.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">ADEMILSON CARDOSO DOS ANJOS</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">73981692132</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">27000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">63000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">4000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">8000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">19500.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">18500.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Uilson santana dos santos</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">12000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">19500.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">27800.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">19500.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">48000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">REIZINHO VEÍCULOS</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">9000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">GLEIDE LIMA PINHEIRO</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">36000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">REIZINHO VEÍCULOS</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">17500.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">2500.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">11000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">47500.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">GENIVALDO DOS SANTOS FEREIRA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">83000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">GILZIAN DOS SANTOS OLIVEIRA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">9500.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">12500.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">BRUNA DOS SANTOS MOTA OLIVEIRA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">32000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="21" ss:MergeAcross="2">
+				<Data ss:Type="String">Total do fornecedor: 149</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="32"/>
+			<Cell ss:Index="5" ss:StyleID="32"/>
+			<Cell ss:Index="6" ss:StyleID="32"/>
+			<Cell ss:Index="7" ss:StyleID="34">
+				<Data ss:Type="Number">4183637.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="21" ss:MergeAcross="2">
+				<Data ss:Type="String">Total acumulado: 149</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="32"/>
+			<Cell ss:Index="5" ss:StyleID="32"/>
+			<Cell ss:Index="6" ss:StyleID="32"/>
+			<Cell ss:Index="7" ss:StyleID="25">
+				<Data ss:Type="String">R$ 4.183.637,00</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="21" ss:MergeAcross="6">
+				<Data ss:Type="String">Categoria: VEÍCULOS - IPVA/LICENC/SEG OBRIG/MULTA SAIDA</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="23">
+				<Data ss:Type="String">Forncedor</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="25">
+				<Data ss:Type="String">Residencial</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="25">
+				<Data ss:Type="String">Celular</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="25">
+				<Data ss:Type="String">Multas</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="25">
+				<Data ss:Type="String">Juros</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="25">
+				<Data ss:Type="String">Descontos</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="25">
+				<Data ss:Type="String">Valor</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Fernando dos Santos Cerqueira</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75988871275</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">18814.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="21" ss:MergeAcross="2">
+				<Data ss:Type="String">Total do fornecedor: 1</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="32"/>
+			<Cell ss:Index="5" ss:StyleID="32"/>
+			<Cell ss:Index="6" ss:StyleID="32"/>
+			<Cell ss:Index="7" ss:StyleID="34">
+				<Data ss:Type="Number">18814.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="21" ss:MergeAcross="2">
+				<Data ss:Type="String">Total acumulado: 150</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="32"/>
+			<Cell ss:Index="5" ss:StyleID="32"/>
+			<Cell ss:Index="6" ss:StyleID="32"/>
+			<Cell ss:Index="7" ss:StyleID="25">
+				<Data ss:Type="String">R$ 4.202.451,00</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="21" ss:MergeAcross="6">
+				<Data ss:Type="String">Categoria: VEÍCULOS - PAGAMENTO CONSIGNADO</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="23">
+				<Data ss:Type="String">Forncedor</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="25">
+				<Data ss:Type="String">Residencial</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="25">
+				<Data ss:Type="String">Celular</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="25">
+				<Data ss:Type="String">Multas</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="25">
+				<Data ss:Type="String">Juros</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="25">
+				<Data ss:Type="String">Descontos</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="25">
+				<Data ss:Type="String">Valor</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">VINICIUS Gomes DOS SANTOS</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">RUAN DE JESUS LEITE</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75 981878025</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">45000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">JOSE FLAVIO DAMACENA DE BRITO</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">14000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">RODRIGO SANTANA DOS SANTOS</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75 982116654</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">14000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Arthur Silveira</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">71 981769607</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">40000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">GIRLEAN DE LIMA GOMES</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75991276705</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">23500.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">VITOR MILTON SANTOS  SOUZA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75 983661150</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">16900.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Bruno Nunes</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75 988445055</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">26000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">VINICIUS Gomes DOS SANTOS</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">12000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">LUIZ GABRIEL RIBEIRO SANTANA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75 991860707</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">48000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">JURANDIR RODRIGUES BARBOSA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75 981214175</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">46000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Nadson manoel vilas boas oliveira</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">82000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">DANILO Tavares Moreira da costa</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">76000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Rogerio da Silva Matos</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">73991322366</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">11500.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">FELIPE SILVA DE JESUS</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75 982568939</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">26000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">GESLEI ANDRADE OLIVEIRA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75988357273</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">32000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">RODRIGO SANTANA DOS SANTOS</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75 982116654</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">16000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">MARCOS ALBERTO BORGES DA SILVA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75981666443</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">7000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Lucas de jesus pimentel brito</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">24800.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">15000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">JURANDIR RODRIGUES BARBOSA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75 981214175</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">10000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">15500.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">10000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">3800.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">39000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">VALDEMAR MERCES DOS SANTOS</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">27000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">35000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">7300.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">RODRIGO MATOS SANTANA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">47988576736</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">27800.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Victor pugas</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">19000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">21000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">LUIZ FERNANDO RODRIGUES ROCHA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75999701652</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">18000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">55000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">RODRIGO QUEIROZ DOS SANTOS</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75982245822</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">50000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Adilson Reis Barreto</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75988474673</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">38000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">16500.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">GILZIAN DOS SANTOS OLIVEIRA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">17000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">12000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">9400.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">NARDIR DE JESUS SILVA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">35000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CORBAÇA MOTO LTDA</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">11700.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Filemon Damasceno Menezes</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75983729461</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">25000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Elielson de souza santos</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">10500.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">EDMUNDO DA MOTTA RIBEIRO</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75998310155</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">16000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">CARLOS BALBINO DE SOUZA PINTO</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">10000.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Iago Alves de Almeida</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">34500.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="21" ss:MergeAcross="2">
+				<Data ss:Type="String">Total do fornecedor: 46</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="32"/>
+			<Cell ss:Index="5" ss:StyleID="32"/>
+			<Cell ss:Index="6" ss:StyleID="32"/>
+			<Cell ss:Index="7" ss:StyleID="34">
+				<Data ss:Type="Number">1149700.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="21" ss:MergeAcross="2">
+				<Data ss:Type="String">Total acumulado: 196</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="32"/>
+			<Cell ss:Index="5" ss:StyleID="32"/>
+			<Cell ss:Index="6" ss:StyleID="32"/>
+			<Cell ss:Index="7" ss:StyleID="25">
+				<Data ss:Type="String">R$ 5.352.151,00</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="21" ss:MergeAcross="6">
+				<Data ss:Type="String">Categoria: VEÍCULOS - QUITAÇÕES</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="23">
+				<Data ss:Type="String">Forncedor</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="25">
+				<Data ss:Type="String">Residencial</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="25">
+				<Data ss:Type="String">Celular</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="25">
+				<Data ss:Type="String">Multas</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="25">
+				<Data ss:Type="String">Juros</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="25">
+				<Data ss:Type="String">Descontos</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="25">
+				<Data ss:Type="String">Valor</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Fernando dos Santos Cerqueira</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75988871275</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">409.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Fernando dos Santos Cerqueira</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75988871275</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">409.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Fernando dos Santos Cerqueira</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75988871275</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">409.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Fernando dos Santos Cerqueira</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75988871275</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">409.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Fernando dos Santos Cerqueira</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75988871275</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">409.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">Fernando dos Santos Cerqueira</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29">
+				<Data ss:Type="String">75988871275</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">409.0</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">JOILSON DE SOUZA BARBOSA NASCIMENTO</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">6.14</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">JOILSON DE SOUZA BARBOSA NASCIMENTO</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">6.14</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">JOILSON DE SOUZA BARBOSA NASCIMENTO</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">6.14</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">JOILSON DE SOUZA BARBOSA NASCIMENTO</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">6.14</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="27">
+				<Data ss:Type="String">JOILSON DE SOUZA BARBOSA NASCIMENTO</Data>
+			</Cell>
+			<Cell ss:Index="2" ss:StyleID="29"/>
+			<Cell ss:Index="3" ss:StyleID="29"/>
+			<Cell ss:Index="4" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="31">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="31">
+				<Data ss:Type="Number">6.14</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="21" ss:MergeAcross="2">
+				<Data ss:Type="String">Total do fornecedor: 11</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="32"/>
+			<Cell ss:Index="5" ss:StyleID="32"/>
+			<Cell ss:Index="6" ss:StyleID="32"/>
+			<Cell ss:Index="7" ss:StyleID="34">
+				<Data ss:Type="Number">2484.6999999999994</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="21" ss:MergeAcross="2">
+				<Data ss:Type="String">Total acumulado: 207</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="32"/>
+			<Cell ss:Index="5" ss:StyleID="32"/>
+			<Cell ss:Index="6" ss:StyleID="32"/>
+			<Cell ss:Index="7" ss:StyleID="25">
+				<Data ss:Type="String">R$ 5.354.635,70</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="0" ss:Height="18.0">
+			<Cell ss:Index="1" ss:StyleID="35" ss:MergeAcross="6"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="21" ss:MergeAcross="2">
+				<Data ss:Type="String">Total:</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="36"/>
+			<Cell ss:Index="5" ss:StyleID="36"/>
+			<Cell ss:Index="6" ss:StyleID="36"/>
+			<Cell ss:Index="7" ss:StyleID="34">
+				<Data ss:Type="Number">5354635.699999998</Data>
+			</Cell>
+		</Row>
+	</ss:Table>
+	<WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+		<PageSetup>
+			<PageMargins x:Bottom="0.25" x:Left="0.099999994" x:Right="0.099999994" x:Top="0.25"/>
+			<Layout x:Orientation="Landscape"/>
+			<Header x:Data="&amp;L&amp;&#34;Arial,Bold&#34;&amp;11&amp;K000000IAGO VEICULOS&amp;&#34;Arial&#34;&amp;8&amp;K00000030 de mar de 2026 19:11&amp;C&amp;&#34;Arial,Bold&#34;&amp;11&amp;K000000CONTAS À PAGAR POR CATEGORIA/FORNECEDOR&amp;&#34;Arial,Bold&#34;&amp;11&amp;K00000030/03/2023 à 30/03/2024&amp;&#34;Arial&#34;&amp;8&amp;K000000Usuário:  isaac oliveira dos santos junior"/>
+			<Footer/>
+		</PageSetup>
+		<Print>
+			<PaperSizeIndex>9</PaperSizeIndex>
+		</Print>
+	</WorksheetOptions>
+</Worksheet>
+</Workbook>

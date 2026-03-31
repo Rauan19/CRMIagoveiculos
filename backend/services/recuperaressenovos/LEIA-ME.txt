@@ -1,0 +1,16 @@
+Pasta para relatórios .XLS do Revenda Mais (recuperação “novos”).
+
+Ordem sugerida no sistema:
+1) Clientes já importados via export .xlsx (comando import:clientes:xlsx no backend).
+2) Coloque aqui os .XLS exportados (Listagem de Clientes, Vendidos com Cliente, Lista Gerencial de Estoque, etc.).
+3) Só os 3 passos novos (clientes .xlsx + usuário import + batch desta pasta):
+   cd backend
+   npm run import:novos:dry   (simula)
+   npm run import:novos       (grava)
+
+   Opcional: migrate antes — npm run import:rm:recover:novos:dry / :novos
+
+O “Gerencial Estoque Externo” usa o script importRevendaMaisEstoqueExterno.js (fase 35 do batch).
+Vendas sem cliente no relatório ficam vinculadas ao cliente placeholder “Importação — cliente não informado (estoque externo)” até você corrigir no CRM.
+
+Defina IMPORT_DEFAULT_SELLER_ID no .env se precisar forçar o vendedor das vendas importadas.

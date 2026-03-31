@@ -29,6 +29,7 @@ interface Customer {
 
 interface Vehicle {
   id: number
+  revendaMaisCodigo?: string | null
   brand: string
   model: string
   year: number
@@ -122,6 +123,27 @@ const statusColors: Record<string, string> = {
   disponivel: 'bg-green-100 text-green-800',
   reservado: 'bg-yellow-100 text-yellow-800',
   vendido: 'bg-red-100 text-red-800',
+}
+
+function tipoFromCanalEntrada(canalEntrada?: string): string {
+  const c = String(canalEntrada || '').trim().toUpperCase()
+  if (!c) return '-'
+  if (c === 'REPASSE') return 'Repasse'
+  if (c === 'CONSIGNADO' || c.includes('CONSIGN')) return 'Consignado'
+  return 'Próprio'
+}
+
+function fmtDateBR(iso?: string | null): string {
+  if (!iso) return ''
+  const d = new Date(iso)
+  if (Number.isNaN(d.getTime())) return ''
+  return d.toLocaleDateString('pt-BR')
+}
+
+function fabModFromVehicle(v: Vehicle): string {
+  const fab = v.anoFabricacao ?? v.year
+  const mod = v.anoModelo ?? v.year
+  return `${fab}/${mod}`
 }
 
 interface FipeBrand {
@@ -2622,54 +2644,86 @@ function VehiclesPageContent() {
                 <table className="min-w-full divide-y divide-gray-200 text-xs">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th className="px-2 py-2 text-left font-medium text-gray-500 uppercase tracking-wider">Marca/Modelo</th>
-                    <th className="px-2 py-2 text-left font-medium text-gray-500 uppercase tracking-wider">Ano</th>
-                    <th className="px-2 py-2 text-left font-medium text-gray-500 uppercase tracking-wider">Placa</th>
-                    <th className="px-2 py-2 text-left font-medium text-gray-500 uppercase tracking-wider">Valor Venda</th>
-                    <th className="px-2 py-2 text-left font-medium text-gray-500 uppercase tracking-wider">Valor Compra</th>
-                    <th className="px-2 py-2 text-left font-medium text-gray-500 uppercase tracking-wider">Valor Tabela</th>
-                    <th className="px-2 py-2 text-left font-medium text-gray-500 uppercase tracking-wider">Entrada</th>
-                    <th className="px-2 py-2 text-left font-medium text-gray-500 uppercase tracking-wider">Saída</th>
-                    <th className="px-2 py-2 text-left font-medium text-gray-500 uppercase tracking-wider">Cliente</th>
-                    <th className="px-2 py-2 text-left font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                    <th className="px-2 py-2 text-left font-medium text-gray-500 uppercase tracking-wider">Ações</th>
+                    <th className="px-2 py-2 text-left font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Cod</th>
+                    <th className="px-2 py-2 text-left font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Posição</th>
+                    <th className="px-2 py-2 text-left font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Modelo</th>
+                    <th className="px-2 py-2 text-left font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Fab/Mod</th>
+                    <th className="px-2 py-2 text-left font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Cor</th>
+                    <th className="px-2 py-2 text-left font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">PL/CH</th>
+                    <th className="px-2 py-2 text-left font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Status</th>
+                    <th className="px-2 py-2 text-left font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Tipo</th>
+                    <th className="px-2 py-2 text-left font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Entrada</th>
+                    <th className="px-2 py-2 text-left font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Saída</th>
+                    <th className="px-2 py-2 text-left font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Situação</th>
+                    <th className="px-2 py-2 text-left font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Nfe</th>
+                    <th className="px-2 py-2 text-left font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">B/L</th>
+                    <th className="px-2 py-2 text-left font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Marcador</th>
+                    <th className="px-2 py-2 text-left font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Ações</th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {totalResults === 0 ? (
                     <tr>
-                      <td colSpan={11} className="px-2 py-3 text-center text-gray-500">
+                      <td colSpan={15} className="px-2 py-3 text-center text-gray-500">
                         {vehicles.length === 0 ? 'Nenhum veículo cadastrado' : 'Nenhum veículo encontrado com os filtros aplicados'}
                       </td>
                     </tr>
                   ) : (
                     pageVehicles.map((vehicle) => (
                       <tr key={vehicle.id} className="hover:bg-gray-50">
-                        <td className="px-2 py-2 whitespace-nowrap">
-                          <div className="font-medium text-gray-900">{vehicle.brand} {vehicle.model}</div>
+                        <td className="px-2 py-2 whitespace-nowrap font-mono text-gray-900">
+                          {vehicle.revendaMaisCodigo || vehicle.id}
                         </td>
-                        <td className="px-2 py-2 whitespace-nowrap text-gray-500">{vehicle.year}</td>
-                        <td className="px-2 py-2 whitespace-nowrap text-gray-500">{vehicle.plate || '-'}</td>
-                        <td className="px-2 py-2 whitespace-nowrap font-medium text-gray-900">
-                          {vehicle.price ? `R$ ${vehicle.price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` : '-'}
+                        <td className="px-2 py-2 whitespace-nowrap text-gray-700">
+                          {vehicle.posicao ?? '-'}
                         </td>
-                        <td className="px-2 py-2 whitespace-nowrap text-gray-500">
-                          {vehicle.cost ? `R$ ${vehicle.cost.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` : '-'}
+                        <td className="px-2 py-2 whitespace-nowrap text-gray-900">
+                          {vehicle.model || '-'}
                         </td>
-                        <td className="px-2 py-2 whitespace-nowrap text-gray-500">
-                          {vehicle.tableValue ? `R$ ${vehicle.tableValue.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` : '-'}
+                        <td className="px-2 py-2 whitespace-nowrap text-gray-700">
+                          {`${vehicle.anoFabricacao ?? vehicle.year}/${vehicle.anoModelo ?? vehicle.year}`}
                         </td>
-                        <td className="px-2 py-2 whitespace-nowrap text-gray-500">
-                          {vehicle.createdAt ? new Date(vehicle.createdAt).toLocaleDateString('pt-BR') : '-'}
+                        <td className="px-2 py-2 whitespace-nowrap text-gray-700">
+                          {(vehicle.color || '-').toUpperCase()}
                         </td>
-                        <td className="px-2 py-2 whitespace-nowrap text-gray-500">
-                          {(() => { const d = vehicle.saleDate ?? vehicle.sale?.date; return d ? new Date(d).toLocaleDateString('pt-BR') : '-' })()}
+                        <td className="px-2 py-2 whitespace-nowrap font-mono text-gray-700">
+                          {vehicle.plate || vehicle.chassi || '-'}
                         </td>
-                        <td className="px-2 py-2 whitespace-nowrap text-gray-500">{vehicle.customer?.name || '-'}</td>
-                        <td className="px-2 py-2 whitespace-nowrap">
-                          <span className={`px-1.5 py-0.5 font-medium rounded-full ${statusColors[vehicle.status] || 'bg-gray-100 text-gray-800'}`}>
-                            {vehicle.status}
-                          </span>
+                        <td className="px-2 py-2 whitespace-nowrap text-gray-900">
+                          {vehicle.conditionStatus ? (vehicle.conditionStatus === 'usado' ? 'Usado' : vehicle.conditionStatus === 'novo' ? 'Novo' : vehicle.conditionStatus) : '-'}
+                        </td>
+                        <td className="px-2 py-2 whitespace-nowrap text-gray-700">
+                          {(() => {
+                            const canal = String(vehicle.canalEntrada || '').toUpperCase()
+                            if (canal === 'REPASSE') return 'Repasse'
+                            if (canal === 'CONSIGNADO' || canal.includes('CONSIGN')) return 'Consignado'
+                            if (vehicle.customerId) return 'Consignado'
+                            return 'Próprio'
+                          })()}
+                        </td>
+                        <td className="px-2 py-2 whitespace-nowrap text-gray-700">
+                          {(() => {
+                            const d = (vehicle.dataEntrada || vehicle.createdAt) as any
+                            return d ? new Date(d).toLocaleDateString('pt-BR') : '-'
+                          })()}
+                        </td>
+                        <td className="px-2 py-2 whitespace-nowrap text-gray-700">
+                          {(() => {
+                            const d = vehicle.saleDate ?? vehicle.sale?.date
+                            return d ? new Date(d).toLocaleDateString('pt-BR') : '-'
+                          })()}
+                        </td>
+                        <td className="px-2 py-2 whitespace-nowrap text-gray-700">
+                          {vehicle.status === 'disponivel' ? 'Estoque' : vehicle.status === 'reservado' ? 'Reservado' : vehicle.status === 'vendido' ? 'Vendido' : (vehicle.status || '-')}
+                        </td>
+                        <td className="px-2 py-2 whitespace-nowrap text-gray-700">
+                          {vehicle.documentName ? 'OK' : '-'}
+                        </td>
+                        <td className="px-2 py-2 whitespace-nowrap text-gray-700">
+                          {vehicle.blindado || '-'}
+                        </td>
+                        <td className="px-2 py-2 whitespace-nowrap text-gray-700">
+                          {vehicle.marcador1 || '-'}
                         </td>
                         <td className="px-2 py-2 whitespace-nowrap font-medium">
                           <button

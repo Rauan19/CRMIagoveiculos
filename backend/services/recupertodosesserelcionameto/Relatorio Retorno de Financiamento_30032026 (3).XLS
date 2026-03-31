@@ -1,0 +1,3739 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?mso-application progid="Excel.Sheet"?>
+
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" xmlns:html="http://www.w3.org/TR/REC-html40">
+	<DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+		<Author/>
+		<Title>Relatório Retorno de Financiamento</Title>
+		<Description/>
+		<Subject/>
+	</DocumentProperties>
+	<Styles>
+		<Style ss:ID="HyperlinkId" ss:Name="Hyperlink">
+			<Font ss:Color="#0000ff"/>
+		</Style>
+		<Style ss:ID="1">
+			<NumberFormat ss:Format="yyyy-M-d HH:mm:ss AM/PM"/>
+		</Style>
+		<Style ss:ID="31">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="33">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<NumberFormat ss:Format="[$-416]dd/MM/yyyy"/>
+		</Style>
+		<Style ss:ID="37">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="47">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="25">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#ffffff"/>
+			<Interior ss:Color="#000000" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="27">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#ffffff"/>
+			<Interior ss:Color="#000000" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="20">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top"/>
+				<Border ss:Position="Left"/>
+				<Border ss:Position="Right"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="11.0" ss:Bold="1" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="22">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top"/>
+				<Border ss:Position="Left"/>
+				<Border ss:Position="Right"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="11.0" ss:Bold="1" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="24">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#ffffff"/>
+			<Interior ss:Color="#000000" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="26">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#ffffff"/>
+			<Interior ss:Color="#000000" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="28">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#ffffff"/>
+			<Interior ss:Color="#000000" ss:Pattern="Solid"/>
+		</Style>
+		<Style ss:ID="51">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top"/>
+				<Border ss:Position="Left"/>
+				<Border ss:Position="Right"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="30">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="32">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<NumberFormat ss:Format="[$-416]dd/MM/yyyy"/>
+		</Style>
+		<Style ss:ID="36">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="46">
+			<Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="34">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="23">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top"/>
+				<Border ss:Position="Left"/>
+				<Border ss:Position="Right"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="38">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<NumberFormat ss:Format="R$ ###,##0.00"/>
+		</Style>
+		<Style ss:ID="40">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="42">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<NumberFormat ss:Format="R$ ###,##0.00"/>
+		</Style>
+		<Style ss:ID="44">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="29">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="35">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="39">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<NumberFormat ss:Format="R$ ###,##0.00"/>
+		</Style>
+		<Style ss:ID="41">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="43">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+			<NumberFormat ss:Format="R$ ###,##0.00"/>
+		</Style>
+		<Style ss:ID="45">
+			<Alignment ss:Horizontal="Right" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="48">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="49">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#000000"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="7.0" ss:Bold="1" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="21">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top"/>
+				<Border ss:Position="Left"/>
+				<Border ss:Position="Right"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Color="#000000"/>
+		</Style>
+		<Style ss:ID="50">
+			<Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+			<Borders>
+				<Border ss:Position="Bottom"/>
+				<Border ss:Position="Top"/>
+				<Border ss:Position="Left"/>
+				<Border ss:Position="Right"/>
+				<Border ss:Position="DiagonalLeft"/>
+			</Borders>
+			<Font ss:FontName="Arial" ss:Size="8.0" ss:Color="#000000"/>
+		</Style>
+	</Styles>
+	<Names>
+		<NamedRange ss:Name="__bookmark_1" ss:RefersTo="Relatório Retorno de Financiame!R3C1:R72C25"/>
+	</Names>
+
+<Worksheet ss:Name="Relatório Retorno de Financiame">
+	<ss:Table>
+		<ss:Column ss:Width="39.936" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="28.16" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="44.416" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="57.344" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="31.616" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="8.576" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="40.32" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="18.176" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="6.016" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="26.368" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="9.856" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="9.856" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="16.128" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="2.304" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="32.256" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="56.32" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="56.448" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="53.12" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="3.328" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="56.448" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="96.64" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="57.344" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="54.912" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="2.432" ss:AutoFitWidth="0"/>
+		<ss:Column ss:Width="37.504" ss:AutoFitWidth="0"/>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="20" ss:MergeAcross="4">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="22" ss:MergeAcross="17">
+				<Data ss:Type="String">RELATÓRIO RETORNO DE FINANCIAMENTO: 30/03/2023 à 30/03/2024</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="21" ss:MergeAcross="4">
+				<Data ss:Type="String">30 de mar de 2026 21:42</Data>
+			</Cell>
+			<Cell ss:Index="6" ss:StyleID="23" ss:MergeAcross="17">
+				<Data ss:Type="String">Usuário: isaac oliveira dos santos junior</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="24"/>
+			<Cell ss:Index="2" ss:StyleID="26">
+				<Data ss:Type="String">Tipo</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="26">
+				<Data ss:Type="String">Dt. Venda</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="28">
+				<Data ss:Type="String">Modelo</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="26" ss:MergeAcross="1">
+				<Data ss:Type="String">Ano</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="26">
+				<Data ss:Type="String">Placa/Chassi</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="26" ss:MergeAcross="1">
+				<Data ss:Type="String">Pos.</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="26" ss:MergeAcross="4">
+				<Data ss:Type="String">Financiado</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="26">
+				<Data ss:Type="String">Tp. Ret.</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="26">
+				<Data ss:Type="String">Retorno</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="26">
+				<Data ss:Type="String">Tac</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="26" ss:MergeAcross="1">
+				<Data ss:Type="String">Plus</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="26">
+				<Data ss:Type="String">TIF</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="26">
+				<Data ss:Type="String">Financeira</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="26">
+				<Data ss:Type="String">Cliente</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="26" ss:MergeAcross="1">
+				<Data ss:Type="String">Vendedor</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="26">
+				<Data ss:Type="String">Localização</Data>
+			</Cell>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2023-08-31T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">CG 160 START</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2023/2023</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">SJJ3C21</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">13300.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">BANCO PAN</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">IONAR DOS SANTOS ...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">ISAAC OLIVEIRA DO...</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2023-07-11T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">XRE 300 ABS</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2013/2013</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">OLB1984</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">5900.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">BANCO PAN</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">FLORISVALDO DA CO...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">ISAAC OLIVEIRA DO...</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2023-09-02T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">CG 160 START</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2022/2022</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">RPH0E63</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">10900.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">BANCO PAN</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">LUIZ SANTANA DOS ...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">JOSE GENIVALDO DA...</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2023-09-04T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">NXR 160 BROS ESDD FLEXONE</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2021/2020</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">RCV8I87</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">800.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">FINANCIAMENTO PRÓ...</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">JORGE MOREIRA DA ...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2023-09-04T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">NXR 160 BROS ESDD FLEXONE</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2021/2020</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">RCV8I87</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">1500.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">FINANCIAMENTO PRÓ...</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">JORGE MOREIRA DA ...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2023-09-21T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">POP 110I</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2023/2023</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">RPT8C44</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">8400.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">PAN</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">JESSICA COSTA DOS...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2023-09-26T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">FOCUS 1.6 SE 16V FLEX 4P POWERSHIFT</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2014/2013</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">OUZ7G71</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">13900.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">FINANCIAMENTO PRÓ...</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">WASHINGTON PAIXAO...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2023-09-27T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">RAV4 2.0 4X2 16V GASOLINA 4P AUTOMATICO</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2011/2011</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">NZD0888</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">23523.18</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">BANCO PAN</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">STEFFEN HERMANN M...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2023-09-29T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">POP 110I</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2023/2023</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">RPV7E72</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">7700.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">PANAMERICANO</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">RAMON PEREIRA ARA...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2023-09-30T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">CG 160 START</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2023/2022</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">RPV3F31</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">13900.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">SANTANDER</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">RAFAEL SANTOS SAN...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">ISAAC OLIVEIRA DO...</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2023-10-09T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">NXR 160 BROS ESD</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2022/2022</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">RPO6H28</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">19160.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">FINANCIAMENTO PRÓ...</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">VALDECY RIBEIRO D...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2023-10-21T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">FIAT PALIO FIRE ECONOMY</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2012/2011</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">NZB6269</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">16900.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">SANTANDER</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">JAILSON SAMPAIO D...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2023-10-26T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">GOL</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2007/2007</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">JPN3D81</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">7000.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">FINANCIAMENTO PRÓ...</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">IRISMAR DIAS DOS ...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2023-10-28T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">PALIO 1.0 FIRE</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2014/2014</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">OUZ0267</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">19000.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">SANTANDER</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">CLAUDEMIRO ALMEID...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2023-11-01T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">POP 110I</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2022/2022</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">RPG2G22</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">5300.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">SANTANDER</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">WANDERSON DOS SAN...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">ISAAC OLIVEIRA DO...</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2023-11-04T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">BIZ 110I</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2023/2023</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">RPS4H01</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">13000.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="45">
+				<Data ss:Type="Number">0</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">SANTANDER</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">EVANEY ARAUJO PER...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">JOSE GENIVALDO DA...</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2023-11-06T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">NISSAN FRONTIER LEATX4</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2018/2018</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">PLK0A60</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">17000.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">FINANCIAMENTO PRÓ...</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">JOANDERSON DE ALM...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2023-11-08T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">KA 1.0 TI-VCT</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2019/2018</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">QOX0H72</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">34000.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">PAN</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">JOILSON DE SOUZA ...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2023-11-13T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">NXR 160 BROS ESDD FLEXONE</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2020/2019</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">QTW2E83</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">16000.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">SANTANDER</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">ESMAEL SOUZA DA S...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2023-11-17T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">ONIX 1.0 MT JOY</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2018/2018</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">QOC4C35</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">30900.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="45">
+				<Data ss:Type="Number">3</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">SANTANDER</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">ROBSON MACHADO DE...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">JOSE GENIVALDO DA...</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2023-11-21T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">CHEVROLET CLASSIC LS</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2015/2014</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">OZJ1491</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">400.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">FINANCIAMENTO PRÓ...</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">JANETE SANTANA CA...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2023-11-23T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">POP 110I</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2023/2023</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">rps3i73</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">12000.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">FINANCIAMENTO PRÓ...</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">JOSE FLAVIO DAMAC...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2023-11-25T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">COROLLA 2.0 XEI 16V FLEX 4P AUTOMATICO</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2016/2015</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">PJG0G82</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">47000.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="45">
+				<Data ss:Type="Number">3</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">BV FINANCEIRA</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">PAULO SANTOS VIER...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">JOSE GENIVALDO DA...</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2023-12-06T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">GOL (NOVO) 1.0 TREND</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2010/2009</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">moc8f32</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">400.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">FINANCIAMENTO PRÓ...</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">JESSICA DOS SANTO...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2023-12-07T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">GOL</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2007/2006</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">jmk0993</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">2500.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">FINANCIAMENTO PRÓ...</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">EVERALDO SOARES D...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2023-12-09T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">GOL 1.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2014/2013</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">ous7g06</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">20000.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">BV FINANCEIRA</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">SIMONE SANTANA AL...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">JOSE GENIVALDO DA...</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2023-12-11T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">GOL</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2010/2009</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">nll2f85</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">10000.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">BANCO PAN</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">ADAILTON PEREIRA ...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2023-12-11T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">GOL</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2010/2009</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">nll2f85</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">1500.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">FINANCIAMENTO PRÓ...</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">ADAILTON PEREIRA ...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2023-12-13T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">CG 160 START</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2023/2022</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">RPL9D26</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">13400.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="45">
+				<Data ss:Type="Number">5</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">BANCO PAN</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">CEZAR DE SOUZA RO...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2023-12-22T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">KA 1.0 TI-VCT</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2013/2012</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">okn0i68</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">19290.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">BRADESCO</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">FRANCISCO DE SOUZ...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2023-12-22T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">KA 1.0 TI-VCT</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2013/2012</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">okn0i68</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">710.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">FINANCIAMENTO PRÓ...</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">FRANCISCO DE SOUZ...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-01-05T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">POP 100</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2008/2008</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">jrr3124</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">4000.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">FINANCIAMENTO PRÓ...</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">IRISMAR DIAS DOS ...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-01-06T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">POP 110I</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2023/2023</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">rpx2e62</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">11100.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="45">
+				<Data ss:Type="Number">3</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">SANTANDER</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">JOÃO PEDRO DE SOU...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-01-08T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">POP 110I</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2023/2023</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">sjl1f55</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">11100.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">SANTANDER</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">ADILSON DOS SANTO...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-01-11T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">CG 160 START</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2024/2023</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">sjq1j34</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">15400.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">PAN</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">TAINÁ LEITE SANTO...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-01-11T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">CG 160 START</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2024/2023</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">sjq4i52</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">12095.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">SANTANDER</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">FELIPE DE JESUS O...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-01-12T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">POP 110I</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2020/2020</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">RCQ5A70</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">500.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">FINANCIAMENTO PRÓ...</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">THIAGO DE OLIVEIR...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-01-19T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">XRE 190 SE</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2021/2021</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">rdi5g09</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">15900.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">SANTANDER</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">MATHEUS LUIZ DA C...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-01-19T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">XRE 190 SE</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2021/2021</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">rdi5g09</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">4000.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">FINANCIAMENTO PRÓ...</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">MATHEUS LUIZ DA C...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-01-22T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">POP 110I</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2023/2023</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">rpt3j27</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">500.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">FINANCIAMENTO PRÓ...</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">THIAGO DE OLIVEIR...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-01-22T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">POP 110I</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2019/2019</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">PLQ9F73</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">500.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">FINANCIAMENTO PRÓ...</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">LUANA FIUZA SAMPA...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-01-24T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">CG 160 START</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2024/2023</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">9C2KC2500RR028113</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">17200.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">SANTANDER</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">GILMAR PEREIRA</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-02-05T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">CHEVROLET CLASSIC LS</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2012/2011</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">NZA7281</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">19900.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">SANTANDER</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">VINICIUS CONCEIÇÃ...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-02-17T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">BIZ 125 ES</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2015/2015</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">PJR4798</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">5000.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">BANCO PAN</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">DUCE LENE MODESTA...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-02-19T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">POP 110I</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2019/2019</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">plx4f23</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">1800.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">FINANCIAMENTO PRÓ...</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">GABRIELA DE OLIVE...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-02-19T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">CG 160 START</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2024/2023</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="47"/>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">19900.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">PAN</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">DANIEL DOS SANTOS...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-02-22T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">POP 110I</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2024/2023</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">sjo0i37</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">6900.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">SANTANDER</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">HELLEN BEATRIZ BO...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-02-29T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">HB20 10M VISION</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2020/2020</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">qtz9f36</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">12000.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">PAN</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">JUAREZ SANTOS SIL...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-03-01T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">PRISMA 1.0MT ADV</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2015/2014</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">OZR2619</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">33200.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">BANCO PAN</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">JEFERSON NAVARRO</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">JOSE GENIVALDO DA...</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-03-01T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">PRISMA 1.0MT ADV</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2015/2014</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">OZR2619</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">2700.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">FINANCIAMENTO PRÓ...</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">JEFERSON NAVARRO</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">JOSE GENIVALDO DA...</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-03-02T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">CG 160 START</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2024/2023</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">sjq6A19</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">15900.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">BANCO PAN</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">JACY FERREIRA MOR...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-03-05T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">COROLLA XEI20FLEX</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2011/2010</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">NTT1475</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">9200.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">FINANCIAMENTO PRÓ...</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">JAIDIEL DE OLIVEI...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-03-07T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">RENEGADE 1.8 16V FLEX SPORT 4P AUTOMÁTICO</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2016/2016</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">PJV9E29</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">36616.47</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">SANTANDER</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">ALEX CARDOSO BOAV...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">ISAAC OLIVEIRA DO...</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-03-07T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">RENEGADE 1.8 16V FLEX SPORT 4P AUTOMÁTICO</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2016/2016</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">PJV9E29</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">5283.53</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">FINANCIAMENTO PRÓ...</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">ALEX CARDOSO BOAV...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">ISAAC OLIVEIRA DO...</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-03-09T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">KA 1.0 TI-VCT</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2015/2015</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">pJJ3C04</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">8500.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">SANTANDER</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">CRISLANE SANTOS D...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-03-12T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">CORSA HATCH MAXX</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2007/2007</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">jpy0b82</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">15135.20</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">PAN</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">DOUGLAS SILVA DA ...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-03-12T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">CORSA HATCH MAXX</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2007/2007</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">jpy0b82</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">1800.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">FINANCIAMENTO PRÓ...</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">DOUGLAS SILVA DA ...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-03-12T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">NXR 160 BROS ES FLEXONE</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2023/2023</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">RPL4I02</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">16900.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">SANTANDER</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">GABRIEL LUCAS PAS...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-03-16T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">KOMBI</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2013/2012</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">oku5898</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">26900.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">SANTANDER</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">MARCOS LIMA SANTO...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-03-18T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">HB20 1.0 COMFORT</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2016/2016</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">pjv1h00</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">49400.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">SANTANDER</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">MONICA DA SILVA D...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">JOSE GENIVALDO DA...</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-03-19T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">INTRUDER 125</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2007/2007</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">jgy3122</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">3900.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">FINANCIAMENTO PRÓ...</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">FRANKLIN DA SILVA...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">ISAAC OLIVEIRA DO...</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-03-21T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">BIZ 110I</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2023/2023</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">rpr5c73</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">1000.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">FINANCIAMENTO PRÓ...</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">SANDRO BASTO SANT...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-03-22T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">CG 150 FAN ESI</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2013/2013</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">OUI1C43</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">7100.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="45">
+				<Data ss:Type="Number">5</Data>
+			</Cell>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">BANCO PAN</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">CARLOS HENRIQUE D...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">JOSE GENIVALDO DA...</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-03-23T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">GOL 1.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2013/2012</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">nzu1e75</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">18900.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">BANCO PAN</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">FELIPE SILVA CONC...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-03-23T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">GOL 1.0</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2013/2012</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">nzu1e75</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">7000.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">FINANCIAMENTO PRÓ...</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">FELIPE SILVA CONC...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-03-28T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">POP 110I</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2021/2021</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">RDH3F76</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">10900.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">FINANCIAMENTO PRÓ...</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">BRUNO SANTOS SILV...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-03-28T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">CG 160 START</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2023/2022</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">RPP8E71</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">15000.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">FINANCIAMENTO PRÓ...</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">JAQUELINE COSTA C...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="29"/>
+			<Cell ss:Index="2" ss:StyleID="31">
+				<Data ss:Type="String">FINSP</Data>
+			</Cell>
+			<Cell ss:Index="3" ss:StyleID="33">
+				<Data ss:Type="DateTime">2024-03-30T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:Index="4" ss:StyleID="35">
+				<Data ss:Type="String">POP 110I</Data>
+			</Cell>
+			<Cell ss:Index="5" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">2023/2022</Data>
+			</Cell>
+			<Cell ss:Index="7" ss:StyleID="37">
+				<Data ss:Type="String">RPP9D84</Data>
+			</Cell>
+			<Cell ss:Index="8" ss:StyleID="37" ss:MergeAcross="1">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">10280.00</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="41"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="43" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="43">
+				<Data ss:Type="Number">0.00</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="35">
+				<Data ss:Type="String">PAN</Data>
+			</Cell>
+			<Cell ss:Index="22" ss:StyleID="35">
+				<Data ss:Type="String">JOÂNDERSON DE OLI...</Data>
+			</Cell>
+			<Cell ss:Index="23" ss:StyleID="35" ss:MergeAcross="1">
+				<Data ss:Type="String">IAGO VEICULOS</Data>
+			</Cell>
+			<Cell ss:Index="25" ss:StyleID="37"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="49" ss:MergeAcross="8">
+				<Data ss:Type="String">Total: 68</Data>
+			</Cell>
+			<Cell ss:Index="10" ss:StyleID="39" ss:MergeAcross="4">
+				<Data ss:Type="Number">858693.3799999999</Data>
+			</Cell>
+			<Cell ss:Index="15" ss:StyleID="29"/>
+			<Cell ss:Index="16" ss:StyleID="39">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="17" ss:StyleID="39">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="18" ss:StyleID="39" ss:MergeAcross="1">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="20" ss:StyleID="39">
+				<Data ss:Type="Number">0.0</Data>
+			</Cell>
+			<Cell ss:Index="21" ss:StyleID="29"/>
+			<Cell ss:Index="22" ss:StyleID="29"/>
+			<Cell ss:Index="23" ss:StyleID="29" ss:MergeAcross="1"/>
+			<Cell ss:Index="25" ss:StyleID="29"/>
+		</Row>
+		<Row ss:AutoFitHeight="1">
+			<Cell ss:Index="1" ss:StyleID="50" ss:MergeAcross="7"/>
+			<Cell ss:Index="9" ss:StyleID="51" ss:MergeAcross="1">
+				<Data ss:Type="String">Página:</Data>
+			</Cell>
+			<Cell ss:Index="11" ss:StyleID="51">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="12" ss:StyleID="51">
+				<Data ss:Type="String">/</Data>
+			</Cell>
+			<Cell ss:Index="13" ss:StyleID="51">
+				<Data ss:Type="String">1</Data>
+			</Cell>
+			<Cell ss:Index="14" ss:StyleID="50" ss:MergeAcross="4"/>
+			<Cell ss:Index="19" ss:StyleID="50" ss:MergeAcross="4"/>
+		</Row>
+	</ss:Table>
+	<WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+		<PageSetup>
+			<PageMargins x:Bottom="0.25" x:Left="0.25" x:Right="0.25" x:Top="0.25"/>
+			<Layout x:Orientation="Landscape"/>
+		</PageSetup>
+		<Print>
+			<PaperSizeIndex>9</PaperSizeIndex>
+		</Print>
+	</WorksheetOptions>
+</Worksheet>
+</Workbook>
