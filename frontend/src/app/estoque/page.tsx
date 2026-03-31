@@ -597,7 +597,7 @@ export default function EstoquePage() {
                   {items.length === 0 ? (
                     <tr>
                       <td colSpan={7} className="px-3 py-3 text-center text-gray-500">
-                        Nenhum veículo no estoque. Clique em "Adicionar Veículo" para começar.
+                        Nenhum veículo no estoque. Clique em &quot;Adicionar Veículo&quot; para começar.
                       </td>
                     </tr>
                   ) : (

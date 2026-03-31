@@ -476,7 +476,7 @@ export default function FipePage() {
                 <li>2. Após selecionar a marca, os modelos serão carregados automaticamente</li>
                 <li>3. Selecione o modelo digitando para buscar</li>
                 <li>4. Após selecionar o modelo, os anos estarão disponíveis</li>
-                <li>5. Selecione o ano e clique em "Consultar FIPE"</li>
+                <li>5. Selecione o ano e clique em &quot;Consultar FIPE&quot;</li>
               </ul>
             </div>
           </div>

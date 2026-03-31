@@ -269,7 +269,7 @@ export default function TradeInsPage() {
                   {totalResults === 0 ? (
                     <tr>
                       <td colSpan={8} className="px-6 py-4 text-center text-gray-500">
-                        Nenhuma avaliação cadastrada. Clique em "Nova Avaliação" para começar.
+                        Nenhuma avaliação cadastrada. Clique em &quot;Nova Avaliação&quot; para começar.
                       </td>
                     </tr>
                   ) : (

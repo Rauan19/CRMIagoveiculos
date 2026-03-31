@@ -4786,7 +4786,7 @@ export default function SalesPage() {
                                   {vehicleDocumentFile ? 'PDF selecionado' : 'Anexar PDF do veículo'}
                                 </div>
                                 <div className="text-xs text-gray-500">
-                                  Arraste e solte aqui ou clique em "Selecionar PDF"
+                                  Arraste e solte aqui ou clique em &quot;Selecionar PDF&quot;
                                 </div>
                               </div>
                             </div>
