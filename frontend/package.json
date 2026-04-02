@@ -8,6 +8,7 @@
     "dev:turbo": "node --max-old-space-size=4096 node_modules/next/dist/bin/next dev --turbo -p 8080",
     "build": "next build",
     "start": "next start -p 8080",
+    "export": "next build",
     "lint": "next lint",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui"
