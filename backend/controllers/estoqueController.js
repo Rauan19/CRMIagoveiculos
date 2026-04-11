@@ -47,7 +47,7 @@ class EstoqueController {
       const take = Math.min(200, Math.max(1, parseInt(perPage, 10) || 50));
       const skip = (pageNum - 1) * take;
 
-      // Select apenas os campos necessários para a listagem (evitar fotos/JSON grandes)
+      // Inclui photos na listagem (consumo no frontend ou integrações)
       const items = await prisma.estoque.findMany({
         where,
         orderBy: { createdAt: 'desc' },
@@ -65,7 +65,8 @@ class EstoqueController {
           promotionValue: true,
           discount: true,
           createdAt: true,
-          totalSize: true
+          totalSize: true,
+          photos: true
         }
       });
 

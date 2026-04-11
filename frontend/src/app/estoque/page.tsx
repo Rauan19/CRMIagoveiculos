@@ -602,22 +602,6 @@ export default function EstoquePage() {
                     </tr>
                   ) : (
                     items.map((item) => {
-                      const parsePhotos = (p: any) => {
-                        if (!p) return []
-                        if (Array.isArray(p)) return p
-                        if (typeof p === 'string') {
-                          const s = p.trim()
-                          if (!s || s === '[]' || s === 'null') return []
-                          try {
-                            const parsed = JSON.parse(s)
-                            if (Array.isArray(parsed)) return parsed
-                          } catch {}
-                          // fallback: single base64/string stored directly
-                          return [p]
-                        }
-                        return []
-                      }
-                      const photos = parsePhotos(item.photos)
                       // Se houver promotionValue, usar ele como valor final
                       // Caso contrário, calcular com desconto se houver
                       const finalValue = item.promotionValue 
