@@ -63,6 +63,42 @@ function parsePhotos(p: any): string[] {
   return []
 }
 
+async function compressImageToDataUrl(
+  file: File,
+  opts: { maxSide: number; quality: number; mimeType: string }
+): Promise<string> {
+  const { maxSide, quality, mimeType } = opts
+  const objectUrl = URL.createObjectURL(file)
+  try {
+    const img = await new Promise<HTMLImageElement>((resolve, reject) => {
+      const el = new Image()
+      el.onload = () => resolve(el)
+      el.onerror = () => reject(new Error('Falha ao carregar imagem'))
+      el.src = objectUrl
+    })
+
+    const w = img.naturalWidth || img.width
+    const h = img.naturalHeight || img.height
+    if (!w || !h) throw new Error('Dimensão inválida da imagem')
+
+    const scale = Math.min(1, maxSide / Math.max(w, h))
+    const targetW = Math.max(1, Math.round(w * scale))
+    const targetH = Math.max(1, Math.round(h * scale))
+
+    const canvas = document.createElement('canvas')
+    canvas.width = targetW
+    canvas.height = targetH
+
+    const ctx = canvas.getContext('2d')
+    if (!ctx) throw new Error('Canvas não suportado')
+    ctx.drawImage(img, 0, 0, targetW, targetH)
+
+    return canvas.toDataURL(mimeType, quality)
+  } finally {
+    URL.revokeObjectURL(objectUrl)
+  }
+}
+
 export default function EstoquePage() {
   const [items, setItems] = useState<Estoque[]>([])
   const [storageInfo, setStorageInfo] = useState<StorageInfo | null>(null)
@@ -288,48 +324,55 @@ export default function EstoquePage() {
       })
     }
 
-    filesToProcess.forEach((file) => {
-      if (file.type.startsWith('image/')) {
-        const reader = new FileReader()
-        reader.onloadend = () => {
-          const base64String = reader.result as string
-          const newPhotos = [...formData.photos, base64String]
-          
-          if (newPhotos.length > MAX_PHOTOS) {
-            setToast({
-              message: `Limite de ${MAX_PHOTOS} fotos por veículo atingido.`,
-              type: 'error'
-            })
-            return
-          }
+    ;(async () => {
+      for (const file of filesToProcess) {
+        if (!file.type.startsWith('image/')) continue
 
-          const newSize = calculateTotalSize(newPhotos)
-          const availableSize = storageInfo ? storageInfo.available : 10 * 1024 * 1024 * 1024
-          
-          // Se estiver editando, precisa considerar o espaço que será liberado
-          const editingItemSize = editingItem?.totalSize || 0
-          const effectiveAvailable = editingItem 
-            ? availableSize + editingItemSize 
-            : availableSize
+        // Limites para evitar 413: comprime e mantém o total baixo
+        const dataUrl = await compressImageToDataUrl(file, {
+          maxSide: 1600,
+          quality: 0.82,
+          mimeType: 'image/jpeg',
+        }).catch(() => null)
 
-          if (newSize > effectiveAvailable) {
-            const availableMB = (effectiveAvailable / (1024 * 1024)).toFixed(2)
-            const neededMB = (newSize / (1024 * 1024)).toFixed(2)
-            setToast({ 
-              message: `Limite de armazenamento excedido! Disponível: ${availableMB}MB, Necessário: ${neededMB}MB. Limite máximo: 10GB`, 
-              type: 'error' 
-            })
-            return
-          }
-
-          setFormData((prev) => ({
-            ...prev,
-            photos: newPhotos,
-          }))
+        if (!dataUrl) {
+          setToast({ message: 'Não foi possível processar uma das imagens.', type: 'error' })
+          continue
         }
-        reader.readAsDataURL(file)
+
+        const nextPhotos = [...formData.photos, dataUrl]
+        if (nextPhotos.length > MAX_PHOTOS) break
+
+        const nextSize = calculateTotalSize(nextPhotos)
+        const availableSize = storageInfo ? storageInfo.available : 10 * 1024 * 1024 * 1024
+
+        const editingItemSize = editingItem?.totalSize || 0
+        const effectiveAvailable = editingItem ? availableSize + editingItemSize : availableSize
+
+        // Proteção adicional: manter payload confortável (Base64 cresce ~33%)
+        const MAX_REQUEST_BYTES = 40 * 1024 * 1024 // ~40MB
+        if (nextSize > MAX_REQUEST_BYTES) {
+          setToast({
+            message:
+              'As fotos ficaram muito grandes mesmo após compressão. Envie menos fotos ou use imagens menores.',
+            type: 'error',
+          })
+          break
+        }
+
+        if (nextSize > effectiveAvailable) {
+          const availableMB = (effectiveAvailable / (1024 * 1024)).toFixed(2)
+          const neededMB = (nextSize / (1024 * 1024)).toFixed(2)
+          setToast({
+            message: `Limite de armazenamento excedido! Disponível: ${availableMB}MB, Necessário: ${neededMB}MB. Limite máximo: 10GB`,
+            type: 'error',
+          })
+          break
+        }
+
+        setFormData((prev) => ({ ...prev, photos: nextPhotos }))
       }
-    })
+    })()
     
     // Limpar o input para permitir selecionar o mesmo arquivo novamente
     e.target.value = ''
